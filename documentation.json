@@ -9609,7 +9609,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n    defaultName: 'Welcome',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
+                "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n    \"@chromatic-com/storybook\"\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    defaultName: 'Welcome'\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
             },
             {
                 "name": "ContextMenu",
@@ -9635,16 +9635,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -9655,11 +9645,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/button/src/lib/button.stories.ts",
+                "file": "packages/alert/src/lib/alert.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -9670,6 +9660,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-card [className]=\"className\" class=\"w-[350px]\">\n        <ng-shadcn-card-header>\n          <ng-shadcn-card-title>Card Title</ng-shadcn-card-title>\n          <ng-shadcn-card-description>\n            Card description goes here. This provides additional context about the card content.\n          </ng-shadcn-card-description>\n        </ng-shadcn-card-header>\n        <ng-shadcn-card-content>\n          <p>This is the main content area of the card. You can put any content here.</p>\n        </ng-shadcn-card-content>\n        <ng-shadcn-card-footer>\n          <ng-shadcn-button>Action</ng-shadcn-button>\n        </ng-shadcn-card-footer>\n      </ng-shadcn-card>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/button/src/lib/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
             },
             {
                 "name": "Default",
@@ -9805,21 +9805,21 @@
                 "name": "Dismissible",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "Dismissible",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Dismissible Badge</ng-shadcn-badge>`,\n  }),\n}"
+            },
+            {
+                "name": "Dismissible",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
             },
             {
                 "name": "dropdownMenuMetadata",
@@ -9905,16 +9905,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AlertComponent>",
-                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -9925,11 +9915,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/button/src/lib/button.stories.ts",
+                "file": "packages/alert/src/lib/alert.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [ButtonComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants and sizes. Built with Angular signals and TailwindCSS.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: 'select',\n      options: ['default', 'sm', 'lg', 'icon'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply',\n    },\n    clicked: {\n      action: 'clicked',\n      description: 'Event emitted when button is clicked',\n    },\n  },\n  args: {\n    variant: 'default',\n    size: 'default',\n    disabled: false,\n    className: '',\n  },\n}"
+                "type": "Meta<AlertComponent>",
+                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -9940,6 +9930,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<CardComponent>",
                 "defaultValue": "{\n  title: 'Components/Card',\n  component: CardComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        CardComponent,\n        CardHeaderComponent,\n        CardTitleComponent,\n        CardDescriptionComponent,\n        CardContentComponent,\n        CardFooterComponent,\n        ButtonComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible card component with header, content, and footer sections. Perfect for displaying grouped information.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply to the card',\n    },\n  },\n  args: {\n    className: '',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/button/src/lib/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [ButtonComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants and sizes. Built with Angular signals and TailwindCSS.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: 'select',\n      options: ['default', 'sm', 'lg', 'icon'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply',\n    },\n    clicked: {\n      action: 'clicked',\n      description: 'Event emitted when button is clicked',\n    },\n  },\n  args: {\n    variant: 'default',\n    size: 'default',\n    disabled: false,\n    className: '',\n  },\n}"
             },
             {
                 "name": "meta",
@@ -10215,21 +10215,21 @@
                 "name": "Variants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "Variants",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-2\">\n        <ng-shadcn-badge variant=\"default\">Default</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"secondary\">Secondary</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"destructive\">Destructive</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"outline\">Outline</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"success\">Success</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"warning\">Warning</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"info\">Info</ng-shadcn-badge>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Variants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Variants",
@@ -10431,17 +10431,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AlertComponent>",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<BadgeComponent>",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
@@ -10453,8 +10442,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "packages/button/src/lib/button.stories.ts",
+                "rawtype": "StoryObj<AlertComponent>",
+                "file": "packages/alert/src/lib/alert.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -10466,6 +10455,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<CardComponent>",
                 "file": "packages/card/src/lib/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "packages/button/src/lib/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -10810,7 +10810,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n    defaultName: 'Welcome',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n    \"@chromatic-com/storybook\"\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    defaultName: 'Welcome'\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
                 },
                 {
                     "name": "require",
@@ -10927,48 +10927,6 @@
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <ng-shadcn-tabs defaultValue=\"available\" class=\"w-[400px]\">\n        <ng-shadcn-tab-list>\n          <ng-shadcn-tab-trigger value=\"available\">Available</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"disabled\" [disabled]=\"true\">Disabled</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"premium\">Premium</ng-shadcn-tab-trigger>\n        </ng-shadcn-tab-list>\n        <ng-shadcn-tab-content value=\"available\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Available Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is available to all users.\n            </p>\n            <div class=\"p-4 bg-green-50 border border-green-200 rounded-lg\">\n              <p class=\"text-sm text-green-800\">\n                ✅ You have access to this content\n              </p>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"disabled\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Disabled Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is currently disabled.\n            </p>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"premium\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Premium Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is available to premium users.\n            </p>\n            <div class=\"p-4 bg-yellow-50 border border-yellow-200 rounded-lg\">\n              <p class=\"text-sm text-yellow-800\">\n                ⭐ Upgrade to premium to access this content\n              </p>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n      </ng-shadcn-tabs>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Example showing a disabled tab that cannot be selected.',\n      },\n    },\n  },\n}"
                 }
             ],
-            "packages/alert/src/lib/alert.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "Dismissible",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AlertComponent>",
-                    "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
-                },
-                {
-                    "name": "Variants",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
-                }
-            ],
             "packages/badge/src/lib/badge.stories.ts": [
                 {
                     "name": "Default",
@@ -11011,76 +10969,46 @@
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-2\">\n        <ng-shadcn-badge variant=\"default\">Default</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"secondary\">Secondary</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"destructive\">Destructive</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"outline\">Outline</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"success\">Success</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"warning\">Warning</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"info\">Info</ng-shadcn-badge>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
-            "packages/button/src/lib/button.stories.ts": [
+            "packages/alert/src/lib/alert.stories.ts": [
                 {
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
                 },
                 {
-                    "name": "Disabled",
+                    "name": "Dismissible",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button [disabled]=\"true\">Disabled Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\" [disabled]=\"true\">Disabled Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\" [disabled]=\"true\">Disabled Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\" [disabled]=\"true\">Disabled Secondary</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Disabled states for different button variants.',\n      },\n    },\n  },\n}"
-                },
-                {
-                    "name": "Loading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex gap-4\">\n        <ng-shadcn-button [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Loading...\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\" [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Please wait\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Loading states with spinner icons and disabled interaction.',\n      },\n    },\n  },\n}"
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [ButtonComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants and sizes. Built with Angular signals and TailwindCSS.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: 'select',\n      options: ['default', 'sm', 'lg', 'icon'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply',\n    },\n    clicked: {\n      action: 'clicked',\n      description: 'Event emitted when button is clicked',\n    },\n  },\n  args: {\n    variant: 'default',\n    size: 'default',\n    disabled: false,\n    className: '',\n  },\n}"
-                },
-                {
-                    "name": "Sizes",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex items-center gap-4\">\n        <ng-shadcn-button size=\"sm\">Small</ng-shadcn-button>\n        <ng-shadcn-button size=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button size=\"lg\">Large</ng-shadcn-button>\n        <ng-shadcn-button size=\"icon\">\n          <svg class=\"h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"/>\n          </svg>\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Different button sizes including an icon-only variant.',\n      },\n    },\n  },\n}"
+                    "type": "Meta<AlertComponent>",
+                    "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
                 },
                 {
                     "name": "Variants",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button variant=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\">Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">Secondary</ng-shadcn-button>\n        <ng-shadcn-button variant=\"ghost\">Ghost</ng-shadcn-button>\n        <ng-shadcn-button variant=\"link\">Link</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'All available button variants showcased together.',\n      },\n    },\n  },\n}"
-                },
-                {
-                    "name": "WithIcons",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/button/src/lib/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button>\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"/>\n          </svg>\n          Add Item\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\"/>\n          </svg>\n          Download\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">\n          Settings\n          <svg class=\"ml-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z\"/>\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"/>\n          </svg>\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Buttons with icons positioned before or after the text content.',\n      },\n    },\n  },\n}"
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "packages/card/src/lib/card.stories.ts": [
@@ -11163,6 +11091,78 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <ng-shadcn-card class=\"w-[350px]\">\n        <div class=\"aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-lg\"></div>\n        <ng-shadcn-card-header>\n          <ng-shadcn-card-title>Beautiful Gradient</ng-shadcn-card-title>\n          <ng-shadcn-card-description>\n            A card with a beautiful gradient background image.\n          </ng-shadcn-card-description>\n        </ng-shadcn-card-header>\n        <ng-shadcn-card-content>\n          <p>This card demonstrates how to include images or visual elements at the top.</p>\n        </ng-shadcn-card-content>\n        <ng-shadcn-card-footer>\n          <ng-shadcn-button variant=\"outline\" class=\"w-full\">View Details</ng-shadcn-button>\n        </ng-shadcn-card-footer>\n      </ng-shadcn-card>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Card with an image or visual element at the top.',\n      },\n    },\n  },\n}"
+                }
+            ],
+            "packages/button/src/lib/button.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button [disabled]=\"true\">Disabled Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\" [disabled]=\"true\">Disabled Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\" [disabled]=\"true\">Disabled Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\" [disabled]=\"true\">Disabled Secondary</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Disabled states for different button variants.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "Loading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex gap-4\">\n        <ng-shadcn-button [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Loading...\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\" [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Please wait\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Loading states with spinner icons and disabled interaction.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [ButtonComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants and sizes. Built with Angular signals and TailwindCSS.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: 'select',\n      options: ['default', 'sm', 'lg', 'icon'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply',\n    },\n    clicked: {\n      action: 'clicked',\n      description: 'Event emitted when button is clicked',\n    },\n  },\n  args: {\n    variant: 'default',\n    size: 'default',\n    disabled: false,\n    className: '',\n  },\n}"
+                },
+                {
+                    "name": "Sizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex items-center gap-4\">\n        <ng-shadcn-button size=\"sm\">Small</ng-shadcn-button>\n        <ng-shadcn-button size=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button size=\"lg\">Large</ng-shadcn-button>\n        <ng-shadcn-button size=\"icon\">\n          <svg class=\"h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"/>\n          </svg>\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Different button sizes including an icon-only variant.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "Variants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button variant=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\">Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">Secondary</ng-shadcn-button>\n        <ng-shadcn-button variant=\"ghost\">Ghost</ng-shadcn-button>\n        <ng-shadcn-button variant=\"link\">Link</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'All available button variants showcased together.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "WithIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/button/src/lib/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button>\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"/>\n          </svg>\n          Add Item\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\"/>\n          </svg>\n          Download\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">\n          Settings\n          <svg class=\"ml-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z\"/>\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"/>\n          </svg>\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Buttons with icons positioned before or after the text content.',\n      },\n    },\n  },\n}"
                 }
             ],
             "packages/input/src/lib/input.stories.ts": [
@@ -11550,19 +11550,6 @@
                     "kind": 184
                 }
             ],
-            "packages/alert/src/lib/alert.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AlertComponent>",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "packages/badge/src/lib/badge.stories.ts": [
                 {
                     "name": "Story",
@@ -11576,13 +11563,13 @@
                     "kind": 184
                 }
             ],
-            "packages/button/src/lib/button.stories.ts": [
+            "packages/alert/src/lib/alert.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "packages/button/src/lib/button.stories.ts",
+                    "rawtype": "StoryObj<AlertComponent>",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -11596,6 +11583,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<CardComponent>",
                     "file": "packages/card/src/lib/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "packages/button/src/lib/button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "packages/button/src/lib/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",

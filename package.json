@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "ng",
     "docs": "ng run storybook:serve-storybook",
+    "docs:build": "ng run storybook:storybook",
     "start": "ng serve demo",
     "build": "ng build demo",
     "build:lib": "npm run build:components",
@@ -51,6 +52,7 @@
     "@angular/build": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "@chromatic-com/storybook": "^3.2.7",
     "@compodoc/compodoc": "^1.1.31",
     "@playwright/test": "^1.40.0",
     "@storybook/addon-docs": "^8.6.14",

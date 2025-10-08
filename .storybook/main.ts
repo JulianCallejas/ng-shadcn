@@ -15,6 +15,7 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-docs"),
+    "@chromatic-com/storybook"
   ],
 
   framework: {
@@ -23,8 +24,7 @@ const config: StorybookConfig = {
   },
 
   docs: {
-    autodocs: 'tag',
-    defaultName: 'Welcome',
+    defaultName: 'Welcome'
   },
   staticDirs: ['../src/assets'],
 
