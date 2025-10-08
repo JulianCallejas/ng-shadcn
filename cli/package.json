@@ -1,0 +1,22 @@
+{
+  "name": "@ng-shadcn/cli",
+  "version": "1.0.0",
+  "bin": {
+    "ng-shadcn": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "fs-extra": "^11.0.0",
+    "inquirer": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/inquirer": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "~5.8.2"
+  }
+}

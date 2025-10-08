@@ -1,0 +1,12 @@
+{
+  "name": "@ng-shadcn/dropdown-menu",
+  "version": "1.0.0",
+  "description": "Dropdown menu component for ng-shadcn",
+  "keywords": ["angular", "dropdown", "menu", "navigation", "ui", "component"],
+  "author": "ng-shadcn",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  }
+}

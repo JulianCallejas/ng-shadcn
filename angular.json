@@ -1,0 +1,324 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "demo": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "configurations": {
+            "development": {
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true
+            },
+            "production": {
+              "aot": true,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false
+            }
+          },  
+          "options": {
+            "assets": ["src/assets"],
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "outputPath": "dist/demo",
+            "polyfills": ["zone.js"],
+            "scripts": [],
+            "styles": ["src/global_styles.css"],
+            "tsConfig": "tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "development": {
+              "buildTarget": "demo:build:development"
+            },
+            "production": {
+              "buildTarget": "demo:build:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {},
+      "sourceRoot": "src"
+    },
+    "button": {
+      "projectType": "library",
+      "root": "packages/button",
+      "sourceRoot": "packages/button/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/button/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "projectType": "library", 
+      "root": "packages/input",
+      "sourceRoot": "packages/input/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/input/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/input/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "dialog": {
+      "projectType": "library",
+      "root": "packages/dialog", 
+      "sourceRoot": "packages/dialog/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/dialog/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/dialog/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "tooltip": {
+      "projectType": "library",
+      "root": "packages/tooltip",
+      "sourceRoot": "packages/tooltip/src", 
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/tooltip/ng-package.json"
+          }
+        }
+      }
+    },
+    "card": {
+      "projectType": "library",
+      "root": "packages/card",
+      "sourceRoot": "packages/card/src",
+      "prefix": "ng-shadcn", 
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/card/ng-package.json"
+          }
+        }
+      }
+    },
+    "switch": {
+      "projectType": "library",
+      "root": "packages/switch",
+      "sourceRoot": "packages/switch/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/switch/ng-package.json"
+          }
+        }
+      }
+    },
+    "select": {
+      "projectType": "library",
+      "root": "packages/select",
+      "sourceRoot": "packages/select/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/select/ng-package.json"
+          }
+        }
+      }
+    },
+    "checkbox": {
+      "projectType": "library",
+      "root": "packages/checkbox",
+      "sourceRoot": "packages/checkbox/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/checkbox/ng-package.json"
+          }
+        }
+      }
+    },
+    "radio-group": {
+      "projectType": "library",
+      "root": "packages/radio-group",
+      "sourceRoot": "packages/radio-group/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/radio-group/ng-package.json"
+          }
+        }
+      }
+    },
+    "textarea": {
+      "projectType": "library",
+      "root": "packages/textarea",
+      "sourceRoot": "packages/textarea/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/textarea/ng-package.json"
+          }
+        }
+      }
+    },
+    "badge": {
+      "projectType": "library",
+      "root": "packages/badge",
+      "sourceRoot": "packages/badge/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/badge/ng-package.json"
+          }
+        }
+      }
+    },
+    "alert": {
+      "projectType": "library",
+      "root": "packages/alert",
+      "sourceRoot": "packages/alert/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/alert/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/alert/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "tabs": {
+      "projectType": "library",
+      "root": "packages/tabs",
+      "sourceRoot": "packages/tabs/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/tabs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/tabs/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "dropdown-menu": {
+      "projectType": "library",
+      "root": "packages/dropdown-menu",
+      "sourceRoot": "packages/dropdown-menu/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/dropdown-menu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/dropdown-menu/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "popover": {
+      "projectType": "library",
+      "root": "packages/popover",
+      "sourceRoot": "packages/popover/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/popover/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/popover/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    },
+    "accordion": {
+      "projectType": "library",
+      "root": "packages/accordion",
+      "sourceRoot": "packages/accordion/src",
+      "prefix": "ng-shadcn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/accordion/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/accordion/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": 1
+}

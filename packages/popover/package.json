@@ -1,0 +1,12 @@
+{
+  "name": "@ng-shadcn/popover",
+  "version": "1.0.0",
+  "description": "Popover component for ng-shadcn",
+  "keywords": ["angular", "popover", "overlay", "tooltip", "ui", "component"],
+  "author": "ng-shadcn",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  }
+}

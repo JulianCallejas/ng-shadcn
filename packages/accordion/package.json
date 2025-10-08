@@ -1,0 +1,12 @@
+{
+  "name": "@ng-shadcn/accordion",
+  "version": "1.0.0",
+  "description": "Accordion component for ng-shadcn",
+  "keywords": ["angular", "accordion", "disclosure", "collapsible", "ui", "component"],
+  "author": "ng-shadcn",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  }
+}
