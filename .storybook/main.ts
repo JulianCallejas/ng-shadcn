@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
+    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
@@ -13,6 +14,7 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-docs"),
   ],
 
   framework: {
@@ -22,6 +24,7 @@ const config: StorybookConfig = {
 
   docs: {
     autodocs: 'tag',
+    defaultName: 'Welcome',
   },
   staticDirs: ['../src/assets'],
 

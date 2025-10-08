@@ -5154,6 +5154,41 @@
             "extends": []
         },
         {
+            "name": "GettingStartedComponent",
+            "id": "component-GettingStartedComponent-669b297a897da7458ae0bfb29cfd0812e2983df4ec81fb8bedcb1ad9f92321e9a66e1351542cbac1c9419d105b7335bdb0722b6d7da045111da63cc079328edb",
+            "file": "src/stories/GettingStarted.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "getting-started-page",
+            "styleUrls": [],
+            "styles": [],
+            "template": "    <div class=\"max-w-4xl mx-auto p-6 font-sans\">\n      <h1 class=\"text-4xl font-bold text-gray-900 mb-6\">Getting Started</h1>\n\n      <p class=\"text-lg text-gray-600 mb-8\">\n        Learn how to integrate ng-shadcn components into your Angular application.\n      </p>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📋 Prerequisites</h2>\n      <p class=\"text-gray-600 mb-4\">Before you begin, ensure you have:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-2\">\n        <li>• <strong>Node.js</strong> 18+ installed</li>\n        <li>• <strong>Angular CLI</strong> 19+ installed</li>\n        <li>• An existing <strong>Angular 19+</strong> project</li>\n        <li>• <strong>TailwindCSS</strong> configured in your project</li>\n      </ul>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🚀 Quick Start</h2>\n\n      <div class=\"space-y-6\">\n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">1. Install the CLI Tool</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto\"><code>npm install -g &#64;ng-shadcn/cli</code></pre>\n        </div>\n\n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">2. Initialize in Your Project</h3>\n          <p class=\"text-gray-600 mb-4\">Navigate to your Angular project and run:</p>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4\"><code>cd your-angular-project\nng-shadcn init</code></pre>\n          <p class=\"text-gray-600 mb-2\">This will:</p>\n          <ul class=\"text-gray-600 space-y-1\">\n            <li>• Configure TailwindCSS if not already set up</li>\n            <li>• Add necessary dependencies</li>\n            <li>• Set up the component configuration</li>\n          </ul>\n        </div>\n\n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">3. Add Your First Component</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4\"><code>ng-shadcn add button</code></pre>\n          <p class=\"text-gray-600 mb-2\">This command will:</p>\n          <ul class=\"text-gray-600 space-y-1\">\n            <li>• Download the Button component</li>\n            <li>• Add it to your project structure</li>\n            <li>• Update necessary imports</li>\n          </ul>\n        </div>\n\n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">4. Use the Component</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm\"><code>// app.component.ts\nimport {{ '{' }} Component {{ '}' }} from '&#64;angular/core';\nimport {{ '{' }} ButtonComponent {{ '}' }} from './components/ui/button/button.component';\n\n&#64;Component({{ '{' }}\n  selector: 'app-root',\n  standalone: true,\n  imports: [ButtonComponent],\n  template: `\n    &lt;ui-button variant=\"default\" size=\"md\"&gt;\n      Click me!\n    &lt;/ui-button&gt;\n  `\n{{ '}' }})\nexport class AppComponent {{ '{' }}{{ '}' }}</code></pre>\n        </div>\n      </div>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🎨 TailwindCSS Setup</h2>\n      <p class=\"text-gray-600 mb-6\">If you don't have TailwindCSS configured, follow these steps:</p>\n\n      <div class=\"space-y-4\">\n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">1. Install TailwindCSS</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>npm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p</code></pre>\n        </div>\n\n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">2. Configure tailwind.config.js</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>/** &#64;type {{ '{' }}import('tailwindcss').Config{{ '}' }} */\nmodule.exports = {{ '{' }}\n  content: [\n    \"./src/**/*.{{ '{' }}html,ts{{ '}' }}\",\n  ],\n  theme: {{ '{' }}\n    extend: {{ '{' }}{{ '}' }},\n  {{ '}' }},\n  plugins: [],\n{{ '}' }}</code></pre>\n        </div>\n\n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">3. Add Tailwind directives to styles.css</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>&#64;tailwind base;\n&#64;tailwind components;\n&#64;tailwind utilities;</code></pre>\n        </div>\n      </div>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">📦 Available Commands</h2>\n\n      <div class=\"grid grid-cols-1 lg:grid-cols-2 gap-6\">\n        <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-blue-800 mb-2\">Add Components</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code># Add a single component\nng-shadcn add button\n\n# Add multiple components\nng-shadcn add button input card\n\n# Add all components\nng-shadcn add --all</code></pre>\n        </div>\n\n        <div class=\"bg-green-50 border border-green-200 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-green-800 mb-2\">List & Update</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code># List available components\nng-shadcn list\n\n# Update a specific component\nng-shadcn update button\n\n# Update all components\nng-shadcn update --all</code></pre>\n        </div>\n      </div>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🏗️ Project Structure</h2>\n      <p class=\"text-gray-600 mb-4\">After adding components, your project structure will look like:</p>\n      <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-4\">\n        <pre class=\"text-gray-700 text-sm\"><code>src/\n├── app/\n│   └── components/\n│       └── ui/\n│           ├── button/\n│           │   ├── button.component.ts\n│           │   └── button.component.html\n│           ├── input/\n│           └── ...\n└── styles.css</code></pre>\n      </div>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🔧 Troubleshooting</h2>\n\n      <div class=\"space-y-4\">\n        <div class=\"bg-yellow-50 border-l-4 border-yellow-400 p-4\">\n          <h4 class=\"text-yellow-800 font-semibold mb-2\">TailwindCSS styles not applying:</h4>\n          <ul class=\"text-yellow-700 space-y-1 text-sm\">\n            <li>• Ensure TailwindCSS is properly configured</li>\n            <li>• Check that your content paths include component files</li>\n            <li>• Verify Tailwind directives are in your global styles</li>\n          </ul>\n        </div>\n\n        <div class=\"bg-red-50 border-l-4 border-red-400 p-4\">\n          <h4 class=\"text-red-800 font-semibold mb-2\">Component not found:</h4>\n          <ul class=\"text-red-700 space-y-1 text-sm\">\n            <li>• Make sure you've imported the component</li>\n            <li>• Check that the component was added to your project</li>\n            <li>• Verify the import path is correct</li>\n          </ul>\n        </div>\n\n        <div class=\"bg-teal-50 border-l-4 border-teal-400 p-4\">\n          <h4 class=\"text-teal-800 font-semibold mb-2\">TypeScript errors:</h4>\n          <ul class=\"text-teal-700 space-y-1 text-sm\">\n            <li>• Ensure you're using Angular 19+</li>\n            <li>• Check that all dependencies are installed</li>\n            <li>• Verify your tsconfig.json is properly configured</li>\n          </ul>\n        </div>\n      </div>\n\n      <hr class=\"my-8 border-gray-200\" />\n\n      <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-6\">\n        <p class=\"text-blue-800 font-semibold mb-2\">Next Steps:</p>\n        <p class=\"text-blue-600\">Explore individual components in the sidebar to see detailed examples and API documentation.</p>\n      </div>\n    </div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { Component } from '@angular/core';\n\n@Component({\n  selector: 'getting-started-page',\n  standalone: true,\n  template: `\n    <div class=\"max-w-4xl mx-auto p-6 font-sans\">\n      <h1 class=\"text-4xl font-bold text-gray-900 mb-6\">Getting Started</h1>\n      \n      <p class=\"text-lg text-gray-600 mb-8\">\n        Learn how to integrate ng-shadcn components into your Angular application.\n      </p>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📋 Prerequisites</h2>\n      <p class=\"text-gray-600 mb-4\">Before you begin, ensure you have:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-2\">\n        <li>• <strong>Node.js</strong> 18+ installed</li>\n        <li>• <strong>Angular CLI</strong> 19+ installed</li>\n        <li>• An existing <strong>Angular 19+</strong> project</li>\n        <li>• <strong>TailwindCSS</strong> configured in your project</li>\n      </ul>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🚀 Quick Start</h2>\n      \n      <div class=\"space-y-6\">\n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">1. Install the CLI Tool</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto\"><code>npm install -g &#64;ng-shadcn/cli</code></pre>\n        </div>\n        \n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">2. Initialize in Your Project</h3>\n          <p class=\"text-gray-600 mb-4\">Navigate to your Angular project and run:</p>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4\"><code>cd your-angular-project\nng-shadcn init</code></pre>\n          <p class=\"text-gray-600 mb-2\">This will:</p>\n          <ul class=\"text-gray-600 space-y-1\">\n            <li>• Configure TailwindCSS if not already set up</li>\n            <li>• Add necessary dependencies</li>\n            <li>• Set up the component configuration</li>\n          </ul>\n        </div>\n        \n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">3. Add Your First Component</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4\"><code>ng-shadcn add button</code></pre>\n          <p class=\"text-gray-600 mb-2\">This command will:</p>\n          <ul class=\"text-gray-600 space-y-1\">\n            <li>• Download the Button component</li>\n            <li>• Add it to your project structure</li>\n            <li>• Update necessary imports</li>\n          </ul>\n        </div>\n        \n        <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-6\">\n          <h3 class=\"text-xl font-medium text-gray-700 mb-3\">4. Use the Component</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm\"><code>// app.component.ts\nimport {{ '{' }} Component {{ '}' }} from '&#64;angular/core';\nimport {{ '{' }} ButtonComponent {{ '}' }} from './components/ui/button/button.component';\n\n&#64;Component({{ '{' }}\n  selector: 'app-root',\n  standalone: true,\n  imports: [ButtonComponent],\n  template: \\`\n    &lt;ui-button variant=\"default\" size=\"md\"&gt;\n      Click me!\n    &lt;/ui-button&gt;\n  \\`\n{{ '}' }})\nexport class AppComponent {{ '{' }}{{ '}' }}</code></pre>\n        </div>\n      </div>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🎨 TailwindCSS Setup</h2>\n      <p class=\"text-gray-600 mb-6\">If you don't have TailwindCSS configured, follow these steps:</p>\n      \n      <div class=\"space-y-4\">\n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">1. Install TailwindCSS</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>npm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p</code></pre>\n        </div>\n        \n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">2. Configure tailwind.config.js</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>/** &#64;type {{ '{' }}import('tailwindcss').Config{{ '}' }} */\nmodule.exports = {{ '{' }}\n  content: [\n    \"./src/**/*.{{ '{' }}html,ts{{ '}' }}\",\n  ],\n  theme: {{ '{' }}\n    extend: {{ '{' }}{{ '}' }},\n  {{ '}' }},\n  plugins: [],\n{{ '}' }}</code></pre>\n        </div>\n        \n        <div class=\"border border-orange-200 bg-orange-50 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-orange-800 mb-2\">3. Add Tailwind directives to styles.css</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code>&#64;tailwind base;\n&#64;tailwind components;\n&#64;tailwind utilities;</code></pre>\n        </div>\n      </div>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">📦 Available Commands</h2>\n      \n      <div class=\"grid grid-cols-1 lg:grid-cols-2 gap-6\">\n        <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-blue-800 mb-2\">Add Components</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code># Add a single component\nng-shadcn add button\n\n# Add multiple components\nng-shadcn add button input card\n\n# Add all components\nng-shadcn add --all</code></pre>\n        </div>\n        \n        <div class=\"bg-green-50 border border-green-200 rounded-lg p-4\">\n          <h3 class=\"text-lg font-medium text-green-800 mb-2\">List & Update</h3>\n          <pre class=\"bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto\"><code># List available components\nng-shadcn list\n\n# Update a specific component\nng-shadcn update button\n\n# Update all components\nng-shadcn update --all</code></pre>\n        </div>\n      </div>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🏗️ Project Structure</h2>\n      <p class=\"text-gray-600 mb-4\">After adding components, your project structure will look like:</p>\n      <div class=\"bg-gray-50 border border-gray-200 rounded-lg p-4\">\n        <pre class=\"text-gray-700 text-sm\"><code>src/\n├── app/\n│   └── components/\n│       └── ui/\n│           ├── button/\n│           │   ├── button.component.ts\n│           │   └── button.component.html\n│           ├── input/\n│           └── ...\n└── styles.css</code></pre>\n      </div>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4 mt-12\">🔧 Troubleshooting</h2>\n      \n      <div class=\"space-y-4\">\n        <div class=\"bg-yellow-50 border-l-4 border-yellow-400 p-4\">\n          <h4 class=\"text-yellow-800 font-semibold mb-2\">TailwindCSS styles not applying:</h4>\n          <ul class=\"text-yellow-700 space-y-1 text-sm\">\n            <li>• Ensure TailwindCSS is properly configured</li>\n            <li>• Check that your content paths include component files</li>\n            <li>• Verify Tailwind directives are in your global styles</li>\n          </ul>\n        </div>\n        \n        <div class=\"bg-red-50 border-l-4 border-red-400 p-4\">\n          <h4 class=\"text-red-800 font-semibold mb-2\">Component not found:</h4>\n          <ul class=\"text-red-700 space-y-1 text-sm\">\n            <li>• Make sure you've imported the component</li>\n            <li>• Check that the component was added to your project</li>\n            <li>• Verify the import path is correct</li>\n          </ul>\n        </div>\n        \n        <div class=\"bg-teal-50 border-l-4 border-teal-400 p-4\">\n          <h4 class=\"text-teal-800 font-semibold mb-2\">TypeScript errors:</h4>\n          <ul class=\"text-teal-700 space-y-1 text-sm\">\n            <li>• Ensure you're using Angular 19+</li>\n            <li>• Check that all dependencies are installed</li>\n            <li>• Verify your tsconfig.json is properly configured</li>\n          </ul>\n        </div>\n      </div>\n      \n      <hr class=\"my-8 border-gray-200\" />\n      \n      <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-6\">\n        <p class=\"text-blue-800 font-semibold mb-2\">Next Steps:</p>\n        <p class=\"text-blue-600\">Explore individual components in the sidebar to see detailed examples and API documentation.</p>\n      </div>\n    </div>\n  `,\n})\nclass GettingStartedComponent {}\n\nconst meta: Meta<GettingStartedComponent> = {\n  title: 'Introduction/02-Getting Started',\n  component: GettingStartedComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<GettingStartedComponent>;\n\nexport const GettingStarted: Story = {};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "InputComponent",
             "id": "component-InputComponent-919350d5272d1ff53868af7675ae8e2a6ff5221e2900435914158a547f0fe61574c37b3c490be062206409a535c038d31df720dd163d3c572fd76559066b3dd6",
             "file": "packages/input/src/lib/input.component.ts",
@@ -9426,6 +9461,41 @@
                     }
                 }
             }
+        },
+        {
+            "name": "WelcomeComponent",
+            "id": "component-WelcomeComponent-3ae7dfadbbeed9716067e802dc4870c3c50c16d8739ed401b97b735eca10b8b83227da41981017741ca4aef5c8709144894a89966f558ffb5735d355744385f6",
+            "file": "src/stories/Introduction.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "welcome-page",
+            "styleUrls": [],
+            "styles": [],
+            "template": "    <div class=\"max-w-4xl mx-auto p-6 font-sans\">\n      <h1 class=\"text-4xl font-bold text-gray-900 mb-6\">Welcome to ng-shadcn UI Components</h1>\n\n      <p class=\"text-lg text-gray-600 mb-8\">\n        A comprehensive Angular component library inspired by shadcn/ui, built with Angular 19+ and TailwindCSS.\n      </p>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🚀 Features</h2>\n      <ul class=\"text-gray-600 mb-8 space-y-2\">\n        <li><strong>16 Production-Ready Components</strong> - Complete set of UI components for modern Angular applications</li>\n        <li><strong>Angular 19+ Support</strong> - Built with the latest Angular features including signals and standalone components</li>\n        <li><strong>TailwindCSS Integration</strong> - Styled with TailwindCSS v3.4.18 for consistent design</li>\n        <li><strong>TypeScript First</strong> - Fully typed components with excellent IntelliSense support</li>\n        <li><strong>Accessibility Ready</strong> - WCAG compliant components with proper ARIA attributes</li>\n        <li><strong>Tree Shakeable</strong> - Import only what you need for optimal bundle size</li>\n      </ul>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📦 Available Components</h2>\n\n      <h3 class=\"text-xl font-medium text-gray-700 mb-3\">Core Components (12)</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6\">\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Button</strong>\n          <p class=\"text-sm text-blue-600\">Various styles and sizes with loading states</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Input</strong>\n          <p class=\"text-sm text-blue-600\">Text inputs with validation and icons</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Card</strong>\n          <p class=\"text-sm text-blue-600\">Flexible content containers</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Switch</strong>\n          <p class=\"text-sm text-blue-600\">Toggle switches with smooth animations</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Dialog</strong>\n          <p class=\"text-sm text-blue-600\">Modal dialogs and overlays</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Tooltip</strong>\n          <p class=\"text-sm text-blue-600\">Contextual help and information</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Select</strong>\n          <p class=\"text-sm text-blue-600\">Dropdown selection components</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Checkbox</strong>\n          <p class=\"text-sm text-blue-600\">Multi-selection inputs</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Radio Group</strong>\n          <p class=\"text-sm text-blue-600\">Single selection from multiple options</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Textarea</strong>\n          <p class=\"text-sm text-blue-600\">Multi-line text inputs</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Badge</strong>\n          <p class=\"text-sm text-blue-600\">Status indicators and labels</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Alert</strong>\n          <p class=\"text-sm text-blue-600\">Notification and message components</p>\n        </div>\n      </div>\n\n      <h3 class=\"text-xl font-medium text-gray-700 mb-3\">Advanced Components (4)</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 mb-8\">\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Tabs</strong>\n          <p class=\"text-sm text-green-600\">Horizontal and vertical tab navigation</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Dropdown Menu</strong>\n          <p class=\"text-sm text-green-600\">Context menus with keyboard navigation</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Popover</strong>\n          <p class=\"text-sm text-green-600\">Smart positioning tooltips and content overlays</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Accordion</strong>\n          <p class=\"text-sm text-green-600\">Collapsible content sections</p>\n        </div>\n      </div>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🛠️ Installation</h2>\n      <p class=\"text-gray-600 mb-4\">Use our CLI tool to add components to your Angular project:</p>\n      <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-8\"><code>npm install -g &#64;ng-shadcn/cli\nng-shadcn add button</code></pre>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📖 Documentation</h2>\n      <p class=\"text-gray-600 mb-4\">Each component includes:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Interactive examples in this Storybook</li>\n        <li>• API documentation with all props and events</li>\n        <li>• Accessibility guidelines</li>\n        <li>• Usage examples and best practices</li>\n      </ul>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🎨 Theming</h2>\n      <p class=\"text-gray-600 mb-4\">All components support:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Light and dark themes</li>\n        <li>• Custom color schemes</li>\n        <li>• CSS custom properties for easy customization</li>\n        <li>• TailwindCSS utility classes</li>\n      </ul>\n\n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🧪 Testing</h2>\n      <p class=\"text-gray-600 mb-4\">The library includes:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Comprehensive Jest unit tests (>80% coverage)</li>\n        <li>• Playwright E2E tests</li>\n        <li>• Accessibility testing utilities</li>\n      </ul>\n\n      <hr class=\"my-8 border-gray-200\" />\n\n      <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-6\">\n        <p class=\"text-blue-800 font-semibold mb-2\">Ready to get started?</p>\n        <p class=\"text-blue-600\">Browse the components in the sidebar or check out our Getting Started guide.</p>\n      </div>\n    </div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { Component } from '@angular/core';\n\n@Component({\n  selector: 'welcome-page',\n  standalone: true,\n  template: `\n    <div class=\"max-w-4xl mx-auto p-6 font-sans\">\n      <h1 class=\"text-4xl font-bold text-gray-900 mb-6\">Welcome to ng-shadcn UI Components</h1>\n      \n      <p class=\"text-lg text-gray-600 mb-8\">\n        A comprehensive Angular component library inspired by shadcn/ui, built with Angular 19+ and TailwindCSS.\n      </p>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🚀 Features</h2>\n      <ul class=\"text-gray-600 mb-8 space-y-2\">\n        <li><strong>16 Production-Ready Components</strong> - Complete set of UI components for modern Angular applications</li>\n        <li><strong>Angular 19+ Support</strong> - Built with the latest Angular features including signals and standalone components</li>\n        <li><strong>TailwindCSS Integration</strong> - Styled with TailwindCSS v3.4.18 for consistent design</li>\n        <li><strong>TypeScript First</strong> - Fully typed components with excellent IntelliSense support</li>\n        <li><strong>Accessibility Ready</strong> - WCAG compliant components with proper ARIA attributes</li>\n        <li><strong>Tree Shakeable</strong> - Import only what you need for optimal bundle size</li>\n      </ul>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📦 Available Components</h2>\n      \n      <h3 class=\"text-xl font-medium text-gray-700 mb-3\">Core Components (12)</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6\">\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Button</strong>\n          <p class=\"text-sm text-blue-600\">Various styles and sizes with loading states</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Input</strong>\n          <p class=\"text-sm text-blue-600\">Text inputs with validation and icons</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Card</strong>\n          <p class=\"text-sm text-blue-600\">Flexible content containers</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Switch</strong>\n          <p class=\"text-sm text-blue-600\">Toggle switches with smooth animations</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Dialog</strong>\n          <p class=\"text-sm text-blue-600\">Modal dialogs and overlays</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Tooltip</strong>\n          <p class=\"text-sm text-blue-600\">Contextual help and information</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Select</strong>\n          <p class=\"text-sm text-blue-600\">Dropdown selection components</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Checkbox</strong>\n          <p class=\"text-sm text-blue-600\">Multi-selection inputs</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Radio Group</strong>\n          <p class=\"text-sm text-blue-600\">Single selection from multiple options</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Textarea</strong>\n          <p class=\"text-sm text-blue-600\">Multi-line text inputs</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Badge</strong>\n          <p class=\"text-sm text-blue-600\">Status indicators and labels</p>\n        </div>\n        <div class=\"p-3 bg-blue-50 rounded-lg border border-blue-200\">\n          <strong class=\"text-blue-800\">Alert</strong>\n          <p class=\"text-sm text-blue-600\">Notification and message components</p>\n        </div>\n      </div>\n      \n      <h3 class=\"text-xl font-medium text-gray-700 mb-3\">Advanced Components (4)</h3>\n      <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 mb-8\">\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Tabs</strong>\n          <p class=\"text-sm text-green-600\">Horizontal and vertical tab navigation</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Dropdown Menu</strong>\n          <p class=\"text-sm text-green-600\">Context menus with keyboard navigation</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Popover</strong>\n          <p class=\"text-sm text-green-600\">Smart positioning tooltips and content overlays</p>\n        </div>\n        <div class=\"p-3 bg-green-50 rounded-lg border border-green-200\">\n          <strong class=\"text-green-800\">Accordion</strong>\n          <p class=\"text-sm text-green-600\">Collapsible content sections</p>\n        </div>\n      </div>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🛠️ Installation</h2>\n      <p class=\"text-gray-600 mb-4\">Use our CLI tool to add components to your Angular project:</p>\n      <pre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-8\"><code>npm install -g &#64;ng-shadcn/cli\nng-shadcn add button</code></pre>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">📖 Documentation</h2>\n      <p class=\"text-gray-600 mb-4\">Each component includes:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Interactive examples in this Storybook</li>\n        <li>• API documentation with all props and events</li>\n        <li>• Accessibility guidelines</li>\n        <li>• Usage examples and best practices</li>\n      </ul>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🎨 Theming</h2>\n      <p class=\"text-gray-600 mb-4\">All components support:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Light and dark themes</li>\n        <li>• Custom color schemes</li>\n        <li>• CSS custom properties for easy customization</li>\n        <li>• TailwindCSS utility classes</li>\n      </ul>\n      \n      <h2 class=\"text-2xl font-semibold text-gray-800 mb-4\">🧪 Testing</h2>\n      <p class=\"text-gray-600 mb-4\">The library includes:</p>\n      <ul class=\"text-gray-600 mb-8 space-y-1\">\n        <li>• Comprehensive Jest unit tests (>80% coverage)</li>\n        <li>• Playwright E2E tests</li>\n        <li>• Accessibility testing utilities</li>\n      </ul>\n      \n      <hr class=\"my-8 border-gray-200\" />\n      \n      <div class=\"bg-blue-50 border border-blue-200 rounded-lg p-6\">\n        <p class=\"text-blue-800 font-semibold mb-2\">Ready to get started?</p>\n        <p class=\"text-blue-600\">Browse the components in the sidebar or check out our Getting Started guide.</p>\n      </div>\n    </div>\n  `,\n})\nclass WelcomeComponent {}\n\nconst meta: Meta<WelcomeComponent> = {\n  title: 'Welcome',\n  component: WelcomeComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<WelcomeComponent>;\n\nexport const Welcome: Story = {};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
         }
     ],
     "modules": [],
@@ -9539,7 +9609,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\r\n  stories: [\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
+                "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n    defaultName: 'Welcome',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
             },
             {
                 "name": "ContextMenu",
@@ -9762,6 +9832,16 @@
                 "defaultValue": "{\n  name: 'dropdown-menu',\n  displayName: 'Dropdown Menu',\n  description: 'Displays a menu to the user—such as a set of actions or functions—triggered by a button.',\n  category: 'navigation',\n  version: '1.0.0',\n  dependencies: [],\n  files: [\n    'dropdown-menu.component.ts'\n  ],\n  examples: [\n    {\n      name: 'Basic Dropdown',\n      description: 'Simple dropdown menu with actions',\n      code: `<ng-shadcn-dropdown-menu>\n  <ng-shadcn-dropdown-menu-trigger>\n    <button class=\"btn\">Open Menu</button>\n  </ng-shadcn-dropdown-menu-trigger>\n  <ng-shadcn-dropdown-menu-content>\n    <ng-shadcn-dropdown-menu-item label=\"Profile\" (itemSelected)=\"openProfile()\"></ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-item label=\"Settings\" (itemSelected)=\"openSettings()\"></ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n    <ng-shadcn-dropdown-menu-item label=\"Logout\" (itemSelected)=\"logout()\"></ng-shadcn-dropdown-menu-item>\n  </ng-shadcn-dropdown-menu-content>\n</ng-shadcn-dropdown-menu>`\n    },\n    {\n      name: 'With Icons and Shortcuts',\n      description: 'Dropdown menu with icons and keyboard shortcuts',\n      code: `<ng-shadcn-dropdown-menu>\n  <ng-shadcn-dropdown-menu-trigger>\n    <button class=\"btn\">Actions</button>\n  </ng-shadcn-dropdown-menu-trigger>\n  <ng-shadcn-dropdown-menu-content>\n    <ng-shadcn-dropdown-menu-label>My Account</ng-shadcn-dropdown-menu-label>\n    <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n    <ng-shadcn-dropdown-menu-item \n      label=\"Profile\" \n      icon=\"👤\" \n      shortcut=\"⌘P\"\n      (itemSelected)=\"openProfile()\">\n    </ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-item \n      label=\"Settings\" \n      icon=\"⚙️\" \n      shortcut=\"⌘S\"\n      (itemSelected)=\"openSettings()\">\n    </ng-shadcn-dropdown-menu-item>\n  </ng-shadcn-dropdown-menu-content>\n</ng-shadcn-dropdown-menu>`\n    }\n  ],\n  props: {\n    dropdownMenu: [\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      },\n      {\n        name: 'open',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the dropdown is open (controlled)'\n      }\n    ],\n    dropdownMenuTrigger: [\n      {\n        name: 'isOpen',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the dropdown is open'\n      }\n    ],\n    dropdownMenuContent: [\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      },\n      {\n        name: 'minWidth',\n        type: 'number',\n        default: '220',\n        description: 'Minimum width of the dropdown content'\n      }\n    ],\n    dropdownMenuItem: [\n      {\n        name: 'label',\n        type: 'string',\n        default: \"''\",\n        description: 'The text label for the menu item'\n      },\n      {\n        name: 'icon',\n        type: 'string',\n        default: \"''\",\n        description: 'Icon HTML or text to display'\n      },\n      {\n        name: 'disabled',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the menu item is disabled'\n      },\n      {\n        name: 'shortcut',\n        type: 'string',\n        default: \"''\",\n        description: 'Keyboard shortcut text to display'\n      },\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      }\n    ]\n  },\n  events: {\n    dropdownMenu: [\n      {\n        name: 'openChange',\n        type: 'EventEmitter<boolean>',\n        description: 'Emitted when the dropdown open state changes'\n      }\n    ],\n    dropdownMenuTrigger: [\n      {\n        name: 'openChange',\n        type: 'EventEmitter<boolean>',\n        description: 'Emitted when the trigger is activated'\n      }\n    ],\n    dropdownMenuItem: [\n      {\n        name: 'itemSelected',\n        type: 'EventEmitter<void>',\n        description: 'Emitted when the menu item is selected'\n      }\n    ]\n  },\n  accessibility: {\n    roles: ['menu', 'menuitem', 'separator'],\n    keyboardNavigation: [\n      'Tab - Move focus to the trigger',\n      'Enter/Space - Open/close the dropdown',\n      'Escape - Close the dropdown',\n      'Arrow Keys - Navigate between menu items (when open)'\n    ],\n    ariaAttributes: [\n      'aria-haspopup - Indicates the trigger has a popup menu',\n      'aria-expanded - Indicates whether the menu is expanded',\n      'aria-disabled - Indicates disabled menu items',\n      'role=\"menu\" - Identifies the menu container',\n      'role=\"menuitem\" - Identifies individual menu items',\n      'role=\"separator\" - Identifies menu separators'\n    ]\n  }\n}"
             },
             {
+                "name": "GettingStarted",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/GettingStarted.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
                 "name": "Indeterminate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9800,6 +9880,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex gap-4\">\n        <ng-shadcn-button [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Loading...\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\" [disabled]=\"true\">\n          <svg class=\"mr-2 h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n            <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n            <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\"></path>\n          </svg>\n          Please wait\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Loading states with spinner icons and disabled interaction.',\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/GettingStarted.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<GettingStartedComponent>",
+                "defaultValue": "{\n  title: 'Introduction/02-Getting Started',\n  component: GettingStartedComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Introduction.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<WelcomeComponent>",
+                "defaultValue": "{\n  title: 'Welcome',\n  component: WelcomeComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n}"
             },
             {
                 "name": "meta",
@@ -9939,7 +10039,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\r\n  parameters: {\r\n    actions: { argTypesRegex: '^on[A-Z].*' },\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n    docs: {\r\n      inlineStories: true,\r\n    },\r\n    backgrounds: {\r\n      options: {\r\n        light: {\r\n          name: 'light',\r\n          value: '#ffffff',\r\n        },\r\n\r\n        dark: {\r\n          name: 'dark',\r\n          value: '#0a0a0a',\r\n        }\r\n      }\r\n    },\r\n  },\r\n\r\n  globalTypes: {\r\n    theme: {\r\n      description: 'Global theme for components',\r\n      defaultValue: 'light',\r\n      toolbar: {\r\n        title: 'Theme',\r\n        icon: 'paintbrush',\r\n        items: ['light', 'dark'],\r\n        dynamicTitle: true,\r\n      },\r\n    },\r\n  },\r\n\r\n  decorators: [\r\n    (story, context) => {\r\n      const theme = context.globals.theme || 'light';\r\n      \r\n      // Apply theme to document element\r\n      if (typeof document !== 'undefined') {\r\n        document.documentElement.className = theme;\r\n      }\r\n      \r\n      return story();\r\n    },\r\n  ],\r\n\r\n  initialGlobals: {\r\n    backgrounds: {\r\n      value: 'light'\r\n    }\r\n  }\r\n}"
+                "defaultValue": "{\r\n  parameters: {\r\n    actions: { argTypesRegex: '^on[A-Z].*' },\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n    docs: {\r\n      inlineStories: true,\r\n    },\r\n    options: {\r\n      storySort: {\r\n        order: ['Welcome', 'Introduction', '*'],\r\n      },\r\n    },\r\n    backgrounds: {\r\n      options: {\r\n        light: {\r\n          name: 'light',\r\n          value: '#ffffff',\r\n        },\r\n\r\n        dark: {\r\n          name: 'dark',\r\n          value: '#0a0a0a',\r\n        }\r\n      }\r\n    },\r\n  },\r\n\r\n  globalTypes: {\r\n    theme: {\r\n      description: 'Global theme for components',\r\n      defaultValue: 'light',\r\n      toolbar: {\r\n        title: 'Theme',\r\n        icon: 'paintbrush',\r\n        items: ['light', 'dark'],\r\n        dynamicTitle: true,\r\n      },\r\n    },\r\n  },\r\n\r\n  decorators: [\r\n    (story, context) => {\r\n      const theme = context.globals.theme || 'light';\r\n      \r\n      // Apply theme to document element\r\n      if (typeof document !== 'undefined') {\r\n        document.documentElement.className = theme;\r\n      }\r\n      \r\n      return story();\r\n    },\r\n  ],\r\n\r\n  initialGlobals: {\r\n    backgrounds: {\r\n      value: 'light'\r\n    }\r\n  }\r\n}"
             },
             {
                 "name": "ProductCard",
@@ -10152,6 +10252,16 @@
                 "defaultValue": "{\n  render: () => ({\n    template: `\n      <ng-shadcn-tabs defaultValue=\"general\" orientation=\"vertical\" class=\"w-[600px]\">\n        <ng-shadcn-tab-list>\n          <ng-shadcn-tab-trigger value=\"general\">General</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"security\">Security</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"integrations\">Integrations</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"support\">Support</ng-shadcn-tab-trigger>\n        </ng-shadcn-tab-list>\n        <ng-shadcn-tab-content value=\"general\" class=\"ml-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">General Settings</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              Make changes to your general account settings here.\n            </p>\n            <div class=\"grid gap-4\">\n              <div class=\"space-y-2\">\n                <label class=\"text-sm font-medium\">Display Name</label>\n                <input class=\"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm\" placeholder=\"Your display name\" />\n              </div>\n              <div class=\"space-y-2\">\n                <label class=\"text-sm font-medium\">Bio</label>\n                <textarea class=\"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm\" placeholder=\"Tell us about yourself\"></textarea>\n              </div>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"security\" class=\"ml-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Security Settings</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              Manage your account security and authentication preferences.\n            </p>\n            <div class=\"space-y-4\">\n              <div class=\"flex items-center justify-between\">\n                <div>\n                  <p class=\"font-medium\">Two-factor authentication</p>\n                  <p class=\"text-sm text-muted-foreground\">Add an extra layer of security</p>\n                </div>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2\">\n                  Enable\n                </button>\n              </div>\n              <div class=\"flex items-center justify-between\">\n                <div>\n                  <p class=\"font-medium\">Login notifications</p>\n                  <p class=\"text-sm text-muted-foreground\">Get notified of new logins</p>\n                </div>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2\">\n                  Configure\n                </button>\n              </div>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"integrations\" class=\"ml-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Integrations</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              Connect and manage your third-party integrations.\n            </p>\n            <div class=\"grid gap-4\">\n              <div class=\"flex items-center justify-between p-4 border rounded-lg\">\n                <div class=\"flex items-center space-x-4\">\n                  <div class=\"w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold\">\n                    G\n                  </div>\n                  <div>\n                    <p class=\"font-medium\">Google</p>\n                    <p class=\"text-sm text-muted-foreground\">Connect your Google account</p>\n                  </div>\n                </div>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3\">\n                  Connect\n                </button>\n              </div>\n              <div class=\"flex items-center justify-between p-4 border rounded-lg\">\n                <div class=\"flex items-center space-x-4\">\n                  <div class=\"w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white font-bold\">\n                    GH\n                  </div>\n                  <div>\n                    <p class=\"font-medium\">GitHub</p>\n                    <p class=\"text-sm text-muted-foreground\">Connected</p>\n                  </div>\n                </div>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3\">\n                  Disconnect\n                </button>\n              </div>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"support\" class=\"ml-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Support</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              Get help and support for your account.\n            </p>\n            <div class=\"space-y-4\">\n              <div class=\"p-4 border rounded-lg\">\n                <h4 class=\"font-medium mb-2\">Contact Support</h4>\n                <p class=\"text-sm text-muted-foreground mb-4\">\n                  Need help? Our support team is here to assist you.\n                </p>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2\">\n                  Contact Us\n                </button>\n              </div>\n              <div class=\"p-4 border rounded-lg\">\n                <h4 class=\"font-medium mb-2\">Documentation</h4>\n                <p class=\"text-sm text-muted-foreground mb-4\">\n                  Learn how to use our platform with our comprehensive guides.\n                </p>\n                <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2\">\n                  View Docs\n                </button>\n              </div>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n      </ng-shadcn-tabs>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Tabs arranged vertically with a side navigation layout.',\n      },\n    },\n  },\n}"
             },
             {
+                "name": "Welcome",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Introduction.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
                 "name": "WithCharacterCount",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -10294,6 +10404,28 @@
                 "deprecationMessage": "",
                 "description": "<p>Popover placement options</p>\n",
                 "kind": 193
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<GettingStartedComponent>",
+                "file": "src/stories/GettingStarted.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<WelcomeComponent>",
+                "file": "src/stories/Introduction.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
             },
             {
                 "name": "Story",
@@ -10678,7 +10810,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\r\n  stories: [\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  stories: [\r\n    '../src/stories/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',\r\n    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'\r\n  ],\r\n\r\n  addons: [\r\n    getAbsolutePath(\"@storybook/addon-links\"),\r\n    getAbsolutePath(\"@storybook/addon-essentials\"),\r\n    getAbsolutePath(\"@storybook/addon-docs\"),\r\n  ],\r\n\r\n  framework: {\r\n    name: getAbsolutePath(\"@storybook/angular\"),\r\n    options: {},\r\n  },\r\n\r\n  docs: {\r\n    autodocs: 'tag',\r\n    defaultName: 'Welcome',\r\n  },\r\n  staticDirs: ['../src/assets'],\r\n\r\n  typescript: {\r\n    check: false,\r\n  }\r\n}"
                 },
                 {
                     "name": "require",
@@ -11191,6 +11323,28 @@
                     "defaultValue": "{\n  name: 'dropdown-menu',\n  displayName: 'Dropdown Menu',\n  description: 'Displays a menu to the user—such as a set of actions or functions—triggered by a button.',\n  category: 'navigation',\n  version: '1.0.0',\n  dependencies: [],\n  files: [\n    'dropdown-menu.component.ts'\n  ],\n  examples: [\n    {\n      name: 'Basic Dropdown',\n      description: 'Simple dropdown menu with actions',\n      code: `<ng-shadcn-dropdown-menu>\n  <ng-shadcn-dropdown-menu-trigger>\n    <button class=\"btn\">Open Menu</button>\n  </ng-shadcn-dropdown-menu-trigger>\n  <ng-shadcn-dropdown-menu-content>\n    <ng-shadcn-dropdown-menu-item label=\"Profile\" (itemSelected)=\"openProfile()\"></ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-item label=\"Settings\" (itemSelected)=\"openSettings()\"></ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n    <ng-shadcn-dropdown-menu-item label=\"Logout\" (itemSelected)=\"logout()\"></ng-shadcn-dropdown-menu-item>\n  </ng-shadcn-dropdown-menu-content>\n</ng-shadcn-dropdown-menu>`\n    },\n    {\n      name: 'With Icons and Shortcuts',\n      description: 'Dropdown menu with icons and keyboard shortcuts',\n      code: `<ng-shadcn-dropdown-menu>\n  <ng-shadcn-dropdown-menu-trigger>\n    <button class=\"btn\">Actions</button>\n  </ng-shadcn-dropdown-menu-trigger>\n  <ng-shadcn-dropdown-menu-content>\n    <ng-shadcn-dropdown-menu-label>My Account</ng-shadcn-dropdown-menu-label>\n    <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n    <ng-shadcn-dropdown-menu-item \n      label=\"Profile\" \n      icon=\"👤\" \n      shortcut=\"⌘P\"\n      (itemSelected)=\"openProfile()\">\n    </ng-shadcn-dropdown-menu-item>\n    <ng-shadcn-dropdown-menu-item \n      label=\"Settings\" \n      icon=\"⚙️\" \n      shortcut=\"⌘S\"\n      (itemSelected)=\"openSettings()\">\n    </ng-shadcn-dropdown-menu-item>\n  </ng-shadcn-dropdown-menu-content>\n</ng-shadcn-dropdown-menu>`\n    }\n  ],\n  props: {\n    dropdownMenu: [\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      },\n      {\n        name: 'open',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the dropdown is open (controlled)'\n      }\n    ],\n    dropdownMenuTrigger: [\n      {\n        name: 'isOpen',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the dropdown is open'\n      }\n    ],\n    dropdownMenuContent: [\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      },\n      {\n        name: 'minWidth',\n        type: 'number',\n        default: '220',\n        description: 'Minimum width of the dropdown content'\n      }\n    ],\n    dropdownMenuItem: [\n      {\n        name: 'label',\n        type: 'string',\n        default: \"''\",\n        description: 'The text label for the menu item'\n      },\n      {\n        name: 'icon',\n        type: 'string',\n        default: \"''\",\n        description: 'Icon HTML or text to display'\n      },\n      {\n        name: 'disabled',\n        type: 'boolean',\n        default: 'false',\n        description: 'Whether the menu item is disabled'\n      },\n      {\n        name: 'shortcut',\n        type: 'string',\n        default: \"''\",\n        description: 'Keyboard shortcut text to display'\n      },\n      {\n        name: 'className',\n        type: 'string',\n        default: \"''\",\n        description: 'Additional CSS classes'\n      }\n    ]\n  },\n  events: {\n    dropdownMenu: [\n      {\n        name: 'openChange',\n        type: 'EventEmitter<boolean>',\n        description: 'Emitted when the dropdown open state changes'\n      }\n    ],\n    dropdownMenuTrigger: [\n      {\n        name: 'openChange',\n        type: 'EventEmitter<boolean>',\n        description: 'Emitted when the trigger is activated'\n      }\n    ],\n    dropdownMenuItem: [\n      {\n        name: 'itemSelected',\n        type: 'EventEmitter<void>',\n        description: 'Emitted when the menu item is selected'\n      }\n    ]\n  },\n  accessibility: {\n    roles: ['menu', 'menuitem', 'separator'],\n    keyboardNavigation: [\n      'Tab - Move focus to the trigger',\n      'Enter/Space - Open/close the dropdown',\n      'Escape - Close the dropdown',\n      'Arrow Keys - Navigate between menu items (when open)'\n    ],\n    ariaAttributes: [\n      'aria-haspopup - Indicates the trigger has a popup menu',\n      'aria-expanded - Indicates whether the menu is expanded',\n      'aria-disabled - Indicates disabled menu items',\n      'role=\"menu\" - Identifies the menu container',\n      'role=\"menuitem\" - Identifies individual menu items',\n      'role=\"separator\" - Identifies menu separators'\n    ]\n  }\n}"
                 }
             ],
+            "src/stories/GettingStarted.stories.ts": [
+                {
+                    "name": "GettingStarted",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/GettingStarted.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/GettingStarted.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GettingStartedComponent>",
+                    "defaultValue": "{\n  title: 'Introduction/02-Getting Started',\n  component: GettingStartedComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n}"
+                }
+            ],
             "packages/input/src/lib/input.metadata.ts": [
                 {
                     "name": "InputMeta",
@@ -11201,6 +11355,28 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  name: 'input',\n  description: 'A form input component with label and error support',\n  component: InputComponent,\n  usage: `\n    <!-- Basic usage -->\n    <ng-shadcn-input placeholder=\"Enter text\"></ng-shadcn-input>\n    \n    <!-- With label -->\n    <ng-shadcn-input label=\"Email\" type=\"email\" placeholder=\"Enter your email\"></ng-shadcn-input>\n    \n    <!-- With error -->\n    <ng-shadcn-input label=\"Username\" error=\"Username is required\"></ng-shadcn-input>\n    \n    <!-- Two-way binding -->\n    <ng-shadcn-input [(ngModel)]=\"username\" label=\"Username\"></ng-shadcn-input>\n  `,\n  types: [\n    { name: 'text', description: 'Text input' },\n    { name: 'email', description: 'Email input' },\n    { name: 'password', description: 'Password input' },\n    { name: 'number', description: 'Number input' },\n    { name: 'tel', description: 'Telephone input' },\n    { name: 'url', description: 'URL input' },\n  ],\n}"
+                }
+            ],
+            "src/stories/Introduction.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Introduction.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<WelcomeComponent>",
+                    "defaultValue": "{\n  title: 'Welcome',\n  component: WelcomeComponent,\n  parameters: {\n    layout: 'fullscreen',\n  },\n}"
+                },
+                {
+                    "name": "Welcome",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Introduction.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
                 }
             ],
             "packages/popover/src/lib/popover.metadata.ts": [
@@ -11224,7 +11400,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\r\n  parameters: {\r\n    actions: { argTypesRegex: '^on[A-Z].*' },\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n    docs: {\r\n      inlineStories: true,\r\n    },\r\n    backgrounds: {\r\n      options: {\r\n        light: {\r\n          name: 'light',\r\n          value: '#ffffff',\r\n        },\r\n\r\n        dark: {\r\n          name: 'dark',\r\n          value: '#0a0a0a',\r\n        }\r\n      }\r\n    },\r\n  },\r\n\r\n  globalTypes: {\r\n    theme: {\r\n      description: 'Global theme for components',\r\n      defaultValue: 'light',\r\n      toolbar: {\r\n        title: 'Theme',\r\n        icon: 'paintbrush',\r\n        items: ['light', 'dark'],\r\n        dynamicTitle: true,\r\n      },\r\n    },\r\n  },\r\n\r\n  decorators: [\r\n    (story, context) => {\r\n      const theme = context.globals.theme || 'light';\r\n      \r\n      // Apply theme to document element\r\n      if (typeof document !== 'undefined') {\r\n        document.documentElement.className = theme;\r\n      }\r\n      \r\n      return story();\r\n    },\r\n  ],\r\n\r\n  initialGlobals: {\r\n    backgrounds: {\r\n      value: 'light'\r\n    }\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  parameters: {\r\n    actions: { argTypesRegex: '^on[A-Z].*' },\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n    docs: {\r\n      inlineStories: true,\r\n    },\r\n    options: {\r\n      storySort: {\r\n        order: ['Welcome', 'Introduction', '*'],\r\n      },\r\n    },\r\n    backgrounds: {\r\n      options: {\r\n        light: {\r\n          name: 'light',\r\n          value: '#ffffff',\r\n        },\r\n\r\n        dark: {\r\n          name: 'dark',\r\n          value: '#0a0a0a',\r\n        }\r\n      }\r\n    },\r\n  },\r\n\r\n  globalTypes: {\r\n    theme: {\r\n      description: 'Global theme for components',\r\n      defaultValue: 'light',\r\n      toolbar: {\r\n        title: 'Theme',\r\n        icon: 'paintbrush',\r\n        items: ['light', 'dark'],\r\n        dynamicTitle: true,\r\n      },\r\n    },\r\n  },\r\n\r\n  decorators: [\r\n    (story, context) => {\r\n      const theme = context.globals.theme || 'light';\r\n      \r\n      // Apply theme to document element\r\n      if (typeof document !== 'undefined') {\r\n        document.documentElement.className = theme;\r\n      }\r\n      \r\n      return story();\r\n    },\r\n  ],\r\n\r\n  initialGlobals: {\r\n    backgrounds: {\r\n      value: 'light'\r\n    }\r\n  }\r\n}"
                 }
             ],
             "packages/radio-group/src/lib/radio-group.component.ts": [
@@ -11346,6 +11522,32 @@
                     "deprecationMessage": "",
                     "description": "<p>Popover placement options</p>\n",
                     "kind": 193
+                }
+            ],
+            "src/stories/GettingStarted.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<GettingStartedComponent>",
+                    "file": "src/stories/GettingStarted.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "src/stories/Introduction.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<WelcomeComponent>",
+                    "file": "src/stories/Introduction.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
                 }
             ],
             "packages/alert/src/lib/alert.stories.ts": [
@@ -12927,6 +13129,84 @@
                 "name": "App",
                 "coveragePercent": 0,
                 "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/GettingStarted.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "GettingStartedComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/GettingStarted.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GettingStarted",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/GettingStarted.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/GettingStarted.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Introduction.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WelcomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Introduction.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Introduction.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Welcome",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Introduction.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "ng": "ng",
+    "docs": "ng run storybook:serve-storybook",
     "start": "ng serve demo",
     "build": "ng build demo",
     "build:lib": "npm run build:components",

@@ -18,6 +18,11 @@ const preview: Preview = {
     docs: {
       inlineStories: true,
     },
+    options: {
+      storySort: {
+        order: ['Welcome', 'Introduction', '*'],
+      },
+    },
     backgrounds: {
       options: {
         light: {
