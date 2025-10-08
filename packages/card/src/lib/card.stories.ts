@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { 
   CardComponent, 
   CardHeaderComponent, 
@@ -12,6 +13,19 @@ import { ButtonComponent } from '../../../button/src/lib/button.component';
 const meta: Meta<CardComponent> = {
   title: 'Components/Card',
   component: CardComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [
+        CardComponent,
+        CardHeaderComponent,
+        CardTitleComponent,
+        CardDescriptionComponent,
+        CardContentComponent,
+        CardFooterComponent,
+        ButtonComponent
+      ],
+    }),
+  ],
   parameters: {
     layout: 'centered',
     docs: {

@@ -77,7 +77,7 @@ export class PopoverContentComponent {
     }
   }
 
-  get arrowPosition(): { top?: string; left?: string; bottom?: string; right?: string } {
+  get arrowPosition(): { top?: string; left?: string; bottom?: string; right?: string; transform?: string } {
     if (!this.showArrow) return {};
 
     switch (this.placement) {

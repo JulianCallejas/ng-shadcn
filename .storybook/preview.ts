@@ -2,8 +2,7 @@ import type { Preview } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 
-// Import global styles
-import '../src/global_styles.css';
+// Global styles are configured in angular.json
 
 setCompodocJson(docJson);
 
@@ -20,19 +19,20 @@ const preview: Preview = {
       inlineStories: true,
     },
     backgrounds: {
-      default: 'light',
-      values: [
-        {
+      options: {
+        light: {
           name: 'light',
           value: '#ffffff',
         },
-        {
+
+        dark: {
           name: 'dark',
           value: '#0a0a0a',
-        },
-      ],
+        }
+      }
     },
   },
+
   globalTypes: {
     theme: {
       description: 'Global theme for components',
@@ -45,22 +45,25 @@ const preview: Preview = {
       },
     },
   },
+
   decorators: [
     (story, context) => {
       const theme = context.globals.theme || 'light';
       
-      return {
-        template: `
-          <div class="${theme}" style="min-height: 100vh; padding: 1rem;">
-            <div class="bg-background text-foreground">
-              <story></story>
-            </div>
-          </div>
-        `,
-        props: {},
-      };
+      // Apply theme to document element
+      if (typeof document !== 'undefined') {
+        document.documentElement.className = theme;
+      }
+      
+      return story();
     },
   ],
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'light'
+    }
+  }
 };
 
 export default preview;

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { 
   DropdownMenuComponent, 
   DropdownMenuTriggerComponent, 
@@ -11,6 +12,18 @@ import {
 const meta: Meta<DropdownMenuComponent> = {
   title: 'Components/Dropdown Menu',
   component: DropdownMenuComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [
+        DropdownMenuComponent,
+        DropdownMenuTriggerComponent,
+        DropdownMenuContentComponent,
+        DropdownMenuItemComponent,
+        DropdownMenuSeparatorComponent,
+        DropdownMenuLabelComponent
+      ],
+    }),
+  ],
   parameters: {
     layout: 'centered',
     docs: {

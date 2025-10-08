@@ -1,10 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './input.component';
 
 const meta: Meta<InputComponent> = {
   title: 'Components/Input',
   component: InputComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [InputComponent, ReactiveFormsModule],
+    }),
+  ],
   parameters: {
     layout: 'centered',
     docs: {

@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Components/Button',
   component: ButtonComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [ButtonComponent],
+    }),
+  ],
   parameters: {
     layout: 'centered',
     docs: {
@@ -53,6 +59,13 @@ export const Default: Story = {
     props: args,
     template: '<ng-shadcn-button [variant]="variant" [size]="size" [disabled]="disabled" [className]="className" (clicked)="clicked($event)">Button</ng-shadcn-button>',
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: '<ng-shadcn-button>Button</ng-shadcn-button>',
+      },
+    },
+  },
 };
 
 export const Variants: Story = {

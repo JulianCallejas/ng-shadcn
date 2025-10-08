@@ -1,9 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { TabsComponent, TabListComponent, TabTriggerComponent, TabContentComponent } from './tabs.component';
 
 const meta: Meta<TabsComponent> = {
   title: 'Components/Tabs',
   component: TabsComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [
+        TabsComponent,
+        TabListComponent,
+        TabTriggerComponent,
+        TabContentComponent
+      ],
+    }),
+  ],
   parameters: {
     layout: 'centered',
     docs: {
