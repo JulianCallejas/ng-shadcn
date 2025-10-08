@@ -26,74 +26,74 @@ import { Component } from '@angular/core';
       
       <h3 class="text-xl font-medium text-gray-700 mb-3">Core Components (12)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <a onclick="window.top.location.href = '?path=/docs/components-button--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Button</strong>
           <p class="text-sm text-blue-600">Various styles and sizes with loading states</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-input--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Input</strong>
           <p class="text-sm text-blue-600">Text inputs with validation and icons</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-card--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Card</strong>
           <p class="text-sm text-blue-600">Flexible content containers</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-switch--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Switch</strong>
           <p class="text-sm text-blue-600">Toggle switches with smooth animations</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-dialog--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Dialog</strong>
           <p class="text-sm text-blue-600">Modal dialogs and overlays</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-tooltip--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Tooltip</strong>
           <p class="text-sm text-blue-600">Contextual help and information</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-select--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Select</strong>
           <p class="text-sm text-blue-600">Dropdown selection components</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-checkbox--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Checkbox</strong>
           <p class="text-sm text-blue-600">Multi-selection inputs</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-radio-group--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Radio Group</strong>
           <p class="text-sm text-blue-600">Single selection from multiple options</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-textarea--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Textarea</strong>
           <p class="text-sm text-blue-600">Multi-line text inputs</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-badge--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Badge</strong>
           <p class="text-sm text-blue-600">Status indicators and labels</p>
-        </div>
-        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-alert--docs'" class="p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors cursor-pointer no-underline">
           <strong class="text-blue-800">Alert</strong>
           <p class="text-sm text-blue-600">Notification and message components</p>
-        </div>
+        </a>
       </div>
       
       <h3 class="text-xl font-medium text-gray-700 mb-3">Advanced Components (4)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-        <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+        <a onclick="window.top.location.href = '?path=/docs/components-tabs--docs'" class="p-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 hover:border-green-300 transition-colors cursor-pointer no-underline">
           <strong class="text-green-800">Tabs</strong>
           <p class="text-sm text-green-600">Horizontal and vertical tab navigation</p>
-        </div>
-        <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-dropdown-menu--docs'" class="p-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 hover:border-green-300 transition-colors cursor-pointer no-underline">
           <strong class="text-green-800">Dropdown Menu</strong>
           <p class="text-sm text-green-600">Context menus with keyboard navigation</p>
-        </div>
-        <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-popover--docs'" class="p-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 hover:border-green-300 transition-colors cursor-pointer no-underline">
           <strong class="text-green-800">Popover</strong>
           <p class="text-sm text-green-600">Smart positioning tooltips and content overlays</p>
-        </div>
-        <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+        </a>
+        <a onclick="window.top.location.href = '?path=/docs/components-accordion--docs'" class="p-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 hover:border-green-300 transition-colors cursor-pointer no-underline">
           <strong class="text-green-800">Accordion</strong>
           <p class="text-sm text-green-600">Collapsible content sections</p>
-        </div>
+        </a>
       </div>
       
       <h2 class="text-2xl font-semibold text-gray-800 mb-4">🛠️ Installation</h2>
