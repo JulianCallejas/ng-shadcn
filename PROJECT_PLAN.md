@@ -14,7 +14,7 @@
 - ✅ **12 Components Implemented**: Button, Input, Card, Switch, Dialog, Tooltip, Select, Checkbox, Radio Group, Textarea, Badge, Alert
 - ✅ **Modern Architecture**: Standalone components, signals, CSS variables theming
 - ✅ **CLI Tool Complete**: Full installation support for all components
-- ✅ **Demo Application**: Comprehensive showcase with all components and theme switching
+- ✅ **ng-shadcn Application**: Comprehensive showcase with all components and theme switching
 
 ### Issues to Resolve
 - ✅ **Build Errors**: ~~TypeScript compatibility issues~~ **RESOLVED**
@@ -45,7 +45,7 @@
 #### Acceptance Criteria
 - [x] All components build without errors
 - [x] CLI commands work end-to-end (init command verified)
-- [x] Demo application runs without compilation errors
+- [x] ng-shadcn application runs without compilation errors
 
 ---
 
@@ -94,7 +94,7 @@
 - [x] All 6 components implemented with full functionality
 - [x] Components follow established patterns (signals, accessibility, theming)
 - [x] Added to angular.json and CLI installation
-- [x] Demo application showcases all components
+- [x] ng-shadcn application showcases all components
 
 ---
 
@@ -111,7 +111,7 @@
 - [x] **E2E Tests**
   - [x] Setup Playwright for E2E testing
   - [x] Test CLI installation workflow
-  - [x] Test component interactions in demo app
+  - [x] Test component interactions in ng-shadcn app
 
 #### Documentation
 - [x] **Storybook Integration**
@@ -250,13 +250,13 @@ Total Project Progress: [██████████] 100% - PROJECT COMPLETE
 **Status**: ✅ **COMPLETED**  
 - [x] All components build successfully
 - [x] CLI commands functional
-- [x] Demo app runs without errors
+- [x] ng-shadcn app runs without errors
 
 ### Milestone 2: Core Components Complete ✅
 **Target**: October 12, 2025  
 **Status**: ✅ **COMPLETED**  
 - [x] 6 additional core components implemented
-- [x] All components in demo application
+- [x] All components in ng-shadcn application
 - [x] CLI supports all components
 
 ### Milestone 3: Testing & Documentation ✅
@@ -295,7 +295,7 @@ Total Project Progress: [██████████] 100% - PROJECT COMPLETE
 - [x] Unit tests written and passing
 - [x] Documentation updated
 - [x] Added to CLI installation
-- [x] Demo application updated
+- [x] ng-shadcn application updated
 - [x] Code review completed
 
 ---

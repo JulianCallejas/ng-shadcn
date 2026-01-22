@@ -214,7 +214,7 @@ test.describe('CLI Installation Workflow', () => {
   });
 });
 
-test.describe('CLI Integration with Demo App', () => {
+test.describe('CLI Integration with ng-shadcn App', () => {
   test('should verify all components are available in CLI', async () => {
     const cliPath = join(process.cwd(), 'cli', 'dist', 'index.js');
     if (!existsSync(cliPath)) {

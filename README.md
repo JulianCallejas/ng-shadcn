@@ -291,7 +291,7 @@ ng-shadcn/
 │   ├── card/          # Card component
 │   └── ...
 ├── cli/               # CLI tool
-├── src/               # Demo application
+├── src/               # ng-shadcn application
 └── docs/              # Documentation (planned)
 ```
 

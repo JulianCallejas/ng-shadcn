@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Demo Application', () => {
+test.describe('ng-shadcn Application', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
-  test('should load the demo application', async ({ page }) => {
+  test('should load the ng-shadcn application', async ({ page }) => {
     await expect(page).toHaveTitle(/ng-shadcn/i);
     await expect(page.locator('h1')).toContainText('ng-shadcn');
   });
