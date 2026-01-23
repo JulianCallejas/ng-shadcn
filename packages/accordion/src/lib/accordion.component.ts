@@ -65,6 +65,7 @@ export class AccordionContentComponent {
   imports: [CommonModule],
   template: `
     <button
+      class="gap-2"
       [class]="computedClasses"
       [attr.data-state]="isExpanded ? 'open' : 'closed'"
       [disabled]="disabled"

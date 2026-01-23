@@ -23,11 +23,25 @@ import {
       <div class="p-6 border rounded-lg bg-card">
         <ng-shadcn-accordion>
           <ng-shadcn-accordion-item *ngFor="let item of items" [value]="item.value">
-            <ng-shadcn-accordion-trigger [isExpanded]="expandedItems.includes(item.value)" (itemToggled)="toggleItem(item.value)" class="w-full text-left p-4 hover:bg-accent/50 transition-colors">
+            <ng-shadcn-accordion-trigger [isExpanded]="expandedItems.includes(item.value)" (itemToggled)="toggleItem(item.value)">
               {{ item.title }}
             </ng-shadcn-accordion-trigger>
-            <ng-shadcn-accordion-content [isExpanded]="expandedItems.includes(item.value)" class="p-4 pt-0">
+            <ng-shadcn-accordion-content [isExpanded]="expandedItems.includes(item.value)" >
               <p class="text-muted-foreground">{{ item.content }}</p>
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+          <ng-shadcn-accordion-item value="item-4">
+            <ng-shadcn-accordion-trigger 
+              class="text-red-800"
+              [isExpanded]="expandedItems.includes('item-4')" 
+              (itemToggled)="toggleItem('item-4')"
+            >
+              Custom Trigger exmaple
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content [isExpanded]="expandedItems.includes('item-4')">
+              <p class="text-muted-foreground">left text</p>
+              <p class="text-center text-blue-800">center text</p>
+              <p class="text-right text-amber-400">right text</p>
             </ng-shadcn-accordion-content>
           </ng-shadcn-accordion-item>
         </ng-shadcn-accordion>
