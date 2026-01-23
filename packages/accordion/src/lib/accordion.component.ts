@@ -26,11 +26,36 @@ export interface AccordionItem {
       role="region"
       [attr.aria-labelledby]="triggerId"
       [attr.id]="contentId"
-      [style.display]="isExpanded ? 'block' : 'none'">
+    >
       <div class="pb-4 pt-0">
         <ng-content></ng-content>
       </div>
     </div>
+  `,
+  styles: `
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+  0% { 
+    height: var(--radix-accordion-content-height); 
+    display: block;
+  }
+  100% { 
+    height: 0; 
+    display: none;
+  }
+}
+  .animate-accordion-down {
+    interpolate-size: allow-keywords;
+    animation: accordion-down 0.2s ease-out forwards;
+  }
+  .animate-accordion-up {
+    interpolate-size: allow-keywords;
+    animation: accordion-up 0.2s ease-out forwards;
+  }
+
   `,
 })
 export class AccordionContentComponent {
@@ -48,10 +73,10 @@ export class AccordionContentComponent {
 
   get computedClasses(): string {
     const baseClasses = 'overflow-hidden text-sm transition-all';
-    const stateClasses = this.isExpanded 
-      ? 'data-[state=open]:animate-accordion-down' 
-      : 'data-[state=closed]:animate-accordion-up';
-    
+    const stateClasses = this.isExpanded
+      ? 'animate-accordion-down'
+      : 'animate-accordion-up';
+
     return `${baseClasses} ${stateClasses} ${this.className}`;
   }
 }
@@ -65,7 +90,7 @@ export class AccordionContentComponent {
   imports: [CommonModule],
   template: `
     <button
-      class="gap-2"
+      class="gap-2 w-full"
       [class]="computedClasses"
       [attr.data-state]="isExpanded ? 'open' : 'closed'"
       [disabled]="disabled"
@@ -74,14 +99,14 @@ export class AccordionContentComponent {
       [attr.id]="triggerId"
       (click)="handleClick()"
       (keydown)="handleKeyDown($event)">
-      
+
       <ng-content></ng-content>
-      
-      <svg 
+
+      <svg
         class="h-4 w-4 shrink-0 transition-transform duration-200"
         [class.rotate-180]="isExpanded"
-        fill="none" 
-        stroke="currentColor" 
+        fill="none"
+        stroke="currentColor"
         viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
       </svg>
@@ -106,10 +131,10 @@ export class AccordionTriggerComponent {
 
   get computedClasses(): string {
     const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';
-    const stateClasses = this.disabled 
-      ? 'pointer-events-none opacity-50' 
+    const stateClasses = this.disabled
+      ? 'pointer-events-none opacity-50'
       : '[&[data-state=open]>svg]:rotate-180';
-    
+
     return `${baseClasses} ${stateClasses} ${this.className}`;
   }
 
@@ -235,12 +260,12 @@ export class AccordionComponent implements AfterContentInit {
     }
 
     this.expandedItems.set(newExpanded);
-    
+
     // Emit the appropriate value format
-    const emitValue = this.type === 'single' 
+    const emitValue = this.type === 'single'
       ? (newExpanded.length > 0 ? newExpanded[0] : '')
       : newExpanded;
-    
+
     this.valueChange.emit(emitValue);
     this.updateItemStates();
   }

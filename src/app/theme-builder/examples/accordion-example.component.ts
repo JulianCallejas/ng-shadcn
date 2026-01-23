@@ -45,6 +45,12 @@ import {
             </ng-shadcn-accordion-content>
           </ng-shadcn-accordion-item>
         </ng-shadcn-accordion>
+        <div class="p-6 border rounded-lg bg-card">
+          <ng-shadcn-accordion type="single" >
+
+          </ng-shadcn-accordion>
+
+        </div>
       </div>
     </div>
   `,
