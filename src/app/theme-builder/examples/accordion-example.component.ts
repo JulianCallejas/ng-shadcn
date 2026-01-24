@@ -45,27 +45,26 @@ import {
             </ng-shadcn-accordion-content>
           </ng-shadcn-accordion-item>
         </ng-shadcn-accordion>
-        <div class="p-6 border rounded-lg bg-card">
-          <ng-shadcn-accordion type="single" >
-            <ng-shadcn-accordion-item id="nc-item-1" >
-              <ng-shadcn-accordion-trigger >
-                Non-Controlled Item
-              </ng-shadcn-accordion-trigger>
-              <ng-shadcn-accordion-content >
-                This content should toggle automatically
-              </ng-shadcn-accordion-content>
-            </ng-shadcn-accordion-item>
-            <ng-shadcn-accordion-item id="nc-item-2" >
-              <ng-shadcn-accordion-trigger >
-                Non-Controlled Item 2
-              </ng-shadcn-accordion-trigger>
-              <ng-shadcn-accordion-content >
-                This content should toggle automatically
-              </ng-shadcn-accordion-content>
-            </ng-shadcn-accordion-item>
-          </ng-shadcn-accordion>
-
-        </div>
+      </div>
+      <div class="p-6 border rounded-lg bg-card">
+        <ng-shadcn-accordion type="single">
+          <ng-shadcn-accordion-item id="nc-item-1" >
+            <ng-shadcn-accordion-trigger >
+              Non-Controlled Item
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content >
+              This content should toggle automatically
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+          <ng-shadcn-accordion-item id="nc-item-2" >
+            <ng-shadcn-accordion-trigger >
+              Non-Controlled Item 2
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content >
+              This content should toggle automatically
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+        </ng-shadcn-accordion>
       </div>
     </div>
   `,

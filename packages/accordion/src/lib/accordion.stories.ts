@@ -90,9 +90,9 @@ class AccordionMultipleStory {}
       </div>
 
       <ng-shadcn-accordion 
-        type="multiple" 
-        [id]="openItems()" 
-        (idChange)="openItems.set($event)">
+        type="multiple"
+        [expandedItems]="openItems()"
+        (expandedItemsChange)="openItems.set($event)">
         <ng-shadcn-accordion-item id="item-1">
           <ng-shadcn-accordion-trigger>Controlled Item 1</ng-shadcn-accordion-trigger>
           <ng-shadcn-accordion-content>
@@ -113,43 +113,43 @@ class AccordionMultipleStory {}
 class AccordionControlledStory {
   openItems = signal<string[]>(['item-1']);
 
-  toggleItem(item: string) {
-    if (this.isOpen(item)) {
-      this.openItems.update(items => items.filter(i => i !== item));
-    } else {
-      this.openItems.update(items => [...items, item]);
-    }
+  isOpen(id: string): boolean {
+    return this.openItems().includes(id);
   }
 
-  isOpen(item: string): boolean {
-    return this.openItems().includes(item);
+  toggleItem(id: string): void {
+    this.openItems.update(items => 
+      items.includes(id) 
+        ? items.filter(item => item !== id)
+        : [...items, id]
+    );
   }
 }
 
-// Collapsible Single
+// Single with Collapsible Behavior
 @Component({
-  selector: 'story-accordion-collapsible',
+  selector: 'story-accordion-single',
   standalone: true,
   imports: [CommonModule, AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
   template: `
-    <ng-shadcn-accordion [collapsible]="true">
+    <ng-shadcn-accordion type="single">
       <ng-shadcn-accordion-item id="item-1">
-        <ng-shadcn-accordion-trigger>Click to toggle</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-trigger>Can I open just one item at a time?</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
-          This accordion can be collapsed by clicking the active item.
+          Yes. You can set the type prop to 'single' to ensure only one item can be opened at a time.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
       <ng-shadcn-accordion-item id="item-2">
-        <ng-shadcn-accordion-trigger>Another item</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-trigger>Can I close an item by clicking it again?</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
-          Another item's content.
+          Yes. In 'single' mode, clicking an open item will close it.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
     </ng-shadcn-accordion>
   `,
 })
-class AccordionCollapsibleStory {}
+class AccordionSingleStory {}
 
 const meta: Meta = {
   title: 'Components/Accordion',
@@ -198,17 +198,9 @@ npm install @ng-shadcn/accordion
         defaultValue: { summary: 'single' },
       },
     },
-    collapsible: {
-      control: 'boolean',
-      description: 'Whether the accordion can be collapsed when in single mode',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
-    id: {
+    expandedItems: {
       control: 'text',
-      description: 'The identifier of the currently expanded item(s)',
+      description: 'The identifier(s) of the currently expanded item(s)',
       table: {
         type: { summary: 'string | string[]' },
       },
@@ -216,7 +208,6 @@ npm install @ng-shadcn/accordion
   },
   args: {
     type: 'single',
-    collapsible: false,
   },
 };
 
@@ -236,7 +227,7 @@ export const Basic: Story = {
       source: {
         code: `
 <ng-shadcn-accordion>
-  <ng-shadcn-accordion-item value="item-1">
+  <ng-shadcn-accordion-item id="item-1">
     <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>
     <ng-shadcn-accordion-content>
       Yes. It adheres to the WAI-ARIA design pattern.
@@ -265,13 +256,17 @@ export const Multiple: Story = {
       source: {
         code: `
 <ng-shadcn-accordion type="multiple">
-  <ng-shadcn-accordion-item value="item-1">
+  <ng-shadcn-accordion-item id="item-1">
     <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>
-    <ng-shadcn-accordion-content>Content 1</ng-shadcn-accordion-content>
+    <ng-shadcn-accordion-content>
+      First item content.
+    </ng-shadcn-accordion-content>
   </ng-shadcn-accordion-item>
-  <ng-shadcn-accordion-item value="item-2">
+  <ng-shadcn-accordion-item id="item-2">
     <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>
-    <ng-shadcn-accordion-content>Content 2</ng-shadcn-accordion-content>
+    <ng-shadcn-accordion-content>
+      Second item content.
+    </ng-shadcn-accordion-content>
   </ng-shadcn-accordion-item>
 </ng-shadcn-accordion>
         `,
@@ -280,6 +275,44 @@ export const Multiple: Story = {
     },
   },
 };
+
+const par = ()=>{
+  return `
+  // Template
+<ng-shadcn-accordion 
+  type="multiple"
+  [expandedItems]="openItems()"
+  (expandedItemsChange)="openItems.set($event)">
+  <ng-shadcn-accordion-item id="item-1">
+    <ng-shadcn-accordion-trigger>Item 1</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>
+      Content for item 1
+    </ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+  
+  <ng-shadcn-accordion-item id="item-2">
+    <ng-shadcn-accordion-trigger>Item 2</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>
+      Content for item 2
+    </ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+</ng-shadcn-accordion>
+
+// Component Class
+export class MyComponent {
+  openItems = signal<string[]>([]);
+  
+  toggleItem(id: string) {
+    this.openItems.update(items => 
+      items.includes(id) 
+        ? items.filter(item => item !== id)
+        : [...items, id]
+    );
+  }
+}
+
+  `
+}
 
 export const Controlled: Story = {
   render: () => ({
@@ -291,34 +324,49 @@ export const Controlled: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Accordion with controlled state from the parent component.',
-      },
-    },
-  },
-};
-
-export const Collapsible: Story = {
-  render: () => ({
-    moduleMetadata: {
-      imports: [AccordionCollapsibleStory],
-    },
-    template: '<story-accordion-collapsible></story-accordion-collapsible>',
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Single accordion that can be collapsed by clicking the active item.',
+        story: 'Accordion with controlled state from the parent component using expandedItems and expandedItemsChange.',
       },
       source: {
+        // 1. Set type to 'code' to force Storybook to use this exact string
+        type: 'code', 
+        language: 'typescript',
         code: `
-<ng-shadcn-accordion [collapsible]="true">
-  <ng-shadcn-accordion-item value="item-1">
-    <ng-shadcn-accordion-trigger>Click to toggle</ng-shadcn-accordion-trigger>
-    <ng-shadcn-accordion-content>Content</ng-shadcn-accordion-content>
-  </ng-shadcn-accordion-item>
-</ng-shadcn-accordion>
+        // Component Class
+        export class MyComponent {
+          openItems = signal<string[]>([]);
+          toggleItem(id: string) {
+            this.openItems.update(items => 
+              items.includes(id) 
+                ? items.filter(item => item !== id)
+                : [...items, id]
+            );
+          }
+        }
+
+                // Template
+        <ng-shadcn-accordion 
+          type="multiple"
+          [expandedItems]="openItems()"
+          >
+          <ng-shadcn-accordion-item id="item-1">
+            <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-1')">
+             Item 1
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content>
+              Content for item 1
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+          
+          <ng-shadcn-accordion-item id="item-2">
+            <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-2')">
+             Item 2
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content>
+              Content for item 2
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+        </ng-shadcn-accordion>
         `,
-        language: 'html',
       },
     },
   },

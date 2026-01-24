@@ -26,11 +26,9 @@ declare const ngDevMode: boolean;
   @keyframes accordion-up {
     0% { 
       height: var(--radix-accordion-content-height); 
-      display: block;
     }
     100% { 
       height: 0; 
-      display: none;
     }
   }
   .animate-accordion-down {
