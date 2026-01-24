@@ -1,16 +1,15 @@
-import { Component, Input, Output, EventEmitter, signal, computed, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { 
+  Component, Input, Output, EventEmitter, signal, computed, 
+  ContentChildren, QueryList, effect, booleanAttribute, 
+  inject, OnChanges, SimpleChanges, AfterContentInit,
+  ContentChild,
+  DestroyRef,
+  EnvironmentInjector,
+  ChangeDetectorRef
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * Accordion item interface
- */
-export interface AccordionItem {
-  id: string;
-  title: string;
-  content: string;
-  disabled?: boolean;
-  expanded?: boolean;
-}
+declare const ngDevMode: boolean;
 
 /**
  * Individual accordion content component
@@ -19,6 +18,30 @@ export interface AccordionItem {
   selector: 'ng-shadcn-accordion-content',
   standalone: true,
   imports: [CommonModule],
+  styles: `
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    0% { 
+      height: var(--radix-accordion-content-height); 
+      display: block;
+    }
+    100% { 
+      height: 0; 
+      display: none;
+    }
+  }
+  .animate-accordion-down {
+    interpolate-size: allow-keywords;
+    animation: accordion-down 0.2s ease-out forwards;
+  }
+  .animate-accordion-up {
+    interpolate-size: allow-keywords;
+    animation: accordion-up 0.2s ease-out forwards;
+  }
+  `,
   template: `
     <div
       [class]="computedClasses"
@@ -32,52 +55,24 @@ export interface AccordionItem {
       </div>
     </div>
   `,
-  styles: `
-  @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
-  }
-  @keyframes accordion-up {
-  0% { 
-    height: var(--radix-accordion-content-height); 
-    display: block;
-  }
-  100% { 
-    height: 0; 
-    display: none;
-  }
-}
-  .animate-accordion-down {
-    interpolate-size: allow-keywords;
-    animation: accordion-down 0.2s ease-out forwards;
-  }
-  .animate-accordion-up {
-    interpolate-size: allow-keywords;
-    animation: accordion-up 0.2s ease-out forwards;
-  }
-
-  `,
 })
 export class AccordionContentComponent {
-  @Input() value = '';
-  @Input() className = '';
-  @Input() isExpanded = false;
+  id = '';
+  @Input() class = '';
+  @Input({ transform: booleanAttribute }) isExpanded = false;
 
   get triggerId(): string {
-    return `accordion-trigger-${this.value}`;
+    return `accordion-trigger-${this.id}`;
   }
 
   get contentId(): string {
-    return `accordion-content-${this.value}`;
+    return `accordion-content-${this.id}`;
   }
 
   get computedClasses(): string {
     const baseClasses = 'overflow-hidden text-sm transition-all';
-    const stateClasses = this.isExpanded
-      ? 'animate-accordion-down'
-      : 'animate-accordion-up';
-
-    return `${baseClasses} ${stateClasses} ${this.className}`;
+    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';
+    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
   }
 }
 
@@ -92,16 +87,15 @@ export class AccordionContentComponent {
     <button
       class="gap-2 w-full"
       [class]="computedClasses"
-      [attr.data-state]="isExpanded ? 'open' : 'closed'"
-      [disabled]="disabled"
+      [attr.data-state]="dataState"
+      [disabled]="isDisabled"
       [attr.aria-expanded]="isExpanded"
       [attr.aria-controls]="contentId"
       [attr.id]="triggerId"
       (click)="handleClick()"
-      (keydown)="handleKeyDown($event)">
-
+      (keydown.enter)="handleKeyDown($event)"
+      (keydown.space)="handleKeyDown($event)">
       <ng-content></ng-content>
-
       <svg
         class="h-4 w-4 shrink-0 transition-transform duration-200"
         [class.rotate-180]="isExpanded"
@@ -114,19 +108,28 @@ export class AccordionContentComponent {
   `,
 })
 export class AccordionTriggerComponent {
-  @Input() value = '';
-  @Input() className = '';
-  @Input() disabled = false;
-  @Input() isExpanded = false;
+  id = '';
+  @Input() class = '';
+  @Input({ transform: booleanAttribute }) disabled = false;
+  @Input({ transform: booleanAttribute }) isExpanded = false;
+  
 
   @Output() itemToggled = new EventEmitter<string>();
 
+   get dataState(): 'open' | 'closed' {
+    return this.isExpanded ? 'open' : 'closed';
+  }
+
   get triggerId(): string {
-    return `accordion-trigger-${this.value}`;
+    return `accordion-trigger-${this.id}`;
   }
 
   get contentId(): string {
-    return `accordion-content-${this.value}`;
+    return `accordion-content-${this.id}`;
+  }
+
+  get isDisabled(): boolean {
+    return this.disabled;
   }
 
   get computedClasses(): string {
@@ -135,17 +138,17 @@ export class AccordionTriggerComponent {
       ? 'pointer-events-none opacity-50'
       : '[&[data-state=open]>svg]:rotate-180';
 
-    return `${baseClasses} ${stateClasses} ${this.className}`;
+    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
   }
 
   handleClick(): void {
     if (!this.disabled) {
-      this.itemToggled.emit(this.value);
+      this.itemToggled.emit(this.id);
     }
   }
 
-  handleKeyDown(event: KeyboardEvent): void {
-    if ((event.key === 'Enter' || event.key === ' ') && !this.disabled) {
+  handleKeyDown(event: Event): void {
+    if (event instanceof KeyboardEvent) {
       event.preventDefault();
       this.handleClick();
     }
@@ -158,26 +161,73 @@ export class AccordionTriggerComponent {
 @Component({
   selector: 'ng-shadcn-accordion-item',
   standalone: true,
-  imports: [CommonModule, AccordionTriggerComponent, AccordionContentComponent],
+  imports: [CommonModule],
   template: `
     <div
       [class]="computedClasses"
       [attr.data-state]="isExpanded ? 'open' : 'closed'"
       [attr.data-disabled]="disabled">
-      <ng-content select="ng-shadcn-accordion-trigger"></ng-content>
-      <ng-content select="ng-shadcn-accordion-content"></ng-content>
+      <ng-content select="ng-shadcn-accordion-trigger" 
+        (itemToggled)="onItemToggled($event)">
+      </ng-content>
+      <ng-content select="ng-shadcn-accordion-content" 
+        >
+      </ng-content>
     </div>
   `,
 })
-export class AccordionItemComponent {
-  @Input() value = '';
-  @Input() className = '';
-  @Input() disabled = false;
-  @Input() isExpanded = false;
+export class AccordionItemComponent implements AfterContentInit {
+  @Input({ required: true }) id = '';
+  @Input() class = '';
+  @Input({ transform: booleanAttribute }) disabled = false;
+  @Input({ transform: booleanAttribute }) isExpanded = false;
+  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
+  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;
+  private destroyRef = inject(DestroyRef);
+  private expandedItems = inject(AccordionComponent).autoExpandedItems;
+
+  @Output() itemToggled = new EventEmitter<string>();
+
+  constructor(private cdr: ChangeDetectorRef) {
+    effect(() => {
+      this.updateExpandedState();
+    }, { injector: inject(EnvironmentInjector) });
+  }
+  
+
+  ngAfterContentInit() { 
+    this.updateExpandedState();
+    
+    if (this.trigger) { 
+      this.trigger.id = this.id;
+      this.trigger.isExpanded = this.isExpanded; 
+      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })
+    } 
+    if (this.content) { 
+      this.content.id = this.id; 
+      this.content.isExpanded = this.isExpanded; 
+    }
+
+  }
+
+  private updateExpandedState(): void {
+    const isExpanded = this.expandedItems().includes(this.id);
+    this.isExpanded = isExpanded;
+    
+    // Update child components
+    if (this.trigger) this.trigger.isExpanded = isExpanded;
+    if (this.content) this.content.isExpanded = isExpanded;
+    this.cdr.markForCheck();
+  }
+
+  onItemToggled(id: string): void {
+    if (!this.disabled) {
+      this.itemToggled.emit(id);
+    }
+  }
 
   get computedClasses(): string {
-    const baseClasses = 'border-b';
-    return `${baseClasses} ${this.className}`;
+    return `border-b ${this.class}`.trim();
   }
 }
 
@@ -187,110 +237,144 @@ export class AccordionItemComponent {
 @Component({
   selector: 'ng-shadcn-accordion',
   standalone: true,
-  imports: [CommonModule, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
+  imports: [CommonModule],
   template: `
     <div [class]="computedClasses">
       <ng-content></ng-content>
     </div>
   `,
 })
-export class AccordionComponent implements AfterContentInit {
+export class AccordionComponent implements OnChanges {
   @Input() type: 'single' | 'multiple' = 'single';
-  @Input() collapsible = false;
-  @Input() defaultValue: string | string[] = '';
-  @Input() value: string | string[] = '';
-  @Input() className = '';
-
-  @Output() valueChange = new EventEmitter<string | string[]>();
+  @Input() defaultExpanded: string | string[] = '';
+  @Input() expandedItems?: string[];
+  @Input() class = '';
+  
+  @Output() expandedItemsChange = new EventEmitter<string[]>();
 
   @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;
   @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;
   @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;
 
-  private expandedItems = signal<string[]>([]);
+  readonly autoExpandedItems = signal<string[]>([]);
+  private readonly isControlled = computed(() => this.expandedItems !== undefined);
+  private initialized = false;
+  private readonly seenItemIds = new Set<string>();
 
-  // Computed property for expanded items
-  expandedState = computed(() => this.expandedItems());
+  constructor() {
+    // Sync expanded items to children when autoExpandedItems changes
+    effect(() => {
+      const expanded = this.autoExpandedItems();
+      this.syncChildren(expanded);
+      
+      // Only emit in uncontrolled mode
+      if (!this.isControlled() && this.initialized) {
+        this.expandedItemsChange.emit([...expanded]);
+      }
+    });
+  }
+
+  private updateControlledState(): void {
+    if (!this.isControlled() || !this.expandedItems) return;
+    
+    // Only update if the state has actually changed
+    const currentState = this.autoExpandedItems();
+    const newState = [...(this.expandedItems || [])];
+    
+    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {
+      this.autoExpandedItems.set(newState);
+      this.syncChildren(newState);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['expandedItems'] && this.isControlled()) {
+      this.updateControlledState();
+    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {
+      this.initializeFromDefaults();
+    }
+
+    if (ngDevMode) {
+      this.validateProps();
+    }
+  }
 
   ngAfterContentInit(): void {
-    // Set initial expanded items
-    const initialValue = this.value || this.defaultValue;
-    if (initialValue) {
-      const initialItems = Array.isArray(initialValue) ? initialValue : [initialValue];
-      this.expandedItems.set(initialItems);
-    }
-
-    // Subscribe to trigger events
-    this.accordionTriggers.forEach(trigger => {
-      trigger.itemToggled.subscribe(value => {
-        this.toggleItem(value);
-      });
+    this.initialized = true;
+    
+    // Set up item toggling
+    this.accordionItems.forEach(item => {
+      item.itemToggled.subscribe(id => this.toggleItem(id));
+      
+      if (ngDevMode) {
+        if (this.seenItemIds.has(item.id)) {
+          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);
+        }
+        this.seenItemIds.add(item.id);
+      }
     });
 
-    this.updateItemStates();
+    // Initial sync
+    this.syncChildren(this.autoExpandedItems());
   }
 
-  ngOnChanges(): void {
-    if (this.value) {
-      const valueArray = Array.isArray(this.value) ? this.value : [this.value];
-      this.expandedItems.set(valueArray);
-      this.updateItemStates();
+  private toggleItem(id: string): void {
+    if (this.isControlled()) {
+      return; // No-op in controlled mode
     }
-  }
+    
+    const currentItems = this.autoExpandedItems();
+    const index = currentItems.indexOf(id);
+    let newItems: string[];
 
-  private toggleItem(value: string): void {
-    const currentExpanded = this.expandedItems();
-    let newExpanded: string[];
-
-    if (this.type === 'single') {
-      // Single mode: only one item can be expanded at a time
-      if (currentExpanded.includes(value)) {
-        // If collapsible is true, allow closing the current item
-        newExpanded = this.collapsible ? [] : currentExpanded;
+    if (index === -1) {
+      // Item not in array, add it
+      if (this.type === 'single') {
+        newItems = [id];
       } else {
-        newExpanded = [value];
+        newItems = [...currentItems, id];
       }
     } else {
-      // Multiple mode: multiple items can be expanded
-      if (currentExpanded.includes(value)) {
-        newExpanded = currentExpanded.filter(item => item !== value);
-      } else {
-        newExpanded = [...currentExpanded, value];
-      }
+      // Item in array, remove it
+      newItems = [...currentItems];
+      newItems.splice(index, 1);
     }
-
-    this.expandedItems.set(newExpanded);
-
-    // Emit the appropriate value format
-    const emitValue = this.type === 'single'
-      ? (newExpanded.length > 0 ? newExpanded[0] : '')
-      : newExpanded;
-
-    this.valueChange.emit(emitValue);
-    this.updateItemStates();
+    this.autoExpandedItems.set(newItems);
   }
 
-  private updateItemStates(): void {
-    const expandedItems = this.expandedItems();
-
-    // Update item states
+  private syncChildren(expandedItems: string[]): void {
     this.accordionItems?.forEach(item => {
-      item.isExpanded = expandedItems.includes(item.value);
+      item.isExpanded = expandedItems.includes(item.id);
     });
+  }
 
-    // Update trigger states
-    this.accordionTriggers?.forEach(trigger => {
-      trigger.isExpanded = expandedItems.includes(trigger.value);
-    });
+  private initializeFromDefaults(): void {
+    if (this.isControlled()) return;
 
-    // Update content states
-    this.accordionContents?.forEach(content => {
-      content.isExpanded = expandedItems.includes(content.value);
-    });
+    let defaultExpanded = Array.isArray(this.defaultExpanded) 
+      ? this.defaultExpanded 
+      : this.defaultExpanded ? [this.defaultExpanded] : [];
+
+    if (this.type === 'single' && defaultExpanded.length > 0) {
+      defaultExpanded = [defaultExpanded[0]];
+    }
+
+    this.autoExpandedItems.set(defaultExpanded);
+  }
+
+  private validateProps(): void {
+    if (ngDevMode) {
+      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {
+        console.warn('[Accordion] type="single" is ignored when using expandedItems. The accordion will behave as multiple.');
+      }
+      
+      if (this.isControlled() && this.defaultExpanded) {
+        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');
+      }
+    }
   }
 
   get computedClasses(): string {
-    const baseClasses = 'w-full';
-    return `${baseClasses} ${this.className}`;
+    return `w-full ${this.class}`.trim();
   }
 }

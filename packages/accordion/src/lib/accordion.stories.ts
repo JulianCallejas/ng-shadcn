@@ -10,21 +10,21 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
   template: `
     <ng-shadcn-accordion>
-      <ng-shadcn-accordion-item value="item-1">
+      <ng-shadcn-accordion-item id="item-1">
         <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Yes. It adheres to the WAI-ARIA design pattern.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
-      <ng-shadcn-accordion-item value="item-2">
+      <ng-shadcn-accordion-item id="item-2">
         <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Yes. It comes with default styles that match the other components' aesthetics.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
-      <ng-shadcn-accordion-item value="item-3" disabled>
+      <ng-shadcn-accordion-item id="item-3" disabled>
         <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Yes. You can disable the accordion by adding the disabled prop.
@@ -42,21 +42,21 @@ class AccordionBasicStory {}
   imports: [CommonModule, AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
   template: `
     <ng-shadcn-accordion type="multiple">
-      <ng-shadcn-accordion-item value="item-1">
+      <ng-shadcn-accordion-item id="item-1">
         <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           First item content.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
-      <ng-shadcn-accordion-item value="item-2">
+      <ng-shadcn-accordion-item id="item-2">
         <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Second item content.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
-      <ng-shadcn-accordion-item value="item-3">
+      <ng-shadcn-accordion-item id="item-3">
         <ng-shadcn-accordion-trigger>Third Item</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Third item content.
@@ -91,16 +91,16 @@ class AccordionMultipleStory {}
 
       <ng-shadcn-accordion 
         type="multiple" 
-        [value]="openItems()" 
-        (valueChange)="openItems.set($event)">
-        <ng-shadcn-accordion-item value="item-1">
+        [id]="openItems()" 
+        (idChange)="openItems.set($event)">
+        <ng-shadcn-accordion-item id="item-1">
           <ng-shadcn-accordion-trigger>Controlled Item 1</ng-shadcn-accordion-trigger>
           <ng-shadcn-accordion-content>
             This accordion item is controlled by the parent component.
           </ng-shadcn-accordion-content>
         </ng-shadcn-accordion-item>
 
-        <ng-shadcn-accordion-item value="item-2">
+        <ng-shadcn-accordion-item id="item-2">
           <ng-shadcn-accordion-trigger>Controlled Item 2</ng-shadcn-accordion-trigger>
           <ng-shadcn-accordion-content>
             This accordion item is also controlled by the parent component.
@@ -133,14 +133,14 @@ class AccordionControlledStory {
   imports: [CommonModule, AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
   template: `
     <ng-shadcn-accordion [collapsible]="true">
-      <ng-shadcn-accordion-item value="item-1">
+      <ng-shadcn-accordion-item id="item-1">
         <ng-shadcn-accordion-trigger>Click to toggle</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           This accordion can be collapsed by clicking the active item.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
 
-      <ng-shadcn-accordion-item value="item-2">
+      <ng-shadcn-accordion-item id="item-2">
         <ng-shadcn-accordion-trigger>Another item</ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
           Another item's content.
@@ -178,7 +178,7 @@ npm install @ng-shadcn/accordion
 #### Basic Usage
 \`\`\`html
 <ng-shadcn-accordion>
-  <ng-shadcn-accordion-item value="item-1">
+  <ng-shadcn-accordion-item id="item-1">
     <ng-shadcn-accordion-trigger>Title</ng-shadcn-accordion-trigger>
     <ng-shadcn-accordion-content>Content</ng-shadcn-accordion-content>
   </ng-shadcn-accordion-item>
@@ -206,9 +206,9 @@ npm install @ng-shadcn/accordion
         defaultValue: { summary: 'false' },
       },
     },
-    value: {
+    id: {
       control: 'text',
-      description: 'The value of the currently expanded item(s)',
+      description: 'The identifier of the currently expanded item(s)',
       table: {
         type: { summary: 'string | string[]' },
       },
