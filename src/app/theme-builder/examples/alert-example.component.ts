@@ -34,7 +34,16 @@ import { CardComponent } from '@packages/card/src/public-api';
             <ng-shadcn-alert-content>
               Your operation completed successfully.
             </ng-shadcn-alert-content>
-            <ng-shadcn-alert-action>Undo</ng-shadcn-alert-action>
+            <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>
+          </ng-shadcn-alert>
+          
+          <!-- Success Alert with Dismissible Action -->
+          <ng-shadcn-alert variant="success" (onAlertAction)="onAction('success')" dismissible fade showIcon="false">
+            <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>
+            <ng-shadcn-alert-content>
+              Your operation completed successfully.
+            </ng-shadcn-alert-content>
+            <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>
           </ng-shadcn-alert>
 
           <!-- Warning Dismissible Alert -->
@@ -74,6 +83,33 @@ import { CardComponent } from '@packages/card/src/public-api';
               Here's some helpful information for you. This alert will fade out when dismissed.
             </ng-shadcn-alert-content>
           </ng-shadcn-alert>
+          <!-- Info Alert with Fade -->
+          <ng-shadcn-alert 
+            variant="info" 
+            [fade]="true" 
+            [dismissible]="true"
+            (dismissed)="onDismissed('info')"
+          >
+            <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>
+            <ng-shadcn-alert-content>
+              Here's some helpful information for you. This alert will fade out when dismissed.
+            </ng-shadcn-alert-content>
+          </ng-shadcn-alert>
+          <!-- Custom Icon Alert -->
+          <ng-shadcn-alert class="bg-linear-to-l from-[#e966a0] via-[#2b2730] to-[#6554af] rounded-xl" >
+          <ng-shadcn-alert-icon class="text-white" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            </ng-shadcn-alert-icon>
+            <ng-shadcn-alert-title class="text-white">Custom Icon Alert</ng-shadcn-alert-title>
+            <ng-shadcn-alert-content class="bg-white bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]">
+              This alert shows how to use a custom icon with the alert component.
+              bg-white mix-blend-difference bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]
+            </ng-shadcn-alert-content>
+          </ng-shadcn-alert>
+
         </div>
       </div>
     </ng-shadcn-card>

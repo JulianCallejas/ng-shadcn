@@ -49,11 +49,31 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
     AlertContentComponent, 
     AlertActionComponent
   ],
+  styles:`
+  @keyframes alert-fade-out {
+    0% { opacity: 100%; }
+    99% { opacity: 0%; }
+    100% { 
+      opacity: 0%;
+      display: none;
+    }
+  }
+  .alert-out {
+    interpolate-size: allow-keywords;
+    animation: alert-fade-out 0.2s ease-out forwards;
+  }
+  .alert-hide {
+    display: none;
+    height: 0;
+    opacity: 0;
+  }
+  `,
   template: `
     <div 
       [class]="computedClasses()"
       role="alert"
-      [class.opacity-0]="isDismissed() && fade"
+      [class.alert-out]="isDismissed() && fade"
+      [class.alert-hide]="isDismissed() && !fade"
       [class.transition-opacity]="fade"
       [class.duration-300]="fade"
       [class.ease-in-out]="fade"
@@ -176,6 +196,9 @@ export class AlertComponent implements AfterContentInit {
     if (this.alertAction) {
       this.alertAction.onClick.subscribe(event => {
         this.onAlertAction.emit(event);
+        if (this.dismissible) {
+          this.dismiss();
+        }
       });
     }
   }

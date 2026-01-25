@@ -2,43 +2,6 @@
     "pipes": [],
     "interfaces": [
         {
-            "name": "AlertProps",
-            "id": "interface-AlertProps-137e520e0626adbbf877edfde24cfdfe3e483fde5f84e59cb2e6976c5407575f2b9635ec490e573085284d5252894f2847abe31d20f68da6aa72ae0152af10fb",
-            "file": "packages/alert/src/lib/alert.component.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, computed, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { cva, type VariantProps } from 'class-variance-authority';\n\nconst alertVariants = cva(\n  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n);\n\nexport interface AlertProps extends VariantProps<typeof alertVariants> {\n  dismissible?: boolean;\n  title?: string;\n}\n\n/**\n * Alert component for notification messages\n * Supports multiple variants, dismissible option, and icon integration\n */\n@Component({\n  selector: 'ng-shadcn-alert',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div \n      [class]=\"computedClasses()\"\n      role=\"alert\"\n      [attr.aria-live]=\"ariaLive\"\n      [attr.aria-atomic]=\"ariaAtomic\"\n    >\n      <!-- Default icons based on variant -->\n      <svg\n        *ngIf=\"!hasCustomIcon && showDefaultIcon\"\n        class=\"h-4 w-4\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\"\n      >\n        <path\n          *ngIf=\"variant === 'destructive'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n        />\n        <path\n          *ngIf=\"variant === 'warning'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n        />\n        <path\n          *ngIf=\"variant === 'success'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n        <path\n          *ngIf=\"variant === 'info'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n        <path\n          *ngIf=\"variant === 'default'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n      </svg>\n\n      <!-- Custom icon slot -->\n      <span *ngIf=\"hasCustomIcon\">\n        <ng-content select=\"[slot=icon]\"></ng-content>\n      </span>\n\n      <div class=\"flex-1\">\n        <!-- Title -->\n        <h5 \n          *ngIf=\"title || hasTitleContent\"\n          class=\"mb-1 font-medium leading-none tracking-tight\"\n        >\n          {{ title }}\n          <ng-content select=\"[slot=title]\"></ng-content>\n        </h5>\n\n        <!-- Description/Content -->\n        <div class=\"text-sm [&_p]:leading-relaxed\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n\n      <!-- Dismiss button -->\n      <button\n        *ngIf=\"dismissible\"\n        type=\"button\"\n        class=\"absolute right-2 top-2 rounded-md p-1 hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:hover:bg-white/5\"\n        (click)=\"onDismiss()\"\n        [attr.aria-label]=\"'Dismiss ' + (title || 'alert')\"\n      >\n        <svg\n          class=\"h-4 w-4\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          viewBox=\"0 0 24 24\"\n        >\n          <path\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            stroke-width=\"2\"\n            d=\"M6 18L18 6M6 6l12 12\"\n          />\n        </svg>\n      </button>\n    </div>\n  `,\n})\nexport class AlertComponent implements AlertProps {\n  @Input() variant: AlertProps['variant'] = 'default';\n  @Input() dismissible = false;\n  @Input() title?: string;\n  @Input() className = '';\n  @Input() showDefaultIcon = true;\n  @Input() ariaLive: 'polite' | 'assertive' | 'off' = 'polite';\n  @Input() ariaAtomic = true;\n\n  @Output() dismissed = new EventEmitter<void>();\n\n  // Signals for reactive state\n  private variantSignal = signal(this.variant);\n  private classNameSignal = signal(this.className);\n\n  // Check for projected content\n  hasCustomIcon = false;\n  hasTitleContent = false;\n\n  // Computed properties\n  computedClasses = computed(() => {\n    return alertVariants({\n      variant: this.variantSignal(),\n      className: this.classNameSignal(),\n    });\n  });\n\n  ngOnInit() {\n    this.variantSignal.set(this.variant);\n    this.classNameSignal.set(this.className);\n  }\n\n  ngOnChanges() {\n    this.variantSignal.set(this.variant);\n    this.classNameSignal.set(this.className);\n  }\n\n  ngAfterContentInit() {\n    // In a real implementation, you would check for projected content\n    // For now, we'll assume content might exist\n    this.hasCustomIcon = false; // Set based on actual content projection\n    this.hasTitleContent = false; // Set based on actual content projection\n  }\n\n  onDismiss() {\n    this.dismissed.emit();\n  }\n}\n",
-            "properties": [
-                {
-                    "name": "dismissible",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 24
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 25
-                }
-            ],
-            "indexSignatures": [],
-            "kind": 172,
-            "methods": [],
-            "extends": [
-                "VariantProps"
-            ]
-        },
-        {
             "name": "BadgeProps",
             "id": "interface-BadgeProps-cf9bd2dbf6cc726130d0610f60c60d719aad4ebee249549fd13fe5851a422446d4b3344688efad3951d6fcb7f61b968c64b68458898c2a46b1cc13da6042b3cb",
             "file": "packages/badge/src/lib/badge.component.ts",
@@ -3228,196 +3191,67 @@
             }
         },
         {
-            "name": "AlertComponent",
-            "id": "component-AlertComponent-137e520e0626adbbf877edfde24cfdfe3e483fde5f84e59cb2e6976c5407575f2b9635ec490e573085284d5252894f2847abe31d20f68da6aa72ae0152af10fb",
-            "file": "packages/alert/src/lib/alert.component.ts",
+            "name": "AlertActionComponent",
+            "id": "component-AlertActionComponent-8365a2ac714a0c9e2a6f95fbae76aa9b64b0f919b26787fc5ab716c2be619bdfbeeb61657c3992785fc73d67efcbf3bad2d8e020658ae746a5f00cf67c5b85fb",
+            "file": "packages/alert/src/lib/alert-action.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "ng-shadcn-alert",
+            "selector": "ng-shadcn-alert-action",
             "styleUrls": [],
             "styles": [],
-            "template": "<div\n  [class]=\"computedClasses()\"\n  role=\"alert\"\n  [attr.aria-live]=\"ariaLive\"\n  [attr.aria-atomic]=\"ariaAtomic\"\n>\n  <!-- Default icons based on variant -->\n  <svg\n    *ngIf=\"!hasCustomIcon && showDefaultIcon\"\n    class=\"h-4 w-4\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    viewBox=\"0 0 24 24\"\n  >\n    <path\n      *ngIf=\"variant === 'destructive'\"\n      stroke-linecap=\"round\"\n      stroke-linejoin=\"round\"\n      stroke-width=\"2\"\n      d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n    />\n    <path\n      *ngIf=\"variant === 'warning'\"\n      stroke-linecap=\"round\"\n      stroke-linejoin=\"round\"\n      stroke-width=\"2\"\n      d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n    />\n    <path\n      *ngIf=\"variant === 'success'\"\n      stroke-linecap=\"round\"\n      stroke-linejoin=\"round\"\n      stroke-width=\"2\"\n      d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n    />\n    <path\n      *ngIf=\"variant === 'info'\"\n      stroke-linecap=\"round\"\n      stroke-linejoin=\"round\"\n      stroke-width=\"2\"\n      d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n    />\n    <path\n      *ngIf=\"variant === 'default'\"\n      stroke-linecap=\"round\"\n      stroke-linejoin=\"round\"\n      stroke-width=\"2\"\n      d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n    />\n  </svg>\n\n  <!-- Custom icon slot -->\n  <span *ngIf=\"hasCustomIcon\">\n    <ng-content select=\"[slot=icon]\"></ng-content>\n  </span>\n\n  <div class=\"flex-1\">\n    <!-- Title -->\n    <h5\n      *ngIf=\"title || hasTitleContent\"\n      class=\"mb-1 font-medium leading-none tracking-tight\"\n    >\n      {{ title }}\n      <ng-content select=\"[slot=title]\"></ng-content>\n    </h5>\n\n    <!-- Description/Content -->\n    <div class=\"text-sm [&_p]:leading-relaxed\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n\n  <!-- Dismiss button -->\n  <button\n    *ngIf=\"dismissible\"\n    type=\"button\"\n    class=\"absolute right-2 top-2 rounded-md p-1 hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:hover:bg-white/5\"\n    (click)=\"onDismiss()\"\n    [attr.aria-label]=\"'Dismiss ' + (title || 'alert')\"\n  >\n    <svg\n      class=\"h-4 w-4\"\n      fill=\"none\"\n      stroke=\"currentColor\"\n      viewBox=\"0 0 24 24\"\n    >\n      <path\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"2\"\n        d=\"M6 18L18 6M6 6l12 12\"\n      />\n    </svg>\n  </button>\n</div>\n",
+            "template": "<button\n  [class]=\"computedClasses()\"\n  (click)=\"onClick.emit($event)\"\n>\n  <ng-content></ng-content>\n</button>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "ariaAtomic",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 141,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "ariaLive",
-                    "defaultValue": "'polite'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 140,
-                    "type": "\"polite\" | \"assertive\" | \"off\"",
-                    "decorators": []
-                },
-                {
-                    "name": "className",
+                    "name": "class",
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 138,
+                    "line": 18,
                     "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "dismissible",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 136,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "showDefaultIcon",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 139,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 137,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "variant",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 135,
-                    "type": "AlertProps",
                     "decorators": []
                 }
             ],
             "outputsClass": [
                 {
-                    "name": "dismissed",
-                    "defaultValue": "new EventEmitter<void>()",
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<MouseEvent>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 143,
+                    "line": 19,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
-                    "name": "classNameSignal",
-                    "defaultValue": "signal(this.className)",
+                    "name": "defaultClasses",
+                    "defaultValue": "'absolute top-4 right-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-3'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "unknown",
+                    "type": "string",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 147,
+                    "line": 21,
                     "modifierKind": [
-                        123
-                    ]
-                },
-                {
-                    "name": "computedClasses",
-                    "defaultValue": "computed(() => {\n    return alertVariants({\n      variant: this.variantSignal(),\n      className: this.classNameSignal(),\n    });\n  })",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 154
-                },
-                {
-                    "name": "hasCustomIcon",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 150
-                },
-                {
-                    "name": "hasTitleContent",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 151
-                },
-                {
-                    "name": "variantSignal",
-                    "defaultValue": "signal(this.variant)",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 146,
-                    "modifierKind": [
-                        123
+                        123,
+                        148
                     ]
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "ngAfterContentInit",
+                    "name": "computedClasses",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "any",
                     "typeParameters": [],
-                    "line": 171,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnChanges",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 166,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 161,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onDismiss",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 178,
+                    "line": 23,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3433,21 +3267,327 @@
                     "type": "module"
                 }
             ],
-            "description": "<p>Alert component for notification messages\nSupports multiple variants, dismissible option, and icon integration</p>\n",
-            "rawdescription": "\n\nAlert component for notification messages\nSupports multiple variants, dismissible option, and icon integration\n",
+            "description": "",
+            "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter, computed, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { cva, type VariantProps } from 'class-variance-authority';\n\nconst alertVariants = cva(\n  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n);\n\nexport interface AlertProps extends VariantProps<typeof alertVariants> {\n  dismissible?: boolean;\n  title?: string;\n}\n\n/**\n * Alert component for notification messages\n * Supports multiple variants, dismissible option, and icon integration\n */\n@Component({\n  selector: 'ng-shadcn-alert',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div \n      [class]=\"computedClasses()\"\n      role=\"alert\"\n      [attr.aria-live]=\"ariaLive\"\n      [attr.aria-atomic]=\"ariaAtomic\"\n    >\n      <!-- Default icons based on variant -->\n      <svg\n        *ngIf=\"!hasCustomIcon && showDefaultIcon\"\n        class=\"h-4 w-4\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\"\n      >\n        <path\n          *ngIf=\"variant === 'destructive'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n        />\n        <path\n          *ngIf=\"variant === 'warning'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n        />\n        <path\n          *ngIf=\"variant === 'success'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n        <path\n          *ngIf=\"variant === 'info'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n        <path\n          *ngIf=\"variant === 'default'\"\n          stroke-linecap=\"round\"\n          stroke-linejoin=\"round\"\n          stroke-width=\"2\"\n          d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n        />\n      </svg>\n\n      <!-- Custom icon slot -->\n      <span *ngIf=\"hasCustomIcon\">\n        <ng-content select=\"[slot=icon]\"></ng-content>\n      </span>\n\n      <div class=\"flex-1\">\n        <!-- Title -->\n        <h5 \n          *ngIf=\"title || hasTitleContent\"\n          class=\"mb-1 font-medium leading-none tracking-tight\"\n        >\n          {{ title }}\n          <ng-content select=\"[slot=title]\"></ng-content>\n        </h5>\n\n        <!-- Description/Content -->\n        <div class=\"text-sm [&_p]:leading-relaxed\">\n          <ng-content></ng-content>\n        </div>\n      </div>\n\n      <!-- Dismiss button -->\n      <button\n        *ngIf=\"dismissible\"\n        type=\"button\"\n        class=\"absolute right-2 top-2 rounded-md p-1 hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:hover:bg-white/5\"\n        (click)=\"onDismiss()\"\n        [attr.aria-label]=\"'Dismiss ' + (title || 'alert')\"\n      >\n        <svg\n          class=\"h-4 w-4\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          viewBox=\"0 0 24 24\"\n        >\n          <path\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            stroke-width=\"2\"\n            d=\"M6 18L18 6M6 6l12 12\"\n          />\n        </svg>\n      </button>\n    </div>\n  `,\n})\nexport class AlertComponent implements AlertProps {\n  @Input() variant: AlertProps['variant'] = 'default';\n  @Input() dismissible = false;\n  @Input() title?: string;\n  @Input() className = '';\n  @Input() showDefaultIcon = true;\n  @Input() ariaLive: 'polite' | 'assertive' | 'off' = 'polite';\n  @Input() ariaAtomic = true;\n\n  @Output() dismissed = new EventEmitter<void>();\n\n  // Signals for reactive state\n  private variantSignal = signal(this.variant);\n  private classNameSignal = signal(this.className);\n\n  // Check for projected content\n  hasCustomIcon = false;\n  hasTitleContent = false;\n\n  // Computed properties\n  computedClasses = computed(() => {\n    return alertVariants({\n      variant: this.variantSignal(),\n      className: this.classNameSignal(),\n    });\n  });\n\n  ngOnInit() {\n    this.variantSignal.set(this.variant);\n    this.classNameSignal.set(this.className);\n  }\n\n  ngOnChanges() {\n    this.variantSignal.set(this.variant);\n    this.classNameSignal.set(this.className);\n  }\n\n  ngAfterContentInit() {\n    // In a real implementation, you would check for projected content\n    // For now, we'll assume content might exist\n    this.hasCustomIcon = false; // Set based on actual content projection\n    this.hasTitleContent = false; // Set based on actual content projection\n  }\n\n  onDismiss() {\n    this.dismissed.emit();\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'ng-shadcn-alert-action',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button \n      [class]=\"computedClasses()\"\n      (click)=\"onClick.emit($event)\"\n    >\n      <ng-content></ng-content>\n    </button>\n  `\n})\nexport class AlertActionComponent {\n  @Input() class = '';\n  @Output() onClick = new EventEmitter<MouseEvent>();\n\n  private readonly defaultClasses = 'absolute top-4 right-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-3';\n\n  computedClasses() {\n    return [\n      this.defaultClasses,\n      this.class,\n    ].filter(Boolean).join(' ');\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "AlertComponent",
+            "id": "component-AlertComponent-f8e39ac83e37a98877169d66d400173f57fa707b5df8ba43517c3d80988e0ad0b8f53458b5425598a826e3819c3c2f7317e8639daadc348ecd34eb0a37aa8f6a",
+            "file": "packages/alert/src/lib/alert.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ng-shadcn-alert",
+            "styleUrls": [],
+            "styles": [
+                "\n  @keyframes alert-fade-out {\n    0% { opacity: 100%; }\n    99% { opacity: 0%; }\n    100% { \n      opacity: 0%;\n      display: none;\n    }\n  }\n  .alert-out {\n    interpolate-size: allow-keywords;\n    animation: alert-fade-out 0.2s ease-out forwards;\n  }\n  .alert-hide {\n    display: none;\n    height: 0;\n    opacity: 0;\n  }\n  "
+            ],
+            "template": "<div\n  [class]=\"computedClasses()\"\n  role=\"alert\"\n  [class.alert-out]=\"isDismissed() && fade\"\n  [class.alert-hide]=\"isDismissed() && !fade\"\n  [class.transition-opacity]=\"fade\"\n  [class.duration-300]=\"fade\"\n  [class.ease-in-out]=\"fade\"\n  [attr.aria-live]=\"ariaLive\"\n  [attr.aria-atomic]=\"ariaAtomic\"\n>\n  <div class=\"flex gap-3\">\n    <!-- Icon -->\n    @if (showIcon) {\n      <div class=\"flex-shrink-0\">\n        @if (hasCustomIcon) {\n          <ng-content select=\"ng-shadcn-alert-icon\"></ng-content>\n        } @else {\n          <ng-shadcn-alert-icon class=\"mt-0.5\">\n            <svg\n              class=\"h-4 w-4\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              viewBox=\"0 0 24 24\"\n            >\n              <path\n                *ngIf=\"variant === 'destructive'\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"2\"\n                d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n              />\n              <path\n                *ngIf=\"variant === 'warning'\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"2\"\n                d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n              />\n              <path\n                *ngIf=\"variant === 'success'\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"2\"\n                d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n              />\n              <path\n                *ngIf=\"variant === 'info' || variant === 'default'\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"2\"\n                d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n              />\n            </svg>\n          </ng-shadcn-alert-icon>\n        }\n      </div>\n    }\n\n    <!-- Content -->\n    <div class=\"flex-1\">\n      <ng-content select=\"ng-shadcn-alert-title\"></ng-content>\n      <ng-content select=\"ng-shadcn-alert-content\"></ng-content>\n    </div>\n\n    <!-- Dismiss button -->\n    @if (dismissible) {\n      <button\n        type=\"button\"\n        class=\"-mx-1.5 -my-1.5 p-1.5 inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-ring\"\n        (click)=\"dismiss()\"\n        aria-label=\"Dismiss\"\n      >\n        <span class=\"sr-only\">Dismiss</span>\n        <svg class=\"h-4 w-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\">\n          <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\" />\n        </svg>\n      </button>\n    }\n  </div>\n\n  <!-- Action button -->\n  <ng-content select=\"ng-shadcn-alert-action\"></ng-content>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "ariaAtomic",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhether the entire region should be considered as a whole for ARIA",
+                    "description": "<p>Whether the entire region should be considered as a whole for ARIA</p>\n",
+                    "line": 178,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "ariaLive",
+                    "defaultValue": "'polite'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nARIA live region setting",
+                    "description": "<p>ARIA live region setting</p>\n",
+                    "line": 175,
+                    "type": "\"polite\" | \"assertive\" | \"off\"",
+                    "decorators": []
+                },
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nAdditional CSS classes",
+                    "description": "<p>Additional CSS classes</p>\n",
+                    "line": 172,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "required": false,
+                    "name": "dismissible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhether the alert can be dismissed",
+                    "description": "<p>Whether the alert can be dismissed</p>\n",
+                    "line": 163,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "required": false,
+                    "name": "fade",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhether to use fade animation when dismissing",
+                    "description": "<p>Whether to use fade animation when dismissing</p>\n",
+                    "line": 166,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "required": false,
+                    "name": "showIcon",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhether to show the icon",
+                    "description": "<p>Whether to show the icon</p>\n",
+                    "line": 169,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nThe variant of the alert",
+                    "description": "<p>The variant of the alert</p>\n",
+                    "line": 160,
+                    "type": "AlertVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "dismissed",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nEmits when the alert is dismissed",
+                    "description": "<p>Emits when the alert is dismissed</p>\n",
+                    "line": 181,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onAlertAction",
+                    "defaultValue": "new EventEmitter<MouseEvent>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nEmits when the action button is clicked",
+                    "description": "<p>Emits when the action button is clicked</p>\n",
+                    "line": 184,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "alertAction",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "AlertActionComponent",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 190,
+                    "decorators": [
+                        {
+                            "name": "ContentChild",
+                            "stringifiedArguments": "AlertActionComponent"
+                        }
+                    ],
+                    "modifierKind": [
+                        171,
+                        123
+                    ]
+                },
+                {
+                    "name": "alertIcon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "AlertIconComponent",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 189,
+                    "decorators": [
+                        {
+                            "name": "ContentChild",
+                            "stringifiedArguments": "AlertIconComponent"
+                        }
+                    ],
+                    "modifierKind": [
+                        171,
+                        123
+                    ]
+                },
+                {
+                    "name": "hasCustomIcon",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 187
+                },
+                {
+                    "name": "isDismissed",
+                    "defaultValue": "signal(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 186
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "computedClasses",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 209,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nComputes the CSS classes for the alert based on inputs\n",
+                    "description": "<p>Computes the CSS classes for the alert based on inputs</p>\n"
+                },
+                {
+                    "name": "dismiss",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 219,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngAfterContentInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 192,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "AlertIconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertTitleComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertContentComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertActionComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "<p>Alert component for notification messages\nSupports multiple variants, dismissible option, and icon integration</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;ng-shadcn-alert variant=&quot;success&quot; dismissible=&quot;true&quot;&gt;\n  &lt;ng-shadcn-alert-title&gt;Success!&lt;/ng-shadcn-alert-title&gt;\n  &lt;ng-shadcn-alert-content&gt;Your action was completed successfully.&lt;/ng-shadcn-alert-content&gt;\n  &lt;ng-shadcn-alert-action (onClick)=&quot;handleAction()&quot;&gt;Undo&lt;/ng-shadcn-alert-action&gt;\n&lt;/ng-shadcn-alert&gt;</code></pre></div>",
+            "rawdescription": "\n\nAlert component for notification messages\nSupports multiple variants, dismissible option, and icon integration\n\n```html\n<ng-shadcn-alert variant=\"success\" dismissible=\"true\">\n  <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n  <ng-shadcn-alert-content>Your action was completed successfully.</ng-shadcn-alert-content>\n  <ng-shadcn-alert-action (onClick)=\"handleAction()\">Undo</ng-shadcn-alert-action>\n</ng-shadcn-alert>\n```",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { AlertIconComponent } from './alert-icon.component';\nimport { AlertTitleComponent } from './alert-title.component';\nimport { AlertContentComponent } from './alert-content.component';\nimport { AlertActionComponent } from './alert-action.component';\n\nconst alertVariants = cva(\n  'relative w-full rounded-lg border p-4',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n);\n\nexport type AlertVariant = VariantProps<typeof alertVariants>['variant'];\n\n/**\n * Alert component for notification messages\n * Supports multiple variants, dismissible option, and icon integration\n * \n * @example\n * ```html\n * <ng-shadcn-alert variant=\"success\" dismissible=\"true\">\n *   <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n *   <ng-shadcn-alert-content>Your action was completed successfully.</ng-shadcn-alert-content>\n *   <ng-shadcn-alert-action (onClick)=\"handleAction()\">Undo</ng-shadcn-alert-action>\n * </ng-shadcn-alert>\n * ```\n */\n@Component({\n  selector: 'ng-shadcn-alert',\n  standalone: true,\n  imports: [\n    CommonModule, \n    AlertIconComponent, \n    AlertTitleComponent, \n    AlertContentComponent, \n    AlertActionComponent\n  ],\n  styles:`\n  @keyframes alert-fade-out {\n    0% { opacity: 100%; }\n    99% { opacity: 0%; }\n    100% { \n      opacity: 0%;\n      display: none;\n    }\n  }\n  .alert-out {\n    interpolate-size: allow-keywords;\n    animation: alert-fade-out 0.2s ease-out forwards;\n  }\n  .alert-hide {\n    display: none;\n    height: 0;\n    opacity: 0;\n  }\n  `,\n  template: `\n    <div \n      [class]=\"computedClasses()\"\n      role=\"alert\"\n      [class.alert-out]=\"isDismissed() && fade\"\n      [class.alert-hide]=\"isDismissed() && !fade\"\n      [class.transition-opacity]=\"fade\"\n      [class.duration-300]=\"fade\"\n      [class.ease-in-out]=\"fade\"\n      [attr.aria-live]=\"ariaLive\"\n      [attr.aria-atomic]=\"ariaAtomic\"\n    >\n      <div class=\"flex gap-3\">\n        <!-- Icon -->\n        @if (showIcon) {\n          <div class=\"flex-shrink-0\">\n            @if (hasCustomIcon) {\n              <ng-content select=\"ng-shadcn-alert-icon\"></ng-content>\n            } @else {\n              <ng-shadcn-alert-icon class=\"mt-0.5\">\n                <svg\n                  class=\"h-4 w-4\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  viewBox=\"0 0 24 24\"\n                >\n                  <path\n                    *ngIf=\"variant === 'destructive'\"\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n                  />\n                  <path\n                    *ngIf=\"variant === 'warning'\"\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"\n                  />\n                  <path\n                    *ngIf=\"variant === 'success'\"\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"\n                  />\n                  <path\n                    *ngIf=\"variant === 'info' || variant === 'default'\"\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"\n                  />\n                </svg>\n              </ng-shadcn-alert-icon>\n            }\n          </div>\n        }\n\n        <!-- Content -->\n        <div class=\"flex-1\">\n          <ng-content select=\"ng-shadcn-alert-title\"></ng-content>\n          <ng-content select=\"ng-shadcn-alert-content\"></ng-content>\n        </div>\n\n        <!-- Dismiss button -->\n        @if (dismissible) {\n          <button \n            type=\"button\"\n            class=\"-mx-1.5 -my-1.5 p-1.5 inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-ring\"\n            (click)=\"dismiss()\"\n            aria-label=\"Dismiss\"\n          >\n            <span class=\"sr-only\">Dismiss</span>\n            <svg class=\"h-4 w-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\">\n              <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\" />\n            </svg>\n          </button>\n        }\n      </div>\n\n      <!-- Action button -->\n      <ng-content select=\"ng-shadcn-alert-action\"></ng-content>\n    </div>\n  `,\n})\nexport class AlertComponent implements AfterContentInit {\n  /** The variant of the alert */\n  @Input() variant: AlertVariant = 'default';\n  \n  /** Whether the alert can be dismissed */\n  @Input({ transform: booleanAttribute }) dismissible = false;\n  \n  /** Whether to use fade animation when dismissing */\n  @Input({ transform: booleanAttribute }) fade = false;\n  \n  /** Whether to show the icon */\n  @Input({ transform: booleanAttribute }) showIcon = true;\n  \n  /** Additional CSS classes */\n  @Input() class = '';\n  \n  /** ARIA live region setting */\n  @Input() ariaLive: 'polite' | 'assertive' | 'off' = 'polite';\n  \n  /** Whether the entire region should be considered as a whole for ARIA */\n  @Input() ariaAtomic = true;\n\n  /** Emits when the alert is dismissed */\n  @Output() dismissed = new EventEmitter<void>();\n  \n  /** Emits when the action button is clicked */\n  @Output() onAlertAction = new EventEmitter<MouseEvent>();\n\n  isDismissed = signal(false);\n  hasCustomIcon = false;\n\n  @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;\n  @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;\n\n  ngAfterContentInit() {\n    this.hasCustomIcon = !!this.alertIcon;\n    \n    // Forward action button clicks to the parent\n    if (this.alertAction) {\n      this.alertAction.onClick.subscribe(event => {\n        this.onAlertAction.emit(event);\n        if (this.dismissible) {\n          this.dismiss();\n        }\n      });\n    }\n  }\n\n  /**\n   * Computes the CSS classes for the alert based on inputs\n   */\n  computedClasses() {\n    return [\n      alertVariants({ variant: this.variant }),\n      this.class,\n      {\n        'pr-10': this.dismissible || this.alertAction\n      }\n    ].filter(Boolean).join(' ');\n  }\n\n  dismiss() {\n    this.isDismissed.set(true);\n    this.dismissed.emit();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "\n  @keyframes alert-fade-out {\n    0% { opacity: 100%; }\n    99% { opacity: 0%; }\n    100% { \n      opacity: 0%;\n      display: none;\n    }\n  }\n  .alert-out {\n    interpolate-size: allow-keywords;\n    animation: alert-fade-out 0.2s ease-out forwards;\n  }\n  .alert-hide {\n    display: none;\n    height: 0;\n    opacity: 0;\n  }\n  \n",
             "extends": [],
             "implements": [
-                "AlertProps"
+                "AfterContentInit"
             ]
         },
         {
+            "name": "AlertContentComponent",
+            "id": "component-AlertContentComponent-e31e5a168229b8c4a285c809ba4fd8cab95c5ededc549553c7885c44ed81a8f166b3f224a2b5186147b802c695c74a21ff5e26ca2603f59015b5d6f35fadc7a4",
+            "file": "packages/alert/src/lib/alert-content.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ng-shadcn-alert-content",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [class]=\"'[&_p]:leading-relaxed ' + (class || '')\">\n  <ng-content></ng-content>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ng-shadcn-alert-content',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  template: `\r\n    <div [class]=\"'[&_p]:leading-relaxed ' + (class || '')\">\r\n      <ng-content></ng-content>\r\n    </div>\r\n  `\r\n})\r\nexport class AlertContentComponent {\r\n  @Input() class = '';\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "AlertExampleComponent",
-            "id": "component-AlertExampleComponent-de1d3333ebacba725f65611da68e81ed41251b2950166cbe630f49cbd8eb6451e15dc42624ad40410973114a360d62a9b1e53100a60c71d80082c30e6db58281",
+            "id": "component-AlertExampleComponent-64ff753bbd1df2c65ca6be867e5575e354a1de9f53b3faefedd8bef40b4ec074c8d6d6e1029dde3688b2653d8010fafb554e24d8dee491258f27095f93b25cd2",
             "file": "src/app/theme-builder/examples/alert-example.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3457,14 +3597,79 @@
             "selector": "app-alert-example",
             "styleUrls": [],
             "styles": [],
-            "template": "<ng-shadcn-card>\n  <div class=\"p-6\">\n    <h2 class=\"text-2xl font-semibold mb-4\">Alerts</h2>\n    <div class=\"grid gap-4\">\n      <ng-shadcn-alert title=\"Default Alert\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n      <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n        Your operation completed successfully.\n      </ng-shadcn-alert>\n      <ng-shadcn-alert variant=\"warning\" title=\"Warning\" [dismissible]=\"true\">\n        Please review your settings before proceeding.\n      </ng-shadcn-alert>\n      <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n        Something went wrong. Please try again.\n      </ng-shadcn-alert>\n      <ng-shadcn-alert variant=\"info\" title=\"Information\">\n        Here's some helpful information for you.\n      </ng-shadcn-alert>\n    </div>\n  </div>\n</ng-shadcn-card>\n",
+            "template": "<ng-shadcn-card>\n  <div class=\"p-6\">\n    <h2 class=\"text-2xl font-semibold mb-4\">Alerts</h2>\n    <div class=\"grid gap-4\">\n      <!-- Default Alert -->\n      <ng-shadcn-alert>\n        <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          This is a default alert with some information.\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n\n      <!-- Success Alert with Action -->\n      <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAction('success')\">\n        <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Your operation completed successfully.\n        </ng-shadcn-alert-content>\n        <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>\n      </ng-shadcn-alert>\n\n      <!-- Success Alert with Dismissible Action -->\n      <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAction('success')\" dismissible fade>\n        <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Your operation completed successfully.\n        </ng-shadcn-alert-content>\n        <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>\n      </ng-shadcn-alert>\n\n      <!-- Warning Dismissible Alert -->\n      <ng-shadcn-alert\n        variant=\"warning\"\n        [dismissible]=\"true\"\n        (dismissed)=\"onDismissed('warning')\"\n      >\n        <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Please review your settings before proceeding.\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n\n      <!-- Destructive Alert with Custom Icon -->\n      <ng-shadcn-alert variant=\"destructive\">\n        <ng-shadcn-alert-icon>\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n            <path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z\" clip-rule=\"evenodd\" />\n          </svg>\n        </ng-shadcn-alert-icon>\n        <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Something went wrong. Please try again.\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n\n      <!-- Info Alert with Fade -->\n      <ng-shadcn-alert\n        variant=\"info\"\n        [fade]=\"true\"\n        [dismissible]=\"true\"\n        (dismissed)=\"onDismissed('info')\"\n      >\n        <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Here's some helpful information for you. This alert will fade out when dismissed.\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n      <!-- Info Alert with Fade -->\n      <ng-shadcn-alert\n        variant=\"info\"\n        [fade]=\"true\"\n        [dismissible]=\"true\"\n        (dismissed)=\"onDismissed('info')\"\n      >\n        <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content>\n          Here's some helpful information for you. This alert will fade out when dismissed.\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n      <!-- Custom Icon Alert -->\n      <ng-shadcn-alert class=\"bg-linear-to-l from-[#e966a0] via-[#2b2730] to-[#6554af] rounded-xl\" >\n      <ng-shadcn-alert-icon class=\"text-white\" >\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"h-5 w-5\">\n          <path d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z\"></path>\n          <path d=\"m9 12 2 2 4-4\"></path>\n        </svg>\n        </ng-shadcn-alert-icon>\n        <ng-shadcn-alert-title class=\"text-white\">Custom Icon Alert</ng-shadcn-alert-title>\n        <ng-shadcn-alert-content class=\"bg-white bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]\">\n          This alert shows how to use a custom icon with the alert component.\n          bg-white mix-blend-difference bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]\n        </ng-shadcn-alert-content>\n      </ng-shadcn-alert>\n\n    </div>\n  </div>\n</ng-shadcn-card>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onAction",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 123,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onDismissed",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 119,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -3476,6 +3681,22 @@
                     "type": "component"
                 },
                 {
+                    "name": "AlertIconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertTitleComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertContentComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AlertActionComponent",
+                    "type": "component"
+                },
+                {
                     "name": "CardComponent",
                     "type": "component"
                 }
@@ -3483,7 +3704,107 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { AlertComponent } from '@packages/alert/src/public-api';\r\nimport { CardComponent } from '@packages/card/src/public-api';\r\n\r\n@Component({\r\n  selector: 'app-alert-example',\r\n  standalone: true,\r\n  imports: [AlertComponent, CardComponent],\r\n  template: `\r\n    <ng-shadcn-card>\r\n      <div class=\"p-6\">\r\n        <h2 class=\"text-2xl font-semibold mb-4\">Alerts</h2>\r\n        <div class=\"grid gap-4\">\r\n          <ng-shadcn-alert title=\"Default Alert\">\r\n            This is a default alert with some information.\r\n          </ng-shadcn-alert>\r\n          <ng-shadcn-alert variant=\"success\" title=\"Success!\">\r\n            Your operation completed successfully.\r\n          </ng-shadcn-alert>\r\n          <ng-shadcn-alert variant=\"warning\" title=\"Warning\" [dismissible]=\"true\">\r\n            Please review your settings before proceeding.\r\n          </ng-shadcn-alert>\r\n          <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\r\n            Something went wrong. Please try again.\r\n          </ng-shadcn-alert>\r\n          <ng-shadcn-alert variant=\"info\" title=\"Information\">\r\n            Here's some helpful information for you.\r\n          </ng-shadcn-alert>\r\n        </div>\r\n      </div>\r\n    </ng-shadcn-card>\r\n  `\r\n})\r\nexport class AlertExampleComponent { }\r\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { AlertComponent, AlertIconComponent, AlertTitleComponent, AlertContentComponent, AlertActionComponent } from '@packages/alert/src/public-api';\r\nimport { CardComponent } from '@packages/card/src/public-api';\r\n\r\n\r\n@Component({\r\n  selector: 'app-alert-example',\r\n  standalone: true,\r\n  imports: [\r\n    AlertComponent, \r\n    AlertIconComponent,\r\n    AlertTitleComponent,\r\n    AlertContentComponent,\r\n    AlertActionComponent,\r\n    CardComponent,\r\n    \r\n  ],\r\n  template: `\r\n    <ng-shadcn-card>\r\n      <div class=\"p-6\">\r\n        <h2 class=\"text-2xl font-semibold mb-4\">Alerts</h2>\r\n        <div class=\"grid gap-4\">\r\n          <!-- Default Alert -->\r\n          <ng-shadcn-alert>\r\n            <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              This is a default alert with some information.\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n\r\n          <!-- Success Alert with Action -->\r\n          <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAction('success')\">\r\n            <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Your operation completed successfully.\r\n            </ng-shadcn-alert-content>\r\n            <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>\r\n          </ng-shadcn-alert>\r\n          \r\n          <!-- Success Alert with Dismissible Action -->\r\n          <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAction('success')\" dismissible fade>\r\n            <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Your operation completed successfully.\r\n            </ng-shadcn-alert-content>\r\n            <ng-shadcn-alert-action >Undo</ng-shadcn-alert-action>\r\n          </ng-shadcn-alert>\r\n\r\n          <!-- Warning Dismissible Alert -->\r\n          <ng-shadcn-alert \r\n            variant=\"warning\" \r\n            [dismissible]=\"true\" \r\n            (dismissed)=\"onDismissed('warning')\"\r\n          >\r\n            <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Please review your settings before proceeding.\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n\r\n          <!-- Destructive Alert with Custom Icon -->\r\n          <ng-shadcn-alert variant=\"destructive\">\r\n            <ng-shadcn-alert-icon>\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\r\n                <path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z\" clip-rule=\"evenodd\" />\r\n              </svg>\r\n            </ng-shadcn-alert-icon>\r\n            <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Something went wrong. Please try again.\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n\r\n          <!-- Info Alert with Fade -->\r\n          <ng-shadcn-alert \r\n            variant=\"info\" \r\n            [fade]=\"true\" \r\n            [dismissible]=\"true\"\r\n            (dismissed)=\"onDismissed('info')\"\r\n          >\r\n            <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Here's some helpful information for you. This alert will fade out when dismissed.\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n          <!-- Info Alert with Fade -->\r\n          <ng-shadcn-alert \r\n            variant=\"info\" \r\n            [fade]=\"true\" \r\n            [dismissible]=\"true\"\r\n            (dismissed)=\"onDismissed('info')\"\r\n          >\r\n            <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content>\r\n              Here's some helpful information for you. This alert will fade out when dismissed.\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n          <!-- Custom Icon Alert -->\r\n          <ng-shadcn-alert class=\"bg-linear-to-l from-[#e966a0] via-[#2b2730] to-[#6554af] rounded-xl\" >\r\n          <ng-shadcn-alert-icon class=\"text-white\" >\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"h-5 w-5\">\r\n              <path d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z\"></path>\r\n              <path d=\"m9 12 2 2 4-4\"></path>\r\n            </svg>\r\n            </ng-shadcn-alert-icon>\r\n            <ng-shadcn-alert-title class=\"text-white\">Custom Icon Alert</ng-shadcn-alert-title>\r\n            <ng-shadcn-alert-content class=\"bg-white bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]\">\r\n              This alert shows how to use a custom icon with the alert component.\r\n              bg-white mix-blend-difference bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]\r\n            </ng-shadcn-alert-content>\r\n          </ng-shadcn-alert>\r\n\r\n        </div>\r\n      </div>\r\n    </ng-shadcn-card>\r\n  `\r\n})\r\nexport class AlertExampleComponent {\r\n  onDismissed(type: string) {\r\n    console.log(`${type} alert was dismissed`);\r\n  }\r\n\r\n  onAction(type: string) {\r\n    console.log(`Action clicked on ${type} alert`);\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "AlertIconComponent",
+            "id": "component-AlertIconComponent-7881e534ca991f7cbe70d94b9e8966ad520d74371b87607c0e0affc2c98285bf22a8ec3b61a03fb2c72c84404caa6f2d948baffe6528341332cb22d8bcc97ec8",
+            "file": "packages/alert/src/lib/alert-icon.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ng-shadcn-alert-icon",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [class]=\"'h-4 w-4 ' + (class || '')\">\n  <ng-content></ng-content>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ng-shadcn-alert-icon',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  template: `\r\n    <div [class]=\"'h-4 w-4 ' + (class || '')\">\r\n      <ng-content></ng-content>\r\n    </div>\r\n  `\r\n})\r\nexport class AlertIconComponent {\r\n  @Input() class = '';\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "AlertTitleComponent",
+            "id": "component-AlertTitleComponent-196fb7e46023c38674e748816af4c5177256e2b3ecfec9d9e43a02c1f3fac00193055f61137410036ce50ec58e4581aabd26d331c2fbcf3dbca5183e4664a4bb",
+            "file": "packages/alert/src/lib/alert-title.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ng-shadcn-alert-title",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<h5 [class]=\"'mb-1 font-medium leading-none tracking-tight ' + (class || '')\">\n  <ng-content></ng-content>\n</h5>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ng-shadcn-alert-title',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  template: `\r\n    <h5 [class]=\"'mb-1 font-medium leading-none tracking-tight ' + (class || '')\">\r\n      <ng-content></ng-content>\r\n    </h5>\r\n  `\r\n})\r\nexport class AlertTitleComponent {\r\n  @Input() class = '';\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -11068,7 +11389,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"min-h-screen bg-background\">\r\n  <div class=\"container mx-auto p-8\">\r\n    <div class=\"flex items-center justify-between mb-8\">\r\n      <h1 class=\"text-4xl font-bold text-foreground\">ng-shadcn UI Library</h1>\r\n      <button \r\n        (click)=\"toggleTheme()\" \r\n        class=\"px-4 py-2 border border-border rounded-lg hover:bg-accent transition-colors\"\r\n      >\r\n        {{ isDark() ? '☀️' : '🌙' }} Toggle Theme\r\n      </button>\r\n    </div>\r\n    \r\n    <div class=\"grid gap-8\">\r\n      <app-accordion-example></app-accordion-example>\r\n      <app-alert-example></app-alert-example>\r\n      <app-badge-example></app-badge-example>\r\n      <app-button-example></app-button-example>\r\n      <app-card-example></app-card-example>\r\n      <app-checkbox-example></app-checkbox-example>\r\n      <app-dialog-example></app-dialog-example>\r\n      <app-dropdown-menu-example></app-dropdown-menu-example>\r\n      <app-input-example></app-input-example>\r\n      <app-popover-example></app-popover-example>\r\n      <app-radio-group-example></app-radio-group-example>\r\n      <app-select-example></app-select-example>\r\n      <app-switch-example></app-switch-example>\r\n      <app-tabs-example></app-tabs-example>\r\n      <app-textarea-example></app-textarea-example>\r\n      <app-tooltip-example></app-tooltip-example>\r\n    </div>\r\n  </div>\r\n</div>"
+            "templateData": "<div class=\"min-h-screen bg-background\">\n  <div class=\"container mx-auto p-8\">\n    <div class=\"flex items-center justify-between mb-8\">\n      <h1 class=\"text-4xl font-bold text-foreground\">ng-shadcn UI Library</h1>\n      <button \n        (click)=\"toggleTheme()\" \n        class=\"px-4 py-2 border border-border rounded-lg hover:bg-accent transition-colors\"\n      >\n        {{ isDark() ? '☀️' : '🌙' }} Toggle Theme\n      </button>\n    </div>\n    \n    <div class=\"grid gap-8\">\n      <!-- <app-accordion-example></app-accordion-example> -->\n      <app-alert-example></app-alert-example>\n      <app-badge-example></app-badge-example>\n      <app-button-example></app-button-example>\n      <app-card-example></app-card-example>\n      <app-checkbox-example></app-checkbox-example>\n      <app-dialog-example></app-dialog-example>\n      <app-dropdown-menu-example></app-dropdown-menu-example>\n      <app-input-example></app-input-example>\n      <app-popover-example></app-popover-example>\n      <app-radio-group-example></app-radio-group-example>\n      <app-select-example></app-select-example>\n      <app-switch-example></app-switch-example>\n      <app-tabs-example></app-tabs-example>\n      <app-textarea-example></app-textarea-example>\n      <app-tooltip-example></app-tooltip-example>\n    </div>\n  </div>\n</div>"
         },
         {
             "name": "TooltipComponent",
@@ -11283,7 +11604,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "cva(\n  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n)"
+                "defaultValue": "cva(\n  'relative w-full rounded-lg border p-4',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n)"
             },
             {
                 "name": "AutoResize",
@@ -11406,6 +11727,16 @@
                 "defaultValue": "{\r\n  render: () => ({\r\n    moduleMetadata: {\r\n      imports: [AccordionControlledStory],\r\n    },\r\n    template: '<story-accordion-controlled></story-accordion-controlled>',\r\n  }),\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        story: 'Accordion with controlled state from the parent component using expandedItems and expandedItemsChange.',\r\n      },\r\n      source: {\r\n        // 1. Set type to 'code' to force Storybook to use this exact string\r\n        type: 'code', \r\n        language: 'typescript',\r\n        code: `\r\n        // Component Class\r\n        export class MyComponent {\r\n          openItems = signal<string[]>([]);\r\n          toggleItem(id: string) {\r\n            this.openItems.update(items => \r\n              items.includes(id) \r\n                ? items.filter(item => item !== id)\r\n                : [...items, id]\r\n            );\r\n          }\r\n        }\r\n\r\n                // Template\r\n        <ng-shadcn-accordion \r\n          type=\"multiple\"\r\n          [expandedItems]=\"openItems()\"\r\n          >\r\n          <ng-shadcn-accordion-item id=\"item-1\">\r\n            <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-1')\">\r\n             Item 1\r\n            </ng-shadcn-accordion-trigger>\r\n            <ng-shadcn-accordion-content>\r\n              Content for item 1\r\n            </ng-shadcn-accordion-content>\r\n          </ng-shadcn-accordion-item>\r\n          \r\n          <ng-shadcn-accordion-item id=\"item-2\">\r\n            <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-2')\">\r\n             Item 2\r\n            </ng-shadcn-accordion-trigger>\r\n            <ng-shadcn-accordion-content>\r\n              Content for item 2\r\n            </ng-shadcn-accordion-content>\r\n          </ng-shadcn-accordion-item>\r\n        </ng-shadcn-accordion>\r\n        `,\r\n      },\r\n    },\r\n  },\r\n}"
             },
             {
+                "name": "CustomAlert",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          class=\"bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 text-white rounded-lg border-0 shadow-lg\"\n          (onAlertAction)=\"onAlertAction()\"\n        >\n          <ng-shadcn-alert-icon class=\"text-white\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"h-5 w-5\">\n              <path d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z\"></path>\n              <path d=\"m9 12 2 2 4-4\"></path>\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title class=\"text-white font-bold\">Custom Styled Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content class=\"text-white/90\">\n            This alert has a custom gradient background, white text, and a custom icon.\n            You can fully customize the appearance using Tailwind CSS classes.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action class=\"bg-white/20 hover:bg-white/30\">\n            Got it!\n          </ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "Dashboard",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -11433,7 +11764,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert [variant]=\"variant\" [dismissible]=\"dismissible\" [fade]=\"fade\" (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -11603,7 +11934,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    dismissible: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Dismissible Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert can be dismissed by clicking the X button.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "dropdownMenuMetadata",
@@ -11713,7 +12044,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AlertComponent>",
-                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
+                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AlertComponent,\n        AlertIconComponent,\n        AlertTitleComponent,\n        AlertContentComponent,\n        AlertActionComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A customizable alert component for displaying important information to users with various styles and interactions.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fade: {\n      control: 'boolean',\n      description: 'Whether the alert should fade out when dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    onAlertAction: {\n      action: 'onAlertAction',\n      description: 'Event emitted when the action button is clicked',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Event emitted when the alert is dismissed',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n    fade: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -12052,7 +12383,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert>\n          <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Please review your settings before proceeding.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"info\">\n          <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Here's some helpful information for you.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Variants",
@@ -12083,6 +12414,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{}"
+            },
+            {
+                "name": "WithAction",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAlertAction()\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action>Undo</ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\" dismissible (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action (click)=\"onAlertAction()\">Retry</ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithCharacterCount",
@@ -12123,6 +12464,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-input \n        [type]=\"type\"\n        [placeholder]=\"placeholder\"\n        [label]=\"label\"\n        [error]=\"error\"\n        [disabled]=\"disabled\">\n      </ng-shadcn-input>\n    `,\n  }),\n  args: {\n    label: 'Password',\n    type: 'password',\n    placeholder: 'Enter your password...',\n    error: 'Password must be at least 8 characters long',\n  },\n}"
+            },
+            {
+                "name": "WithFade",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    dismissible: true,\n    fade: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Fade Effect</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert will fade out when dismissed. Try clicking the X button!\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithIcons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-icon>\n            <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n              <path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" clip-rule=\"evenodd\" />\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title>Success</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Operation completed successfully with a custom icon.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-icon>\n            <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n              <path fill-rule=\"evenodd\" d=\"M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z\" clip-rule=\"evenodd\" />\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a warning with a custom icon.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithIcons",
@@ -12217,6 +12578,17 @@
             }
         ],
         "typealiases": [
+            {
+                "name": "AlertVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "VariantProps",
+                "file": "packages/alert/src/lib/alert.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 200
+            },
             {
                 "name": "PopoverPlacement",
                 "ctype": "miscellaneous",
@@ -12406,7 +12778,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "cva(\n  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n)"
+                    "defaultValue": "cva(\n  'relative w-full rounded-lg border p-4',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground border-border',\n        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',\n        warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',\n        success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',\n        info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  }\n)"
                 }
             ],
             "packages/textarea/src/lib/textarea.stories.ts": [
@@ -12761,6 +13133,88 @@
                     "defaultValue": "{\n  render: () => ({\n    props: {\n      openProfile: () => console.log('Opening profile...'),\n      openSettings: () => console.log('Opening settings...'),\n      openBilling: () => console.log('Opening billing...'),\n      logout: () => console.log('Logging out...'),\n    },\n    template: `\n      <ng-shadcn-dropdown-menu>\n        <ng-shadcn-dropdown-menu-trigger>\n          <button class=\"inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2\">\n            <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n              <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\"/>\n            </svg>\n            My Account\n          </button>\n        </ng-shadcn-dropdown-menu-trigger>\n        <ng-shadcn-dropdown-menu-content class=\"w-56\">\n          <ng-shadcn-dropdown-menu-label>My Account</ng-shadcn-dropdown-menu-label>\n          <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n          <ng-shadcn-dropdown-menu-item \n            label=\"Profile\" \n            icon=\"<svg class='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'/></svg>\" \n            shortcut=\"⌘P\"\n            (itemSelected)=\"openProfile()\">\n          </ng-shadcn-dropdown-menu-item>\n          <ng-shadcn-dropdown-menu-item \n            label=\"Billing\" \n            icon=\"<svg class='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'/></svg>\" \n            shortcut=\"⌘B\"\n            (itemSelected)=\"openBilling()\">\n          </ng-shadcn-dropdown-menu-item>\n          <ng-shadcn-dropdown-menu-item \n            label=\"Settings\" \n            icon=\"<svg class='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'/><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/></svg>\" \n            shortcut=\"⌘S\"\n            (itemSelected)=\"openSettings()\">\n          </ng-shadcn-dropdown-menu-item>\n          <ng-shadcn-dropdown-menu-separator></ng-shadcn-dropdown-menu-separator>\n          <ng-shadcn-dropdown-menu-item \n            label=\"Log out\" \n            shortcut=\"⌘Q\"\n            (itemSelected)=\"logout()\">\n          </ng-shadcn-dropdown-menu-item>\n        </ng-shadcn-dropdown-menu-content>\n      </ng-shadcn-dropdown-menu>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Dropdown menu with icons and keyboard shortcuts for enhanced UX.',\n      },\n    },\n  },\n}"
                 }
             ],
+            "packages/alert/src/lib/alert.stories.ts": [
+                {
+                    "name": "CustomAlert",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          class=\"bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 text-white rounded-lg border-0 shadow-lg\"\n          (onAlertAction)=\"onAlertAction()\"\n        >\n          <ng-shadcn-alert-icon class=\"text-white\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"h-5 w-5\">\n              <path d=\"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z\"></path>\n              <path d=\"m9 12 2 2 4-4\"></path>\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title class=\"text-white font-bold\">Custom Styled Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content class=\"text-white/90\">\n            This alert has a custom gradient background, white text, and a custom icon.\n            You can fully customize the appearance using Tailwind CSS classes.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action class=\"bg-white/20 hover:bg-white/30\">\n            Got it!\n          </ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert [variant]=\"variant\" [dismissible]=\"dismissible\" [fade]=\"fade\" (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Dismissible",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    dismissible: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Dismissible Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert can be dismissed by clicking the X button.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AlertComponent>",
+                    "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AlertComponent,\n        AlertIconComponent,\n        AlertTitleComponent,\n        AlertContentComponent,\n        AlertActionComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A customizable alert component for displaying important information to users with various styles and interactions.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fade: {\n      control: 'boolean',\n      description: 'Whether the alert should fade out when dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    onAlertAction: {\n      action: 'onAlertAction',\n      description: 'Event emitted when the action button is clicked',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Event emitted when the alert is dismissed',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n    fade: false,\n  },\n}"
+                },
+                {
+                    "name": "Variants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert>\n          <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Please review your settings before proceeding.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"info\">\n          <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Here's some helpful information for you.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithAction",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert variant=\"success\" (onAlertAction)=\"onAlertAction()\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action>Undo</ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\" dismissible (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n          <ng-shadcn-alert-action (click)=\"onAlertAction()\">Retry</ng-shadcn-alert-action>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithFade",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    dismissible: true,\n    fade: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Fade Effect</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert will fade out when dismissed. Try clicking the X button!\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-125\">\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-icon>\n            <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n              <path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" clip-rule=\"evenodd\" />\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title>Success</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Operation completed successfully with a custom icon.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-icon>\n            <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n              <path fill-rule=\"evenodd\" d=\"M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z\" clip-rule=\"evenodd\" />\n            </svg>\n          </ng-shadcn-alert-icon>\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a warning with a custom icon.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
             "packages/tabs/src/lib/tabs.stories.ts": [
                 {
                     "name": "Dashboard",
@@ -12853,48 +13307,6 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-2\">\n        <ng-shadcn-badge variant=\"default\">Default</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"secondary\">Secondary</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"destructive\">Destructive</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"outline\">Outline</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"success\">Success</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"warning\">Warning</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"info\">Info</ng-shadcn-badge>\n      </div>\n    `,\n  }),\n}"
-                }
-            ],
-            "packages/alert/src/lib/alert.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This is a default alert with some information.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "Dismissible",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `\n      <ng-shadcn-alert [variant]=\"variant\" [title]=\"title\" [dismissible]=\"dismissible\">\n        This alert can be dismissed by clicking the X button.\n      </ng-shadcn-alert>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AlertComponent>",
-                    "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [AlertComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a callout for user attention.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n    },\n    title: {\n      control: 'text',\n      description: 'The title of the alert',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    title: 'Alert Title',\n    dismissible: false,\n  },\n}"
-                },
-                {
-                    "name": "Variants",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-96\">\n        <ng-shadcn-alert variant=\"default\" title=\"Default Alert\">\n          This is a default alert with some information.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"success\" title=\"Success!\">\n          Your operation completed successfully.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"warning\" title=\"Warning\">\n          Please review your settings before proceeding.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"destructive\" title=\"Error\">\n          Something went wrong. Please try again.\n        </ng-shadcn-alert>\n        <ng-shadcn-alert variant=\"info\" title=\"Information\">\n          Here's some helpful information for you.\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "packages/button/src/lib/button.stories.ts": [
@@ -13408,6 +13820,19 @@
         },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "packages/alert/src/lib/alert.component.ts": [
+                {
+                    "name": "AlertVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "VariantProps",
+                    "file": "packages/alert/src/lib/alert.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 200
+                }
+            ],
             "packages/popover/src/lib/popover.component.ts": [
                 {
                     "name": "PopoverPlacement",
@@ -13807,22 +14232,49 @@
                 "status": "low"
             },
             {
-                "filePath": "packages/alert/src/lib/alert.component.ts",
+                "filePath": "packages/alert/src/lib/alert-action.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "AlertComponent",
-                "coveragePercent": 5,
-                "coverageCount": "1/18",
+                "name": "AlertActionComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert-content.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertContentComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert-icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertIconComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert-title.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertTitleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
                 "filePath": "packages/alert/src/lib/alert.component.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "AlertProps",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertComponent",
+                "coveragePercent": 64,
+                "coverageCount": "11/17",
+                "status": "good"
             },
             {
                 "filePath": "packages/alert/src/lib/alert.component.ts",
@@ -13830,6 +14282,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "alertVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "AlertVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomAlert",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -13870,6 +14342,36 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Variants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithAction",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithFade",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "packages/alert/src/lib/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcons",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -15117,7 +15619,7 @@
                 "linktype": "component",
                 "name": "AlertExampleComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
