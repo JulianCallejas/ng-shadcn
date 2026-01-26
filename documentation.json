@@ -1863,7 +1863,7 @@
     "components": [
         {
             "name": "AccordionComponent",
-            "id": "component-AccordionComponent-1bb16e07b5a8798ff0410711258712ecb63f6f0c596e2cb4ff09f3d2fdf1fc532ce2a416dff58fb20eb2cee7fc9b05890b95e1a523675c3b6df984e83c9f0dc7",
+            "id": "component-AccordionComponent-98a3d4298e105ced9ced4a7fe5014d2f79f71206a7940c8036a9d0e483606f4e4e0db6b33140b7928fdf8c4111903512d84fd87a06b6689201e6bc162b1b779f",
             "file": "packages/accordion/src/lib/accordion.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1883,7 +1883,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 249,
+                    "line": 260,
                     "type": "string",
                     "decorators": []
                 },
@@ -1892,7 +1892,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 247,
+                    "line": 258,
                     "type": "string | string[]",
                     "decorators": []
                 },
@@ -1900,7 +1900,7 @@
                     "name": "expandedItems",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 248,
+                    "line": 259,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -1909,7 +1909,7 @@
                     "defaultValue": "'single'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 246,
+                    "line": 257,
                     "type": "\"single\" | \"multiple\"",
                     "decorators": []
                 }
@@ -1920,7 +1920,7 @@
                     "defaultValue": "new EventEmitter<string[]>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 251,
+                    "line": 262,
                     "type": "EventEmitter"
                 }
             ],
@@ -1933,7 +1933,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 255,
+                    "line": 266,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1952,7 +1952,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 253,
+                    "line": 264,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1971,7 +1971,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 254,
+                    "line": 265,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1991,7 +1991,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 257,
+                    "line": 268,
                     "modifierKind": [
                         148
                     ]
@@ -2005,7 +2005,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 259,
+                    "line": 270,
                     "modifierKind": [
                         123
                     ]
@@ -2019,7 +2019,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 258,
+                    "line": 269,
                     "modifierKind": [
                         123,
                         148
@@ -2034,7 +2034,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 260,
+                    "line": 271,
                     "modifierKind": [
                         123,
                         148
@@ -2048,7 +2048,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 349,
+                    "line": 360,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2061,7 +2061,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 300,
+                    "line": 311,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2080,7 +2080,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 288,
+                    "line": 299,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2112,7 +2112,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 343,
+                    "line": 354,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2147,7 +2147,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 319,
+                    "line": 330,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2173,7 +2173,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 275,
+                    "line": 286,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2186,7 +2186,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 363,
+                    "line": 374,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2208,7 +2208,7 @@
             "description": "<p>Main accordion component</p>\n",
             "rawdescription": "\n\nMain accordion component\n",
             "type": "component",
-            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  DestroyRef,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n   get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  private destroyRef = inject(DestroyRef);\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
+            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  \n  /** @ignore */\n  id = '';\n\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  \n  /** @ignore */\n  id = '';\n  \n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  /** @ignore */\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  /** @ignore */\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  /** @required */\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  \n  /** @ignore */\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n  /** @ignore */\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  /** @ignore */\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  /** @ignore */\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2218,7 +2218,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 260
+                "line": 271
             },
             "extends": [],
             "implements": [
@@ -2231,14 +2231,14 @@
                         "name": "computedClasses",
                         "type": "string",
                         "returnType": "string",
-                        "line": 375
+                        "line": 386
                     }
                 }
             }
         },
         {
             "name": "AccordionContentComponent",
-            "id": "component-AccordionContentComponent-1bb16e07b5a8798ff0410711258712ecb63f6f0c596e2cb4ff09f3d2fdf1fc532ce2a416dff58fb20eb2cee7fc9b05890b95e1a523675c3b6df984e83c9f0dc7",
+            "id": "component-AccordionContentComponent-98a3d4298e105ced9ced4a7fe5014d2f79f71206a7940c8036a9d0e483606f4e4e0db6b33140b7928fdf8c4111903512d84fd87a06b6689201e6bc162b1b779f",
             "file": "packages/accordion/src/lib/accordion.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2260,7 +2260,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 59,
+                    "line": 61,
                     "type": "string",
                     "decorators": []
                 },
@@ -2270,25 +2270,13 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 62,
                     "type": "boolean",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "id",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 58
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -2304,7 +2292,7 @@
             "description": "<p>Individual accordion content component</p>\n",
             "rawdescription": "\n\nIndividual accordion content component\n",
             "type": "component",
-            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  DestroyRef,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n   get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  private destroyRef = inject(DestroyRef);\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
+            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  \n  /** @ignore */\n  id = '';\n\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  \n  /** @ignore */\n  id = '';\n  \n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  /** @ignore */\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  /** @ignore */\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  /** @required */\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  \n  /** @ignore */\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n  /** @ignore */\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  /** @ignore */\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  /** @ignore */\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  \n",
@@ -2316,7 +2304,7 @@
                         "name": "triggerId",
                         "type": "string",
                         "returnType": "string",
-                        "line": 62
+                        "line": 64
                     }
                 },
                 "contentId": {
@@ -2325,7 +2313,7 @@
                         "name": "contentId",
                         "type": "string",
                         "returnType": "string",
-                        "line": 66
+                        "line": 68
                     }
                 },
                 "computedClasses": {
@@ -2334,14 +2322,14 @@
                         "name": "computedClasses",
                         "type": "string",
                         "returnType": "string",
-                        "line": 70
+                        "line": 72
                     }
                 }
             }
         },
         {
             "name": "AccordionControlledStory",
-            "id": "component-AccordionControlledStory-6ecf276a9467b1bf78cb5b60c44ecd43056bccc273e485756d8127cb58648b155e8c3e2790a80c05f61a580f591db49c6cbc9bfec38bb3bdac7e38af5b292c90",
+            "id": "component-AccordionControlledStory-d3babc751710d0e2fa2805f36791c613ddd514d71859bda578bbcc48aa494cdd17a9eb3f896f1b0079adca34ba7821a2fb1c504874b81454b63df4dee0e4d80e",
             "file": "packages/accordion/src/lib/accordion.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2367,7 +2355,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 173,
+                    "line": 311,
                     "modifierKind": [
                         123
                     ]
@@ -2381,7 +2369,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 179
+                    "line": 317
                 }
             ],
             "methodsClass": [
@@ -2400,7 +2388,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 181,
+                    "line": 319,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2432,7 +2420,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 185,
+                    "line": 323,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2476,7 +2464,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { \n  AccordionComponent, \n  AccordionItemComponent, \n  AccordionTriggerComponent, \n  AccordionContentComponent \n} from './accordion.component';\nimport { Component, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nconst meta: Meta<AccordionComponent> = {\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'An interactive component that allows users to toggle the display of content sections.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<AccordionComponent>;\n\n//#region Basic Usage\nexport const Basic: Story = {\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n};\n\n//#region Multiple Items Open\nexport const Multiple: Story = {\n  ...Basic,\n  args: {\n    ...Basic.args,\n    type: 'multiple',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              First item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Second item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\">\n            <ng-shadcn-accordion-trigger>Third Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Third item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n};\n\n//#region Controlled Example\n\n@Component({\n  selector: 'story-accordion-controlled',\n  standalone: true,\n  imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],\n  template: `\n    <div class=\"space-y-4\">\n      <div class=\"flex gap-2\">\n        <button \n          (click)=\"toggleItem('item-1')\" \n          class=\"px-3 py-1 text-sm border rounded\"\n          [class.bg-blue-100]=\"isOpen('item-1')\">\n          Toggle Item 1\n        </button>\n        <button \n          (click)=\"toggleItem('item-2')\" \n          class=\"px-3 py-1 text-sm border rounded\"\n          [class.bg-blue-100]=\"isOpen('item-2')\">\n          Toggle Item 2\n        </button>\n      </div>\n\n      <ng-shadcn-accordion \n        type=\"multiple\"\n        [expandedItems]=\"openItems()\"\n        (expandedItemsChange)=\"openItems.set($event)\">\n        <ng-shadcn-accordion-item id=\"item-1\">\n          <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-1')\" >\n            Controlled Item 1\n          </ng-shadcn-accordion-trigger>\n          <ng-shadcn-accordion-content>\n            This accordion item is controlled by the parent component.\n          </ng-shadcn-accordion-content>\n        </ng-shadcn-accordion-item>\n\n        <ng-shadcn-accordion-item id=\"item-2\">\n          <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-2')\">\n            Controlled Item 2\n          </ng-shadcn-accordion-trigger>\n          <ng-shadcn-accordion-content>\n            This accordion item is also controlled by the parent component.\n          </ng-shadcn-accordion-content>\n        </ng-shadcn-accordion-item>\n      </ng-shadcn-accordion>\n    </div>\n  `,\n})\nclass AccordionControlledStory {\n  private accordionItems = [\n    { id: 'item-1', title: 'Controlled Item 1', content: 'This accordion item is controlled by the parent component.' },\n    { id: 'item-2', title: 'Controlled Item 2', content: 'This accordion item is also controlled by the parent component.' },\n  ];\n\n  \n  openItems = signal<string[]>(['item-1']);\n\n  isOpen(id: string): boolean {\n    return this.openItems().includes(id);\n  }\n\n  toggleItem(id: string): void {\n    this.openItems.update(items => \n      items.includes(id) \n        ? items.filter(item => item !== id)\n        : [...items, id]\n    );\n  }\n}\n\n\n\n\n\n\nexport const Controlled: Story = {\n  render: () => ({\n    moduleMetadata: {\n      imports: [AccordionControlledStory],\n    },\n    template: '<story-accordion-controlled></story-accordion-controlled>',\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Accordion with controlled state from the parent component using expandedItems and expandedItemsChange.',\n      },\n      source: {\n        // 1. Set type to 'code' to force Storybook to use this exact string\n        type: 'code', \n        language: 'typescript',\n        code: `\n        // Component Class\n        @Component({\n          selector: 'story-accordion-controlled',\n          standalone: true,\n          imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],\n          template: \\`\n            <div class=\"space-y-4\">\n              <div class=\"flex gap-2\">\n                <button \n                  (click)=\"toggleItem('item-1')\" \n                  class=\"px-3 py-1 text-sm border rounded\"\n                  [class.bg-blue-100]=\"isOpen('item-1')\">\n                  Toggle Item 1\n                </button>\n                <button \n                  (click)=\"toggleItem('item-2')\" \n                  class=\"px-3 py-1 text-sm border rounded\"\n                  [class.bg-blue-100]=\"isOpen('item-2')\">\n                  Toggle Item 2\n                </button>\n              </div>\n\n              <ng-shadcn-accordion \n                type=\"multiple\"\n                [expandedItems]=\"openItems()\"\n                (expandedItemsChange)=\"openItems.set($event)\">\n                <ng-shadcn-accordion-item id=\"item-1\">\n                  <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-1')\" >\n                    Controlled Item 1\n                  </ng-shadcn-accordion-trigger>\n                  <ng-shadcn-accordion-content>\n                    This accordion item is controlled by the parent component.\n                  </ng-shadcn-accordion-content>\n                </ng-shadcn-accordion-item>\n\n                <ng-shadcn-accordion-item id=\"item-2\">\n                  <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-2')\">\n                    Controlled Item 2\n                  </ng-shadcn-accordion-trigger>\n                  <ng-shadcn-accordion-content>\n                    This accordion item is also controlled by the parent component.\n                  </ng-shadcn-accordion-content>\n                </ng-shadcn-accordion-item>\n              </ng-shadcn-accordion>\n            </div>\n          \\`,\n        })\n        class AccordionControlledStory {\n          openItems = signal<string[]>(['item-1']);\n\n          isOpen(id: string): boolean {\n            return this.openItems().includes(id);\n          }\n\n          toggleItem(id: string): void {\n            this.openItems.update(items => \n              items.includes(id) \n                ? items.filter(item => item !== id)\n                : [...items, id]\n            );\n          }\n        }\n        `,\n      },\n    },\n  },\n};\n\n//#region Single with Collapsible\nexport const SingleWithCollapsible: Story = {\n  ...Basic,\n  args: {\n    ...Basic.args,\n    type: 'single',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              First item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Second item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Single accordion with collapsible behavior where all items can be closed.',\n      },\n    },\n  },\n};\n",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { \n  AccordionComponent, \n  AccordionItemComponent, \n  AccordionTriggerComponent, \n  AccordionContentComponent \n} from './accordion.component';\nimport { Component, signal } from '@angular/core';\n\n\nconst meta: Meta<AccordionComponent> = {\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n//   parameters: {\n//     layout: 'centered',\n//     docs: {\n//       description: {\n//         component: `An interactive component that allows users to toggle the display of content sections.\n\n// ## Installation\n\n// \\`\\`\\`bash\n// # Using npm\n// npm install @your-scope/accordion\n\n// # Using yarn\n// yarn add @your-scope/accordion\n\n// # Using pnpm\n// pnpm add @your-scope/accordion\n// \\`\\`\\`\n\n// Make sure to import the module in your Angular application's module:\n\n// \\`\\`\\`typescript\n// import { AccordionModule } from '@your-scope/accordion';\n\n// @NgModule({\n//   imports: [\n//     // ... other imports\n//     AccordionModule\n//   ]\n// })\n// export class YourModule { }\n// \\`\\`\\``,\n//       },\n//     },\n//   },\n  tags: ['autodocs'],\n  subcomponents: {\n    AccordionItemComponent: AccordionItemComponent,\n    AccordionTriggerComponent: AccordionTriggerComponent,\n    AccordionContentComponent: AccordionContentComponent\n  },\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `An interactive component that allows users to toggle the display of content sections.\n\n## Installation\n\n\\`\\`\\`bash\n# Using npm\nnpm install @your-scope/accordion\n\n# Using yarn\nyarn add @your-scope/accordion\n\n# Using pnpm\npnpm add @your-scope/accordion\n\\`\\`\\`\n\nMake sure to import the module in your Angular application's module:\n\n\\`\\`\\`typescript\nimport { AccordionModule } from '@your-scope/accordion';\n\n@NgModule({\n  imports: [\n    // ... other imports\n    AccordionModule\n  ]\n})\nexport class YourModule { }\n\\`\\`\\``,\n      },\n      extractComponentDescription: (component: any) => {\n        if (component === AccordionComponent) {\n          return 'The root component that contains all accordion items.';\n        }\n        if (component === AccordionItemComponent) {\n          return 'A single collapsible section that contains a trigger and content.';\n        }\n        if (component === AccordionTriggerComponent) {\n          return 'The clickable element that toggles the visibility of the accordion content.';\n        }\n        if (component === AccordionContentComponent) {\n          return 'The collapsible content area that is shown/hidden when the trigger is clicked.';\n        }\n        return null;\n      },\n    },\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n    class: {\n      control: 'text',\n      description: 'Additional CSS classes',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '' },\n      },\n    },\n    accordionItems: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionItemComponent>', \n          detail: 'Accordion Item container. An individual collapsible section that contains a trigger and content.',\n        },\n      },\n    },\n    accordionTriggers: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionTriggerComponent>', \n          detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',\n        },\n      },\n    },\n    accordionContents: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionContentComponent>', \n          detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',\n        },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n    class: '',\n  },\n\n};\n\nexport default meta;\ntype Story = StoryObj<AccordionComponent>;\n\n//#region Basic Usage\nexport const Basic: Story = {\n  parameters:{\n    controls: {\n      exclude: [\n        'initialized',\n        'isControlled',\n        'seenItemIds',\n        'autoExpandedItems',\n        'computedClasses',\n        'expandedItems',\n        'ngAfterContentInit',\n        'ngOnChanges',\n        'initializeFromDefaults',\n        'syncChildren',\n        'toggleItem',\n        'updateControlledState',\n        'validateProps',\n      ]\n    }\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\" [class]=\"class\" >\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n};\n\n//#region Multiple Items Open\nexport const Multiple: Story = {\n  ...Basic,\n  args: {\n    ...Basic.args,\n    type: 'multiple',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              First item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Second item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\">\n            <ng-shadcn-accordion-trigger>Third Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Third item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n};\n\n//#region Controlled Example\n\n@Component({\n  selector: 'story-accordion-controlled',\n  standalone: true,\n  imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],\n  template: `\n    <div class=\"space-y-4\">\n      <div class=\"flex gap-2\">\n        <button \n          (click)=\"toggleItem('item-1')\" \n          class=\"px-3 py-1 text-sm border rounded\"\n          [class.bg-blue-100]=\"isOpen('item-1')\">\n          Toggle Item 1\n        </button>\n        <button \n          (click)=\"toggleItem('item-2')\" \n          class=\"px-3 py-1 text-sm border rounded\"\n          [class.bg-blue-100]=\"isOpen('item-2')\">\n          Toggle Item 2\n        </button>\n      </div>\n\n      <ng-shadcn-accordion \n        type=\"multiple\"\n        [expandedItems]=\"openItems()\"\n        (expandedItemsChange)=\"openItems.set($event)\">\n        <ng-shadcn-accordion-item id=\"item-1\">\n          <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-1')\" >\n            Controlled Item 1\n          </ng-shadcn-accordion-trigger>\n          <ng-shadcn-accordion-content>\n            This accordion item is controlled by the parent component.\n          </ng-shadcn-accordion-content>\n        </ng-shadcn-accordion-item>\n\n        <ng-shadcn-accordion-item id=\"item-2\">\n          <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-2')\">\n            Controlled Item 2\n          </ng-shadcn-accordion-trigger>\n          <ng-shadcn-accordion-content>\n            This accordion item is also controlled by the parent component.\n          </ng-shadcn-accordion-content>\n        </ng-shadcn-accordion-item>\n      </ng-shadcn-accordion>\n    </div>\n  `,\n})\nclass AccordionControlledStory {\n  private accordionItems = [\n    { id: 'item-1', title: 'Controlled Item 1', content: 'This accordion item is controlled by the parent component.' },\n    { id: 'item-2', title: 'Controlled Item 2', content: 'This accordion item is also controlled by the parent component.' },\n  ];\n\n  \n  openItems = signal<string[]>(['item-1']);\n\n  isOpen(id: string): boolean {\n    return this.openItems().includes(id);\n  }\n\n  toggleItem(id: string): void {\n    this.openItems.update(items => \n      items.includes(id) \n        ? items.filter(item => item !== id)\n        : [...items, id]\n    );\n  }\n}\n\n\n\n\n\n\nexport const Controlled: Story = {\n  render: () => ({\n    moduleMetadata: {\n      imports: [AccordionControlledStory],\n    },\n    template: '<story-accordion-controlled></story-accordion-controlled>',\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Accordion with controlled state from the parent component using expandedItems and expandedItemsChange.',\n      },\n      source: {\n        // 1. Set type to 'code' to force Storybook to use this exact string\n        type: 'code', \n        language: 'typescript',\n        code: `\n        // Component Class\n        @Component({\n          selector: 'story-accordion-controlled',\n          standalone: true,\n          imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],\n          template: \\`\n            <div class=\"space-y-4\">\n              <div class=\"flex gap-2\">\n                <button \n                  (click)=\"toggleItem('item-1')\" \n                  class=\"px-3 py-1 text-sm border rounded\"\n                  [class.bg-blue-100]=\"isOpen('item-1')\">\n                  Toggle Item 1\n                </button>\n                <button \n                  (click)=\"toggleItem('item-2')\" \n                  class=\"px-3 py-1 text-sm border rounded\"\n                  [class.bg-blue-100]=\"isOpen('item-2')\">\n                  Toggle Item 2\n                </button>\n              </div>\n\n              <ng-shadcn-accordion \n                type=\"multiple\"\n                [expandedItems]=\"openItems()\"\n                (expandedItemsChange)=\"openItems.set($event)\">\n                <ng-shadcn-accordion-item id=\"item-1\">\n                  <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-1')\" >\n                    Controlled Item 1\n                  </ng-shadcn-accordion-trigger>\n                  <ng-shadcn-accordion-content>\n                    This accordion item is controlled by the parent component.\n                  </ng-shadcn-accordion-content>\n                </ng-shadcn-accordion-item>\n\n                <ng-shadcn-accordion-item id=\"item-2\">\n                  <ng-shadcn-accordion-trigger (itemToggled)=\"toggleItem('item-2')\">\n                    Controlled Item 2\n                  </ng-shadcn-accordion-trigger>\n                  <ng-shadcn-accordion-content>\n                    This accordion item is also controlled by the parent component.\n                  </ng-shadcn-accordion-content>\n                </ng-shadcn-accordion-item>\n              </ng-shadcn-accordion>\n            </div>\n          \\`,\n        })\n        class AccordionControlledStory {\n          openItems = signal<string[]>(['item-1']);\n\n          isOpen(id: string): boolean {\n            return this.openItems().includes(id);\n          }\n\n          toggleItem(id: string): void {\n            this.openItems.update(items => \n              items.includes(id) \n                ? items.filter(item => item !== id)\n                : [...items, id]\n            );\n          }\n        }\n        `,\n      },\n    },\n  },\n};\n\n//#region Single with Collapsible\nexport const SingleWithCollapsible: Story = {\n  ...Basic,\n  args: {\n    ...Basic.args,\n    type: 'single',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              First item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Second Item</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Second item content.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Single accordion with collapsible behavior where all items can be closed.',\n      },\n    },\n  },\n};\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2596,7 +2584,7 @@
         },
         {
             "name": "AccordionItemComponent",
-            "id": "component-AccordionItemComponent-1bb16e07b5a8798ff0410711258712ecb63f6f0c596e2cb4ff09f3d2fdf1fc532ce2a416dff58fb20eb2cee7fc9b05890b95e1a523675c3b6df984e83c9f0dc7",
+            "id": "component-AccordionItemComponent-98a3d4298e105ced9ced4a7fe5014d2f79f71206a7940c8036a9d0e483606f4e4e0db6b33140b7928fdf8c4111903512d84fd87a06b6689201e6bc162b1b779f",
             "file": "packages/accordion/src/lib/accordion.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2616,7 +2604,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 179,
+                    "line": 187,
                     "type": "string",
                     "decorators": []
                 },
@@ -2626,7 +2614,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 180,
+                    "line": 188,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2637,7 +2625,30 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "optional": false,
-                    "line": 178,
+                    "jsdoctags": [
+                        {
+                            "pos": 4608,
+                            "end": 4618,
+                            "kind": 328,
+                            "id": 0,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "tagName": {
+                                "pos": 4609,
+                                "end": 4617,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "",
+                    "description": "",
+                    "line": 186,
                     "type": "string",
                     "decorators": []
                 },
@@ -2647,7 +2658,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 181,
+                    "line": 189,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -2658,7 +2669,7 @@
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 187,
+                    "line": 196,
                     "type": "EventEmitter"
                 }
             ],
@@ -2671,7 +2682,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 183,
+                    "line": 191,
                     "decorators": [
                         {
                             "name": "ContentChild",
@@ -2683,34 +2694,6 @@
                     ]
                 },
                 {
-                    "name": "destroyRef",
-                    "defaultValue": "inject(DestroyRef)",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 184,
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
-                    "name": "expandedItems",
-                    "defaultValue": "inject(AccordionComponent).autoExpandedItems",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 185,
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
                     "name": "trigger",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -2718,7 +2701,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 182,
+                    "line": 190,
                     "decorators": [
                         {
                             "name": "ContentChild",
@@ -2730,63 +2713,7 @@
                     ]
                 }
             ],
-            "methodsClass": [
-                {
-                    "name": "ngAfterContentInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 196,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onItemToggled",
-                    "args": [
-                        {
-                            "name": "id",
-                            "type": "string",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 221,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "id",
-                            "type": "string",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "updateExpandedState",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 211,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -2801,7 +2728,7 @@
             "description": "<p>Individual accordion item component</p>\n",
             "rawdescription": "\n\nIndividual accordion item component\n",
             "type": "component",
-            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  DestroyRef,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n   get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  private destroyRef = inject(DestroyRef);\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
+            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  \n  /** @ignore */\n  id = '';\n\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  \n  /** @ignore */\n  id = '';\n  \n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  /** @ignore */\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  /** @ignore */\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  /** @required */\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  \n  /** @ignore */\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n  /** @ignore */\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  /** @ignore */\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  /** @ignore */\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2820,7 +2747,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 187,
+                "line": 196,
                 "jsdoctags": [
                     {
                         "name": "cdr",
@@ -2846,14 +2773,14 @@
                         "name": "computedClasses",
                         "type": "string",
                         "returnType": "string",
-                        "line": 227
+                        "line": 238
                     }
                 }
             }
         },
         {
             "name": "AccordionTriggerComponent",
-            "id": "component-AccordionTriggerComponent-1bb16e07b5a8798ff0410711258712ecb63f6f0c596e2cb4ff09f3d2fdf1fc532ce2a416dff58fb20eb2cee7fc9b05890b95e1a523675c3b6df984e83c9f0dc7",
+            "id": "component-AccordionTriggerComponent-98a3d4298e105ced9ced4a7fe5014d2f79f71206a7940c8036a9d0e483606f4e4e0db6b33140b7928fdf8c4111903512d84fd87a06b6689201e6bc162b1b779f",
             "file": "packages/accordion/src/lib/accordion.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2873,7 +2800,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 110,
+                    "line": 115,
                     "type": "string",
                     "decorators": []
                 },
@@ -2883,7 +2810,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 111,
+                    "line": 116,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2893,7 +2820,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 112,
+                    "line": 117,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -2904,67 +2831,12 @@
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 115,
+                    "line": 120,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [
-                {
-                    "name": "id",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 109
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "handleClick",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 142,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "handleKeyDown",
-                    "args": [
-                        {
-                            "name": "event",
-                            "type": "Event",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 148,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "event",
-                            "type": "Event",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
+            "propertiesClass": [],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -2979,7 +2851,7 @@
             "description": "<p>Individual accordion trigger component</p>\n",
             "rawdescription": "\n\nIndividual accordion trigger component\n",
             "type": "component",
-            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  DestroyRef,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n   get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  private destroyRef = inject(DestroyRef);\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
+            "sourceCode": "import { \n  Component, Input, Output, EventEmitter, signal, computed, \n  ContentChildren, QueryList, effect, booleanAttribute, \n  inject, OnChanges, SimpleChanges, AfterContentInit,\n  ContentChild,\n  EnvironmentInjector,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\ndeclare const ngDevMode: boolean;\n\n/**\n * Individual accordion content component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-content',\n  standalone: true,\n  imports: [CommonModule],\n  styles: `\n  @keyframes accordion-down {\n    from { height: 0; }\n    to { height: var(--radix-accordion-content-height); }\n  }\n  @keyframes accordion-up {\n    0% { \n      height: var(--radix-accordion-content-height); \n    }\n    100% { \n      height: 0; \n    }\n  }\n  .animate-accordion-down {\n    interpolate-size: allow-keywords;\n    animation: accordion-down 0.2s ease-out forwards;\n  }\n  .animate-accordion-up {\n    interpolate-size: allow-keywords;\n    animation: accordion-up 0.2s ease-out forwards;\n  }\n  `,\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      role=\"region\"\n      [attr.aria-labelledby]=\"triggerId\"\n      [attr.id]=\"contentId\"\n    >\n      <div class=\"pb-4 pt-0\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  `,\n})\nexport class AccordionContentComponent {\n  \n  /** @ignore */\n  id = '';\n\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'overflow-hidden text-sm transition-all';\n    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n}\n\n/**\n * Individual accordion trigger component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-trigger',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <button\n      class=\"gap-2 w-full\"\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"dataState\"\n      [disabled]=\"isDisabled\"\n      [attr.aria-expanded]=\"isExpanded\"\n      [attr.aria-controls]=\"contentId\"\n      [attr.id]=\"triggerId\"\n      (click)=\"handleClick()\"\n      (keydown.enter)=\"handleKeyDown($event)\"\n      (keydown.space)=\"handleKeyDown($event)\">\n      <ng-content></ng-content>\n      <svg\n        class=\"h-4 w-4 shrink-0 transition-transform duration-200\"\n        [class.rotate-180]=\"isExpanded\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\"/>\n      </svg>\n    </button>\n  `,\n})\nexport class AccordionTriggerComponent {\n  \n  /** @ignore */\n  id = '';\n  \n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  \n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  get dataState(): 'open' | 'closed' {\n    return this.isExpanded ? 'open' : 'closed';\n  }\n\n  get triggerId(): string {\n    return `accordion-trigger-${this.id}`;\n  }\n\n  get contentId(): string {\n    return `accordion-content-${this.id}`;\n  }\n\n  get isDisabled(): boolean {\n    return this.disabled;\n  }\n\n  get computedClasses(): string {\n    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';\n    const stateClasses = this.disabled\n      ? 'pointer-events-none opacity-50'\n      : '[&[data-state=open]>svg]:rotate-180';\n\n    return `${baseClasses} ${stateClasses} ${this.class}`.trim();\n  }\n\n  /** @ignore */\n  handleClick(): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(this.id);\n    }\n  }\n\n  /** @ignore */\n  handleKeyDown(event: Event): void {\n    if (event instanceof KeyboardEvent) {\n      event.preventDefault();\n      this.handleClick();\n    }\n  }\n}\n\n/**\n * Individual accordion item component\n */\n@Component({\n  selector: 'ng-shadcn-accordion-item',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div\n      [class]=\"computedClasses\"\n      [attr.data-state]=\"isExpanded ? 'open' : 'closed'\"\n      [attr.data-disabled]=\"disabled\">\n      <ng-content select=\"ng-shadcn-accordion-trigger\" \n        (itemToggled)=\"onItemToggled($event)\">\n      </ng-content>\n      <ng-content select=\"ng-shadcn-accordion-content\" \n        >\n      </ng-content>\n    </div>\n  `,\n})\nexport class AccordionItemComponent implements AfterContentInit {\n  /** @required */\n  @Input({ required: true }) id = '';\n  @Input() class = '';\n  @Input({ transform: booleanAttribute }) disabled = false;\n  @Input({ transform: booleanAttribute }) isExpanded = false;\n  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;\n  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;\n  \n  /** @ignore */\n  private expandedItems = inject(AccordionComponent).autoExpandedItems;\n\n  @Output() itemToggled = new EventEmitter<string>();\n\n  constructor(private cdr: ChangeDetectorRef) {\n    effect(() => {\n      this.updateExpandedState();\n    }, { injector: inject(EnvironmentInjector) });\n  }\n  \n  /** @ignore */\n  ngAfterContentInit() { \n    this.updateExpandedState();\n    \n    if (this.trigger) { \n      this.trigger.id = this.id;\n      this.trigger.isExpanded = this.isExpanded; \n      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })\n    } \n    if (this.content) { \n      this.content.id = this.id; \n      this.content.isExpanded = this.isExpanded; \n    }\n\n  }\n\n  /** @ignore */\n  private updateExpandedState(): void {\n    const isExpanded = this.expandedItems().includes(this.id);\n    this.isExpanded = isExpanded;\n    \n    // Update child components\n    if (this.trigger) this.trigger.isExpanded = isExpanded;\n    if (this.content) this.content.isExpanded = isExpanded;\n    this.cdr.markForCheck();\n  }\n\n  /** @ignore */\n  onItemToggled(id: string): void {\n    if (!this.disabled) {\n      this.itemToggled.emit(id);\n    }\n  }\n\n  get computedClasses(): string {\n    return `border-b ${this.class}`.trim();\n  }\n}\n\n/**\n * Main accordion component\n */\n@Component({\n  selector: 'ng-shadcn-accordion',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <div [class]=\"computedClasses\">\n      <ng-content></ng-content>\n    </div>\n  `,\n})\nexport class AccordionComponent implements OnChanges {\n  @Input() type: 'single' | 'multiple' = 'single';\n  @Input() defaultExpanded: string | string[] = '';\n  @Input() expandedItems?: string[];\n  @Input() class = '';\n  \n  @Output() expandedItemsChange = new EventEmitter<string[]>();\n\n  @ContentChildren(AccordionItemComponent) accordionItems!: QueryList<AccordionItemComponent>;\n  @ContentChildren(AccordionTriggerComponent) accordionTriggers!: QueryList<AccordionTriggerComponent>;\n  @ContentChildren(AccordionContentComponent) accordionContents!: QueryList<AccordionContentComponent>;\n\n  readonly autoExpandedItems = signal<string[]>([]);\n  private readonly isControlled = computed(() => this.expandedItems !== undefined);\n  private initialized = false;\n  private readonly seenItemIds = new Set<string>();\n\n  constructor() {\n    // Sync expanded items to children when autoExpandedItems changes\n    effect(() => {\n      const expanded = this.autoExpandedItems();\n      this.syncChildren(expanded);\n      \n      // Only emit in uncontrolled mode\n      if (!this.isControlled() && this.initialized) {\n        this.expandedItemsChange.emit([...expanded]);\n      }\n    });\n  }\n\n  private updateControlledState(): void {\n    if (!this.isControlled() || !this.expandedItems) return;\n    \n    // Only update if the state has actually changed\n    const currentState = this.autoExpandedItems();\n    const newState = [...(this.expandedItems || [])];\n    \n    if (JSON.stringify(currentState) !== JSON.stringify(newState)) {\n      this.autoExpandedItems.set(newState);\n      this.syncChildren(newState);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges): void {\n    if (changes['expandedItems'] && this.isControlled()) {\n      this.updateControlledState();\n    } else if ((changes['defaultExpanded'] || changes['type']) && !this.initialized) {\n      this.initializeFromDefaults();\n    }\n\n    if (ngDevMode) {\n      this.validateProps();\n    }\n  }\n\n  ngAfterContentInit(): void {\n    this.initialized = true;\n    \n    // Set up item toggling\n    this.accordionItems.forEach(item => {\n      item.itemToggled.subscribe(id => this.toggleItem(id));\n      \n      if (ngDevMode) {\n        if (this.seenItemIds.has(item.id)) {\n          console.warn(`[Accordion] Duplicate accordion item ID: ${item.id}`);\n        }\n        this.seenItemIds.add(item.id);\n      }\n    });\n\n    // Initial sync\n    this.syncChildren(this.autoExpandedItems());\n  }\n\n  private toggleItem(id: string): void {\n    if (this.isControlled()) {\n      return; // No-op in controlled mode\n    }\n    \n    const currentItems = this.autoExpandedItems();\n    const index = currentItems.indexOf(id);\n    let newItems: string[];\n\n    if (index === -1) {\n      // Item not in array, add it\n      if (this.type === 'single') {\n        newItems = [id];\n      } else {\n        newItems = [...currentItems, id];\n      }\n    } else {\n      // Item in array, remove it\n      newItems = [...currentItems];\n      newItems.splice(index, 1);\n    }\n    this.autoExpandedItems.set(newItems);\n  }\n\n  private syncChildren(expandedItems: string[]): void {\n    this.accordionItems?.forEach(item => {\n      item.isExpanded = expandedItems.includes(item.id);\n    });\n  }\n\n  private initializeFromDefaults(): void {\n    if (this.isControlled()) return;\n\n    let defaultExpanded = Array.isArray(this.defaultExpanded) \n      ? this.defaultExpanded \n      : this.defaultExpanded ? [this.defaultExpanded] : [];\n\n    if (this.type === 'single' && defaultExpanded.length > 0) {\n      defaultExpanded = [defaultExpanded[0]];\n    }\n\n    this.autoExpandedItems.set(defaultExpanded);\n  }\n\n  private validateProps(): void {\n    if (ngDevMode) {\n      if (this.isControlled() && this.type === 'single' && this.expandedItems && this.expandedItems.length > 1) {\n        console.warn('[Accordion] type=\"single\" is ignored when using expandedItems. The accordion will behave as multiple.');\n      }\n      \n      if (this.isControlled() && this.defaultExpanded) {\n        console.warn('[Accordion] defaultExpanded is ignored in controlled mode. Use expandedItems instead.');\n      }\n    }\n  }\n\n  get computedClasses(): string {\n    return `w-full ${this.class}`.trim();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2991,7 +2863,7 @@
                         "name": "dataState",
                         "type": "unknown",
                         "returnType": "\"open\" | \"closed\"",
-                        "line": 117
+                        "line": 122
                     }
                 },
                 "triggerId": {
@@ -3000,7 +2872,7 @@
                         "name": "triggerId",
                         "type": "string",
                         "returnType": "string",
-                        "line": 121
+                        "line": 126
                     }
                 },
                 "contentId": {
@@ -3009,7 +2881,7 @@
                         "name": "contentId",
                         "type": "string",
                         "returnType": "string",
-                        "line": 125
+                        "line": 130
                     }
                 },
                 "isDisabled": {
@@ -3018,7 +2890,7 @@
                         "name": "isDisabled",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 129
+                        "line": 134
                     }
                 },
                 "computedClasses": {
@@ -3027,7 +2899,7 @@
                         "name": "computedClasses",
                         "type": "string",
                         "returnType": "string",
-                        "line": 133
+                        "line": 138
                     }
                 }
             }
@@ -11476,7 +11348,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  parameters:{\n    controls: {\n      exclude: [\n        'initialized',\n        'isControlled',\n        'seenItemIds',\n        'autoExpandedItems',\n        'computedClasses',\n        'expandedItems',\n        'ngAfterContentInit',\n        'ngOnChanges',\n        'initializeFromDefaults',\n        'syncChildren',\n        'toggleItem',\n        'updateControlledState',\n        'validateProps',\n      ]\n    }\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\" [class]=\"class\" >\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "ButtonMeta",
@@ -11592,11 +11464,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
+                "file": "packages/button/src/lib/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert [variant]=\"variant\" [dismissible]=\"dismissible\" [fade]=\"fade\" (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
             },
             {
                 "name": "Default",
@@ -11607,16 +11479,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Badge</ng-shadcn-badge>`,\n  }),\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "packages/button/src/lib/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: '<ng-shadcn-button [variant]=\"variant\" [size]=\"size\" [disabled]=\"disabled\" [className]=\"className\" (clicked)=\"clicked($event)\">Button</ng-shadcn-button>',\n  }),\n  parameters: {\n    docs: {\n      source: {\n        code: '<ng-shadcn-button>Button</ng-shadcn-button>',\n      },\n    },\n  },\n}"
             },
             {
                 "name": "Default",
@@ -11637,6 +11499,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    template: `<ng-shadcn-checkbox [checked]=\"false\" [disabled]=\"false\" [indeterminate]=\"false\" id=\"checkbox-default\"></ng-shadcn-checkbox>`,\n  }),\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert [variant]=\"variant\" [dismissible]=\"dismissible\" [fade]=\"fade\" (dismissed)=\"dismissed()\">\n          <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -11762,21 +11634,21 @@
                 "name": "Dismissible",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    dismissible: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Dismissible Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert can be dismissed by clicking the X button.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "Dismissible",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "packages/badge/src/lib/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Dismissible Badge</ng-shadcn-badge>`,\n  }),\n}"
+            },
+            {
+                "name": "Dismissible",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    dismissible: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-125\">\n        <ng-shadcn-alert \n          [variant]=\"variant\" \n          [dismissible]=\"dismissible\" \n          [fade]=\"fade\" \n          (dismissed)=\"dismissed()\"\n        >\n          <ng-shadcn-alert-title>Dismissible Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This alert can be dismissed by clicking the X button.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "dropdownMenuMetadata",
@@ -11876,27 +11748,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AccordionComponent>",
-                "defaultValue": "{\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'An interactive component that allows users to toggle the display of content sections.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AlertComponent>",
-                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AlertComponent,\n        AlertIconComponent,\n        AlertTitleComponent,\n        AlertContentComponent,\n        AlertActionComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A customizable alert component for displaying important information to users with various styles and interactions.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fade: {\n      control: 'boolean',\n      description: 'Whether the alert should fade out when dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    onAlertAction: {\n      action: 'onAlertAction',\n      description: 'Event emitted when the action button is clicked',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Event emitted when the alert is dismissed',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n    fade: false,\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "packages/badge/src/lib/badge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<BadgeComponent>",
-                "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BadgeComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a badge or a component that looks like a badge.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the badge',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the badge can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n  },\n}"
+                "defaultValue": "{\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n//   parameters: {\n//     layout: 'centered',\n//     docs: {\n//       description: {\n//         component: `An interactive component that allows users to toggle the display of content sections.\n\n// ## Installation\n\n// \\`\\`\\`bash\n// # Using npm\n// npm install @your-scope/accordion\n\n// # Using yarn\n// yarn add @your-scope/accordion\n\n// # Using pnpm\n// pnpm add @your-scope/accordion\n// \\`\\`\\`\n\n// Make sure to import the module in your Angular application's module:\n\n// \\`\\`\\`typescript\n// import { AccordionModule } from '@your-scope/accordion';\n\n// @NgModule({\n//   imports: [\n//     // ... other imports\n//     AccordionModule\n//   ]\n// })\n// export class YourModule { }\n// \\`\\`\\``,\n//       },\n//     },\n//   },\n  tags: ['autodocs'],\n  subcomponents: {\n    AccordionItemComponent: AccordionItemComponent,\n    AccordionTriggerComponent: AccordionTriggerComponent,\n    AccordionContentComponent: AccordionContentComponent\n  },\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `An interactive component that allows users to toggle the display of content sections.\n\n## Installation\n\n\\`\\`\\`bash\n# Using npm\nnpm install @your-scope/accordion\n\n# Using yarn\nyarn add @your-scope/accordion\n\n# Using pnpm\npnpm add @your-scope/accordion\n\\`\\`\\`\n\nMake sure to import the module in your Angular application's module:\n\n\\`\\`\\`typescript\nimport { AccordionModule } from '@your-scope/accordion';\n\n@NgModule({\n  imports: [\n    // ... other imports\n    AccordionModule\n  ]\n})\nexport class YourModule { }\n\\`\\`\\``,\n      },\n      extractComponentDescription: (component: any) => {\n        if (component === AccordionComponent) {\n          return 'The root component that contains all accordion items.';\n        }\n        if (component === AccordionItemComponent) {\n          return 'A single collapsible section that contains a trigger and content.';\n        }\n        if (component === AccordionTriggerComponent) {\n          return 'The clickable element that toggles the visibility of the accordion content.';\n        }\n        if (component === AccordionContentComponent) {\n          return 'The collapsible content area that is shown/hidden when the trigger is clicked.';\n        }\n        return null;\n      },\n    },\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n    class: {\n      control: 'text',\n      description: 'Additional CSS classes',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '' },\n      },\n    },\n    accordionItems: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionItemComponent>', \n          detail: 'Accordion Item container. An individual collapsible section that contains a trigger and content.',\n        },\n      },\n    },\n    accordionTriggers: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionTriggerComponent>', \n          detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',\n        },\n      },\n    },\n    accordionContents: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionContentComponent>', \n          detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',\n        },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n    class: '',\n  },\n\n}"
             },
             {
                 "name": "meta",
@@ -11907,6 +11759,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
                 "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [ButtonComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants and sizes. Built with Angular signals and TailwindCSS.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],\n      description: 'The visual style variant of the button',\n    },\n    size: {\n      control: 'select',\n      options: ['default', 'sm', 'lg', 'icon'],\n      description: 'The size of the button',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes to apply',\n    },\n    clicked: {\n      action: 'clicked',\n      description: 'Event emitted when button is clicked',\n    },\n  },\n  args: {\n    variant: 'default',\n    size: 'default',\n    disabled: false,\n    className: '',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/badge/src/lib/badge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<BadgeComponent>",
+                "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BadgeComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a badge or a component that looks like a badge.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the badge',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the badge can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -11927,6 +11789,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<CheckboxComponent>",
                 "defaultValue": "{\n  title: 'Components/Checkbox',\n  component: CheckboxComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [CheckboxComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A control that allows the user to toggle between checked and not checked.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    // Remove signal-based properties from argTypes to avoid conflicts\n  },\n  args: {\n    // Remove signal-based properties from args to avoid conflicts\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "packages/alert/src/lib/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AlertComponent>",
+                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AlertComponent,\n        AlertIconComponent,\n        AlertTitleComponent,\n        AlertContentComponent,\n        AlertActionComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A customizable alert component for displaying important information to users with various styles and interactions.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'destructive', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the alert',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'default' },\n      },\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the alert can be dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fade: {\n      control: 'boolean',\n      description: 'Whether the alert should fade out when dismissed',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    onAlertAction: {\n      action: 'onAlertAction',\n      description: 'Event emitted when the action button is clicked',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Event emitted when the alert is dismissed',\n      table: {\n        type: { summary: 'EventEmitter<void>' },\n      },\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n    fade: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -12221,11 +12093,11 @@
                 "name": "Variants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/alert/src/lib/alert.stories.ts",
+                "file": "packages/button/src/lib/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 w-125\">\n        <ng-shadcn-alert>\n          <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Please review your settings before proceeding.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"info\">\n          <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Here's some helpful information for you.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button variant=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\">Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">Secondary</ng-shadcn-button>\n        <ng-shadcn-button variant=\"ghost\">Ghost</ng-shadcn-button>\n        <ng-shadcn-button variant=\"link\">Link</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'All available button variants showcased together.',\n      },\n    },\n  },\n}"
             },
             {
                 "name": "Variants",
@@ -12241,11 +12113,11 @@
                 "name": "Variants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "packages/button/src/lib/button.stories.ts",
+                "file": "packages/alert/src/lib/alert.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button variant=\"default\">Default</ng-shadcn-button>\n        <ng-shadcn-button variant=\"destructive\">Destructive</ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">Outline</ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">Secondary</ng-shadcn-button>\n        <ng-shadcn-button variant=\"ghost\">Ghost</ng-shadcn-button>\n        <ng-shadcn-button variant=\"link\">Link</ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'All available button variants showcased together.',\n      },\n    },\n  },\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 w-125\">\n        <ng-shadcn-alert>\n          <ng-shadcn-alert-title>Default Alert</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            This is a default alert with some information.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"success\">\n          <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Your operation completed successfully.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"warning\">\n          <ng-shadcn-alert-title>Warning</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Please review your settings before proceeding.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"destructive\">\n          <ng-shadcn-alert-title>Error</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Something went wrong. Please try again.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n\n        <ng-shadcn-alert variant=\"info\">\n          <ng-shadcn-alert-title>Information</ng-shadcn-alert-title>\n          <ng-shadcn-alert-content>\n            Here's some helpful information for you.\n          </ng-shadcn-alert-content>\n        </ng-shadcn-alert>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Vertical",
@@ -12479,8 +12351,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AlertComponent>",
-                "file": "packages/alert/src/lib/alert.stories.ts",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "packages/button/src/lib/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -12492,17 +12364,6 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<BadgeComponent>",
                 "file": "packages/badge/src/lib/badge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "packages/button/src/lib/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -12525,6 +12386,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<CheckboxComponent>",
                 "file": "packages/checkbox/src/lib/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<AlertComponent>",
+                "file": "packages/alert/src/lib/alert.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -12696,7 +12568,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\">\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  parameters:{\n    controls: {\n      exclude: [\n        'initialized',\n        'isControlled',\n        'seenItemIds',\n        'autoExpandedItems',\n        'computedClasses',\n        'expandedItems',\n        'ngAfterContentInit',\n        'ngOnChanges',\n        'initializeFromDefaults',\n        'syncChildren',\n        'toggleItem',\n        'updateControlledState',\n        'validateProps',\n      ]\n    }\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-100\">\n        <ng-shadcn-accordion [type]=\"type\" [class]=\"class\" >\n          <ng-shadcn-accordion-item id=\"item-1\">\n            <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It adheres to the WAI-ARIA design pattern.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-2\">\n            <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. It comes with default styles that match the other components' aesthetics.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n\n          <ng-shadcn-accordion-item id=\"item-3\" [disabled]=\"true\">\n            <ng-shadcn-accordion-trigger>Can it be disabled?</ng-shadcn-accordion-trigger>\n            <ng-shadcn-accordion-content>\n              Yes. You can disable the accordion by adding the disabled prop.\n            </ng-shadcn-accordion-content>\n          </ng-shadcn-accordion-item>\n        </ng-shadcn-accordion>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "Controlled",
@@ -12716,7 +12588,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AccordionComponent>",
-                    "defaultValue": "{\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'An interactive component that allows users to toggle the display of content sections.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n  },\n}"
+                    "defaultValue": "{\n  title: 'Components/Accordion',\n  component: AccordionComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AccordionComponent,\n        AccordionItemComponent,\n        AccordionTriggerComponent,\n        AccordionContentComponent\n      ],\n    }),\n  ],\n//   parameters: {\n//     layout: 'centered',\n//     docs: {\n//       description: {\n//         component: `An interactive component that allows users to toggle the display of content sections.\n\n// ## Installation\n\n// \\`\\`\\`bash\n// # Using npm\n// npm install @your-scope/accordion\n\n// # Using yarn\n// yarn add @your-scope/accordion\n\n// # Using pnpm\n// pnpm add @your-scope/accordion\n// \\`\\`\\`\n\n// Make sure to import the module in your Angular application's module:\n\n// \\`\\`\\`typescript\n// import { AccordionModule } from '@your-scope/accordion';\n\n// @NgModule({\n//   imports: [\n//     // ... other imports\n//     AccordionModule\n//   ]\n// })\n// export class YourModule { }\n// \\`\\`\\``,\n//       },\n//     },\n//   },\n  tags: ['autodocs'],\n  subcomponents: {\n    AccordionItemComponent: AccordionItemComponent,\n    AccordionTriggerComponent: AccordionTriggerComponent,\n    AccordionContentComponent: AccordionContentComponent\n  },\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `An interactive component that allows users to toggle the display of content sections.\n\n## Installation\n\n\\`\\`\\`bash\n# Using npm\nnpm install @your-scope/accordion\n\n# Using yarn\nyarn add @your-scope/accordion\n\n# Using pnpm\npnpm add @your-scope/accordion\n\\`\\`\\`\n\nMake sure to import the module in your Angular application's module:\n\n\\`\\`\\`typescript\nimport { AccordionModule } from '@your-scope/accordion';\n\n@NgModule({\n  imports: [\n    // ... other imports\n    AccordionModule\n  ]\n})\nexport class YourModule { }\n\\`\\`\\``,\n      },\n      extractComponentDescription: (component: any) => {\n        if (component === AccordionComponent) {\n          return 'The root component that contains all accordion items.';\n        }\n        if (component === AccordionItemComponent) {\n          return 'A single collapsible section that contains a trigger and content.';\n        }\n        if (component === AccordionTriggerComponent) {\n          return 'The clickable element that toggles the visibility of the accordion content.';\n        }\n        if (component === AccordionContentComponent) {\n          return 'The collapsible content area that is shown/hidden when the trigger is clicked.';\n        }\n        return null;\n      },\n    },\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['single', 'multiple'],\n      description: 'Type of the accordion behavior',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: 'single' },\n      },\n    },\n    class: {\n      control: 'text',\n      description: 'Additional CSS classes',\n      table: {\n        type: { summary: 'string' },\n        defaultValue: { summary: '' },\n      },\n    },\n    accordionItems: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionItemComponent>', \n          detail: 'Accordion Item container. An individual collapsible section that contains a trigger and content.',\n        },\n      },\n    },\n    accordionTriggers: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionTriggerComponent>', \n          detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',\n        },\n      },\n    },\n    accordionContents: {\n      control: 'object',\n      table: {\n        type: { \n          summary: 'QueryList<AccordionContentComponent>', \n          detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',\n        },\n      },\n    },\n  },\n  args: {\n    type: 'single',\n    class: '',\n  },\n\n}"
                 },
                 {
                     "name": "Multiple",
@@ -13109,48 +12981,6 @@
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <ng-shadcn-tabs defaultValue=\"available\" class=\"w-[400px]\">\n        <ng-shadcn-tab-list>\n          <ng-shadcn-tab-trigger value=\"available\">Available</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"disabled\" [disabled]=\"true\">Disabled</ng-shadcn-tab-trigger>\n          <ng-shadcn-tab-trigger value=\"premium\">Premium</ng-shadcn-tab-trigger>\n        </ng-shadcn-tab-list>\n        <ng-shadcn-tab-content value=\"available\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Available Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is available to all users.\n            </p>\n            <div class=\"p-4 bg-green-50 border border-green-200 rounded-lg\">\n              <p class=\"text-sm text-green-800\">\n                ✅ You have access to this content\n              </p>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"disabled\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Disabled Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is currently disabled.\n            </p>\n          </div>\n        </ng-shadcn-tab-content>\n        <ng-shadcn-tab-content value=\"premium\" class=\"mt-6\">\n          <div class=\"space-y-4\">\n            <h3 class=\"text-lg font-medium\">Premium Content</h3>\n            <p class=\"text-sm text-muted-foreground\">\n              This content is available to premium users.\n            </p>\n            <div class=\"p-4 bg-yellow-50 border border-yellow-200 rounded-lg\">\n              <p class=\"text-sm text-yellow-800\">\n                ⭐ Upgrade to premium to access this content\n              </p>\n            </div>\n          </div>\n        </ng-shadcn-tab-content>\n      </ng-shadcn-tabs>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Example showing a disabled tab that cannot be selected.',\n      },\n    },\n  },\n}"
                 }
             ],
-            "packages/badge/src/lib/badge.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/badge/src/lib/badge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Badge</ng-shadcn-badge>`,\n  }),\n}"
-                },
-                {
-                    "name": "Dismissible",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/badge/src/lib/badge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Dismissible Badge</ng-shadcn-badge>`,\n  }),\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/badge/src/lib/badge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<BadgeComponent>",
-                    "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BadgeComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a badge or a component that looks like a badge.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the badge',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the badge can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n  },\n}"
-                },
-                {
-                    "name": "Variants",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "packages/badge/src/lib/badge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-2\">\n        <ng-shadcn-badge variant=\"default\">Default</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"secondary\">Secondary</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"destructive\">Destructive</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"outline\">Outline</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"success\">Success</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"warning\">Warning</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"info\">Info</ng-shadcn-badge>\n      </div>\n    `,\n  }),\n}"
-                }
-            ],
             "packages/button/src/lib/button.stories.ts": [
                 {
                     "name": "Default",
@@ -13221,6 +13051,48 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-4\">\n        <ng-shadcn-button>\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"/>\n          </svg>\n          Add Item\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"outline\">\n          <svg class=\"mr-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\"/>\n          </svg>\n          Download\n        </ng-shadcn-button>\n        <ng-shadcn-button variant=\"secondary\">\n          Settings\n          <svg class=\"ml-2 h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z\"/>\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"/>\n          </svg>\n        </ng-shadcn-button>\n      </div>\n    `,\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Buttons with icons positioned before or after the text content.',\n      },\n    },\n  },\n}"
+                }
+            ],
+            "packages/badge/src/lib/badge.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/badge/src/lib/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: args,\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Badge</ng-shadcn-badge>`,\n  }),\n}"
+                },
+                {
+                    "name": "Dismissible",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/badge/src/lib/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, dismissible: true },\n    template: `<ng-shadcn-badge [variant]=\"variant\" [dismissible]=\"dismissible\">Dismissible Badge</ng-shadcn-badge>`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/badge/src/lib/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<BadgeComponent>",
+                    "defaultValue": "{\n  title: 'Components/Badge',\n  component: BadgeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BadgeComponent],\n    }),\n  ],\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Displays a badge or a component that looks like a badge.',\n      },\n    },\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],\n      description: 'The visual style variant of the badge',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Whether the badge can be dismissed',\n    },\n  },\n  args: {\n    variant: 'default',\n    dismissible: false,\n  },\n}"
+                },
+                {
+                    "name": "Variants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "packages/badge/src/lib/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-wrap gap-2\">\n        <ng-shadcn-badge variant=\"default\">Default</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"secondary\">Secondary</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"destructive\">Destructive</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"outline\">Outline</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"success\">Success</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"warning\">Warning</ng-shadcn-badge>\n        <ng-shadcn-badge variant=\"info\">Info</ng-shadcn-badge>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "packages/card/src/lib/card.stories.ts": [
@@ -13727,13 +13599,13 @@
                     "kind": 184
                 }
             ],
-            "packages/alert/src/lib/alert.stories.ts": [
+            "packages/button/src/lib/button.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<AlertComponent>",
-                    "file": "packages/alert/src/lib/alert.stories.ts",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "packages/button/src/lib/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -13747,19 +13619,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<BadgeComponent>",
                     "file": "packages/badge/src/lib/badge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "packages/button/src/lib/button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "packages/button/src/lib/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -13786,6 +13645,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<CheckboxComponent>",
                     "file": "packages/checkbox/src/lib/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "packages/alert/src/lib/alert.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AlertComponent>",
+                    "file": "packages/alert/src/lib/alert.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -13935,17 +13807,17 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AccordionContentComponent",
-                "coveragePercent": 25,
-                "coverageCount": "1/4",
-                "status": "low"
+                "coveragePercent": 33,
+                "coverageCount": "1/3",
+                "status": "medium"
             },
             {
                 "filePath": "packages/accordion/src/lib/accordion.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AccordionItemComponent",
-                "coveragePercent": 7,
-                "coverageCount": "1/14",
+                "coveragePercent": 11,
+                "coverageCount": "1/9",
                 "status": "low"
             },
             {
@@ -13953,8 +13825,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AccordionTriggerComponent",
-                "coveragePercent": 12,
-                "coverageCount": "1/8",
+                "coveragePercent": 20,
+                "coverageCount": "1/5",
                 "status": "low"
             },
             {
