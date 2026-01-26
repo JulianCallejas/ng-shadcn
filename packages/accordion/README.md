@@ -1,27 +1,106 @@
 # Accordion Component
 
-A vertically stacked set of interactive headings that each reveal a section of content. Perfect for FAQs, settings panels, and collapsible content sections. Built with Angular signals for modern, reactive UI development.
+A flexible and accessible accordion component built with Angular. It provides a vertically stacked set of interactive headers that reveal associated sections of content. Perfect for FAQs, settings panels, and any scenario where you need to show and hide content sections.
 
 ## Features
 
-- ✅ **Single & Multiple Modes**: Control whether one or multiple sections can be open
-- ✅ **Collapsible**: Option to close the currently open section in single mode
-- ✅ **Smooth Animations**: Built-in animations for expanding and collapsing
-- ✅ **Signal-based State**: Modern Angular signals for reactive updates
-- ✅ **Accessibility**: Full ARIA support with proper roles and attributes
-- ✅ **Keyboard Navigation**: Full keyboard support for navigation
-- ✅ **Disabled Items**: Support for disabled accordion sections
-- ✅ **TypeScript**: Full type safety with proper interfaces
+- 🚀 **Standalone Components**: Built as modern Angular standalone components for better tree-shaking and performance
+- 🧩 **NgModule Support**: Includes `AccordionModule` for compatibility with traditional NgModule-based applications
+- 🔄 **Flexible API**: Supports both standalone and module-based usage patterns
+- 🎨 **Fully Styled**: Beautiful default styling that matches the shadcn/ui design system
+- ♿ **Accessibility First**: Follows WAI-ARIA design patterns for maximum accessibility
+- ⌨️ **Keyboard Navigation**: Full keyboard support with proper focus management
+- 🎭 **Multiple Modes**: Support for both single and multiple open items
+- 🔄 **Controlled & Uncontrolled**: Use it in controlled or uncontrolled mode
+- 🛑 **Disabled State**: Support for disabled accordion items
+- 🎯 **Type-Safe**: Fully typed with TypeScript for better developer experience
+- 🎨 **Customizable**: Easy to style and extend with custom classes
 
 ## Installation
 
 ```bash
-npx ng-shadcn install accordion
+# Using npm
+npm install @ng-shadcn/accordion
+
+# Using yarn
+yarn add @ng-shadcn/accordion
+
+# Using pnpm
+pnpm add @ng-shadcn/accordion
 ```
 
-## Usage
+## Import
 
-### Basic Usage
+### Standalone Components (Recommended)
+
+Import and use the individual components directly in your standalone components:
+
+```typescript
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { 
+  AccordionComponent, 
+  AccordionItemComponent, 
+  AccordionTriggerComponent, 
+  AccordionContentComponent 
+} from '@ng-shadcn/accordion';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AccordionComponent,
+    AccordionItemComponent,
+    AccordionTriggerComponent,
+    AccordionContentComponent
+  ],
+  template: `
+    <ng-shadcn-accordion type="single">
+      <ng-shadcn-accordion-item id="item-1">
+        <ng-shadcn-accordion-trigger>Item 1</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-content>Content 1</ng-shadcn-accordion-content>
+      </ng-shadcn-accordion-item>
+    </ng-shadcn-accordion>
+  `
+})
+export class ExampleComponent { }
+```
+
+### Using NgModule (Legacy)
+
+If you're using NgModules, import the `AccordionModule`:
+
+```typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AccordionModule } from '@ng-shadcn/accordion';
+
+@NgModule({
+  declarations: [YourComponent],
+  imports: [
+    CommonModule,
+    AccordionModule
+  ]
+})
+export class YourModule { }
+```
+
+Then use the components in your templates:
+
+```html
+<ng-shadcn-accordion type="single">
+  <ng-shadcn-accordion-item id="item-1">
+    <ng-shadcn-accordion-trigger>Item 1</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>Content 1</ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+</ng-shadcn-accordion>
+```
+```
+
+## Basic Usage
+
+### Single Item Open (Default)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -30,10 +109,10 @@ import {
   AccordionItemComponent, 
   AccordionTriggerComponent, 
   AccordionContentComponent 
-} from './components/accordion';
+} from '@ng-shadcn/accordion';
 
 @Component({
-  selector: 'app-example',
+  selector: 'app-faq',
   standalone: true,
   imports: [
     AccordionComponent,
@@ -42,61 +121,252 @@ import {
     AccordionContentComponent
   ],
   template: `
-    <ng-shadcn-accordion type="single" [collapsible]="true">
+    <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+    <ng-shadcn-accordion type="single" class="w-full max-w-2xl space-y-2">
       <ng-shadcn-accordion-item value="item-1">
-        <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-trigger>
+          How do I get started?
+        </ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
-          Yes. It adheres to the WAI-ARIA design pattern.
+          Getting started is easy! Follow our installation guide in the documentation to add the accordion component to your project.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
       
       <ng-shadcn-accordion-item value="item-2">
-        <ng-shadcn-accordion-trigger>Is it styled?</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-trigger>
+          Is it accessible?
+        </ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
-          Yes. It comes with default styles that match the other components' aesthetic.
+          Yes! The accordion follows WAI-ARIA design patterns and includes proper keyboard navigation and screen reader support.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
       
       <ng-shadcn-accordion-item value="item-3">
-        <ng-shadcn-accordion-trigger>Is it animated?</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-trigger>
+          Can I customize the styling?
+        </ng-shadcn-accordion-trigger>
         <ng-shadcn-accordion-content>
-          Yes. It includes smooth animations for opening and closing sections using CSS transitions.
+          Absolutely! The component is fully customizable using CSS variables and supports custom class names for complete control over the appearance.
         </ng-shadcn-accordion-content>
       </ng-shadcn-accordion-item>
     </ng-shadcn-accordion>
   `,
 })
-export class ExampleComponent {}
+export class FaqComponent {}
 ```
 
-### Multiple Sections Open
+### Multiple Items Open
 
-```html
-<ng-shadcn-accordion type="multiple" [defaultValue]="['item-1', 'item-3']">
+```typescript
+<ng-shadcn-accordion type="multiple" class="w-full max-w-2xl space-y-2">
   <ng-shadcn-accordion-item value="item-1">
-    <ng-shadcn-accordion-trigger>Can multiple sections be open?</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-trigger>
+      Multiple Items Open
+    </ng-shadcn-accordion-trigger>
     <ng-shadcn-accordion-content>
-      Yes, when type is set to "multiple", you can have multiple sections open at once.
+      When type is set to "multiple", you can have multiple accordion items open at the same time.
     </ng-shadcn-accordion-content>
   </ng-shadcn-accordion-item>
   
   <ng-shadcn-accordion-item value="item-2">
-    <ng-shadcn-accordion-trigger>How do I control which sections are open?</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-trigger>
+      Another Section
+    </ng-shadcn-accordion-trigger>
     <ng-shadcn-accordion-content>
-      Use the defaultValue prop to set initially open sections, or value prop for controlled behavior.
-    </ng-shadcn-accordion-content>
-  </ng-shadcn-accordion-item>
-  
-  <ng-shadcn-accordion-item value="item-3">
-    <ng-shadcn-accordion-trigger>Is it responsive?</ng-shadcn-accordion-trigger>
-    <ng-shadcn-accordion-content>
-      Yes. The accordion works well on all screen sizes and follows responsive design principles.
+      This section can be open at the same time as others when in multiple mode.
     </ng-shadcn-accordion-content>
   </ng-shadcn-accordion-item>
 </ng-shadcn-accordion>
 ```
+```
+
+## Advanced Usage
 
 ### Controlled Accordion
+
+For more control over the accordion's state, you can use it in controlled mode:
+
+```typescript
+import { Component, signal } from '@angular/core';
+import { 
+  AccordionComponent, 
+  AccordionItemComponent, 
+  AccordionTriggerComponent, 
+  AccordionContentComponent 
+} from '@ng-shadcn/accordion';
+
+@Component({
+  selector: 'app-controlled-accordion',
+  standalone: true,
+  imports: [
+    AccordionComponent,
+    AccordionItemComponent,
+    AccordionTriggerComponent,
+    AccordionContentComponent
+  ],
+  template: `
+    <div class="space-y-4">
+      <div class="flex gap-2 mb-4">
+        <button 
+          *ngFor="let item of items"
+          (click)="toggleItem(item.id)"
+          [class.bg-primary]="isOpen(item.id)"
+          class="px-3 py-1 rounded border"
+        >
+          Toggle {{ item.title }}
+        </button>
+      </div>
+
+      <ng-shadcn-accordion 
+        type="multiple" 
+        [expandedItems]="openItems()"
+        (expandedItemsChange)="openItems.set($event)"
+        class="w-full max-w-2xl space-y-2"
+      >
+        <ng-shadcn-accordion-item 
+          *ngFor="let item of items" 
+          [value]="item.id"
+        >
+          <ng-shadcn-accordion-trigger>
+            {{ item.title }}
+          </ng-shadcn-accordion-trigger>
+          <ng-shadcn-accordion-content>
+            {{ item.content }}
+          </ng-shadcn-accordion-content>
+        </ng-shadcn-accordion-item>
+      </ng-shadcn-accordion>
+    </div>
+  `,
+})
+export class ControlledAccordionComponent {
+  items = [
+    { id: 'item-1', title: 'First Item', content: 'Content for the first item' },
+    { id: 'item-2', title: 'Second Item', content: 'Content for the second item' },
+    { id: 'item-3', title: 'Third Item', content: 'Content for the third item' },
+  ];
+
+  openItems = signal<string[]>(['item-1']);
+
+  isOpen(id: string): boolean {
+    return this.openItems().includes(id);
+  }
+
+  toggleItem(id: string): void {
+    this.openItems.update(items => 
+      items.includes(id)
+        ? items.filter(item => item !== id)
+        : [...items, id]
+    );
+  }
+}
+```
+
+### Disabled Items
+
+You can disable individual accordion items:
+
+```html
+<ng-shadcn-accordion type="single">
+  <ng-shadcn-accordion-item value="item-1">
+    <ng-shadcn-accordion-trigger>Enabled Item</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>This item can be toggled.</ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+  
+  <ng-shadcn-accordion-item value="item-2" [disabled]="true">
+    <ng-shadcn-accordion-trigger>Disabled Item</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>This content is not accessible when disabled.</ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+</ng-shadcn-accordion>
+```
+
+## API Reference
+
+### AccordionComponent
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `'single' | 'multiple'` | `'single'` | Whether an accordion item should be closed when another is opened ('single') or allow multiple items to be open ('multiple') |
+| `expandedItems` | `string[]` | `undefined` | Array of currently expanded item values (controlled mode) |
+| `defaultExpanded` | `string | string[]` | `''` | Default expanded item(s) when using uncontrolled mode |
+| `class` | `string` | `''` | Additional CSS classes for the accordion container |
+| `expandedItemsChange` | `EventEmitter<string[]>` | - | Emits when expanded items change (controlled mode) |
+
+### AccordionItemComponent
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `string` | `''` | A unique value for the item (required) |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `class` | `string` | `''` | Additional CSS classes for the item |
+| `isExpanded` | `boolean` | `false` | Whether the item is expanded (uncontrolled mode) |
+
+### AccordionTriggerComponent
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `class` | `string` | `''` | Additional CSS classes for the trigger button |
+
+### AccordionContentComponent
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `class` | `string` | `''` | Additional CSS classes for the content container |
+
+## Styling
+
+The accordion components use CSS variables for styling. You can override these variables to customize the appearance:
+
+```css
+:root {
+  --accordion-border: 1px solid hsl(240, 3.7%, 93.7%);
+  --accordion-border-radius: 0.5rem;
+  --accordion-padding: 1rem;
+  --accordion-trigger-bg: transparent;
+  --accordion-trigger-hover: hsl(240, 4.8%, 95.9%);
+  --accordion-trigger-active: hsl(240, 4.9%, 93.9%);
+  --accordion-content-bg: white;
+}
+
+/* Dark mode support */
+.dark {
+  --accordion-border: 1px solid hsl(240, 3.7%, 15.9%);
+  --accordion-trigger-bg: transparent;
+  --accordion-trigger-hover: hsl(240, 3.7%, 15.9%);
+  --accordion-trigger-active: hsl(240, 5%, 26.1%);
+  --accordion-content-bg: hsl(240, 3.7%, 10.2%);
+}
+```
+
+## Accessibility
+
+The accordion component follows WAI-ARIA Authoring Practices for the accordion pattern:
+
+- Uses proper ARIA attributes (`aria-expanded`, `aria-controls`, `aria-labelledby`)
+- Implements keyboard navigation:
+  - <kbd>Tab</kbd> - Move focus to the next focusable element
+  - <kbd>Shift + Tab</kbd> - Move focus to the previous focusable element
+  - <kbd>Space</kbd> or <kbd>Enter</kbd> - Toggle the selected accordion item
+  - <kbd>Home</kbd> - Move focus to the first accordion header
+  - <kbd>End</kbd> - Move focus to the last accordion header
+  - <kbd>ArrowDown</kbd> - Move focus to the next accordion header
+  - <kbd>ArrowUp</kbd> - Move focus to the previous accordion header
+
+## Browser Support
+
+The accordion component works in all modern browsers and is tested against:
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Contributing
+
+Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) to get started.
+
+## License
+
+MIT
 
 ```typescript
 @Component({

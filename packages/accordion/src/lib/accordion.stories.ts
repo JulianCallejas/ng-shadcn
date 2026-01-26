@@ -5,7 +5,7 @@ import {
   AccordionItemComponent, 
   AccordionTriggerComponent, 
   AccordionContentComponent 
-} from './accordion.component';
+} from './index';
 import { Component, signal } from '@angular/core';
 
 
@@ -22,41 +22,6 @@ const meta: Meta<AccordionComponent> = {
       ],
     }),
   ],
-//   parameters: {
-//     layout: 'centered',
-//     docs: {
-//       description: {
-//         component: `An interactive component that allows users to toggle the display of content sections.
-
-// ## Installation
-
-// \`\`\`bash
-// # Using npm
-// npm install @your-scope/accordion
-
-// # Using yarn
-// yarn add @your-scope/accordion
-
-// # Using pnpm
-// pnpm add @your-scope/accordion
-// \`\`\`
-
-// Make sure to import the module in your Angular application's module:
-
-// \`\`\`typescript
-// import { AccordionModule } from '@your-scope/accordion';
-
-// @NgModule({
-//   imports: [
-//     // ... other imports
-//     AccordionModule
-//   ]
-// })
-// export class YourModule { }
-// \`\`\``,
-//       },
-//     },
-//   },
   tags: ['autodocs'],
   subcomponents: {
     AccordionItemComponent: AccordionItemComponent,
@@ -68,33 +33,91 @@ const meta: Meta<AccordionComponent> = {
     docs: {
       description: {
         component: `An interactive component that allows users to toggle the display of content sections.
-
 ## Installation
 
 \`\`\`bash
 # Using npm
-npm install @your-scope/accordion
-
+npm install @ng-shadcn/accordion
 # Using yarn
-yarn add @your-scope/accordion
-
+yarn add @ng-shadcn/accordion
 # Using pnpm
-pnpm add @your-scope/accordion
+pnpm add @ng-shadcn/accordion
 \`\`\`
-
-Make sure to import the module in your Angular application's module:
+## Usage
+### Standalone Components (Recommended)
+Import and use the individual components directly in your standalone components:
 
 \`\`\`typescript
-import { AccordionModule } from '@your-scope/accordion';
-
-@NgModule({
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { 
+  AccordionComponent, 
+  AccordionItemComponent,
+  AccordionTriggerComponent,
+  AccordionContentComponent
+} from '@ng-shadcn/accordion';
+@Component({
+  selector: 'app-example',
+  standalone: true,
   imports: [
-    // ... other imports
+    CommonModule,
+    AccordionComponent,
+    AccordionItemComponent,
+    AccordionTriggerComponent,
+    AccordionContentComponent
+  ],
+  template: \`
+    <ng-shadcn-accordion type="single">
+      <ng-shadcn-accordion-item id="item-1">
+        <ng-shadcn-accordion-trigger>Item 1</ng-shadcn-accordion-trigger>
+        <ng-shadcn-accordion-content>Content 1</ng-shadcn-accordion-content>
+      </ng-shadcn-accordion-item>
+    </ng-shadcn-accordion>
+  \`
+})
+export class ExampleComponent { }
+
+\`\`\`
+
+### Using NgModule (Legacy)
+If you're using NgModules, import the \[AccordionModule\](cci:2://file:///d:/Documents/Desarrollos/jc-develop/Angular/monorepo-ui-components/packages/accordion/src/lib/accordion.module.ts:21:0-36:32):
+
+\`\`\`typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AccordionModule } from '@ng-shadcn/accordion';
+@NgModule({
+  declarations: [YourComponent],
+  imports: [
+    CommonModule,
     AccordionModule
-  ]
+  ],
+  exports: [YourComponent]
 })
 export class YourModule { }
-\`\`\``,
+
+\`\`\`
+
+Then use the components in your templates:
+
+\`\`\`html
+<ng-shadcn-accordion type="single">
+  <ng-shadcn-accordion-item id="item-1">
+    <ng-shadcn-accordion-trigger>Item 1</ng-shadcn-accordion-trigger>
+    <ng-shadcn-accordion-content>Content 1</ng-shadcn-accordion-content>
+  </ng-shadcn-accordion-item>
+</ng-shadcn-accordion>
+
+\`\`\`
+
+## Features
+- **Multiple or Single Item Open**: Control whether multiple items can be open at once
+- **Controlled/Uncontrolled**: Use as controlled or uncontrolled component
+- **Accessible**: Follows WAI-ARIA design patterns
+- **Keyboard Navigation**: Full keyboard support
+- **Customizable**: Style with your own CSS classes
+- **TypeScript Support**: Fully typed API
+`,
       },
       extractComponentDescription: (component: any) => {
         if (component === AccordionComponent) {

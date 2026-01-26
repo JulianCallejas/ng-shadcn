@@ -7,238 +7,241 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AccordionItemComponent } from './accordion-item.component';
+import { AccordionTriggerComponent } from './accordion-trigger.component';
+import { AccordionContentComponent } from './accordion-content.component';
 
 declare const ngDevMode: boolean;
 
 /**
  * Individual accordion content component
  */
-@Component({
-  selector: 'ng-shadcn-accordion-content',
-  standalone: true,
-  imports: [CommonModule],
-  styles: `
-  @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
-  }
-  @keyframes accordion-up {
-    0% { 
-      height: var(--radix-accordion-content-height); 
-    }
-    100% { 
-      height: 0; 
-    }
-  }
-  .animate-accordion-down {
-    interpolate-size: allow-keywords;
-    animation: accordion-down 0.2s ease-out forwards;
-  }
-  .animate-accordion-up {
-    interpolate-size: allow-keywords;
-    animation: accordion-up 0.2s ease-out forwards;
-  }
-  `,
-  template: `
-    <div
-      [class]="computedClasses"
-      [attr.data-state]="isExpanded ? 'open' : 'closed'"
-      role="region"
-      [attr.aria-labelledby]="triggerId"
-      [attr.id]="contentId"
-    >
-      <div class="pb-4 pt-0">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `,
-})
-export class AccordionContentComponent {
+// @Component({
+//   selector: 'ng-shadcn-accordion-content',
+//   standalone: true,
+//   imports: [CommonModule],
+//   styles: `
+//   @keyframes accordion-down {
+//     from { height: 0; }
+//     to { height: var(--radix-accordion-content-height); }
+//   }
+//   @keyframes accordion-up {
+//     0% { 
+//       height: var(--radix-accordion-content-height); 
+//     }
+//     100% { 
+//       height: 0; 
+//     }
+//   }
+//   .animate-accordion-down {
+//     interpolate-size: allow-keywords;
+//     animation: accordion-down 0.2s ease-out forwards;
+//   }
+//   .animate-accordion-up {
+//     interpolate-size: allow-keywords;
+//     animation: accordion-up 0.2s ease-out forwards;
+//   }
+//   `,
+//   template: `
+//     <div
+//       [class]="computedClasses"
+//       [attr.data-state]="isExpanded ? 'open' : 'closed'"
+//       role="region"
+//       [attr.aria-labelledby]="triggerId"
+//       [attr.id]="contentId"
+//     >
+//       <div class="pb-4 pt-0">
+//         <ng-content></ng-content>
+//       </div>
+//     </div>
+//   `,
+// })
+// export class AccordionContentComponent {
   
-  /** @ignore */
-  id = '';
+//   /** @ignore */
+//   id = '';
 
-  @Input() class = '';
-  @Input({ transform: booleanAttribute }) isExpanded = false;
+//   @Input() class = '';
+//   @Input({ transform: booleanAttribute }) isExpanded = false;
 
-  get triggerId(): string {
-    return `accordion-trigger-${this.id}`;
-  }
+//   get triggerId(): string {
+//     return `accordion-trigger-${this.id}`;
+//   }
 
-  get contentId(): string {
-    return `accordion-content-${this.id}`;
-  }
+//   get contentId(): string {
+//     return `accordion-content-${this.id}`;
+//   }
 
-  get computedClasses(): string {
-    const baseClasses = 'overflow-hidden text-sm transition-all';
-    const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';
-    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
-  }
-}
+//   get computedClasses(): string {
+//     const baseClasses = 'overflow-hidden text-sm transition-all';
+//     const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';
+//     return `${baseClasses} ${stateClasses} ${this.class}`.trim();
+//   }
+// }
 
 /**
  * Individual accordion trigger component
  */
-@Component({
-  selector: 'ng-shadcn-accordion-trigger',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <button
-      class="gap-2 w-full"
-      [class]="computedClasses"
-      [attr.data-state]="dataState"
-      [disabled]="isDisabled"
-      [attr.aria-expanded]="isExpanded"
-      [attr.aria-controls]="contentId"
-      [attr.id]="triggerId"
-      (click)="handleClick()"
-      (keydown.enter)="handleKeyDown($event)"
-      (keydown.space)="handleKeyDown($event)">
-      <ng-content></ng-content>
-      <svg
-        class="h-4 w-4 shrink-0 transition-transform duration-200"
-        [class.rotate-180]="isExpanded"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </button>
-  `,
-})
-export class AccordionTriggerComponent {
+// @Component({
+//   selector: 'ng-shadcn-accordion-trigger',
+//   standalone: true,
+//   imports: [CommonModule],
+//   template: `
+//     <button
+//       class="gap-2 w-full"
+//       [class]="computedClasses"
+//       [attr.data-state]="dataState"
+//       [disabled]="isDisabled"
+//       [attr.aria-expanded]="isExpanded"
+//       [attr.aria-controls]="contentId"
+//       [attr.id]="triggerId"
+//       (click)="handleClick()"
+//       (keydown.enter)="handleKeyDown($event)"
+//       (keydown.space)="handleKeyDown($event)">
+//       <ng-content></ng-content>
+//       <svg
+//         class="h-4 w-4 shrink-0 transition-transform duration-200"
+//         [class.rotate-180]="isExpanded"
+//         fill="none"
+//         stroke="currentColor"
+//         viewBox="0 0 24 24">
+//         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+//       </svg>
+//     </button>
+//   `,
+// })
+// export class AccordionTriggerComponent {
   
-  /** @ignore */
-  id = '';
+//   /** @ignore */
+//   id = '';
   
-  @Input() class = '';
-  @Input({ transform: booleanAttribute }) disabled = false;
-  @Input({ transform: booleanAttribute }) isExpanded = false;
+//   @Input() class = '';
+//   @Input({ transform: booleanAttribute }) disabled = false;
+//   @Input({ transform: booleanAttribute }) isExpanded = false;
   
 
-  @Output() itemToggled = new EventEmitter<string>();
+//   @Output() itemToggled = new EventEmitter<string>();
 
-  get dataState(): 'open' | 'closed' {
-    return this.isExpanded ? 'open' : 'closed';
-  }
+//   get dataState(): 'open' | 'closed' {
+//     return this.isExpanded ? 'open' : 'closed';
+//   }
 
-  get triggerId(): string {
-    return `accordion-trigger-${this.id}`;
-  }
+//   get triggerId(): string {
+//     return `accordion-trigger-${this.id}`;
+//   }
 
-  get contentId(): string {
-    return `accordion-content-${this.id}`;
-  }
+//   get contentId(): string {
+//     return `accordion-content-${this.id}`;
+//   }
 
-  get isDisabled(): boolean {
-    return this.disabled;
-  }
+//   get isDisabled(): boolean {
+//     return this.disabled;
+//   }
 
-  get computedClasses(): string {
-    const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';
-    const stateClasses = this.disabled
-      ? 'pointer-events-none opacity-50'
-      : '[&[data-state=open]>svg]:rotate-180';
+//   get computedClasses(): string {
+//     const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';
+//     const stateClasses = this.disabled
+//       ? 'pointer-events-none opacity-50'
+//       : '[&[data-state=open]>svg]:rotate-180';
 
-    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
-  }
+//     return `${baseClasses} ${stateClasses} ${this.class}`.trim();
+//   }
 
-  /** @ignore */
-  handleClick(): void {
-    if (!this.disabled) {
-      this.itemToggled.emit(this.id);
-    }
-  }
+//   /** @ignore */
+//   handleClick(): void {
+//     if (!this.disabled) {
+//       this.itemToggled.emit(this.id);
+//     }
+//   }
 
-  /** @ignore */
-  handleKeyDown(event: Event): void {
-    if (event instanceof KeyboardEvent) {
-      event.preventDefault();
-      this.handleClick();
-    }
-  }
-}
+//   /** @ignore */
+//   handleKeyDown(event: Event): void {
+//     if (event instanceof KeyboardEvent) {
+//       event.preventDefault();
+//       this.handleClick();
+//     }
+//   }
+// }
 
 /**
  * Individual accordion item component
  */
-@Component({
-  selector: 'ng-shadcn-accordion-item',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <div
-      [class]="computedClasses"
-      [attr.data-state]="isExpanded ? 'open' : 'closed'"
-      [attr.data-disabled]="disabled">
-      <ng-content select="ng-shadcn-accordion-trigger" 
-        (itemToggled)="onItemToggled($event)">
-      </ng-content>
-      <ng-content select="ng-shadcn-accordion-content" 
-        >
-      </ng-content>
-    </div>
-  `,
-})
-export class AccordionItemComponent implements AfterContentInit {
-  /** @required */
-  @Input({ required: true }) id = '';
-  @Input() class = '';
-  @Input({ transform: booleanAttribute }) disabled = false;
-  @Input({ transform: booleanAttribute }) isExpanded = false;
-  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
-  @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;
+// @Component({
+//   selector: 'ng-shadcn-accordion-item',
+//   standalone: true,
+//   imports: [CommonModule],
+//   template: `
+//     <div
+//       [class]="computedClasses"
+//       [attr.data-state]="isExpanded ? 'open' : 'closed'"
+//       [attr.data-disabled]="disabled">
+//       <ng-content select="ng-shadcn-accordion-trigger" 
+//         (itemToggled)="onItemToggled($event)">
+//       </ng-content>
+//       <ng-content select="ng-shadcn-accordion-content" 
+//         >
+//       </ng-content>
+//     </div>
+//   `,
+// })
+// export class AccordionItemComponent implements AfterContentInit {
+//   /** @required */
+//   @Input({ required: true }) id = '';
+//   @Input() class = '';
+//   @Input({ transform: booleanAttribute }) disabled = false;
+//   @Input({ transform: booleanAttribute }) isExpanded = false;
+//   @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
+//   @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;
   
-  /** @ignore */
-  private expandedItems = inject(AccordionComponent).autoExpandedItems;
+//   /** @ignore */
+//   private expandedItems = inject(AccordionComponent).autoExpandedItems;
 
-  @Output() itemToggled = new EventEmitter<string>();
+//   @Output() itemToggled = new EventEmitter<string>();
 
-  constructor(private cdr: ChangeDetectorRef) {
-    effect(() => {
-      this.updateExpandedState();
-    }, { injector: inject(EnvironmentInjector) });
-  }
+//   constructor(private cdr: ChangeDetectorRef) {
+//     effect(() => {
+//       this.updateExpandedState();
+//     }, { injector: inject(EnvironmentInjector) });
+//   }
   
-  /** @ignore */
-  ngAfterContentInit() { 
-    this.updateExpandedState();
+//   /** @ignore */
+//   ngAfterContentInit() { 
+//     this.updateExpandedState();
     
-    if (this.trigger) { 
-      this.trigger.id = this.id;
-      this.trigger.isExpanded = this.isExpanded; 
-      this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })
-    } 
-    if (this.content) { 
-      this.content.id = this.id; 
-      this.content.isExpanded = this.isExpanded; 
-    }
+//     if (this.trigger) { 
+//       this.trigger.id = this.id;
+//       this.trigger.isExpanded = this.isExpanded; 
+//       this.trigger.itemToggled.subscribe(value => { this.onItemToggled(value); })
+//     } 
+//     if (this.content) { 
+//       this.content.id = this.id; 
+//       this.content.isExpanded = this.isExpanded; 
+//     }
 
-  }
+//   }
 
-  /** @ignore */
-  private updateExpandedState(): void {
-    const isExpanded = this.expandedItems().includes(this.id);
-    this.isExpanded = isExpanded;
+//   /** @ignore */
+//   private updateExpandedState(): void {
+//     const isExpanded = this.expandedItems().includes(this.id);
+//     this.isExpanded = isExpanded;
     
-    // Update child components
-    if (this.trigger) this.trigger.isExpanded = isExpanded;
-    if (this.content) this.content.isExpanded = isExpanded;
-    this.cdr.markForCheck();
-  }
+//     // Update child components
+//     if (this.trigger) this.trigger.isExpanded = isExpanded;
+//     if (this.content) this.content.isExpanded = isExpanded;
+//     this.cdr.markForCheck();
+//   }
 
-  /** @ignore */
-  onItemToggled(id: string): void {
-    if (!this.disabled) {
-      this.itemToggled.emit(id);
-    }
-  }
+//   /** @ignore */
+//   onItemToggled(id: string): void {
+//     if (!this.disabled) {
+//       this.itemToggled.emit(id);
+//     }
+//   }
 
-  get computedClasses(): string {
-    return `border-b ${this.class}`.trim();
-  }
-}
+//   get computedClasses(): string {
+//     return `border-b ${this.class}`.trim();
+//   }
+// }
 
 /**
  * Main accordion component
