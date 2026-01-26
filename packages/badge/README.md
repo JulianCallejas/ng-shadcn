@@ -7,7 +7,7 @@ A flexible badge component for status indicators, labels, and notifications with
 - 🎨 **Multiple Variants**: Default, secondary, destructive, outline, success, warning, and info styles
 - 📏 **Size Options**: Small, default, and large variants
 - 🔧 **Icon Support**: Leading and trailing icon slots
-- ❌ **Dismissible**: Optional close button functionality
+- ❌ **Dismissible**: Optional close button functionality with optional fade effect
 - 🎯 **Accessibility**: Proper ARIA attributes and keyboard support
 - 🎭 **Customizable**: Additional CSS classes and styling options
 
@@ -67,8 +67,16 @@ export class MyComponent {}
 ```typescript
 <ng-shadcn-badge 
   [dismissible]="true"
-  (dismiss)="onBadgeDismiss()">
+  (dismissed)="onBadgeDismiss()">
   Removable
+</ng-shadcn-badge>
+
+<!-- With fade animation on dismiss -->
+<ng-shadcn-badge
+  [dismissible]="true"
+  [fade]="true"
+  (dismissed)="onBadgeDismiss()">
+  Fade out on dismiss
 </ng-shadcn-badge>
 ```
 
@@ -106,7 +114,8 @@ export class MyComponent {}
 | `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'success' \| 'warning' \| 'info'` | `'default'` | Badge style variant |
 | `size` | `'sm' \| 'default' \| 'lg'` | `'default'` | Badge size |
 | `dismissible` | `boolean` | `false` | Whether the badge can be dismissed |
-| `className` | `string` | `''` | Additional CSS classes |
+| `fade` | `boolean` | `false` | Whether to use fade animation when dismissing (only applies when `dismissible` is true) |
+| `class` | `string` | `''` | Additional CSS classes |
 | `role` | `string` | `'status'` | ARIA role attribute |
 | `ariaLabel` | `string` | `undefined` | ARIA label for accessibility |
 
@@ -114,7 +123,7 @@ export class MyComponent {}
 
 | Event | Type | Description |
 |-------|------|-------------|
-| `dismiss` | `CustomEvent` | Emitted when dismissible badge is closed |
+| `dismissed` | `EventEmitter<void>` | Emitted when a dismissible badge is closed |
 
 ## Content Projection
 
@@ -152,6 +161,8 @@ Use `slot="trailing-icon"` to project an icon after the text:
   <ng-shadcn-badge 
     variant="destructive" 
     size="sm" 
+    [dismissible]="true"
+    (dismissed)="clearNotification()"
     class="absolute -top-2 -right-2">
     5
   </ng-shadcn-badge>
