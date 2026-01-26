@@ -22,15 +22,97 @@ const meta: Meta<AccordionComponent> = {
       ],
     }),
   ],
+//   parameters: {
+//     layout: 'centered',
+//     docs: {
+//       description: {
+//         component: `An interactive component that allows users to toggle the display of content sections.
+
+// ## Installation
+
+// \`\`\`bash
+// # Using npm
+// npm install @your-scope/accordion
+
+// # Using yarn
+// yarn add @your-scope/accordion
+
+// # Using pnpm
+// pnpm add @your-scope/accordion
+// \`\`\`
+
+// Make sure to import the module in your Angular application's module:
+
+// \`\`\`typescript
+// import { AccordionModule } from '@your-scope/accordion';
+
+// @NgModule({
+//   imports: [
+//     // ... other imports
+//     AccordionModule
+//   ]
+// })
+// export class YourModule { }
+// \`\`\``,
+//       },
+//     },
+//   },
+  tags: ['autodocs'],
+  subcomponents: {
+    AccordionItemComponent: AccordionItemComponent,
+    AccordionTriggerComponent: AccordionTriggerComponent,
+    AccordionContentComponent: AccordionContentComponent
+  },
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'An interactive component that allows users to toggle the display of content sections.',
+        component: `An interactive component that allows users to toggle the display of content sections.
+
+## Installation
+
+\`\`\`bash
+# Using npm
+npm install @your-scope/accordion
+
+# Using yarn
+yarn add @your-scope/accordion
+
+# Using pnpm
+pnpm add @your-scope/accordion
+\`\`\`
+
+Make sure to import the module in your Angular application's module:
+
+\`\`\`typescript
+import { AccordionModule } from '@your-scope/accordion';
+
+@NgModule({
+  imports: [
+    // ... other imports
+    AccordionModule
+  ]
+})
+export class YourModule { }
+\`\`\``,
+      },
+      extractComponentDescription: (component: any) => {
+        if (component === AccordionComponent) {
+          return 'The root component that contains all accordion items.';
+        }
+        if (component === AccordionItemComponent) {
+          return 'A single collapsible section that contains a trigger and content.';
+        }
+        if (component === AccordionTriggerComponent) {
+          return 'The clickable element that toggles the visibility of the accordion content.';
+        }
+        if (component === AccordionContentComponent) {
+          return 'The collapsible content area that is shown/hidden when the trigger is clicked.';
+        }
+        return null;
       },
     },
   },
-  tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
@@ -41,10 +123,47 @@ const meta: Meta<AccordionComponent> = {
         defaultValue: { summary: 'single' },
       },
     },
+    class: {
+      control: 'text',
+      description: 'Additional CSS classes',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
+      },
+    },
+    accordionItems: {
+      control: 'object',
+      table: {
+        type: { 
+          summary: 'QueryList<AccordionItemComponent>', 
+          detail: 'Accordion Item container. An individual collapsible section that contains a trigger and content.',
+        },
+      },
+    },
+    accordionTriggers: {
+      control: 'object',
+      table: {
+        type: { 
+          summary: 'QueryList<AccordionTriggerComponent>', 
+          detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',
+        },
+      },
+    },
+    accordionContents: {
+      control: 'object',
+      table: {
+        type: { 
+          summary: 'QueryList<AccordionContentComponent>', 
+          detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',
+        },
+      },
+    },
   },
   args: {
     type: 'single',
+    class: '',
   },
+
 };
 
 export default meta;
@@ -52,11 +171,30 @@ type Story = StoryObj<AccordionComponent>;
 
 //#region Basic Usage
 export const Basic: Story = {
+  parameters:{
+    controls: {
+      exclude: [
+        'initialized',
+        'isControlled',
+        'seenItemIds',
+        'autoExpandedItems',
+        'computedClasses',
+        'expandedItems',
+        'ngAfterContentInit',
+        'ngOnChanges',
+        'initializeFromDefaults',
+        'syncChildren',
+        'toggleItem',
+        'updateControlledState',
+        'validateProps',
+      ]
+    }
+  },
   render: (args) => ({
     props: args,
     template: `
       <div class="w-100">
-        <ng-shadcn-accordion [type]="type">
+        <ng-shadcn-accordion [type]="type" [class]="class" >
           <ng-shadcn-accordion-item id="item-1">
             <ng-shadcn-accordion-trigger>Is it accessible?</ng-shadcn-accordion-trigger>
             <ng-shadcn-accordion-content>

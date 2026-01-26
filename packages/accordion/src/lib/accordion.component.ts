@@ -3,7 +3,6 @@ import {
   ContentChildren, QueryList, effect, booleanAttribute, 
   inject, OnChanges, SimpleChanges, AfterContentInit,
   ContentChild,
-  DestroyRef,
   EnvironmentInjector,
   ChangeDetectorRef
 } from '@angular/core';
@@ -55,7 +54,10 @@ declare const ngDevMode: boolean;
   `,
 })
 export class AccordionContentComponent {
+  
+  /** @ignore */
   id = '';
+
   @Input() class = '';
   @Input({ transform: booleanAttribute }) isExpanded = false;
 
@@ -106,7 +108,10 @@ export class AccordionContentComponent {
   `,
 })
 export class AccordionTriggerComponent {
+  
+  /** @ignore */
   id = '';
+  
   @Input() class = '';
   @Input({ transform: booleanAttribute }) disabled = false;
   @Input({ transform: booleanAttribute }) isExpanded = false;
@@ -114,7 +119,7 @@ export class AccordionTriggerComponent {
 
   @Output() itemToggled = new EventEmitter<string>();
 
-   get dataState(): 'open' | 'closed' {
+  get dataState(): 'open' | 'closed' {
     return this.isExpanded ? 'open' : 'closed';
   }
 
@@ -139,12 +144,14 @@ export class AccordionTriggerComponent {
     return `${baseClasses} ${stateClasses} ${this.class}`.trim();
   }
 
+  /** @ignore */
   handleClick(): void {
     if (!this.disabled) {
       this.itemToggled.emit(this.id);
     }
   }
 
+  /** @ignore */
   handleKeyDown(event: Event): void {
     if (event instanceof KeyboardEvent) {
       event.preventDefault();
@@ -175,13 +182,15 @@ export class AccordionTriggerComponent {
   `,
 })
 export class AccordionItemComponent implements AfterContentInit {
+  /** @required */
   @Input({ required: true }) id = '';
   @Input() class = '';
   @Input({ transform: booleanAttribute }) disabled = false;
   @Input({ transform: booleanAttribute }) isExpanded = false;
   @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
   @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;
-  private destroyRef = inject(DestroyRef);
+  
+  /** @ignore */
   private expandedItems = inject(AccordionComponent).autoExpandedItems;
 
   @Output() itemToggled = new EventEmitter<string>();
@@ -192,7 +201,7 @@ export class AccordionItemComponent implements AfterContentInit {
     }, { injector: inject(EnvironmentInjector) });
   }
   
-
+  /** @ignore */
   ngAfterContentInit() { 
     this.updateExpandedState();
     
@@ -208,6 +217,7 @@ export class AccordionItemComponent implements AfterContentInit {
 
   }
 
+  /** @ignore */
   private updateExpandedState(): void {
     const isExpanded = this.expandedItems().includes(this.id);
     this.isExpanded = isExpanded;
@@ -218,6 +228,7 @@ export class AccordionItemComponent implements AfterContentInit {
     this.cdr.markForCheck();
   }
 
+  /** @ignore */
   onItemToggled(id: string): void {
     if (!this.disabled) {
       this.itemToggled.emit(id);
