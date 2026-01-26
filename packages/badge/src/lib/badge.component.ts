@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, Input, computed, signal, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, booleanAttribute, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -17,7 +17,7 @@ const badgeVariants = cva(
       },
       size: {
         default: 'px-2.5 py-0.5 text-xs',
-        sm: 'px-2 py-0.5 text-xs',
+        sm: 'px-[2.5px] py-[1px] text-xs',
         lg: 'px-3 py-1 text-sm',
       },
     },
@@ -40,11 +40,37 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   selector: 'ng-shadcn-badge',
   standalone: true,
   imports: [CommonModule],
+  styles: `
+  @keyframes badge-fade-out {
+    0% { opacity: 100%; }
+    99% { 
+      opacity: 0%; 
+    }
+    100% { 
+      opacity: 0%;
+      display: none;
+    }
+  }
+  .badge-out {
+    interpolate-size: allow-keywords;
+    animation: badge-fade-out 0.2s ease-out forwards;
+  }
+  .badge-hide {
+    display: none;
+    height: 0;
+    opacity: 0;
+  }
+  `,
   template: `
-    <div [class]="computedClasses()" [attr.role]="role">
+    <div 
+      [class]="computedClasses()" 
+      [attr.role]="role"
+      [class.badge-out]="isDismissed() && fade"
+      [class.badge-hide]="isDismissed() && !fade"
+    >
       <!-- Leading icon slot -->
-      <span *ngIf="hasLeadingIcon" class="mr-1 flex-shrink-0">
-        <ng-content select="[slot=leading-icon]"></ng-content>
+      <span #leadingIcon class="mr-1 shrink-0">
+        <ng-content select="[leadingIcon]"></ng-content>
       </span>
 
       <!-- Badge content -->
@@ -53,53 +79,73 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
       </span>
 
       <!-- Trailing icon slot -->
-      <span *ngIf="hasTrailingIcon" class="ml-1 flex-shrink-0">
-        <ng-content select="[slot=trailing-icon]"></ng-content>
+      <span #trailingIcon class="ml-1 shrink-0">
+        <ng-content select="[trailingIcon]"></ng-content>
       </span>
 
       <!-- Dismiss button -->
-      <button
-        *ngIf="dismissible"
-        type="button"
-        class="ml-1 flex-shrink-0 rounded-full p-0.5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
-        (click)="onDismiss()"
-        [attr.aria-label]="'Remove ' + (ariaLabel || 'badge')"
-      >
-        <svg
-          class="h-3 w-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      @if (dismissible) {
+        <button
+          *ngIf="dismissible"
+          type="button"
+          class="ml-1 shrink-0 rounded-full p-0.5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
+          (click)="dismiss()"
+          [attr.aria-label]="'Remove ' + (ariaLabel || 'badge')"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+          <svg
+            class="h-3 w-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      }
     </div>
   `,
 })
 export class BadgeComponent implements BadgeProps {
   @Input() variant: BadgeProps['variant'] = 'default';
   @Input() size: BadgeProps['size'] = 'default';
-  @Input() dismissible = false;
-  @Input() className = '';
+  @Input({ transform: booleanAttribute }) dismissible = false;
+  @Input({ transform: booleanAttribute }) fade = false;
+  @Input() class = '';
   @Input() role = 'status';
   @Input() ariaLabel?: string;
+  @Output() dismissed = new EventEmitter<void>();
+
+  /** @ignore */
+  isDismissed = signal(false);
 
   // Signals for reactive state
+  /** @ignore */
   private variantSignal = signal(this.variant);
+  
+  /** @ignore */
   private sizeSignal = signal(this.size);
-  private classNameSignal = signal(this.className);
+  
+  /** @ignore */
+  private classNameSignal = signal(this.class);
+
+  // Content queries for projected icons
+  @ContentChild('leadingIcon', { static: false }) leadingIcon?: ElementRef;
+  @ContentChild('trailingIcon', { static: false }) trailingIcon?: ElementRef;
 
   // Check for projected content
+  /** @ignore */
   hasLeadingIcon = false;
+  
+  /** @ignore */
   hasTrailingIcon = false;
 
   // Computed properties
+  /** @ignore */
   computedClasses = computed(() => {
     return badgeVariants({
       variant: this.variantSignal(),
@@ -108,34 +154,31 @@ export class BadgeComponent implements BadgeProps {
     });
   });
 
+  /** @ignore */
   ngOnInit() {
     this.variantSignal.set(this.variant);
     this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
+    this.classNameSignal.set(this.class);
   }
 
+  /** @ignore */
   ngOnChanges() {
     this.variantSignal.set(this.variant);
     this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
+    this.classNameSignal.set(this.class);
   }
 
+  /** @ignore */
   ngAfterContentInit() {
-    // In a real implementation, you would check for projected content
-    // For now, we'll assume content exists
-    this.hasLeadingIcon = true;
-    this.hasTrailingIcon = true;
+    // Check for projected content in icon slots
+    this.hasLeadingIcon = this.leadingIcon?.nativeElement.children.length > 0;
+    this.hasTrailingIcon = this.trailingIcon?.nativeElement.children.length > 0;
   }
 
-  onDismiss() {
-    // Emit dismiss event or handle removal
-    const event = new CustomEvent('dismiss', {
-      bubbles: true,
-      cancelable: true,
-    });
-    
-    // Dispatch the event on the host element
-    const hostElement = document.querySelector('ng-shadcn-badge');
-    hostElement?.dispatchEvent(event);
+  /** @ignore */
+  dismiss() {
+    this.isDismissed.set(true);
+    this.dismissed.emit();
   }
+  
 }
