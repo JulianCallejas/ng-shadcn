@@ -24,11 +24,126 @@ const meta: Meta<AlertComponent> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A customizable alert component for displaying important information to users with various styles and interactions.',
+        component: `A customizable alert component for displaying important information to users with various styles and interactions.
+## Installation
+
+\`\`\`bash
+# Using npm
+npm install @ng-shadcn/alert
+# Using yarn
+yarn add @ng-shadcn/alert
+# Using pnpm
+pnpm add @ng-shadcn/alert
+\`\`\`
+## Usage
+### Standalone Components (Recommended)
+Import and use the individual components directly in your standalone components:
+
+\`\`\`typescript
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { 
+  AlertComponent, 
+  AlertIconComponent,
+  AlertTitleComponent,
+  AlertContentComponent,
+  AlertActionComponent
+} from '@ng-shadcn/alert';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AlertComponent,
+    AlertIconComponent,
+    AlertTitleComponent,
+    AlertContentComponent,
+    AlertActionComponent
+  ],
+  template: \`
+    <ng-shadcn-alert variant="default">
+      <ng-shadcn-alert-icon></ng-shadcn-alert-icon>
+      <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>
+      <ng-shadcn-alert-content>
+        This is a default alert with some information.
+      </ng-shadcn-alert-content>
+      <ng-shadcn-alert-action>Action</ng-shadcn-alert-action>
+    </ng-shadcn-alert>
+  \`
+})
+export class ExampleComponent { }
+\`\`\`
+
+### Using NgModule (Legacy)
+If you're using NgModules, import the \`AlertModule\`:
+
+\`\`\`typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AlertModule } from '@ng-shadcn/alert';
+
+@NgModule({
+  declarations: [YourComponent],
+  imports: [
+    CommonModule,
+    AlertModule
+  ],
+  exports: [YourComponent]
+})
+export class YourModule { }
+\`\`\`
+
+Then use the components in your templates:
+
+\`\`\`html
+<ng-shadcn-alert variant="success" [dismissible]="true" (dismissed)="onDismiss()">
+  <ng-shadcn-alert-icon></ng-shadcn-alert-icon>
+  <ng-shadcn-alert-title>Success!</ng-shadcn-alert-title>
+  <ng-shadcn-alert-content>
+    Your operation completed successfully.
+  </ng-shadcn-alert-content>
+  <ng-shadcn-alert-action (click)="onAction()">Undo</ng-shadcn-alert-action>
+</ng-shadcn-alert>
+\`\`\`
+
+## Features
+- **Multiple Variants**: Choose from different visual styles (default, success, warning, destructive, info)
+- **Dismissible**: Option to close the alert manually
+- **Fade Effect**: Smooth fade-out animation when dismissing
+- **Action Button**: Include custom action with the alert
+- **Icons**: Built-in support for contextual icons
+- **Accessible**: Follows WAI-ARIA design patterns
+- **TypeScript Support**: Fully typed API
+`,
+      },
+      extractComponentDescription: (component: any) => {
+        if (component === AlertComponent) {
+          return 'The root component that contains the alert content and handles the dismiss functionality.';
+        }
+        if (component === AlertIconComponent) {
+          return 'Optional icon component that can be used to display contextual icons in the alert.';
+        }
+        if (component === AlertTitleComponent) {
+          return 'The title of the alert, typically displayed in bold.';
+        }
+        if (component === AlertContentComponent) {
+          return 'The main content area of the alert.';
+        }
+        if (component === AlertActionComponent) {
+          return 'An optional action button that can be placed in the alert.';
+        }
+        return null;
       },
     },
   },
   tags: ['autodocs'],
+  subcomponents: {
+      AlertIconComponent,
+      AlertTitleComponent,
+      AlertContentComponent,
+      AlertActionComponent,
+    },
   argTypes: {
     variant: {
       control: 'select',

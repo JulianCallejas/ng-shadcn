@@ -52,9 +52,13 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
   styles:`
   @keyframes alert-fade-out {
     0% { opacity: 100%; }
-    99% { opacity: 0%; }
+    99% { 
+      opacity: 0%; 
+      height: 0;
+    }
     100% { 
       opacity: 0%;
+      height: 0;
       display: none;
     }
   }
@@ -83,7 +87,7 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
       <div class="flex gap-3">
         <!-- Icon -->
         @if (showIcon) {
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             @if (hasCustomIcon) {
               <ng-content select="ng-shadcn-alert-icon"></ng-content>
             } @else {
@@ -183,12 +187,16 @@ export class AlertComponent implements AfterContentInit {
   /** Emits when the action button is clicked */
   @Output() onAlertAction = new EventEmitter<MouseEvent>();
 
+  /** @ignore */
   isDismissed = signal(false);
+
+  /** @ignore */
   hasCustomIcon = false;
 
   @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;
   @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
 
+  /** @ignore */
   ngAfterContentInit() {
     this.hasCustomIcon = !!this.alertIcon;
     
@@ -206,6 +214,7 @@ export class AlertComponent implements AfterContentInit {
   /**
    * Computes the CSS classes for the alert based on inputs
    */
+  /** @ignore */
   computedClasses() {
     return [
       alertVariants({ variant: this.variant }),
@@ -216,6 +225,7 @@ export class AlertComponent implements AfterContentInit {
     ].filter(Boolean).join(' ');
   }
 
+  /** @ignore */
   dismiss() {
     this.isDismissed.set(true);
     this.dismissed.emit();

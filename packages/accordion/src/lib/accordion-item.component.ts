@@ -26,7 +26,7 @@ import { AccordionComponent } from './accordion.component';
   `,
 })
 export class AccordionItemComponent implements AfterContentInit {
-  /** @required */
+ 
   @Input({ required: true }) id = '';
   @Input() class = '';
   @Input({ transform: booleanAttribute }) disabled = false;
