@@ -130,13 +130,6 @@ export class BadgeComponent implements BadgeProps {
   @ContentChild('leadingIcon', { static: false }) leadingIcon?: ElementRef;
   @ContentChild('trailingIcon', { static: false }) trailingIcon?: ElementRef;
 
-  // Check for projected content
-  /** @ignore */
-  private hasLeadingIcon = false;
-  
-  /** @ignore */
-  private hasTrailingIcon = false;
-
   constructor(private elementRef: ElementRef) {}
 
   // Computed properties
@@ -152,13 +145,6 @@ export class BadgeComponent implements BadgeProps {
     
   };
   
-  /** @ignore */
-  ngAfterContentInit() {
-    // Check for projected content in icon slots
-    this.hasLeadingIcon = this.leadingIcon?.nativeElement.children.length > 0;
-    this.hasTrailingIcon = this.trailingIcon?.nativeElement.children.length > 0;
-  }
-
   /** @ignore */
   dismiss() {
     this.isDismissed.set(true);
