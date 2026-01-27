@@ -1,6 +1,8 @@
-import { Component, Input, Output, EventEmitter, computed, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -22,7 +24,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',  
+      variant: 'default',
       size: 'default',
     },
   }
@@ -30,11 +32,11 @@ const buttonVariants = cva(
 
 export interface ButtonProps extends VariantProps<typeof buttonVariants> {
   disabled?: boolean;
+  class?: string;
 }
 
 /**
  * Button component with multiple variants and sizes
- * Supports both signal and observable patterns
  */
 @Component({
   selector: 'ng-shadcn-button',
@@ -59,41 +61,17 @@ export class ButtonComponent implements ButtonProps {
   
   @Output() clicked = new EventEmitter<Event>();
 
-  // Signal-based computed property for classes
-  /** @ignore */
-  private variantSignal = signal(this.variant);
-  
-  /** @ignore */
-  private sizeSignal = signal(this.size);
-  
-  /** @ignore */
-  private classNameSignal = signal(this.class);
-
-  /** @ignore */
+  // Use the cn utility to merge classes
   computedClasses = computed(() => {
-    return buttonVariants({
-      variant: this.variantSignal(),
-      size: this.sizeSignal(),
-      className: this.classNameSignal(),
-    });
+    return cn(
+      buttonVariants({
+        variant: this.variant,
+        size: this.size,
+      }),
+      this.class
+    );
   });
 
-  /** @ignore */
-  ngOnInit() {
-    // Update signals when inputs change
-    this.variantSignal.set(this.variant);
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.class);
-  }
-
-  /** @ignore */
-  ngOnChanges() {
-    this.variantSignal.set(this.variant);
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.class);
-  }
-
-  /** @ignore */
   handleClick(event: Event) {
     if (!this.disabled) {
       this.clicked.emit(event);

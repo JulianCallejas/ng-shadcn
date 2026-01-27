@@ -1,8 +1,10 @@
-import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, effect, inject, signal, AfterContentInit, ChangeDetectorRef, EnvironmentInjector } from '@angular/core';
+import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, effect, inject, AfterContentInit, ChangeDetectorRef, EnvironmentInjector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccordionTriggerComponent } from './accordion-trigger.component';
 import { AccordionContentComponent } from './accordion-content.component';
 import { AccordionComponent } from './accordion.component';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 /**
  * Individual accordion item component
@@ -80,6 +82,9 @@ export class AccordionItemComponent implements AfterContentInit {
   }
 
   get computedClasses(): string {
-    return `border-b ${this.class}`.trim();
+    return cn(
+      'border-b',
+      this.class
+    );
   }
 }

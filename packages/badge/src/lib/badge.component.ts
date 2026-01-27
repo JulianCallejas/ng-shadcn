@@ -1,6 +1,8 @@
 import { Component, Input, computed, signal, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, booleanAttribute, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 const badgeVariants = cva(
   'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
@@ -63,7 +65,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   `,
   template: `
     <div 
-      [class]="computedClasses()" 
+      [class]="computedClasses" 
       [attr.role]="role"
       [class.badge-out]="isDismissed() && fade"
       [class.badge-hide]="isDismissed() && !fade"
@@ -111,6 +113,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   `,
 })
 export class BadgeComponent implements BadgeProps {
+  
   @Input() variant: BadgeProps['variant'] = 'default';
   @Input() size: BadgeProps['size'] = 'default';
   @Input({ transform: booleanAttribute }) dismissible = false;
@@ -123,51 +126,32 @@ export class BadgeComponent implements BadgeProps {
   /** @ignore */
   isDismissed = signal(false);
 
-  // Signals for reactive state
-  /** @ignore */
-  private variantSignal = signal(this.variant);
-  
-  /** @ignore */
-  private sizeSignal = signal(this.size);
-  
-  /** @ignore */
-  private classNameSignal = signal(this.class);
-
   // Content queries for projected icons
   @ContentChild('leadingIcon', { static: false }) leadingIcon?: ElementRef;
   @ContentChild('trailingIcon', { static: false }) trailingIcon?: ElementRef;
 
   // Check for projected content
   /** @ignore */
-  hasLeadingIcon = false;
+  private hasLeadingIcon = false;
   
   /** @ignore */
-  hasTrailingIcon = false;
+  private hasTrailingIcon = false;
+
+  constructor(private elementRef: ElementRef) {}
 
   // Computed properties
   /** @ignore */
-  computedClasses = computed(() => {
-    return badgeVariants({
-      variant: this.variantSignal(),
-      size: this.sizeSignal(),
-      className: this.classNameSignal(),
-    });
-  });
-
-  /** @ignore */
-  ngOnInit() {
-    this.variantSignal.set(this.variant);
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.class);
-  }
-
-  /** @ignore */
-  ngOnChanges() {
-    this.variantSignal.set(this.variant);
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.class);
-  }
-
+  get computedClasses(): string {
+    return cn(
+      badgeVariants({
+        variant: this.variant,
+        size: this.size as 'default' | 'sm' | 'lg',
+      }),
+      this.class
+    );
+    
+  };
+  
   /** @ignore */
   ngAfterContentInit() {
     // Check for projected content in icon slots
@@ -179,6 +163,11 @@ export class BadgeComponent implements BadgeProps {
   dismiss() {
     this.isDismissed.set(true);
     this.dismissed.emit();
+    setTimeout(() => {
+      this.isDismissed.set(false);
+      this.elementRef.nativeElement.remove();
+    }, 200);
+    
   }
   
 }

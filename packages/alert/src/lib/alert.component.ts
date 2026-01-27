@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AlertIconComponent } from './alert-icon.component';
-import { AlertTitleComponent } from './alert-title.component';
-import { AlertContentComponent } from './alert-content.component';
 import { AlertActionComponent } from './alert-action.component';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border p-4',
@@ -45,9 +45,6 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
   imports: [
     CommonModule, 
     AlertIconComponent, 
-    // AlertTitleComponent, 
-    // AlertContentComponent, 
-    // AlertActionComponent
   ],
   styles:`
   @keyframes alert-fade-out {
@@ -74,7 +71,7 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
   `,
   template: `
     <div 
-      [class]="computedClasses()"
+      [class]="computedClasses"
       role="alert"
       [class.alert-out]="isDismissed() && fade"
       [class.alert-hide]="isDismissed() && !fade"
@@ -196,6 +193,8 @@ export class AlertComponent implements AfterContentInit {
   @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;
   @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
 
+  constructor(private elementRef: ElementRef) {}
+
   /** @ignore */
   ngAfterContentInit() {
     this.hasCustomIcon = !!this.alertIcon;
@@ -215,19 +214,23 @@ export class AlertComponent implements AfterContentInit {
    * Computes the CSS classes for the alert based on inputs
    */
   /** @ignore */
-  computedClasses() {
-    return [
+  get computedClasses(): string {
+    return cn(
       alertVariants({ variant: this.variant }),
       this.class,
       {
         'pr-10': this.dismissible || this.alertAction
       }
-    ].filter(Boolean).join(' ');
+    );
   }
 
   /** @ignore */
   dismiss() {
     this.isDismissed.set(true);
     this.dismissed.emit();
+    setTimeout(() => {
+      this.isDismissed.set(false);
+      this.elementRef.nativeElement.remove();
+    }, 200);
   }
 }

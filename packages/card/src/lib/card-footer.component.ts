@@ -1,26 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { Component, Input } from "@angular/core";
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
+/**
+ * Card footer component
+ */
 @Component({
-  selector: 'ng-shadcn-alert-title',
+  selector: 'ng-shadcn-card-footer',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h5 [class]="computedClasses">
+    <div [class]="computedClasses">
       <ng-content></ng-content>
-    </h5>
-  `
+    </div>
+  `,
 })
-export class AlertTitleComponent {
+export class CardFooterComponent {
   @Input() class = '';
 
-  /** @ignore */
   get computedClasses(): string {
     return cn(
-      'mb-1 font-medium leading-none tracking-tight',
+      'flex items-center p-6',
       this.class
-    )
+    );
   }
 }

@@ -187,7 +187,7 @@ export const Variants: Story = {
   render: () => ({
     template: `
       <div class="flex flex-wrap gap-4">
-        <ng-shadcn-button variant="default">Default</ng-shadcn-button>
+        <ng-shadcn-button variant="default" class="px-0">Default</ng-shadcn-button>
         <ng-shadcn-button variant="destructive">Destructive</ng-shadcn-button>
         <ng-shadcn-button variant="outline">Outline</ng-shadcn-button>
         <ng-shadcn-button variant="secondary">Secondary</ng-shadcn-button>

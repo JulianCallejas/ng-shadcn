@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { 
-  CardComponent, 
-  CardHeaderComponent, 
-  CardTitleComponent, 
-  CardDescriptionComponent, 
-  CardContentComponent, 
-  CardFooterComponent 
-} from './card.component';
+import { CardComponent } from './card.component';
+import { CardHeaderComponent } from './card-header.component';
+import { CardTitleComponent } from './card-title.component';
+import { CardDescriptionComponent } from './card-description.component';
+import { CardContentComponent } from './card-content.component';
+import { CardFooterComponent } from './card-footer.component';
 import { ButtonComponent } from '../../../button/src/lib/button.component';
+
 
 const meta: Meta<CardComponent> = {
   title: 'Components/Card',
@@ -30,19 +29,137 @@ const meta: Meta<CardComponent> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A flexible card component with header, content, and footer sections. Perfect for displaying grouped information.',
+        component: `A flexible card component with header, content, and footer sections. Perfect for displaying grouped information.
+
+## Installation
+
+\`\`\`bash
+# Using npm
+npm install @ng-shadcn/card
+# Using yarn
+yarn add @ng-shadcn/card
+# Using pnpm
+pnpm add @ng-shadcn/card
+\`\`\`
+
+## Usage
+### Standalone Components (Recommended)
+Import and use the individual components directly in your standalone components:
+
+\`\`\`typescript
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { 
+  CardComponent, 
+  CardHeaderComponent,
+  CardTitleComponent,
+  CardDescriptionComponent,
+  CardContentComponent,
+  CardFooterComponent
+} from '@ng-shadcn/card';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [
+    CommonModule,
+    CardComponent,
+    CardHeaderComponent,
+    CardTitleComponent,
+    CardDescriptionComponent,
+    CardContentComponent,
+    CardFooterComponent
+  ],
+  template: \`
+    <ng-shadcn-card>
+      <ng-shadcn-card-header>
+        <ng-shadcn-card-title>Card Title</ng-shadcn-card-title>
+        <ng-shadcn-card-description>
+          A description of what this card is about
+        </ng-shadcn-card-description>
+      </ng-shadcn-card-header>
+      <ng-shadcn-card-content>
+        <p>This is the main content of the card.</p>
+      </ng-shadcn-card-content>
+      <ng-shadcn-card-footer>
+        <button>Action</button>
+      </ng-shadcn-card-footer>
+    </ng-shadcn-card>
+  \`
+})
+export class ExampleComponent { }
+\`\`\`
+
+### Using NgModule (Legacy)
+If you're using NgModules, import the \`CardModule\`:
+
+\`\`\`typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CardModule } from '@ng-shadcn/card';
+
+@NgModule({
+  declarations: [YourComponent],
+  imports: [
+    CommonModule,
+    CardModule
+  ],
+  exports: [YourComponent]
+})
+export class YourModule { }
+\`\`\`
+
+## Features
+- **Flexible Layout**: Easily compose cards with header, content, and footer sections
+- **Fully Typed**: Built with TypeScript for better developer experience
+- **Customizable**: Style individual components using Tailwind CSS classes
+- **Accessible**: Follows WAI-ARIA design patterns
+- **Responsive**: Works on all screen sizes
+`,
+      },
+      extractComponentDescription: (component: any) => {
+        if (component === CardComponent) {
+          return 'The root component that provides the card container with consistent styling and spacing.';
+        }
+        if (component === CardHeaderComponent) {
+          return 'Container for the card title and description, with proper spacing and typography.';
+        }
+        if (component === CardTitleComponent) {
+          return 'The title of the card, typically displayed in a larger font size.';
+        }
+        if (component === CardDescriptionComponent) {
+          return 'A short description or subtitle for the card.';
+        }
+        if (component === CardContentComponent) {
+          return 'The main content area of the card.';
+        }
+        if (component === CardFooterComponent) {
+          return 'A container for action buttons or additional information at the bottom of the card.';
+        }
+        return null;
       },
     },
   },
   tags: ['autodocs'],
+  subcomponents: {
+    CardHeaderComponent,
+    CardTitleComponent,
+    CardDescriptionComponent,
+    CardContentComponent,
+    CardFooterComponent,
+  },
   argTypes: {
-    className: {
+    class: {
       control: 'text',
       description: 'Additional CSS classes to apply to the card',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
+      },
     },
   },
   args: {
-    className: '',
+    class: '',
   },
 };
 
@@ -53,7 +170,7 @@ export const Default: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <ng-shadcn-card [className]="className" class="w-[350px]">
+      <ng-shadcn-card [class]="class">
         <ng-shadcn-card-header>
           <ng-shadcn-card-title>Card Title</ng-shadcn-card-title>
           <ng-shadcn-card-description>
@@ -74,8 +191,8 @@ export const Default: Story = {
 export const Simple: Story = {
   render: () => ({
     template: `
-      <ng-shadcn-card class="w-[350px]">
-        <ng-shadcn-card-content class="pt-6">
+      <ng-shadcn-card>
+        <ng-shadcn-card-content class="py-2">
           <p>A simple card with just content. No header or footer needed.</p>
         </ng-shadcn-card-content>
       </ng-shadcn-card>
@@ -123,10 +240,10 @@ export const ProductCard: Story = {
   render: () => ({
     template: `
       <ng-shadcn-card class="w-[300px]">
-        <div class="aspect-square bg-gray-100 rounded-t-lg flex items-center justify-center">
-          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
+        <div class="aspect-square bg-gray-100 rounded-t-lg flex items-center justify-center overflow-hidden">
+          <a href="https://playtwq.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://postaly.cl/img/twq-ads-banner-dark.webp" alt="Product" class="w-full h-full object-cover" />
+          </a>
         </div>
         <ng-shadcn-card-header>
           <ng-shadcn-card-title>Product Name</ng-shadcn-card-title>

@@ -1,4 +1,10 @@
-import { CardComponent, CardHeaderComponent, CardTitleComponent, CardDescriptionComponent, CardContentComponent, CardFooterComponent } from './card.component';
+import { CardContentComponent } from "./card-content.component";
+import { CardDescriptionComponent } from "./card-description.component";
+import { CardFooterComponent } from "./card-footer.component";
+import { CardHeaderComponent } from "./card-header.component";
+import { CardTitleComponent } from "./card-title.component";
+import { CardComponent } from "./card.component";
+
 
 export const CardMeta = {
   name: 'card',

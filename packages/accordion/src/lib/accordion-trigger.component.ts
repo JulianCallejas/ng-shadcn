@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, booleanAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 /**
  * Individual accordion trigger component
@@ -66,7 +68,12 @@ export class AccordionTriggerComponent {
       ? 'pointer-events-none opacity-50'
       : '[&[data-state=open]>svg]:rotate-180';
 
-    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
+    return cn(
+      baseClasses,
+      stateClasses,
+      this.class
+    );
+
   }
 
   /** @ignore */

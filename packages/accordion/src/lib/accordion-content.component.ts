@@ -1,5 +1,7 @@
 import { Component, Input, booleanAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 /**
  * Individual accordion content component
@@ -63,6 +65,10 @@ export class AccordionContentComponent {
   get computedClasses(): string {
     const baseClasses = 'overflow-hidden text-sm transition-all';
     const stateClasses = this.isExpanded ? 'animate-accordion-down' : 'animate-accordion-up';
-    return `${baseClasses} ${stateClasses} ${this.class}`.trim();
+    return cn(
+      baseClasses,
+      stateClasses,
+      this.class
+    );
   }
 }

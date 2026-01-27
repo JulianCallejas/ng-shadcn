@@ -6,7 +6,8 @@
     "@angular/core": "^19.0.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@ng-shadcn/utils": "workspace:*"
   },
   "sideEffects": false
 }

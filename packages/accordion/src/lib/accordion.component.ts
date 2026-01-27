@@ -1,15 +1,14 @@
 import { 
   Component, Input, Output, EventEmitter, signal, computed, 
-  ContentChildren, QueryList, effect, booleanAttribute, 
-  inject, OnChanges, SimpleChanges, AfterContentInit,
-  ContentChild,
-  EnvironmentInjector,
-  ChangeDetectorRef
+  ContentChildren, QueryList, effect, 
+  OnChanges, SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccordionItemComponent } from './accordion-item.component';
 import { AccordionTriggerComponent } from './accordion-trigger.component';
 import { AccordionContentComponent } from './accordion-content.component';
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 declare const ngDevMode: boolean;
 
@@ -195,6 +194,9 @@ export class AccordionComponent implements AccordionProps, OnChanges {
   }
 
   get computedClasses(): string {
-    return `w-full ${this.class}`.trim();
+    return cn(
+      'w-full',
+      this.class
+    );
   }
 }

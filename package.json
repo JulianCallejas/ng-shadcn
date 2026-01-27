@@ -13,8 +13,8 @@
     "start": "ng serve ng-shadcn",
     "build": "ng build ng-shadcn",
     "build:lib": "npm run build:components",
-    "build:components": "ng build button && ng build input && ng build dialog && ng build tooltip && ng build card && ng build switch && ng build select && ng build checkbox && ng build radio-group && ng build textarea && ng build badge && ng build alert && ng build tabs && ng build dropdown-menu && ng build popover && ng build accordion",
-    "build:components:production": "ng build button --configuration production && ng build input --configuration production && ng build dialog --configuration production && ng build tooltip --configuration production && ng build card --configuration production && ng build switch --configuration production && ng build select --configuration production && ng build checkbox --configuration production && ng build radio-group --configuration production && ng build textarea --configuration production && ng build badge --configuration production && ng build alert --configuration production && ng build tabs --configuration production && ng build dropdown-menu --configuration production && ng build popover --configuration production && ng build accordion --configuration production",
+    "build:components": "ng build utils && ng build button && ng build input && ng build dialog && ng build tooltip && ng build card && ng build switch && ng build select && ng build checkbox && ng build radio-group && ng build textarea && ng build badge && ng build alert && ng build tabs && ng build dropdown-menu && ng build popover && ng build accordion",
+    "build:components:production": "ng build utils --configuration production && ng build button --configuration production && ng build input --configuration production && ng build dialog --configuration production && ng build tooltip --configuration production && ng build card --configuration production && ng build switch --configuration production && ng build select --configuration production && ng build checkbox --configuration production && ng build radio-group --configuration production && ng build textarea --configuration production && ng build badge --configuration production && ng build alert --configuration production && ng build tabs --configuration production && ng build dropdown-menu --configuration production && ng build popover --configuration production && ng build accordion --configuration production",
     "build:cli": "cd cli && npm run build",
     "build:production": "npm run build:components:production && npm run build:cli",
     "build:analyze": "node scripts/bundle-analyzer.js",
@@ -46,6 +46,7 @@
     "clsx": "^2.0.0",
     "postcss": "^8.5.6",
     "rxjs": "^7.8.1",
+    "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "tslib": "^2.5.0",
     "zone.js": "~0.15.0"
