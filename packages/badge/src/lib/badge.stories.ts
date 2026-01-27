@@ -14,7 +14,86 @@ const meta: Meta<BadgeComponent> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Displays a badge or a component that looks like a badge.',
+        component: `A customizable badge component for displaying status, tags, or labels with various styles and interactions.
+## Installation
+
+\`\`\`bash
+# Using npm
+npm install @ng-shadcn/badge
+# Using yarn
+yarn add @ng-shadcn/badge
+# Using pnpm
+pnpm add @ng-shadcn/badge
+\`\`\`
+## Usage
+### Standalone Components (Recommended)
+Import and use the BadgeComponent directly in your standalone components:
+
+\`\`\`typescript
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BadgeComponent } from '@ng-shadcn/badge';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [
+    CommonModule,
+    BadgeComponent
+  ],
+  template: \`
+    <ng-shadcn-badge variant="default">New</ng-shadcn-badge>
+  \`
+})
+export class ExampleComponent { }
+\`\`\`
+
+### Using NgModule (Legacy)
+If you're using NgModules, import the \`BadgeModule\`:
+
+\`\`\`typescript
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BadgeModule } from '@ng-shadcn/badge';
+
+@NgModule({
+  declarations: [YourComponent],
+  imports: [
+    CommonModule,
+    BadgeModule
+  ],
+  exports: [YourComponent]
+})
+export class YourModule { }
+\`\`\`
+
+Then use the component in your templates:
+
+\`\`\`html
+<ng-shadcn-badge variant="success" [dismissible]="true" (dismissed)="onDismiss()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+  Success
+</ng-shadcn-badge>
+\`\`\`
+
+## Features
+- **Multiple Variants**: Choose from different visual styles (default, secondary, destructive, outline, success, warning, info)
+- **Sizes**: Available in small, default, and large sizes
+- **Dismissible**: Option to close the badge manually
+- **Icons**: Support for both leading and trailing icons
+- **Accessible**: Follows WAI-ARIA design patterns
+- **TypeScript Support**: Fully typed API
+- **Responsive**: Works well on all screen sizes
+- **Customizable**: Extend with custom classes for unique styling needs
+`,
+      },
+      extractComponentDescription: (component: any) => {
+        if (component === BadgeComponent) {
+          return 'A flexible badge component that can be used to highlight, label, or tag UI elements with various styles and interactions.';
+        }
+        return null;
       },
     },
   },

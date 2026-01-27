@@ -45,9 +45,9 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
   imports: [
     CommonModule, 
     AlertIconComponent, 
-    AlertTitleComponent, 
-    AlertContentComponent, 
-    AlertActionComponent
+    // AlertTitleComponent, 
+    // AlertContentComponent, 
+    // AlertActionComponent
   ],
   styles:`
   @keyframes alert-fade-out {

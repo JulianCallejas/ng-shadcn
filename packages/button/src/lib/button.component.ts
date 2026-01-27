@@ -55,15 +55,21 @@ export class ButtonComponent implements ButtonProps {
   @Input() variant: ButtonProps['variant'] = 'default';
   @Input() size: ButtonProps['size'] = 'default';
   @Input() disabled = false;
-  @Input() className = '';
+  @Input() class = '';
   
   @Output() clicked = new EventEmitter<Event>();
 
   // Signal-based computed property for classes
+  /** @ignore */
   private variantSignal = signal(this.variant);
+  
+  /** @ignore */
   private sizeSignal = signal(this.size);
-  private classNameSignal = signal(this.className);
+  
+  /** @ignore */
+  private classNameSignal = signal(this.class);
 
+  /** @ignore */
   computedClasses = computed(() => {
     return buttonVariants({
       variant: this.variantSignal(),
@@ -72,19 +78,22 @@ export class ButtonComponent implements ButtonProps {
     });
   });
 
+  /** @ignore */
   ngOnInit() {
     // Update signals when inputs change
     this.variantSignal.set(this.variant);
     this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
+    this.classNameSignal.set(this.class);
   }
 
+  /** @ignore */
   ngOnChanges() {
     this.variantSignal.set(this.variant);
     this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
+    this.classNameSignal.set(this.class);
   }
 
+  /** @ignore */
   handleClick(event: Event) {
     if (!this.disabled) {
       this.clicked.emit(event);
