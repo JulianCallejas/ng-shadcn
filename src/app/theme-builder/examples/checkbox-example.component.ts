@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   CheckboxComponent, 
@@ -36,6 +36,11 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
         <div class="mb-8">
           <h3 class="text-lg font-medium mb-4">Default Size</h3>
           <div class="flex flex-col gap-4 pl-4">
+            <ng-shadcn-checkbox >
+              <ng-shadcn-checkbox-label>Default checkbox</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Standard size with default styling</ng-shadcn-checkbox-description>
+            </ng-shadcn-checkbox>
+            
             <ng-shadcn-checkbox 
               (checkedChange)="onCheckboxChange($event)" 
               size="default" 
@@ -84,8 +89,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
           <h3 class="text-lg font-medium mb-4">Controlled Example</h3>
           <div class="flex flex-col gap-4 pl-4">
             <ng-shadcn-checkbox 
-              [checked]="controlledChecked"
-              (checkedChange)="controlledChecked = $event"
+              [checked]="controlledChecked()"
+              (checkedChange)="toggleControlledCheckbox()"
               size="default">
               <ng-shadcn-checkbox-label>{{ controlledLabel }}</ng-shadcn-checkbox-label>
               <ng-shadcn-checkbox-description>This checkbox is controlled by the parent component's state</ng-shadcn-checkbox-description>
@@ -94,11 +99,11 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
             <button 
               (click)="toggleControlledCheckbox()" 
               class="w-fit px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-              {{ controlledChecked ? 'Uncheck' : 'Check' }} the checkbox
+              {{ controlledChecked() ? 'Uncheck' : 'Check' }} the checkbox
             </button>
             
             <div class="mt-2 p-3 bg-muted/50 rounded-md">
-              <p class="text-sm">Current state: <code>{{ controlledChecked ? 'checked' : 'unchecked' }}</code></p>
+              <p class="text-sm">Current state: <code>{{ controlledChecked() ? 'checked' : 'unchecked' }}</code></p>
             </div>
           </div>
         </div>
@@ -258,7 +263,7 @@ export class CheckboxExampleComponent {
   disabledState = false;
   
   // Controlled example state
-  controlledChecked = false;
+  controlledChecked = signal(true);
   controlledLabel = 'I am controlled by a parent component';
   
   // Form example state
@@ -284,8 +289,9 @@ export class CheckboxExampleComponent {
     console.log('Checkbox changed:', event);
   }
   
+
   toggleControlledCheckbox() {
-    this.controlledChecked = !this.controlledChecked;
+    this.controlledChecked.set(!this.controlledChecked());
   }
   
   onSubmit() {

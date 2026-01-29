@@ -64,7 +64,7 @@ export interface CheckboxProps extends VariantProps<typeof checkboxVariants> {
         [id]="id"
         [class]="computedClasses()"
         [disabled]="disabled"
-        [attr.aria-checked]="indeterminate ? 'mixed' : checked()"
+        [attr.aria-checked]="indeterminate ? 'mixed' : checkedSignal()"
         [attr.aria-disabled]="disabled"
         [attr.aria-label]="ariaLabel"
         [attr.aria-describedby]="ariaDescribedby"
@@ -72,7 +72,7 @@ export interface CheckboxProps extends VariantProps<typeof checkboxVariants> {
         (keydown)="onKeydown($event)"
       >
       <!-- Checked state -->
-      @if (checked() && !indeterminate) {
+      @if (checkedSignal() && !indeterminate) {
         <span class="w-full h-full overflow-hidden text-current">
           <!-- <ng-content select="[icon]"></ng-content> -->
           <ng-content select="ng-shadcn-checkbox-icon"></ng-content>
@@ -124,10 +124,16 @@ export class CheckboxComponent implements AfterContentInit, CheckboxProps, Contr
   @Input() checkedClass = '';
   @Input() ariaLabel?: string;
   @Input() ariaDescribedby?: string;
-  @Input({ transform: (value?: any) => {
-    const receivedValue = value === '' ? true : !!value;
-    return signal(receivedValue);
-  } }) checked = signal<boolean>(false);
+  // @Input({ transform: (value?: any) => {
+  //   const receivedValue = value === '' ? true : !!value;
+  //   return signal(receivedValue);
+  // } }) checked = signal<boolean>(false);
+  @Input({ transform: booleanAttribute }) set checked(value: boolean | string | null | undefined) {
+    this.checkedSignal.set(value === '' ? true : !!value);
+  }
+
+  protected checkedSignal = signal<boolean>(false);
+  
   
   @Output() checkedChange = new EventEmitter<boolean>();
  
@@ -163,7 +169,7 @@ export class CheckboxComponent implements AfterContentInit, CheckboxProps, Contr
       // Set the htmlFor property to match the checkbox's id
       this.labelComponent.id = this.id;
       this.labelComponent.size = this.size;
-      this.labelComponent.toggleCheckbox.subscribe(() => this.toggle());
+      this.labelComponent.toggleCheckbox.subscribe((id: string) => this.toggle());
     }
     if (this.descriptionComponent) {
       this.descriptionComponent.size = this.size;
@@ -188,8 +194,8 @@ export class CheckboxComponent implements AfterContentInit, CheckboxProps, Contr
    */
   writeValue(value: any): void {
     const newValue = !!value;
-    if (this.checked() !== newValue) {
-      this.checked.set(newValue);
+    if (this.checkedSignal() !== newValue) {
+      this.checkedSignal.set(newValue);
     }
   }
 
@@ -231,18 +237,18 @@ export class CheckboxComponent implements AfterContentInit, CheckboxProps, Contr
     if (this.disabled) return;
 
     // Toggle the checked state
-    const newValue = !this.checked();
+    const newValue = !this.checkedSignal();
     
     // Update the signal
     this.indeterminate = false;
-    this.checked.set(newValue);
+    this.checkedSignal.set(newValue);
     
     // Notify form controls and parent components
     this.onChange(newValue);
     this.checkedChange.emit(newValue);
     this.onTouched();
   }
-
+  
   /** @ignore */
   onKeydown(event: KeyboardEvent) {
     if (event.key === ' ' || event.key === 'Enter') {
@@ -257,8 +263,8 @@ export class CheckboxComponent implements AfterContentInit, CheckboxProps, Contr
     cn(
       checkboxVariants({ size: this.size }),
       this.class,
-      ((this.checked() && !this.indeterminate) || this.indeterminate) && 'bg-primary border-primary',
-      ((this.checked() && !this.indeterminate) || this.indeterminate) && this.checkedClass
+      ((this.checkedSignal() && !this.indeterminate) || this.indeterminate) && 'bg-primary border-primary',
+      ((this.checkedSignal() && !this.indeterminate) || this.indeterminate) && this.checkedClass
     )
   );
 
