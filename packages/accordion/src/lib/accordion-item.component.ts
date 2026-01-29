@@ -21,9 +21,7 @@ import { cn } from '@packages/utils/src/public-api';
       <ng-content select="ng-shadcn-accordion-trigger" 
         (itemToggled)="onItemToggled($event)">
       </ng-content>
-      <ng-content select="ng-shadcn-accordion-content" 
-        >
-      </ng-content>
+      <ng-content select="ng-shadcn-accordion-content"></ng-content>
     </div>
   `,
 })

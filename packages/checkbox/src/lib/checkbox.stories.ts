@@ -7,12 +7,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {
   AlertComponent,
   AlertContentComponent,
 } from "@packages/alert/src/public-api";
+import { CheckboxIconComponent } from "./checkbox-icon.component";
+import { CheckboxLabelComponent } from "./checkbox-label.component";
+import { CheckboxDescriptionComponent } from "./checkbox-description.component";
 
 // Create a wrapper component for reactive form example
 @Component({
@@ -22,6 +25,8 @@ import {
     CommonModule,
     ReactiveFormsModule,
     CheckboxComponent,
+    CheckboxDescriptionComponent,
+    CheckboxLabelComponent,
     AlertComponent,
     AlertContentComponent,
   ],
@@ -40,9 +45,8 @@ import {
         <!-- Terms and Conditions -->
         <div class="space-y-2">
           <ng-shadcn-checkbox formControlName="terms" id="terms-conditions">
-            <span labelContent>I accept the terms and conditions</span>
-            <span descriptionContent
-              >Required to continue using our service</span
+            <ng-shadcn-checkbox-label>I accept the terms and conditions</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>Required to continue using our service</ng-shadcn-checkbox-description
             >
           </ng-shadcn-checkbox>
 
@@ -62,9 +66,9 @@ import {
             formControlName="emailNotifications"
             id="email-notifications"
           >
-            <span labelContent>Email notifications</span>
-            <span descriptionContent
-              >Receive email notifications about important updates</span
+            <ng-shadcn-checkbox-label>Email notifications</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description
+              >Receive email notifications about important updates</ng-shadcn-checkbox-description
             >
           </ng-shadcn-checkbox>
         </div>
@@ -75,9 +79,9 @@ import {
             formControlName="pushNotifications"
             id="push-notifications"
           >
-            <span labelContent>Push notifications</span>
-            <span descriptionContent
-              >Get push notifications on your device</span
+            <ng-shadcn-checkbox-label>Push notifications</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description
+              >Get push notifications on your device</ng-shadcn-checkbox-description
             >
           </ng-shadcn-checkbox>
         </div>
@@ -88,9 +92,9 @@ import {
             formControlName="marketingEmails"
             id="marketing-emails"
           >
-            <span labelContent>Marketing emails</span>
-            <span descriptionContent
-              >Receive our newsletter and promotional offers</span
+            <ng-shadcn-checkbox-label>Marketing emails</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description
+              >Receive our newsletter and promotional offers</ng-shadcn-checkbox-description
             >
           </ng-shadcn-checkbox>
         </div>
@@ -183,7 +187,7 @@ const meta: Meta<CheckboxComponent> = {
   component: CheckboxComponent,
   decorators: [
     moduleMetadata({
-      imports: [CheckboxComponent, ReactiveFormsModule],
+      imports: [CheckboxComponent, ReactiveFormsModule, CheckboxIconComponent, CheckboxLabelComponent, CheckboxDescriptionComponent],
     }),
   ],
   parameters: {
@@ -209,15 +213,17 @@ Import and use the component directly in your standalone components:
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxComponent } from '@ng-shadcn/checkbox';
+import { CheckboxLabelComponent } from './checkbox-label.component';
+import { CheckboxDescriptionComponent } from './checkbox-description.component';
 
 @Component({
   selector: 'app-example',
   standalone: true,
-  imports: [CommonModule, CheckboxComponent],
+  imports: [CommonModule, CheckboxComponent, CheckboxLabelComponent, CheckboxDescriptionComponent],
   template: \`
     <div class="flex items-center space-x-2">
       <ng-shadcn-checkbox id="terms" (change)="onChange($event)">
-        <span labelContent>Accept terms and conditions</span>
+        <ng-shadcn-checkbox-label>Accept terms and conditions</ng-shadcn-checkbox-label>
       </ng-shadcn-checkbox>
     </div>
   \`
@@ -236,12 +242,18 @@ If you're using NgModules, import the \`CheckboxModule\`:
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from '@ng-shadcn/checkbox';
+import { CheckboxIconComponent } from './checkbox-icon.component';
+import { CheckboxLabelComponent } from './checkbox-label.component';
+import { CheckboxDescriptionComponent } from './checkbox-description.component';
 
 @NgModule({
   declarations: [YourComponent],
   imports: [
     CommonModule,
-    CheckboxModule
+    CheckboxModule,
+    CheckboxIconComponent,
+    CheckboxLabelComponent,
+    CheckboxDescriptionComponent,
   ],
   exports: [YourComponent]
 })
@@ -254,16 +266,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@ng-shadcn/checkbox';
+import { CheckboxLabelComponent } from './checkbox-label.component';
+import { CheckboxDescriptionComponent } from './checkbox-description.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CheckboxComponent],
+  imports: [CommonModule, ReactiveFormsModule, CheckboxComponent, CheckboxLabelComponent, CheckboxDescriptionComponent],
   template: \`
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-shadcn-checkbox formControlName="terms" id="terms">
-        <span labelContent>I accept the terms and conditions</span>
-        <span descriptionContent>Required to continue</span>
+        <ng-shadcn-checkbox-label>I accept the terms and conditions</ng-shadcn-checkbox-label>
+        <ng-shadcn-checkbox-description>Required to continue</ng-shadcn-checkbox-description>
       </ng-shadcn-checkbox>
       
       <button type="submit" [disabled]="form.invalid">Submit</button>
@@ -352,8 +366,13 @@ export class SettingsComponent implements OnInit {
       description: "ARIA describedby for additional accessibility context",
     },
   },
+  subcomponents: {
+    CheckboxIconComponent,
+    CheckboxLabelComponent,
+    CheckboxDescriptionComponent,
+  },
   args: {
-    checked: false,
+    checked: signal(false),
     disabled: false,
     indeterminate: false,
     size: "default",
@@ -383,8 +402,8 @@ export const Default: Story = {
           (checkedChange)="checked = $event"
           class="{{class}}"
         >
-          <span labelContent>Toggle me</span>
-          <span descriptionContent>Current state: {{ checked ? 'Checked' : indeterminate ? 'Indeterminate' : 'Unchecked' }}</span>
+          <ng-shadcn-checkbox-label>Toggle me</ng-shadcn-checkbox-label>
+          <ng-shadcn-checkbox-description>Current state: {{ checked ? 'Checked' : indeterminate ? 'Indeterminate' : 'Unchecked' }}</ng-shadcn-checkbox-description>
         </ng-shadcn-checkbox>
         
         <div class="text-sm text-muted-foreground">
@@ -413,8 +432,8 @@ export const WithLabel: Story = {
             [size]="size"
             (checkedChange)="checked = $event"
           >
-            <span labelContent>Accept terms and conditions</span>
-            <span descriptionContent>You agree to our Terms of Service and Privacy Policy.</span>
+            <ng-shadcn-checkbox-label>Accept terms and conditions</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>You agree to our Terms of Service and Privacy Policy.</ng-shadcn-checkbox-description>
           </ng-shadcn-checkbox>
           <p class="text-sm text-muted-foreground mt-2">State: {{ checked ? 'Checked' : 'Unchecked' }}</p>
         </div>
@@ -428,7 +447,7 @@ export const WithLabel: Story = {
             [size]="size"
             (checkedChange)="checked = $event"
           >
-            <span labelContent>I agree to the terms</span>
+            <ng-shadcn-checkbox-label>I agree to the terms</ng-shadcn-checkbox-label>
           </ng-shadcn-checkbox>
           <p class="text-sm text-muted-foreground mt-2">State: {{ checked ? 'Checked' : 'Unchecked' }}</p>
         </div>
@@ -447,7 +466,7 @@ export const WithLabel: Story = {
 
 export const Checked: Story = {
   args: {
-    checked: true,
+    checked: signal(true),
     id: "checkbox-checked",
   },
   render: (args) => ({
@@ -463,7 +482,7 @@ export const Checked: Story = {
             [size]="size"
             (checkedChange)="checked = $event"
           >
-            <span labelContent>Checked</span>
+            <ng-shadcn-checkbox-label>Checked</ng-shadcn-checkbox-label>
           </ng-shadcn-checkbox>
         </div>
 
@@ -474,7 +493,7 @@ export const Checked: Story = {
             [disabled]="disabled"
             [size]="size"
           >
-            <span labelContent>Unchecked checkbox</span>
+            <ng-shadcn-checkbox-label>Unchecked checkbox</ng-shadcn-checkbox-label>
           </ng-shadcn-checkbox>
         </div>
       </div>
@@ -491,7 +510,7 @@ export const Checked: Story = {
 
 export const Controlled: Story = {
   args: {
-    checked: true,
+    checked: signal(true),
     id: "checkbox-checked",
   },
   render: (args) => ({
@@ -507,8 +526,8 @@ export const Controlled: Story = {
             [size]="size"
             (checkedChange)="checked = $event"
           >
-            <span labelContent>Controlled checkbox</span>
-            <span descriptionContent>State is managed by the parent component</span>
+            <ng-shadcn-checkbox-label>Controlled checkbox</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>State is managed by the parent component</ng-shadcn-checkbox-description>
           </ng-shadcn-checkbox>
           <p class="text-sm text-muted-foreground mt-2">
             Current state: {{ checked ? 'Checked' : 'Unchecked' }}
@@ -528,8 +547,8 @@ export const Controlled: Story = {
             [disabled]="disabled"
             [size]="size"
           >
-            <span labelContent>Uncontrolled checkbox</span>
-            <span descriptionContent>State is managed internally</span>
+            <ng-shadcn-checkbox-label>Uncontrolled checkbox</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>State is managed internally</ng-shadcn-checkbox-description>
           </ng-shadcn-checkbox>
         </div>
       </div>
@@ -723,8 +742,8 @@ Try submitting the form without accepting the terms to see the validation in act
               formControlName="terms"
               id="terms-conditions"
             >
-              <span labelContent>I accept the terms and conditions</span>
-              <span descriptionContent>Required to continue using our service</span>
+              <ng-shadcn-checkbox-label>I accept the terms and conditions</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Required to continue using our service</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             @if (form.get('terms')?.touched && form.get('terms')?.errors?.['required']) {
@@ -741,8 +760,8 @@ Try submitting the form without accepting the terms to see the validation in act
               formControlName="emailNotifications"
               id="email-notifications"
             >
-              <span labelContent>Email notifications</span>
-              <span descriptionContent>Receive email notifications about important updates</span>
+              <ng-shadcn-checkbox-label>Email notifications</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Receive email notifications about important updates</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
           </div>
   
@@ -752,8 +771,8 @@ Try submitting the form without accepting the terms to see the validation in act
               formControlName="pushNotifications"
               id="push-notifications"
             >
-              <span labelContent>Push notifications</span>
-              <span descriptionContent>Get push notifications on your device</span>
+              <ng-shadcn-checkbox-label>Push notifications</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Get push notifications on your device</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
           </div>
   
@@ -763,8 +782,8 @@ Try submitting the form without accepting the terms to see the validation in act
               formControlName="marketingEmails"
               id="marketing-emails"
             >
-              <span labelContent>Marketing emails</span>
-              <span descriptionContent>Receive our newsletter and promotional offers</span>
+              <ng-shadcn-checkbox-label>Marketing emails</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Receive our newsletter and promotional offers</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
           </div>
   
@@ -850,6 +869,117 @@ Try submitting the form without accepting the terms to see the validation in act
     }
   }
       `,
+      },
+    },
+  },
+};
+
+export const CustomCheckbox: Story = {
+  args: {
+    id: "checkbox-custom",
+    ariaLabel: "Custom styled checkbox",
+    checkedClass: "bg-green-500 border-green-500",
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      checked: signal(false),
+    },
+    moduleMetadata: {
+      imports: [CheckboxComponent, CheckboxIconComponent],
+    },
+    template: `
+      <div class="flex flex-col gap-4">
+        <!-- Custom icon checkbox -->
+        <div class="flex items-center space-x-2">
+          <ng-shadcn-checkbox
+            [id]="checkbox-custom-1"
+            checked
+            [checkedClass]="checkedClass"
+            (checkedChange)="checked.set($event)"
+            [ariaLabel]="ariaLabel"
+          >
+            <ng-shadcn-checkbox-icon>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="3" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="h-full w-full p-px"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </ng-shadcn-checkbox-icon>
+            <ng-shadcn-checkbox-label>Custom icon with custom checked state</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>This checkbox uses a custom checkmark icon and changes to green when checked</ng-shadcn-checkbox-description>
+          </ng-shadcn-checkbox>
+        </div>
+        <!-- Custom icon with different states -->
+        <div class="flex items-center space-x-2">
+          <ng-shadcn-checkbox
+            id="checkbox-custom-2"
+            checked
+            checkedClass="bg-gradient-to-br from-purple-500 to-pink-500 border-0"
+            ariaLabel="Gradient checkbox"
+          >
+            <ng-shadcn-checkbox-icon class="text-white">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="h-full w-full"
+              >
+                <path d="M20 6 9 17l-5-5"></path>
+              </svg>
+            </ng-shadcn-checkbox-icon>
+            <ng-shadcn-checkbox-label>Gradient background when checked</ng-shadcn-checkbox-label>
+          </ng-shadcn-checkbox>
+        </div>
+      </div>
+    `,
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `## Custom Checkbox with Custom Icon and Styles
+This example demonstrates how to create a custom checkbox with:
+- A custom checkmark icon using \`ng-shadcn-checkbox-icon\`
+- Custom styling when checked using the \`checkedClass\` property
+- Different visual styles for checked and unchecked states
+
+### Key Features:
+- **Custom Icons**: Replace the default checkmark with any SVG or icon
+- **Checked State Styling**: Use \`checkedClass\` to apply custom styles when the checkbox is checked
+- **Responsive**: Works with the existing size variants and responsive design
+
+### Usage:
+\`\`\`html
+<ng-shadcn-checkbox [checkedClass]="'bg-green-500 border-green-500'">
+  <ng-shadcn-checkbox-icon>
+    <!-- Your custom icon SVG here -->
+    <svg>...</svg>
+  </ng-shadcn-checkbox-icon>
+  <ng-shadcn-checkbox-label>Custom checkbox</ng-shadcn-checkbox-label>
+</ng-shadcn-checkbox>
+\`\`\`
+
+### Customization:
+- Use any SVG as the checkmark
+- Apply any Tailwind classes via \`checkedClass\` for the checked state
+- Combine with other checkbox features like labels and descriptions
+        `,
       },
     },
   },

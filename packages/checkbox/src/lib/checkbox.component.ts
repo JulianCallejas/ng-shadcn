@@ -1,12 +1,26 @@
-import { Component, Input, Output, EventEmitter, computed, signal, forwardRef, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, booleanAttribute } from '@angular/core';
+import { 
+  AfterContentInit,
+  booleanAttribute,
+  Component,
+  computed,
+  ContentChild,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { CheckboxIconComponent } from './checkbox-icon.component';
+import { CheckboxLabelComponent } from './checkbox-label.component';
+import { CheckboxDescriptionComponent } from './checkbox-description.component';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
 const checkboxVariants = cva(
-  'peer text-primary-foreground h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  'peer text-primary-foreground h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden',
   {
     variants: {
       size: {
@@ -46,30 +60,37 @@ export interface CheckboxProps extends VariantProps<typeof checkboxVariants> {
       <button
         type="button"
         role="checkbox"
-        [class]="computedClasses"
-        [class.bg-primary]="(_checked() && !indeterminate) || indeterminate"
-        [class.border-primary]="(_checked() && !indeterminate) || indeterminate"
+        tabindex="0"
+        [id]="id"
+        [class]="computedClasses()"
         [disabled]="disabled"
-        [attr.aria-checked]="indeterminate ? 'mixed' : _checked()"
+        [attr.aria-checked]="indeterminate ? 'mixed' : checked()"
         [attr.aria-disabled]="disabled"
         [attr.aria-label]="ariaLabel"
         [attr.aria-describedby]="ariaDescribedby"
-        (click)="toggle()"
+        (click)="toggle($event)"
         (keydown)="onKeydown($event)"
       >
       <!-- Checked state -->
-      @if (_checked() && !indeterminate) {
-        <svg
-          class="h-full w-full"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
+      @if (checked() && !indeterminate) {
+        <span class="w-full h-full overflow-hidden text-current">
+          <!-- <ng-content select="[icon]"></ng-content> -->
+          <ng-content select="ng-shadcn-checkbox-icon"></ng-content>
+        @if (!hasIcon()) {
+          <svg
+            class="h-full w-full"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            select="[defaultIcon]"
+            >
+            <path
             fill-rule="evenodd"
             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
             clip-rule="evenodd"
-          />
-        </svg>
+            />
+          </svg>
+        }
+      </span>
       }
       <!-- Indeterminate state -->
       @if (indeterminate) {
@@ -84,65 +105,73 @@ export interface CheckboxProps extends VariantProps<typeof checkboxVariants> {
       </button>
 
       <!-- Label content -->
-      <div class="grid gap-1 leading-none h-full items-center">
-        <label
-          class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-          [class.text-xs]="size === 'sm'"
-          [class.text-base]="size === 'lg'"
-          (click)="toggle()"
-          [for]="id"
-          #labelContent
-        >
-          <ng-content select="[labelContent]"></ng-content>
-        </label>
-        <p
-          class="text-xs leading-none text-muted-foreground"
-          [class.text-sm]="size === 'lg'"
-          #descriptionContent
-        >
-          <ng-content select="[descriptionContent]"></ng-content>
-        </p>
+       @if (hasContent()) {
+        <div class="grid gap-1 leading-none h-full items-center">
+          <ng-content select="ng-shadcn-checkbox-label"></ng-content>
+          <ng-content select="ng-shadcn-checkbox-description"></ng-content>
+        </div>
+      }
       </div>
-    </div>
   `,
 })
-export class CheckboxComponent implements CheckboxProps, ControlValueAccessor, AfterViewInit {
+export class CheckboxComponent implements AfterContentInit, CheckboxProps, ControlValueAccessor  {
 
   @Input() id = '';
   @Input({ transform: booleanAttribute }) disabled = false;
   @Input({ transform: booleanAttribute }) indeterminate = false;
   @Input() size: CheckboxProps['size'] = 'default';
   @Input() class = '';
+  @Input() checkedClass = '';
   @Input() ariaLabel?: string;
   @Input() ariaDescribedby?: string;
-  @Input({ transform: booleanAttribute })
-  get checked(): boolean {
-    return this._checked();
-  }
-  set checked(value: boolean | null) {
-    this._checked.set(!!value);
-  }
+  @Input({ transform: (value?: any) => {
+    const receivedValue = value === '' ? true : !!value;
+    return signal(receivedValue);
+  } }) checked = signal<boolean>(false);
   
   @Output() checkedChange = new EventEmitter<boolean>();
+ 
+  /** @ignore */
+  hasContent = signal(false);
   
   /** @ignore */
-  _checked = signal<boolean>(false);
+  hasIcon = signal(false);
 
-  // Check if there's content projected
+  
+  /**
+   * Used to include a label for the checkbox.
+   */
+  @ContentChild(CheckboxLabelComponent) 
+  labelComponent?: CheckboxLabelComponent;
+  
+  /**
+   * Used to include a description text to the checkbox.
+   */
+  @ContentChild(CheckboxDescriptionComponent)
+  descriptionComponent?: CheckboxDescriptionComponent;
+  
+  /**
+   * Custom icon to be used instead of the default one.
+   * It is highly recommended to use SVG icons when using a custom icon.
+   */
+  @ContentChild(CheckboxIconComponent) 
+  customIcon?: CheckboxIconComponent;
+
   /** @ignore */
-  hasLabelContent = false;
-
-  /** @ignore */
-  hasDescriptionContent = false;
-
-  // Computed properties
-  get computedClasses(): string {
-    return cn(
-      checkboxVariants({size: this.size}),
-      this.class
-    );
-    
-  };
+  ngAfterContentInit() {
+    if (this.labelComponent) {
+      // Set the htmlFor property to match the checkbox's id
+      this.labelComponent.id = this.id;
+      this.labelComponent.size = this.size;
+      this.labelComponent.toggleCheckbox.subscribe(() => this.toggle());
+    }
+    if (this.descriptionComponent) {
+      this.descriptionComponent.size = this.size;
+    }
+    this.hasContent.set(!!this.labelComponent || !!this.descriptionComponent);
+    this.hasIcon.set(!!this.customIcon);
+  }
+ 
 
   // ControlValueAccessor implementation
   /** @ignore */
@@ -159,8 +188,8 @@ export class CheckboxComponent implements CheckboxProps, ControlValueAccessor, A
    */
   writeValue(value: any): void {
     const newValue = !!value;
-    if (this._checked() !== newValue) {
-      this._checked.set(newValue);
+    if (this.checked() !== newValue) {
+      this.checked.set(newValue);
     }
   }
 
@@ -191,31 +220,7 @@ export class CheckboxComponent implements CheckboxProps, ControlValueAccessor, A
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
-
   
-  /**
-   * Reference to the projected label content element.
-   * Used to check if label content was provided and conditionally render it.
-   */
-  @ViewChild('labelContent', { read: ElementRef, static: false }) labelContent?: ElementRef<HTMLElement>;
-  
-  /**
-   * Reference to the projected description content element.
-   * Used to check if description content was provided and conditionally render it.
-   */
-  @ViewChild('descriptionContent', { read: ElementRef, static: false }) descriptionContent?: ElementRef<HTMLElement>;
-
-  /** @ignore */
-  ngAfterViewInit() {
-    // Check for projected content after view is initialized
-    if (!this.labelContent?.nativeElement?.children?.length){
-      this.labelContent?.nativeElement.remove();
-    }
-    if (!this.descriptionContent?.nativeElement?.children?.length){
-      this.descriptionContent?.nativeElement.remove();
-    }
-  }
-
   /** @ignore */
   toggle(event?: MouseEvent) {
     if (event) {
@@ -226,14 +231,11 @@ export class CheckboxComponent implements CheckboxProps, ControlValueAccessor, A
     if (this.disabled) return;
 
     // Toggle the checked state
-    const newValue = !this._checked();
+    const newValue = !this.checked();
     
     // Update the signal
     this.indeterminate = false;
-    this._checked.set(newValue);
-    
-    // Update the checked property (which will also update the signal again)
-    this.checked = newValue;
+    this.checked.set(newValue);
     
     // Notify form controls and parent components
     this.onChange(newValue);
@@ -248,4 +250,16 @@ export class CheckboxComponent implements CheckboxProps, ControlValueAccessor, A
       this.toggle();
     }
   }
+
+  // Computed properties
+  /** @ignore */
+  computedClasses = computed(() =>
+    cn(
+      checkboxVariants({ size: this.size }),
+      this.class,
+      ((this.checked() && !this.indeterminate) || this.indeterminate) && 'bg-primary border-primary',
+      ((this.checked() && !this.indeterminate) || this.indeterminate) && this.checkedClass
+    )
+  );
+
 }

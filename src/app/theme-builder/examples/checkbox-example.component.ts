@@ -1,6 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckboxComponent } from '@packages/checkbox/src/public-api';
+import { 
+  CheckboxComponent, 
+  CheckboxIconComponent, 
+  CheckboxLabelComponent,
+  CheckboxDescriptionComponent,
+} from '@packages/checkbox/src/public-api';
 import { CardComponent } from '@packages/card/src/public-api';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -9,10 +14,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   standalone: true,
   imports: [
     CommonModule, 
-    CheckboxComponent, 
+    CheckboxComponent,
+    CheckboxIconComponent,
+    CheckboxLabelComponent,
+    CheckboxDescriptionComponent,
     CardComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   styles: [`
     :host {
@@ -29,20 +37,19 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
           <h3 class="text-lg font-medium mb-4">Default Size</h3>
           <div class="flex flex-col gap-4 pl-4">
             <ng-shadcn-checkbox 
-              [(checked)]="defaultChecked" 
               (checkedChange)="onCheckboxChange($event)" 
               size="default" 
               className="flex-col">
-              <span labelContent>Default checkbox</span>
-              <span descriptionContent>Standard size with default styling</span>
+              <ng-shadcn-checkbox-label>Default checkbox</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Standard size with default styling</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox 
               [(checked)]="checkedState" 
               (checkedChange)="onCheckboxChange($event)" 
               size="default">
-              <span labelContent>Checked state</span>
-              <span descriptionContent>This checkbox is checked by default</span>
+              <ng-shadcn-checkbox-label>Checked state</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>This checkbox is checked by default</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox 
@@ -50,16 +57,16 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
               [indeterminate]="true" 
               (checkedChange)="onCheckboxChange($event)" 
               size="default">
-              <span labelContent>Indeterminate state</span>
-              <span descriptionContent>Useful for 'Select All' functionality</span>
+              <ng-shadcn-checkbox-label>Indeterminate state</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Useful for 'Select All' functionality</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox 
               [(checked)]="disabledState" 
               [disabled]="true" 
               size="default">
-              <span labelContent>Disabled state</span>
-              <span descriptionContent>This checkbox is disabled</span>
+              <ng-shadcn-checkbox-label>Disabled state</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>This checkbox is disabled</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
 
             <ng-shadcn-checkbox 
@@ -80,8 +87,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
               [checked]="controlledChecked"
               (checkedChange)="controlledChecked = $event"
               size="default">
-              <span labelContent>{{ controlledLabel }}</span>
-              <span descriptionContent>This checkbox is controlled by the parent component's state</span>
+              <ng-shadcn-checkbox-label>{{ controlledLabel }}</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>This checkbox is controlled by the parent component's state</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <button 
@@ -101,24 +108,25 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
           <h3 class="text-lg font-medium mb-4">Angular Reactive Form</h3>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 pl-4">
             <ng-shadcn-checkbox 
+              id="terms1"
               formControlName="terms"
               size="default">
-              <span labelContent>I accept the terms and conditions</span>
-              <span descriptionContent>Required to continue</span>
+              <ng-shadcn-checkbox-label>I accept the terms and conditions</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Required to continue</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox 
               formControlName="newsletter"
               size="default">
-              <span labelContent>Subscribe to newsletter</span>
-              <span descriptionContent>Get the latest updates</span>
+              <ng-shadcn-checkbox-label>Subscribe to newsletter</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Get the latest updates</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox 
               formControlName="notifications"
               size="default">
-              <span labelContent>Enable notifications</span>
-              <span descriptionContent>Get important alerts</span>
+              <ng-shadcn-checkbox-label>Enable notifications</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Get important alerts</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <div class="pt-2">
@@ -152,16 +160,16 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
           <h3 class="text-lg font-medium mb-4">Small Size</h3>
           <div class="flex flex-col gap-4 pl-4">
             <ng-shadcn-checkbox size="sm">
-              <span labelContent>Small checkbox</span>
-              <span descriptionContent>Compact size for dense UIs</span>
+              <ng-shadcn-checkbox-label>Small checkbox</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Compact size for dense UIs</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox size="sm" (checkedChange)="onCheckboxChange($event)">
-              <span labelContent>Small checked</span>
+              <ng-shadcn-checkbox-label>Small checked</ng-shadcn-checkbox-label>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox [disabled]="true" size="sm">
-              <span labelContent>Small disabled</span>
+              <ng-shadcn-checkbox-label>Small disabled</ng-shadcn-checkbox-label>
             </ng-shadcn-checkbox>
           </div>
         </div>
@@ -171,20 +179,70 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
           <h3 class="text-lg font-medium mb-4">Large Size</h3>
           <div class="flex flex-col gap-4 pl-4">
             <ng-shadcn-checkbox size="lg">
-              <span labelContent>Large checkbox</span>
-              <span descriptionContent>Enhanced touch target size</span>
+              <ng-shadcn-checkbox-label>Large checkbox</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Enhanced touch target size</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox size="lg" (checkedChange)="onCheckboxChange($event)">
-              <span labelContent>Large checked</span>
+              <ng-shadcn-checkbox-label>Large checked</ng-shadcn-checkbox-label>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox [indeterminate]="true" size="lg" [checked]="true">
-              <span labelContent>Large indeterminate</span>
+              <ng-shadcn-checkbox-label>Large indeterminate</ng-shadcn-checkbox-label>
             </ng-shadcn-checkbox>
             
             <ng-shadcn-checkbox [disabled]="true" size="lg">
-              <span labelContent>Large disabled</span>
+              <ng-shadcn-checkbox-label>Large disabled</ng-shadcn-checkbox-label>
+            </ng-shadcn-checkbox>
+          </div>
+        </div>
+
+        <!-- Custom Icons -->
+        <div class="mb-8">
+          <h3 class="text-lg font-medium mb-4">Custom Icons</h3>
+          <div class="flex flex-col gap-4 pl-4">
+            <!-- Heart Icon -->
+            <ng-shadcn-checkbox 
+              checked
+              (checkedChange)="onCheckboxChange($event)"
+              size="lg">
+              <ng-shadcn-checkbox-icon>
+               <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="w-full h-full"
+               >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              </ng-shadcn-checkbox-icon>
+              <ng-shadcn-checkbox-label>Add to favorites</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Save this item to your favorites</ng-shadcn-checkbox-description>
+            </ng-shadcn-checkbox>
+
+            <!-- Star Icon with Animation -->
+            <ng-shadcn-checkbox 
+              checked
+              (checkedChange)="onCheckboxChange($event)"
+              size="lg"
+              checkedClass="bg-linear-to-l from-[#e966a0] via-[#2b2730] to-[#6554af] border-blue-500"
+            >
+              <!-- <span class="text-sm text-center w-full h-full leading-[1.75cqh] p-0 align-text-top" icon >
+                X
+              </span> -->
+              <ng-shadcn-checkbox-icon class="text-sm text-center w-full h-full leading-[1.75cqh] p-0 align-text-top">
+                🍻
+              </ng-shadcn-checkbox-icon>
+              <ng-shadcn-checkbox-label>Rate this item</ng-shadcn-checkbox-label>
+              <ng-shadcn-checkbox-description>Mark as favorite</ng-shadcn-checkbox-description>
             </ng-shadcn-checkbox>
           </div>
         </div>
@@ -206,6 +264,13 @@ export class CheckboxExampleComponent {
   // Form example state
   form: FormGroup;
   formSubmitted = false;
+  
+  // Custom icon states
+  heartChecked = false;
+  starChecked = false;
+  circleChecked = false;
+  alertChecked = false;
+  alertIndeterminate = true;
   
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -230,6 +295,16 @@ export class CheckboxExampleComponent {
       // Here you would typically send the form data to a service
     } else {
       console.log('Form is invalid');
+    }
+  }
+
+  onAlertCheckboxChange(checked: boolean) {
+    if (this.alertIndeterminate) {
+      this.alertIndeterminate = false;
+      this.alertChecked = true;
+    } else if (checked) {
+      this.alertIndeterminate = true;
+      this.alertChecked = false;
     }
   }
 }
