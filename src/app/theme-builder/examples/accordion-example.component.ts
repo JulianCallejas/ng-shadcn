@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   AccordionComponent, 
@@ -21,8 +21,8 @@ import {
     <div class="space-y-4">
       <h2 class="text-2xl font-bold text-foreground mb-4">Accordion</h2>
       <div class="p-6 border rounded-lg bg-card">
-        <ng-shadcn-accordion [expandedItems]="expandedItems">
-          <ng-shadcn-accordion-item *ngFor="let item of items" [id]="item.id">
+        <ng-shadcn-accordion [expandedItems]="expandedItems" >
+          <ng-shadcn-accordion-item *ngFor="let item of items" [id]="item.id" [class]="dinamicClass()">
             <ng-shadcn-accordion-trigger (itemToggled)="toggleItems(item.id)">
               {{ item.title }}
             </ng-shadcn-accordion-trigger>
@@ -30,15 +30,15 @@ import {
               <p class="text-muted-foreground">{{ item.content }}</p>
             </ng-shadcn-accordion-content>
           </ng-shadcn-accordion-item>
-          <ng-shadcn-accordion-item id="item-4">
+          <ng-shadcn-accordion-item [id]="'item-4'">
             <ng-shadcn-accordion-trigger 
               class="text-red-800"
-              [isExpanded]="expandedItems.includes('item-4')" 
+              
               (itemToggled)="toggleItems('item-4')"
             >
               Custom Trigger exmaple
             </ng-shadcn-accordion-trigger>
-            <ng-shadcn-accordion-content [isExpanded]="expandedItems.includes('item-4')">
+            <ng-shadcn-accordion-content >
               <p class="text-muted-foreground">left text</p>
               <p class="text-center text-blue-800">center text</p>
               <p class="text-right text-amber-400">right text</p>
@@ -91,12 +91,22 @@ export class AccordionExampleComponent {
     }
   ];
 
+  dinamicClass = signal(this.expandedItems.length % 2 === 0 ? 'bg-red-500/10' : 'bg-blue-500/10');
+
   toggleItems(value: string) {
     if (this.expandedItems.includes(value)) {
       this.expandedItems = this.expandedItems.filter(item => item !== value);
     } else {
       this.expandedItems = [...this.expandedItems, value];
     }
+
+    if (this.expandedItems.length % 2 === 0) {
+      this.dinamicClass.set('bg-red-500/10');
+    } else {
+      this.dinamicClass.set('bg-blue-500/10');
+    }
+
+    console.log(this.dinamicClass())
   }
  
 }

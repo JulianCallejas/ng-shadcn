@@ -163,24 +163,24 @@ Then use the components in your templates:
         },
       },
     },
-    accordionTriggers: {
-      control: 'object',
-      table: {
-        type: { 
-          summary: 'QueryList<AccordionTriggerComponent>', 
-          detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',
-        },
-      },
-    },
-    accordionContents: {
-      control: 'object',
-      table: {
-        type: { 
-          summary: 'QueryList<AccordionContentComponent>', 
-          detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',
-        },
-      },
-    },
+    // accordionTriggers: {
+    //   control: 'object',
+    //   table: {
+    //     type: { 
+    //       summary: 'QueryList<AccordionTriggerComponent>', 
+    //       detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',
+    //     },
+    //   },
+    // },
+    // accordionContents: {
+    //   control: 'object',
+    //   table: {
+    //     type: { 
+    //       summary: 'QueryList<AccordionContentComponent>', 
+    //       detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',
+    //     },
+    //   },
+    // },
   },
   args: {
     type: 'single',
@@ -289,7 +289,7 @@ export const Multiple: Story = {
   standalone: true,
   imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
   template: `
-    <div class="space-y-4">
+    <div class="space-y-4 w-100">
       <div class="flex gap-2">
         <button 
           (click)="toggleItem('item-1')" 
@@ -380,7 +380,7 @@ export const Controlled: Story = {
           standalone: true,
           imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
           template: \`
-            <div class="space-y-4">
+            <div class="space-y-4 w-100">
               <div class="flex gap-2">
                 <button 
                   (click)="toggleItem('item-1')" 
