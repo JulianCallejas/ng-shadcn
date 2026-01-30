@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal, ElementRef, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AlertIconComponent } from './alert-icon.component';
 import { AlertActionComponent } from './alert-action.component';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border p-4',
@@ -42,6 +43,7 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
 @Component({
   selector: 'ng-shadcn-alert',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule, 
     AlertIconComponent, 
@@ -71,15 +73,19 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
   `,
   template: `
     <div 
-      [class]="computedClasses"
+      [class]="computedClasses()"
       role="alert"
       [class.alert-out]="isDismissed() && fade"
       [class.alert-hide]="isDismissed() && !fade"
       [class.transition-opacity]="fade"
       [class.duration-300]="fade"
       [class.ease-in-out]="fade"
+      [attr.aria-label]="ariaLabel"
+      [attr.aria-describedby]="ariaDescribedBy"
+      [attr.role]="role"
       [attr.aria-live]="ariaLive"
       [attr.aria-atomic]="ariaAtomic"
+      [attr.aria-hidden]="isDismissed()"
     >
       <div class="flex gap-3">
         <!-- Icon -->
@@ -178,6 +184,15 @@ export class AlertComponent implements AfterContentInit {
   /** Whether the entire region should be considered as a whole for ARIA */
   @Input() ariaAtomic = true;
 
+  /** ARIA label for the alert */
+  @Input() ariaLabel?: string;
+  
+  /** ARIA described by for the alert */
+  @Input() ariaDescribedBy?: string;
+  
+  /** ARIA role for the alert */
+  @Input() role = 'alert';
+
   /** Emits when the alert is dismissed */
   @Output() dismissed = new EventEmitter<void>();
   
@@ -190,9 +205,22 @@ export class AlertComponent implements AfterContentInit {
   /** @ignore */
   hasCustomIcon = false;
 
-  @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;
-  @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
+  /** @ignore */
+  private destroyRef = inject(DestroyRef); // ¡IMPORTANTE!
 
+  
+  /**
+   * Reference to the alert icon component if it exists.
+   * Only used for generating the Storybook documentation.
+   */
+  @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;
+
+  /**
+   * Reference to the alert action component if it exists.
+   * Only used for generating the Storybook documentation.
+   */
+  @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
+  
   constructor(private elementRef: ElementRef) {}
 
   /** @ignore */
@@ -201,7 +229,9 @@ export class AlertComponent implements AfterContentInit {
     
     // Forward action button clicks to the parent
     if (this.alertAction) {
-      this.alertAction.onClick.subscribe(event => {
+      this.alertAction.onClick
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(event => {
         this.onAlertAction.emit(event);
         if (this.dismissible) {
           this.dismiss();
@@ -214,7 +244,7 @@ export class AlertComponent implements AfterContentInit {
    * Computes the CSS classes for the alert based on inputs
    */
   /** @ignore */
-  get computedClasses(): string {
+  computedClasses(): string {
     return cn(
       alertVariants({ variant: this.variant }),
       this.class,
@@ -228,9 +258,13 @@ export class AlertComponent implements AfterContentInit {
   dismiss() {
     this.isDismissed.set(true);
     this.dismissed.emit();
+    
     setTimeout(() => {
-      this.isDismissed.set(false);
-      this.elementRef.nativeElement.remove();
+      if (!this.destroyRef.destroyed) {
+        this.isDismissed.set(false);
+        this.elementRef.nativeElement.remove();
+      }
     }, 200);
   }
+    
 }

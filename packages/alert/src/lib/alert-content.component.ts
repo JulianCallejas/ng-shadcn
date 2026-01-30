@@ -17,7 +17,7 @@ export class AlertContentComponent {
   @Input() class = '';
 
   /** @ignore */
-  get computedClasses(): string {
+  computedClasses(): string {
     return cn(
       '[&_p]:leading-relaxed ',
       this.class

@@ -17,7 +17,7 @@ export class AlertIconComponent {
   @Input() class = '';
 
   /** @ignore */
-  get computedClasses(): string {
+  computedClasses(): string {
     return cn(
       'h-4 w-4',
       this.class

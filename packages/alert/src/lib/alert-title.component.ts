@@ -17,7 +17,7 @@ export class AlertTitleComponent {
   @Input() class = '';
 
   /** @ignore */
-  get computedClasses(): string {
+  computedClasses(): string {
     return cn(
       'mb-1 font-medium leading-none tracking-tight',
       this.class
