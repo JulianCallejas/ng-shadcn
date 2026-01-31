@@ -9,7 +9,7 @@ import { cn } from '@packages/utils/src/public-api';
   imports: [CommonModule],
   template: `
     <button 
-      [class]="computedClasses"
+      [class]="computedClasses()"
       (click)="onClick.emit($event)"
     >
       <ng-content></ng-content>

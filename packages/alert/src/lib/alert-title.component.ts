@@ -8,7 +8,7 @@ import { cn } from '@packages/utils/src/public-api';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h5 [class]="computedClasses">
+    <h5 [class]="computedClasses()">
       <ng-content></ng-content>
     </h5>
   `

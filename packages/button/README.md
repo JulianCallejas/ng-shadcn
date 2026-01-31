@@ -11,6 +11,7 @@ A versatile button component with multiple variants, sizes, and states. Built wi
 - ✅ **Form Integration**: Works seamlessly with Angular forms
 - ✅ **Custom Styling**: Easy theming with CSS variables
 - ✅ **TypeScript**: Full type safety with proper interfaces
+- ✅ **Composition**: Use `asChild` prop to compose with other elements
 
 ## Installation
 
@@ -102,6 +103,32 @@ export class ExampleComponent {
 }
 ```
 
+### Composing with asChild
+
+The `asChild` prop allows you to compose the button with other elements while maintaining button styling and behavior:
+
+```html
+<!-- As a link -->
+<ng-shadcn-button asChild>
+  <a href="/dashboard">Go to Dashboard</a>
+</ng-shadcn-button>
+
+<!-- With custom element and click handler -->
+<ng-shadcn-button variant="outline" asChild (clicked)="onCustomClick()">
+  <div class="flex items-center gap-2">
+    <svg>...</svg>
+    <span>Custom Element</span>
+  </div>
+</ng-shadcn-button>
+
+<!-- With form submission -->
+<ng-shadcn-button type="submit" asChild>
+  <button>Submit Form</button>
+</ng-shadcn-button>
+```
+
+When using `asChild`, the button's styles and behavior are applied to the child element, while the original element's attributes and event handlers are preserved.
+
 ### Disabled State
 
 ```html
@@ -130,7 +157,9 @@ export class ExampleComponent {
 | `variant` | `'default' \| 'destructive' \| 'outline' \| 'secondary' \| 'ghost' \| 'link'` | `'default'` | The visual style variant |
 | `size` | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | The size of the button |
 | `disabled` | `boolean` | `false` | Whether the button is disabled |
-| `className` | `string` | `''` | Additional CSS classes |
+| `asChild` | `boolean` | `false` | Whether to render as child element |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | The type of the button |
+| `class` | `string` | `''` | Additional CSS classes |
 
 ### Events
 

@@ -12,7 +12,7 @@ import { CardComponent } from '@packages/card/src/public-api';
         <h2 class="text-2xl font-semibold mb-4">Buttons</h2>
         <div class="flex gap-4 flex-wrap">
           <ng-shadcn-button>Default</ng-shadcn-button>
-          <ng-shadcn-button variant="secondary">Secondary</ng-shadcn-button>
+          <ng-shadcn-button variant="secondary" (click)="handleClick()" >Secondary</ng-shadcn-button>
           <ng-shadcn-button variant="destructive">Destructive</ng-shadcn-button>
           <ng-shadcn-button variant="outline">Outline</ng-shadcn-button>
           <ng-shadcn-button variant="ghost">Ghost</ng-shadcn-button>
@@ -25,4 +25,8 @@ import { CardComponent } from '@packages/card/src/public-api';
   `,
   styles: []
 })
-export class ButtonExampleComponent {}
+export class ButtonExampleComponent {
+  handleClick() {
+    alert('clicked');
+  }
+}

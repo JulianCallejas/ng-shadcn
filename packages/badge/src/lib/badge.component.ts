@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, booleanAttribute, Output, EventEmitter } from '@angular/core';
+import { Component, Input, computed, signal, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, booleanAttribute, Output, EventEmitter, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 // import { cn } from '@ng-shadcn/utils';
@@ -65,7 +65,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   `,
   template: `
     <div 
-      [class]="computedClasses" 
+      [class]="computedClasses()"
       [attr.role]="role"
       [class.badge-out]="isDismissed() && fade"
       [class.badge-hide]="isDismissed() && !fade"
@@ -88,7 +88,6 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
       <!-- Dismiss button -->
       @if (dismissible) {
         <button
-          *ngIf="dismissible"
           type="button"
           class="ml-1 shrink-0 rounded-full p-0.5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
           (click)="dismiss()"
@@ -126,15 +125,27 @@ export class BadgeComponent implements BadgeProps {
   /** @ignore */
   isDismissed = signal(false);
 
+  /** @ignore */
+  private destroyRef = inject(DestroyRef); 
+  
+  /** @ignore */
+  private dismissTimeout?: number;
+
   // Content queries for projected icons
   @ContentChild('leadingIcon', { static: false }) leadingIcon?: ElementRef;
   @ContentChild('trailingIcon', { static: false }) trailingIcon?: ElementRef;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    this.destroyRef.onDestroy(() => {
+      if (this.dismissTimeout) {
+        window.clearTimeout(this.dismissTimeout);
+      }
+    });
+  }
 
   // Computed properties
   /** @ignore */
-  get computedClasses(): string {
+  computedClasses(): string {
     return cn(
       badgeVariants({
         variant: this.variant,
@@ -147,13 +158,24 @@ export class BadgeComponent implements BadgeProps {
   
   /** @ignore */
   dismiss() {
+    if (this.isDismissed()) {
+      return;
+    }
     this.isDismissed.set(true);
     this.dismissed.emit();
-    setTimeout(() => {
-      this.isDismissed.set(false);
-      this.elementRef.nativeElement.remove();
-    }, 200);
-    
+    if (this.fade) {
+      this.dismissTimeout = window.setTimeout(() => {
+        this.removeFromDOM();
+      }, 200);
+    }
+  }
+
+  /** @ignore */
+  private removeFromDOM(): void {
+    const element = this.elementRef.nativeElement;
+    if (element && element.parentNode) {
+      element.parentNode.removeChild(element);
+    }
   }
   
 }
