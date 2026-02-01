@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, booleanAttribute, Output, EventEmitter, inject, DestroyRef } from '@angular/core';
+import { Component, Input, computed, signal, ContentChild, ElementRef, booleanAttribute, Output, EventEmitter, inject, DestroyRef, AfterContentInit, AfterContentChecked, contentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 // import { cn } from '@ng-shadcn/utils';
@@ -19,7 +19,7 @@ const badgeVariants = cva(
       },
       size: {
         default: 'px-2.5 py-0.5 text-xs',
-        sm: 'px-[2.5px] py-[1px] text-xs',
+        sm: 'px-1.5 py-[1px] text-xs',
         lg: 'px-3 py-1 text-sm',
       },
     },
@@ -55,12 +55,14 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   }
   .badge-out {
     interpolate-size: allow-keywords;
-    animation: badge-fade-out 0.2s ease-out forwards;
+    animation: badge-fade-out 0.22s ease-out forwards;
   }
   .badge-hide {
     display: none;
     height: 0;
     opacity: 0;
+    width: 0;
+    overflow: hidden;
   }
   `,
   template: `
@@ -71,7 +73,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
       [class.badge-hide]="isDismissed() && !fade"
     >
       <!-- Leading icon slot -->
-      <span #leadingIcon class="mr-1 shrink-0">
+      <span [class]="leadingIconClasses()">
         <ng-content select="[leadingIcon]"></ng-content>
       </span>
 
@@ -81,12 +83,13 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
       </span>
 
       <!-- Trailing icon slot -->
-      <span #trailingIcon class="ml-1 shrink-0">
+      <span [class]="trailingIconClasses()">
         <ng-content select="[trailingIcon]"></ng-content>
       </span>
+    
 
       <!-- Dismiss button -->
-      @if (dismissible) {
+      @if (!!dismissible()) {
         <button
           type="button"
           class="ml-1 shrink-0 rounded-full p-0.5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
@@ -111,20 +114,48 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
     </div>
   `,
 })
-export class BadgeComponent implements BadgeProps {
+export class BadgeComponent {
+
+  @Input({ alias: 'variant' }) set _variant(v: BadgeProps['variant']) {
+    this.variant.set(v ?? 'default');
+  }
+
+  @Input({ alias: 'size' }) set _size(v: BadgeProps['size']) {
+    this.size.set(v ?? 'default');
+  }
+
+  @Input({ alias: 'dismissible'})
+  set _dismissible(v: 'hide' | 'remove') {
+    if (!v) {
+      this.dismissible.set('');
+      return;
+    }
+    this.dismissible.set(v);
+  }
+
+  @Input({ alias: 'fade', transform: booleanAttribute })
+  set _fade(v: boolean) {
+    this.fade.set(!!v);
+  }
+
+  @Input({ alias: 'class' }) set _class(v: string) {
+    this.class.set(v ?? '');
+  }
   
-  @Input() variant: BadgeProps['variant'] = 'default';
-  @Input() size: BadgeProps['size'] = 'default';
-  @Input({ transform: booleanAttribute }) dismissible = false;
-  @Input({ transform: booleanAttribute }) fade = false;
-  @Input() class = '';
+  variant = signal<BadgeProps['variant']>('default');
+  size = signal<BadgeProps['size']>('default');
+  dismissible = signal<'hide' | 'remove'| ''>('');
+  fade = signal(false);
+  class = signal('');
+
+
   @Input() role = 'status';
   @Input() ariaLabel?: string;
   @Output() dismissed = new EventEmitter<void>();
-
+  
   /** @ignore */
   isDismissed = signal(false);
-
+  
   /** @ignore */
   private destroyRef = inject(DestroyRef); 
   
@@ -132,9 +163,7 @@ export class BadgeComponent implements BadgeProps {
   private dismissTimeout?: number;
 
   // Content queries for projected icons
-  @ContentChild('leadingIcon', { static: false }) leadingIcon?: ElementRef;
-  @ContentChild('trailingIcon', { static: false }) trailingIcon?: ElementRef;
-
+  
   constructor(private elementRef: ElementRef) {
     this.destroyRef.onDestroy(() => {
       if (this.dismissTimeout) {
@@ -145,28 +174,47 @@ export class BadgeComponent implements BadgeProps {
 
   // Computed properties
   /** @ignore */
-  computedClasses(): string {
-    return cn(
+  computedClasses = computed(() =>
+    cn(
       badgeVariants({
-        variant: this.variant,
-        size: this.size as 'default' | 'sm' | 'lg',
+        variant: this.variant(),
+        size: this.size(),
       }),
-      this.class
-    );
-    
-  };
+      this.class()
+    )
+  );
+
+  /** @ignore */
+  leadingIconClasses = computed(() => 
+    cn(
+      'mr-1 shrink-0 overflow-hidden',
+      this.size() === 'lg' ? 'max-h-3.5 max-w-3.5' : 'max-h-3 max-w-3',
+    )
+  )
   
   /** @ignore */
-  dismiss() {
-    if (this.isDismissed()) {
-      return;
-    }
+  trailingIconClasses = computed(() => 
+    cn(
+      'ml-1 shrink-0 overflow-hidden',
+      this.size() === 'lg' ? 'max-h-3.5 max-w-3.5' : 'max-h-3 max-w-3',
+    )
+  )
+    
+      
+  /** @ignore */
+  async dismiss() {
+    
+    if (this.isDismissed()) return;
+
     this.isDismissed.set(true);
+
+    if (this.fade()) {
+      const pause = (ms) => new Promise(res => setTimeout(res, ms));
+      await pause(200); 
+    }
     this.dismissed.emit();
-    if (this.fade) {
-      this.dismissTimeout = window.setTimeout(() => {
-        this.removeFromDOM();
-      }, 200);
+    if (this.dismissible() === 'remove') {
+      this.removeFromDOM();
     }
   }
 

@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { BadgeComponent } from './badge.component';
+import { signal } from '@angular/core';
+import { ButtonComponent } from '@packages/button/src/public-api';
 
 const meta: Meta<BadgeComponent> = {
   title: 'Components/Badge',
   component: BadgeComponent,
   decorators: [
     moduleMetadata({
-      imports: [BadgeComponent],
+      imports: [BadgeComponent, ButtonComponent],
     }),
   ],
   parameters: {
@@ -102,18 +104,65 @@ Then use the component in your templates:
     variant: {
       control: 'select',
       options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],
+      mapping: {
+        default: signal('default'),
+        secondary: signal('secondary'),
+        destructive: signal('destructive'),
+        outline: signal('outline'),
+        success: signal('success'),
+        warning: signal('warning'),
+        info: signal('info'),
+      },
       description: 'The visual style variant of the badge',
+      table:{
+        defaultValue: { summary: 'default' },
+        type: {
+          summary: 'default | secondary | destructive | outline | success | warning | info',
+        },
+      },
+    },
+    size: {
+      control: 'radio',
+      options: ['sm', 'default', 'lg'],
+      mapping: {
+        sm: signal('sm'),
+        default: signal('default'),
+        lg: signal('lg'),
+      },
+      description: 'The size of the badge',
+      table:{
+        defaultValue: { summary: 'default' },
+        type: {
+          summary: 'sm | default | lg',
+        },
+      },
     },
     dismissible: {
-      control: 'boolean',
+      control: 'radio',
+      options: ['remove', 'hide', false],
+      mapping: {
+        remove: signal('remove'),
+        hide: signal('hide'),
+        false: signal(false),
+      },
       description: 'Whether the badge can be dismissed',
+      table:{
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: '"remove" | "hide" | false',
+        },
+      }
     },
     fade: {
       control: 'boolean',
+      mapping: {
+        true: signal(true),
+        false: signal(false),
+      },
       description: 'Whether the badge has a fade effect when dismissed. Useful for indicating that the badge is "deleted" or "removed" visually.',
     },
     class: {
-      control: 'text',
+      control: false,
       description: 'Additional CSS classes',
     },
     role: {
@@ -131,28 +180,12 @@ Then use the component in your templates:
         defaultValue: { summary: 'undefined' },
       },
     },
-    leadingIcon: {
-      table: {
-        type: { 
-          summary: 'ElementRef',
-          detail: 'Use the leadingIcon attribute inside a child tag to add a leading icon.'
-        },
-      },
-    },
-    trailingIcon: {
-      table: {
-        type: { 
-          summary: 'ElementRef',
-          detail: 'Use the `trailingIcon` attribute inside a child tag to add a trailing icon.'
-        },
-      },
-    }
-
-    
   },
   args: {
-    variant: 'default',
-    dismissible: false,
+    variant: signal('default'),
+    size: signal('default'),
+    dismissible: signal(''),
+    fade: signal(false),
   },
 };
 
@@ -162,7 +195,17 @@ type Story = StoryObj<BadgeComponent>;
 export const Default: Story = {
   render: (args) => ({
     props: args,
-    template: `<ng-shadcn-badge [variant]="variant" [dismissible]="dismissible">Badge</ng-shadcn-badge>`,
+    template: `
+    <ng-shadcn-badge 
+      [variant]="variant()" 
+      [size]="size()" 
+      [dismissible]="dismissible()" 
+      [fade]="fade()" 
+      [role]="role" 
+      [ariaLabel]="ariaLabel"
+    >
+      Badge
+    </ng-shadcn-badge>`,
   }),
 };
 
@@ -180,6 +223,13 @@ export const Variants: Story = {
       </div>
     `,
   }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'The badge component supports five variants: default, secondary, destructive, outline, success, warning, and info.',
+      },
+    },
+  },
 };
 
 export const Size: Story = {
@@ -203,13 +253,13 @@ export const Size: Story = {
       </div>
     `,
   }),
-};
-
-export const Dismissible: Story = {
-  render: (args) => ({
-    props: { ...args, dismissible: true },
-    template: `<ng-shadcn-badge [variant]="variant" [dismissible]="dismissible">Dismissible Badge</ng-shadcn-badge>`,
-  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'The badge component supports three sizes: sm, default, and lg.',
+      },
+    },
+  },
 };
 
 export const WithIcons: Story = {
@@ -217,23 +267,23 @@ export const WithIcons: Story = {
     template: `
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap items-center gap-2">
-          <ng-shadcn-badge variant="default">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+          <ng-shadcn-badge variant="default" size="sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             Notifications
           </ng-shadcn-badge>
           
-          <ng-shadcn-badge variant="success">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+          <ng-shadcn-badge variant="success" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
             Success
           </ng-shadcn-badge>
           
-          <ng-shadcn-badge variant="warning">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+          <ng-shadcn-badge variant="warning" size="lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -241,32 +291,32 @@ export const WithIcons: Story = {
             Warning
           </ng-shadcn-badge>
           
-          <ng-shadcn-badge variant="info">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+          </div>
+          
+          <div class="flex flex-wrap items-center gap-2">
+          <ng-shadcn-badge variant="info" size="sm">
+            Information
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" trailingIcon>
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
-            Information
           </ng-shadcn-badge>
-        </div>
-        
-        <div class="flex flex-wrap items-center gap-2">
           <ng-shadcn-badge variant="default">
             With Trailing Icon
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" trailingIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" trailingIcon>
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </ng-shadcn-badge>
           
-          <ng-shadcn-badge variant="secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+          <ng-shadcn-badge variant="secondary" size="lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             Both Icons
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" trailingIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" trailingIcon>
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -275,34 +325,100 @@ export const WithIcons: Story = {
       </div>
     `,
   }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'To include a leading or trailing icon, wrap the icon in a span tag with the class "w-full h-full". This ensures that the icon fits the space available for the icon.'
+      },
+    },
+  },
+};
+
+export const Dismissible: Story = {
+  render: (args) => ({
+    template: `
+    <h3 class="text-center font-semibold">Uncontrolled Dismissible</h3>
+    <div class="flex flex-col items-center">
+      <ng-shadcn-badge 
+        variant="destructive" 
+        dismissible="remove"
+      >
+        Uncontrolled Dismissible Badge
+      </ng-shadcn-badge>
+    </div>  
+    <h3 class="text-center font-semibold mt-6">Controlled Dismissible</h3>
+    <div class="flex flex-col gap-2 items-center">
+      <ng-shadcn-badge 
+        variant="destructive" 
+        dismissible="hide"
+        (dismissed)="removeBadge(badge.id)"
+        *ngFor="let badge of badges"
+      >
+        Dismissible Badge {{ badge.id }}
+      </ng-shadcn-badge>
+
+      <ng-shadcn-button class="w-full"
+          (click)="addBadge()"
+      >
+        Add Dismissible Badge
+      </ng-shadcn-button>
+    </div>
+    `,
+    
+    props: {
+      badges: [
+        { id: 1 },
+      ],
+      nextId: 2,
+      addBadge() {
+        if (this.badges.length >= 3) return;
+        const newBadge = {
+          id: this.nextId++,
+        };
+        
+        this.badges = [...this.badges, newBadge];
+      },
+      removeBadge(id: number) {
+        this.badges = this.badges.filter(badge => badge.id !== id);
+      }
+    },
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Example of a dismissible badge. The `dismissible` attribute can be set to "remove" or "hide". "remove" will remove the badge from the DOM when dismissed, while "hide" will hide the badge with css classes. The badge emits a `dismissed` event when the badge is dismissed.',
+      },
+    },
+  },
 };
 
 export const FadeDismissible: Story = {
   render: () => ({
     template: `
-      <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4">
         <div class="flex flex-wrap items-center gap-2">
           <ng-shadcn-badge 
             *ngFor="let badge of badges"
             [variant]="badge.variant" 
-            [dismissible]="true" 
+            dismissible="hide"
             [fade]="true"
+            (dismissed)="removeBadge(badge.id)"
           >
-          <span leadingIcon>
+          <span leadingIcon class="w-full h-full overflow-hidden">
           <ng-container [ngSwitch]="badge.icon">
-              <svg *ngSwitchCase="'bell'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+              <svg *ngSwitchCase="'bell'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
                 <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
                 <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
               </svg>
-              <svg *ngSwitchCase="'check'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+              <svg *ngSwitchCase="'check'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <svg *ngSwitchCase="'alert-circle'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+              <svg *ngSwitchCase="'alert-circle'" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="8" x2="12" y2="12"></line>
                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
               </svg>
-              <svg *ngSwitchDefault xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
+              <svg *ngSwitchDefault xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full" leadingIcon>
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -313,12 +429,11 @@ export const FadeDismissible: Story = {
           </ng-shadcn-badge>
         </div>
         
-        <button 
-          class="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90"
+        <ng-shadcn-button class="w-56 self-center"
           (click)="addBadge()"
         >
           Add Dismissible Badge
-        </button>
+        </ng-shadcn-button>
       </div>
     `,
     props: {
@@ -350,6 +465,9 @@ export const FadeDismissible: Story = {
   }),
   parameters:{
     docs:{
+      description: {
+        story: 'The badge component supports a fade behavior which can be used to create a subtle animation effect when the badge is dismissed. The fade behavior can be enabled by setting the `fade` property to `true`.'
+      },
       source:{
         type: 'code', 
         code: `
@@ -357,13 +475,23 @@ export const FadeDismissible: Story = {
   [variant]="badge.variant" 
   dismissible
   fade
+  (dismissed)="removeBadge(badge.id)"
 >
-  <span leadingIcon>
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" leadingIcon>
-      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-    </svg>
-  </span>  
+  <svg xmlns="http://www.w3.org/2000/svg" 
+    width="14" 
+    height="14" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    class="w-full h-full" 
+    leadingIcon
+  >
+    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+  </svg>
   {{ badge.text }}
 </ng-shadcn-badge>
         `,

@@ -102,13 +102,16 @@ const XIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" vi
         <div class="space-y-2">
           <h3 class="text-xl font-medium">Dismissible Badge</h3>
           <div class="flex flex-wrap gap-4 items-center">
-            <ng-shadcn-badge [dismissible]="true" variant="secondary">
+            <ng-shadcn-badge dismissible="hide" variant="secondary">
               Click the X to dismiss
             </ng-shadcn-badge>
-            <ng-shadcn-badge dismissible fade variant="destructive">
+            <ng-shadcn-badge>Can't dismiss</ng-shadcn-badge>
+            <ng-shadcn-badge dismissible="remove" fade variant="destructive">
               <div leadingIcon [innerHTML]="AlertCircleIcon"></div>
               Critical Error Fade
             </ng-shadcn-badge>
+            <ng-shadcn-badge>Can't dismiss</ng-shadcn-badge>
+
           </div>
         </div>
       </div>
