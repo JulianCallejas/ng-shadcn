@@ -3,23 +3,19 @@ import {
   Input, 
   Output,
   EventEmitter, 
-  booleanAttribute, 
   ContentChild, 
-  effect, 
   inject, 
   AfterContentInit, 
-  ChangeDetectorRef, 
-  runInInjectionContext,
-  OnInit,
-  Injector,
   DestroyRef,
-  signal,
+  input,
+  computed,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccordionTriggerComponent } from './accordion-trigger.component';
 import { AccordionContentComponent } from './accordion-content.component';
 import { AccordionComponent } from './accordion.component';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
@@ -29,6 +25,7 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-accordion-item',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   styles: `
   @keyframes accordion-down {
@@ -72,7 +69,7 @@ import { cn } from '@packages/utils/src/public-api';
     <div
       [class]="computedClasses()"
       [attr.data-state]="isExpanded ? 'open' : 'closed'"
-      [attr.data-disabled]="disabled">
+      [attr.data-disabled]="disabled()">
       <ng-content select="ng-shadcn-accordion-trigger" 
         (itemToggled)="onItemToggled($event)">
       </ng-content>
@@ -87,17 +84,34 @@ import { cn } from '@packages/utils/src/public-api';
     </div>
   `,
 })
-export class AccordionItemComponent implements OnInit, AfterContentInit {
+export class AccordionItemComponent implements AfterContentInit {
  
+  
+  /**
+   * Id of the accordion item. Must be unique within the accordion.
+   */
   @Input({ required: true }) id = '';
-  @Input() class = '';
-  @Input({ transform: booleanAttribute }) disabled = false;
+  
+  
+  /**
+   * Class name to be applied to the accordion item.
+   * @default ''
+   */
+  class = input<string>('');
+  
+  
+  /**
+   * When true, the accordion item is disabled and cannot be toggled.
+   * @default false
+   */
+  disabled = input<boolean>(false);
+    
   
   /**
    * The trigger title component for this accordion item allows to toggle the accordion item.
    * It must be a direct child of the accordion item.
   */
- @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
+  @ContentChild(AccordionTriggerComponent) trigger?: AccordionTriggerComponent;
  
  /**
   * The content component for this accordion item.
@@ -105,52 +119,28 @@ export class AccordionItemComponent implements OnInit, AfterContentInit {
  */
   @ContentChild(AccordionContentComponent) content?: AccordionContentComponent;
 
+
+  /**
+   * Event emitted when the accordion item is toggled.
+   * Passes the id of the item that was toggled.
+   */
   @Output() itemToggled = new EventEmitter<string>();
 
   /** @ignore */
-  readonly isExpanded = signal(false);
+  readonly isExpanded = computed(() => this.expandedItems().has(this.id));
 
   /** @ignore */
   private expandedItems = inject(AccordionComponent).expandedSet;
-
-  /** @ignore */private injector = inject(Injector);
-
+  
   /** @ignore */
-  private destroyRef = inject(DestroyRef); // ¡IMPORTANTE!
-
-  /** @ignore */
-  private cdr = inject(ChangeDetectorRef);
-
-
-  constructor() { 
-    effect(() => {
-      const isExpanded = this.expandedItems().has(this.id);
-      this.isExpanded.set(isExpanded);
-
-      this.trigger?.isExpanded.set(isExpanded);
-      this.content?.isExpanded.set(isExpanded);;
-    });
-  }
-
-
-
-  /** @ignore */
-  ngOnInit() {
-    runInInjectionContext(this.injector, () => {
-      effect(() => {
-        this.updateExpandedState();
-      });
-    });
-  }
+  private destroyRef = inject(DestroyRef);
 
   /** @ignore */
   ngAfterContentInit() { 
-    this.updateExpandedState();
-    
     if (this.trigger) { 
       this.trigger.id = this.id;
-      // this.trigger.isExpanded = this.isExpanded();
-      this.trigger.isExpanded.set(this.isExpanded());
+      this.trigger.isExpanded = computed(() => this.isExpanded());
+      this.trigger.disabled = computed(() => this.disabled());
       this.trigger.itemToggled
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(value => { 
@@ -159,33 +149,22 @@ export class AccordionItemComponent implements OnInit, AfterContentInit {
     } 
     if (this.content) { 
       this.content.id = this.id; 
-      // this.content.isExpanded = this.isExpanded(); 
-      this.content.isExpanded.set(this.isExpanded()); 
+      this.content.isExpanded = computed(() => this.isExpanded()); 
     }
-
-  }
-
-  /** @ignore */
-  private updateExpandedState(): void {
-    const isExpanded = this.expandedItems().has(this.id);
-    this.isExpanded.update(() => isExpanded);
-    if (this.trigger) this.trigger.isExpanded.set(isExpanded);
-    if (this.content) this.content.isExpanded.set(isExpanded);
-    this.cdr.markForCheck();
   }
 
   /** @ignore */
   onItemToggled(id: string): void {
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.itemToggled.emit(id);
     }
   }
 
   /** @ignore */
-  computedClasses(): string {
-    return cn(
+  readonly computedClasses = computed(() => 
+    cn(
       'border-b',
-      this.class
-    );
-  }
+      this.class()
+    )
+  );
 }

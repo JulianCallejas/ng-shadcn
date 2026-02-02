@@ -1,7 +1,9 @@
-import { Component, Input, Output, EventEmitter, booleanAttribute, signal } from '@angular/core';
+import { Component, Output, EventEmitter, signal, input, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
+
+
 
 /**
  * Individual accordion trigger component
@@ -9,13 +11,14 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-accordion-trigger',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
     <button
       class="gap-2 w-full"
       [class]="computedClasses()"
       [attr.data-state]="dataState"
-      [disabled]="isDisabled"
+      [disabled]="disabled()"
       [attr.aria-expanded]="isExpanded()"
       [attr.aria-controls]="'accordion-content-' + id"
       [attr.id]="'accordion-trigger-' + id"
@@ -35,31 +38,34 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class AccordionTriggerComponent {
+    
+  /**
+   * Class to be added to the trigger element.
+   *
+   */
+  class = input('');
   
   /** @ignore */
   id = '';
   
-  @Input() class = '';
-  @Input({ transform: booleanAttribute }) disabled = false;
-  // @Input({ transform: booleanAttribute }) isExpanded = false;
+  /** @ignore */
+  disabled: Signal<boolean> = signal(false);
   
   /** @ignore */
-  readonly isExpanded = signal(false);
+  isExpanded: Signal<boolean> = signal(false);
 
+
+  /** @ignore */
   @Output() itemToggled = new EventEmitter<string>();
 
   get dataState(): 'open' | 'closed' {
     return this.isExpanded() ? 'open' : 'closed';
   }
 
-  get isDisabled(): boolean {
-    return this.disabled;
-  }
-
   /** @ignore */
   computedClasses(): string {
     const baseClasses = 'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline';
-    const stateClasses = this.disabled
+    const stateClasses = this.disabled()
       ? 'pointer-events-none opacity-50'
       : '[&[data-state=open]>svg]:rotate-180';
 
@@ -68,12 +74,11 @@ export class AccordionTriggerComponent {
       stateClasses,
       this.class
     );
-
   }
 
   /** @ignore */
   handleClick(): void {
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.itemToggled.emit(this.id);
     }
   }

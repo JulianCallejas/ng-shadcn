@@ -1,4 +1,4 @@
-import { Component, Input, booleanAttribute, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, computed, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
@@ -9,6 +9,7 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-accordion-content',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
     <div
@@ -26,19 +27,23 @@ import { cn } from '@packages/utils/src/public-api';
 })
 export class AccordionContentComponent {
   
-  /** @ignore */
-  id = '';
-
-  @Input() class = '';
+  
+  /**
+   * Class name for the content element.
+   */
+  class = input<string>('');
   
   /** @ignore */
-  readonly isExpanded = signal(false);
+  id = '';
+  
+  /** @ignore */
+  isExpanded: Signal<boolean> = signal(false);
 
   /** @ignore */
-  computedClasses(): string {
-    return cn(
+  computedClasses = computed(() =>
+    cn(
       'overflow-hidden text-sm transition-all min-h-[0px]',
-      this.class
-    );
-  }
+      this.class()
+    )
+  );
 }

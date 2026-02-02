@@ -7,6 +7,7 @@ import {
   AccordionContentComponent 
 } from './index';
 import { Component, signal } from '@angular/core';
+import { ButtonComponent } from '@packages/button/src/public-api';
 
 
 const meta: Meta<AccordionComponent> = {
@@ -137,8 +138,29 @@ Then use the components in your templates:
     },
   },
   argTypes: {
+    expandedItems: {
+      control: false,
+      description: 'An array of item IDs that should be expanded, its used for controlled components',
+      table: {
+        type: { 
+          summary: 'string[] | undefined',
+          detail: 'Array of item IDs that should be expanded'
+        },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    defaultExpanded: {
+      control: false,
+      description: 'An array of item IDs that should be expanded by default',
+      table: {
+        type: { 
+          summary: 'string[] | undefined',
+        },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
     type: {
-      control: 'select',
+      control: 'radio',
       options: ['single', 'multiple'],
       description: 'Type of the accordion behavior',
       table: {
@@ -155,32 +177,22 @@ Then use the components in your templates:
       },
     },
     accordionItems: {
-      control: 'object',
+      control: false,
       table: {
         type: { 
           summary: 'QueryList<AccordionItemComponent>', 
-          detail: 'Accordion Item container. An individual collapsible section that contains a trigger and content.',
         },
       },
     },
-    // accordionTriggers: {
-    //   control: 'object',
-    //   table: {
-    //     type: { 
-    //       summary: 'QueryList<AccordionTriggerComponent>', 
-    //       detail: 'Accordion Trigger container. The clickable title element that toggles the visibility of the accordion content.',
-    //     },
-    //   },
-    // },
-    // accordionContents: {
-    //   control: 'object',
-    //   table: {
-    //     type: { 
-    //       summary: 'QueryList<AccordionContentComponent>', 
-    //       detail: 'Accordion Content container. The collapsible content area that is shown/hidden when the trigger is clicked.',
-    //     },
-    //   },
-    // },
+    expandedItemsChange: {
+      control: false,
+      description: 'Event emitted when the expanded items change',
+      table: {
+        type: { 
+          summary: '(items: string[]) => void',
+        },
+      },
+    },
   },
   args: {
     type: 'single',
@@ -195,23 +207,6 @@ type Story = StoryObj<AccordionComponent>;
 //#region Basic Usage
 export const Basic: Story = {
   parameters:{
-    controls: {
-      exclude: [
-        'initialized',
-        'isControlled',
-        'seenItemIds',
-        'autoExpandedItems',
-        'computedClasses',
-        'expandedItems',
-        'ngAfterContentInit',
-        'ngOnChanges',
-        'initializeFromDefaults',
-        'syncChildren',
-        'toggleItem',
-        'updateControlledState',
-        'validateProps',
-      ]
-    }
   },
   render: (args) => ({
     props: args,
@@ -249,13 +244,12 @@ export const Multiple: Story = {
   ...Basic,
   args: {
     ...Basic.args,
-    type: 'multiple',
   },
   render: (args) => ({
     props: args,
     template: `
       <div class="w-100">
-        <ng-shadcn-accordion [type]="type">
+        <ng-shadcn-accordion type="multiple">
           <ng-shadcn-accordion-item id="item-1">
             <ng-shadcn-accordion-trigger>First Item</ng-shadcn-accordion-trigger>
             <ng-shadcn-accordion-content>
@@ -287,45 +281,45 @@ export const Multiple: Story = {
 @Component({
   selector: 'story-accordion-controlled',
   standalone: true,
-  imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
+  imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent, ButtonComponent],
   template: `
     <div class="space-y-4 w-100">
       <div class="flex gap-2">
-        <button 
+        <ng-shadcn-button 
           (click)="toggleItem('item-1')" 
-          class="px-3 py-1 text-sm border rounded"
-          [class.bg-blue-100]="isOpen('item-1')">
+          [variant] = "isOpen('item-1') ? 'default' : 'outline'"
+        >
           Toggle Item 1
-        </button>
-        <button 
+        </ng-shadcn-button>
+        <ng-shadcn-button 
           (click)="toggleItem('item-2')" 
-          class="px-3 py-1 text-sm border rounded"
-          [class.bg-blue-100]="isOpen('item-2')">
+          [variant] = "isOpen('item-2') ? 'default' : 'outline'"
+        >
           Toggle Item 2
-        </button>
+        </ng-shadcn-button>
+        <ng-shadcn-button 
+          (click)="toogleDisabled()" 
+          [variant] = "disabled() ? 'default' : 'outline'"
+        >
+          Disable Item 2
+        </ng-shadcn-button>
       </div>
 
       <ng-shadcn-accordion 
         type="multiple"
         [expandedItems]="openItems()"
-        (expandedItemsChange)="openItems.set($event)">
-        <ng-shadcn-accordion-item id="item-1">
-          <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-1')" >
-            Controlled Item 1
-          </ng-shadcn-accordion-trigger>
-          <ng-shadcn-accordion-content>
-            This accordion item is controlled by the parent component.
-          </ng-shadcn-accordion-content>
-        </ng-shadcn-accordion-item>
-
-        <ng-shadcn-accordion-item id="item-2">
-          <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-2')">
-            Controlled Item 2
-          </ng-shadcn-accordion-trigger>
-          <ng-shadcn-accordion-content>
-            This accordion item is also controlled by the parent component.
-          </ng-shadcn-accordion-content>
-        </ng-shadcn-accordion-item>
+        (expandedItemsChange)="openItems.set($event)"
+      >
+        @for(item of accordionItems; track item.id) {
+          <ng-shadcn-accordion-item  [id]="item.id" [disabled]="disabled()">
+            <ng-shadcn-accordion-trigger (itemToggled)="toggleItem(item.id)" >
+              {{item.title}}
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content>
+              {{item.content}}
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
+        }
       </ng-shadcn-accordion>
     </div>
   `,
@@ -335,12 +329,16 @@ class AccordionControlledStory {
     { id: 'item-1', title: 'Controlled Item 1', content: 'This accordion item is controlled by the parent component.' },
     { id: 'item-2', title: 'Controlled Item 2', content: 'This accordion item is also controlled by the parent component.' },
   ];
-
   
   openItems = signal<string[]>(['item-1']);
+  disabled = signal<boolean>(false);
 
   isOpen(id: string): boolean {
     return this.openItems().includes(id);
+  }
+
+  toogleDisabled(): void {
+    this.disabled.update(value => !value);
   }
 
   toggleItem(id: string): void {
@@ -351,11 +349,6 @@ class AccordionControlledStory {
     );
   }
 }
-
-
-
-
-
 
 export const Controlled: Story = {
   render: () => ({
@@ -374,68 +367,78 @@ export const Controlled: Story = {
         type: 'code', 
         language: 'typescript',
         code: `
-        // Component Class
-        @Component({
-          selector: 'story-accordion-controlled',
-          standalone: true,
-          imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent],
-          template: \`
-            <div class="space-y-4 w-100">
-              <div class="flex gap-2">
-                <button 
-                  (click)="toggleItem('item-1')" 
-                  class="px-3 py-1 text-sm border rounded"
-                  [class.bg-blue-100]="isOpen('item-1')">
-                  Toggle Item 1
-                </button>
-                <button 
-                  (click)="toggleItem('item-2')" 
-                  class="px-3 py-1 text-sm border rounded"
-                  [class.bg-blue-100]="isOpen('item-2')">
-                  Toggle Item 2
-                </button>
-              </div>
+  // Component Class
+  @Component({
+  selector: 'story-accordion-controlled',
+  standalone: true,
+  imports: [AccordionComponent, AccordionItemComponent, AccordionTriggerComponent, AccordionContentComponent, ButtonComponent],
+  template: \`
+    <div class="space-y-4 w-100">
+      <div class="flex gap-2">
+        <ng-shadcn-button 
+          (click)="toggleItem('item-1')" 
+          [variant] = "isOpen('item-1') ? 'default' : 'outline'"
+        >
+          Toggle Item 1
+        </ng-shadcn-button>
+        <ng-shadcn-button 
+          (click)="toggleItem('item-2')" 
+          [variant] = "isOpen('item-2') ? 'default' : 'outline'"
+        >
+          Toggle Item 2
+        </ng-shadcn-button>
+        <ng-shadcn-button 
+          (click)="toogleDisabled()" 
+          [variant] = "disabled() ? 'default' : 'outline'"
+        >
+          Disable Item 2
+        </ng-shadcn-button>
+      </div>
 
-              <ng-shadcn-accordion 
-                type="multiple"
-                [expandedItems]="openItems()"
-                (expandedItemsChange)="openItems.set($event)">
-                <ng-shadcn-accordion-item id="item-1">
-                  <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-1')" >
-                    Controlled Item 1
-                  </ng-shadcn-accordion-trigger>
-                  <ng-shadcn-accordion-content>
-                    This accordion item is controlled by the parent component.
-                  </ng-shadcn-accordion-content>
-                </ng-shadcn-accordion-item>
-
-                <ng-shadcn-accordion-item id="item-2">
-                  <ng-shadcn-accordion-trigger (itemToggled)="toggleItem('item-2')">
-                    Controlled Item 2
-                  </ng-shadcn-accordion-trigger>
-                  <ng-shadcn-accordion-content>
-                    This accordion item is also controlled by the parent component.
-                  </ng-shadcn-accordion-content>
-                </ng-shadcn-accordion-item>
-              </ng-shadcn-accordion>
-            </div>
-          \`,
-        })
-        class AccordionControlledStory {
-          openItems = signal<string[]>(['item-1']);
-
-          isOpen(id: string): boolean {
-            return this.openItems().includes(id);
-          }
-
-          toggleItem(id: string): void {
-            this.openItems.update(items => 
-              items.includes(id) 
-                ? items.filter(item => item !== id)
-                : [...items, id]
-            );
-          }
+      <ng-shadcn-accordion 
+        type="multiple"
+        [expandedItems]="openItems()"
+        (expandedItemsChange)="openItems.set($event)"
+      >
+        @for(item of accordionItems; track item.id) {
+          <ng-shadcn-accordion-item  [id]="item.id" [disabled]="disabled()">
+            <ng-shadcn-accordion-trigger (itemToggled)="toggleItem(item.id)" >
+              {{item.title}}
+            </ng-shadcn-accordion-trigger>
+            <ng-shadcn-accordion-content>
+              {{item.content}}
+            </ng-shadcn-accordion-content>
+          </ng-shadcn-accordion-item>
         }
+      </ng-shadcn-accordion>
+    </div>
+  \`,
+})
+class AccordionControlledStory {
+  private accordionItems = [
+    { id: 'item-1', title: 'Controlled Item 1', content: 'This accordion item is controlled by the parent component.' },
+    { id: 'item-2', title: 'Controlled Item 2', content: 'This accordion item is also controlled by the parent component.' },
+  ];
+  
+  openItems = signal<string[]>(['item-1']);
+  disabled = signal<boolean>(false);
+
+  isOpen(id: string): boolean {
+    return this.openItems().includes(id);
+  }
+
+  toogleDisabled(): void {
+    this.disabled.update(value => !value);
+  }
+
+  toggleItem(id: string): void {
+    this.openItems.update(items => 
+      items.includes(id) 
+        ? items.filter(item => item !== id)
+        : [...items, id]
+    );
+  }
+}
         `,
       },
     },
