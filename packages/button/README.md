@@ -93,7 +93,7 @@ export class ExampleComponent {}
 ```typescript
 @Component({
   template: `
-    <ng-shadcn-button (clicked)="handleClick($event)">Click me</ng-shadcn-button>
+    <ng-shadcn-button (click)="handleClick($event)">Click me</ng-shadcn-button>
   `,
 })
 export class ExampleComponent {

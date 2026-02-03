@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
-import { signal } from '@angular/core';
-
-
-const setDignal = signal('default');
 
 const meta: Meta<ButtonComponent & { claseControl: string }> = {
   title: 'Components/Button',
@@ -53,13 +49,13 @@ import { ButtonComponent } from '@ng-shadcn/button';
     <ng-shadcn-button 
       variant="default" 
       size="default"
-      (clicked)="onButtonClick()">
+      (click)="handleClick()">
       Click me
     </ng-shadcn-button>
   \`
 })
 export class ExampleComponent {
-  onButtonClick() {
+  handleClick() {
     console.log('Button clicked!');
   }
 }
@@ -91,7 +87,7 @@ Then use the button in your templates:
   variant="primary" 
   size="lg"
   [disabled]="isLoading"
-  (clicked)="handleClick()">
+  (click)="handleClick()">
   <span *ngIf="!isLoading">Submit</span>
   <span *ngIf="isLoading" class="flex items-center">
     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -111,7 +107,7 @@ Then use the button in your templates:
 - **Accessible**: Follows WAI-ARIA design patterns for buttons
 - **TypeScript Support**: Fully typed API with strict type checking
 - **Customizable**: Extend with custom classes and styles
-- **Event Handling**: Simple click event binding with (clicked) output
+- **Event Handling**: Simple click event binding with (click) output
 - **Disabled State**: Visual feedback for disabled buttons`,
       },
       extractComponentDescription: (component: any) => {
@@ -127,14 +123,6 @@ Then use the button in your templates:
     variant: {
       control: 'select',
       options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
-      mapping: {
-        default: signal('default'),
-        destructive: signal('destructive'),
-        outline: signal('outline'),
-        secondary: signal('secondary'),
-        ghost: signal('ghost'),
-        link: signal('link'),
-      },
       description: 'The visual style variant of the button',
       table: {
         type: { summary: 'default | destructive | outline | secondary  | ghost | link' },
@@ -146,12 +134,6 @@ Then use the button in your templates:
     size: {
       control: 'select',
       options: ['default', 'sm', 'lg', 'icon'],
-      mapping: {
-        default: signal('default'),
-        sm: signal('sm'),
-        lg: signal('lg'),
-        icon: signal('icon'),
-      },
       description: 'The size of the button',
       table: {
         type: { summary: 'default | sm | lg | icon' },
@@ -161,10 +143,6 @@ Then use the button in your templates:
     disabled: {
       control: 'boolean',
       description: 'Whether the button is disabled',
-      mapping: {
-        true: signal(true),
-        false: signal(false),
-      },
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
@@ -182,11 +160,6 @@ Then use the button in your templates:
     type: {
       control: 'radio',
       options: ['button', 'submit', 'reset'],
-      mapping: {
-        button: signal('button'),
-        submit: signal('submit'),
-        reset: signal('reset'),
-      },
       description: 'The type of the button',
       table: {
         type: { summary: 'button | submit | reset' },
@@ -195,59 +168,27 @@ Then use the button in your templates:
     },
   },
   args: {
-    variant: setDignal as any,
-    size: signal('default'),
-    disabled: signal(false),
-    class: signal(''),
-    type: signal('button'),
+    variant: 'default',
+    size: 'default',
+    disabled: false,
+    class: '',
+    type: 'button',
   },
 };
 
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-// Template for asChild example
-const asChildTemplate = `
-  <div class="flex flex-col gap-4">
-    <p class="text-sm text-muted-foreground">
-      The button below renders as an anchor tag using <code>asChild</code> prop
-    </p>
-    
-    <ng-shadcn-button asChild>
-      <a asChild href="https://github.com/your-org/ng-shadcn" target="_blank" rel="noopener noreferrer">
-        View on GitHub
-      </a>
-    </ng-shadcn-button>
-
-    <p class="text-sm text-muted-foreground mt-4">
-      The button below renders as a div with a click handler
-    </p>
-    
-    <ng-shadcn-button 
-      variant="default" 
-      size="sm" 
-      [asChild]="true"
-      (clicked)="onCustomElementClick()">
-      <div class="flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
-          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-        </svg>
-        <span>Click me!</span>
-      </div>
-    </ng-shadcn-button>
-  </div>
-`;
-
 export const Default: Story = {
   render: (args) => ({
     props: args,
     template: `
       <ng-shadcn-button 
-        [variant]="variant()" 
-        [size]="size()" 
-        [disabled]="disabled()" 
-        [class]="class()"
-        (clicked)="clicked($event)"
+        [variant]="variant" 
+        [size]="size" 
+        [disabled]="disabled" 
+        [class]="class"
+        (click)="handleClick($event)"
         >
         Button
       </ng-shadcn-button>
@@ -382,7 +323,7 @@ export const WithAsChild: Story = {
           variant="default" 
           size="sm" 
           [asChild]="true"
-          (clicked)="onCustomElementClick()">
+          (click)="handleClick()">
           <div class="flex items-center gap-2 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
               <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>

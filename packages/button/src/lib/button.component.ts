@@ -1,13 +1,12 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  signal,
   computed,
   effect,
   contentChild,
   ElementRef,
+  input,
+  booleanAttribute,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -57,6 +56,7 @@ export interface ButtonProps
 @Component({
   selector: 'ng-shadcn-button',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
   <ng-template #content>
@@ -66,7 +66,7 @@ export interface ButtonProps
   @if (!asChild()) {
   <button
     [type]="type()"
-    [class]="classes()"
+    [class]="computedClasses()"
     [disabled]="disabled()"
     [attr.aria-disabled]="disabled()"
   >
@@ -78,40 +78,16 @@ export interface ButtonProps
   `,
 })
 export class ButtonComponent {
-  /* ---------------- Inputs (signals) ---------------- */
-  variant = signal<ButtonProps['variant']>('default');
-  size = signal<ButtonProps['size']>('default');
-  disabled = signal(false);
-  type = signal<'button' | 'submit' | 'reset'>('button');
-  asChild = signal(false);
-  class = signal('');
 
-  @Input({ alias: 'variant' }) set _variant(v: ButtonProps['variant']) {
-    this.variant.set(v ?? 'default');
-  }
-
-  @Input({ alias: 'size' }) set _size(v: ButtonProps['size']) {
-    this.size.set(v ?? 'default');
-  }
-
-   @Input({ alias: 'disabled' }) set _disabled(v: boolean) {
-    this.disabled.set(!!v);
-  }
-
-  @Input({ alias: 'type' }) set _type(v: 'button' | 'submit' | 'reset') {
-    this.type.set(v ?? 'button');
-  }
-
-  @Input({ alias: 'asChild' }) set _asChild(v: boolean) {
-    this.asChild.set(!!v);
-  }
-
-  @Input({ alias: 'class' }) set _class(v: string) {
-    this.class.set(v ?? '');
-  }
+  variant = input<ButtonProps['variant']>('default');
+  size = input<ButtonProps['size']>('default');
+  type = input<'button' | 'submit' | 'reset'>('button');
+  disabled = input(false, { transform: booleanAttribute });
+  asChild = input(false, { transform: booleanAttribute });
+  class = input('');
 
   /** @ignore */
-  classes = computed(() =>
+  computedClasses = computed(() =>
     cn(
       buttonVariants({
         variant: this.variant(),
@@ -132,7 +108,7 @@ export class ButtonComponent {
 
       const native = el.nativeElement as HTMLElement;
 
-      native.className = cn(native.className, this.classes());
+      native.className = cn(native.className, this.computedClasses());
 
       if (this.disabled()) {
         native.setAttribute('aria-disabled', 'true');
