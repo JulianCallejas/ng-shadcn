@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
@@ -6,6 +6,7 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-alert-icon',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
     <div [class]="computedClasses()">
@@ -14,13 +15,13 @@ import { cn } from '@packages/utils/src/public-api';
   `
 })
 export class AlertIconComponent {
-  @Input() class = '';
+  class = input('');
 
   /** @ignore */
-  computedClasses(): string {
-    return cn(
+  computedClasses = computed(()=>
+    cn(
       'h-4 w-4',
       this.class
     )
-  }
+  );
 }

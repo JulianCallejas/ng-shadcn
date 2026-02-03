@@ -1,11 +1,26 @@
-import { Component, Input, Output, EventEmitter, booleanAttribute, ContentChild, AfterContentInit, signal, ElementRef, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
+import { 
+  Component, 
+  Input, 
+  Output, 
+  EventEmitter, 
+  signal, 
+  ElementRef, 
+  inject, 
+  DestroyRef, 
+  ChangeDetectionStrategy, 
+  input, 
+  computed, 
+  contentChild, 
+  effect, 
+  booleanAttribute
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AlertIconComponent } from './alert-icon.component';
 import { AlertActionComponent } from './alert-action.component';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 
 const alertVariants = cva(
   'relative w-full rounded-lg border p-4',
@@ -13,7 +28,7 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: 'bg-background text-foreground border-border',
-        destructive: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
+        destructive: 'border-destructive/50 text-red-800 bg-red-50 dark:border-destructive dark:bg-red-950/30 dark:text-red-300 [&>svg]:text-red-600 dark:[&>svg]:text-red-300',
         warning: 'border-yellow-500/50 text-yellow-800 bg-yellow-50 dark:border-yellow-500 dark:text-yellow-300 dark:bg-yellow-950/30 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',
         success: 'border-green-500/50 text-green-800 bg-green-50 dark:border-green-500 dark:text-green-300 dark:bg-green-950/30 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',
         info: 'border-blue-500/50 text-blue-800 bg-blue-50 dark:border-blue-500 dark:text-blue-300 dark:bg-blue-950/30 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',
@@ -53,11 +68,9 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
     0% { opacity: 100%; }
     99% { 
       opacity: 0%; 
-      height: 0;
     }
     100% { 
       opacity: 0%;
-      height: 0;
       display: none;
     }
   }
@@ -75,11 +88,11 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
     <div 
       [class]="computedClasses()"
       role="alert"
-      [class.alert-out]="isDismissed() && fade"
-      [class.alert-hide]="isDismissed() && !fade"
-      [class.transition-opacity]="fade"
-      [class.duration-300]="fade"
-      [class.ease-in-out]="fade"
+      [class.alert-out]="isDismissed() && fade()"
+      [class.alert-hide]="isDismissed() && !fade()"
+      [class.transition-opacity]="fade()"
+      [class.duration-300]="fade()"
+      [class.ease-in-out]="fade()"
       [attr.aria-label]="ariaLabel"
       [attr.aria-describedby]="ariaDescribedBy"
       [attr.role]="role"
@@ -89,9 +102,9 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
     >
       <div class="flex gap-3">
         <!-- Icon -->
-        @if (showIcon) {
+        @if (showIcon()) {
           <div class="shrink-0">
-            @if (hasCustomIcon) {
+            @if (hasCustomIcon()) {
               <ng-content select="ng-shadcn-alert-icon"></ng-content>
             } @else {
               <ng-shadcn-alert-icon class="mt-0.5">
@@ -101,34 +114,48 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    *ngIf="variant === 'destructive'"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                  />
-                  <path
-                    *ngIf="variant === 'warning'"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                  />
-                  <path
-                    *ngIf="variant === 'success'"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    *ngIf="variant === 'info' || variant === 'default'"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                @switch (variant()) {
+                  @case ('destructive') {
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    />
+                  }
+                  @case ('warning') {
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    />
+                  }
+                  @case ('success') {
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  }
+                  @case ('info') {
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  }
+                  @default {
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  }
+                }  
                 </svg>
               </ng-shadcn-alert-icon>
             }
@@ -142,7 +169,7 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
         </div>
 
         <!-- Dismiss button -->
-        @if (dismissible) {
+        @if (dismissible()) {
           <button 
             type="button"
             class="-mx-1.5 -my-1.5 p-1.5 inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-ring"
@@ -156,27 +183,26 @@ export type AlertVariant = VariantProps<typeof alertVariants>['variant'];
           </button>
         }
       </div>
-
       <!-- Action button -->
       <ng-content select="ng-shadcn-alert-action"></ng-content>
     </div>
   `,
 })
-export class AlertComponent implements AfterContentInit {
+export class AlertComponent {
   /** The variant of the alert */
-  @Input() variant: AlertVariant = 'default';
+  variant = input<AlertVariant>('default');
   
   /** Whether the alert can be dismissed */
-  @Input({ transform: booleanAttribute }) dismissible = false;
+  dismissible = input(false, { transform: booleanAttribute });
   
   /** Whether to use fade animation when dismissing */
-  @Input({ transform: booleanAttribute }) fade = false;
+  fade = input(false, { transform: booleanAttribute });
   
   /** Whether to show the icon */
-  @Input({ transform: booleanAttribute }) showIcon = true;
+  showIcon = input(true, { transform: booleanAttribute });
   
   /** Additional CSS classes */
-  @Input() class = '';
+  class = input<string>('');
   
   /** ARIA live region setting */
   @Input() ariaLive: 'polite' | 'assertive' | 'off' = 'polite';
@@ -203,56 +229,54 @@ export class AlertComponent implements AfterContentInit {
   isDismissed = signal(false);
 
   /** @ignore */
-  hasCustomIcon = false;
+  hasCustomIcon = computed(()=> !!this.alertIcon());
 
   /** @ignore */
   private destroyRef = inject(DestroyRef); // ¡IMPORTANTE!
-
   
   /**
    * Reference to the alert icon component if it exists.
    * Only used for generating the Storybook documentation.
    */
-  @ContentChild(AlertIconComponent) private alertIcon?: AlertIconComponent;
+  private alertIcon = contentChild(AlertIconComponent);
 
   /**
    * Reference to the alert action component if it exists.
    * Only used for generating the Storybook documentation.
    */
-  @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
+  private alertAction = contentChild(AlertActionComponent);
+  // @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
   
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    effect(onCleanup => {
+      const action = this.alertAction();
+      if (!action) return;
 
-  /** @ignore */
-  ngAfterContentInit() {
-    this.hasCustomIcon = !!this.alertIcon;
-    
-    // Forward action button clicks to the parent
-    if (this.alertAction) {
-      this.alertAction.onClick
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(event => {
+      const sub = action.onClick.subscribe(event => {
         this.onAlertAction.emit(event);
-        if (this.dismissible) {
+
+        if (this.dismissible()) {
           this.dismiss();
         }
       });
-    }
+
+      onCleanup(() => sub.unsubscribe());
+    });
   }
 
   /**
    * Computes the CSS classes for the alert based on inputs
    */
   /** @ignore */
-  computedClasses(): string {
-    return cn(
-      alertVariants({ variant: this.variant }),
-      this.class,
+  computedClasses = computed(() =>
+    cn(
+      alertVariants({ variant: this.variant() }),
+      this.class(),
       {
-        'pr-10': this.dismissible || this.alertAction
+        'pr-10': this.dismissible() || !!this.alertAction()
       }
-    );
-  }
+    )
+  );
 
   /** @ignore */
   dismiss() {

@@ -170,7 +170,16 @@ Then use the components in your templates:
         defaultValue: { summary: 'false' },
       },
     },
+    showIcon: {
+      control: 'boolean',
+      description: 'Whether to show the icon',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+      },
+    },
     onAlertAction: {
+      control: false,
       action: 'onAlertAction',
       description: 'Event emitted when the action button is clicked',
       table: {
@@ -178,17 +187,21 @@ Then use the components in your templates:
       },
     },
     dismissed: {
+      control: false,
       action: 'dismissed',
       description: 'Event emitted when the alert is dismissed',
       table: {
         type: { summary: 'EventEmitter<void>' },
       },
     },
+
   },
   args: {
     variant: 'default',
     dismissible: false,
     fade: false,
+    class: '',
+    showIcon: true
   },
 };
 
@@ -201,7 +214,7 @@ export const Default: Story = {
     props: args,
     template: `
       <div class="w-125">
-        <ng-shadcn-alert [variant]="variant" [dismissible]="dismissible" [fade]="fade" (dismissed)="dismissed()">
+        <ng-shadcn-alert [class]="class" [variant]="variant" [showIcon]="showIcon" [dismissible]="dismissible" [fade]="fade" (dismissed)="dismissed()">
           <ng-shadcn-alert-title>Alert Title</ng-shadcn-alert-title>
           <ng-shadcn-alert-content>
             This is a default alert with some information.
@@ -267,9 +280,7 @@ export const Dismissible: Story = {
     template: `
       <div class="w-125">
         <ng-shadcn-alert 
-          [variant]="variant" 
-          [dismissible]="dismissible" 
-          [fade]="fade" 
+          dismissible
           (dismissed)="dismissed()"
         >
           <ng-shadcn-alert-title>Dismissible Alert</ng-shadcn-alert-title>
@@ -313,15 +324,15 @@ export const Icons: Story = {
   render: () => ({
     template: `
       <div class="flex flex-col gap-4 w-125">
-        <ng-shadcn-alert variant="success">
+        <ng-shadcn-alert variant="info">
           <ng-shadcn-alert-icon>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
           </ng-shadcn-alert-icon>
-          <ng-shadcn-alert-title>Success</ng-shadcn-alert-title>
+          <ng-shadcn-alert-title>Info</ng-shadcn-alert-title>
           <ng-shadcn-alert-content>
-            Operation completed successfully with a custom icon.
+            Info Alert with a custom icon.
           </ng-shadcn-alert-content>
         </ng-shadcn-alert>
 
@@ -378,9 +389,8 @@ export const WithFade: Story = {
     template: `
       <div class="w-125">
         <ng-shadcn-alert 
-          [variant]="variant" 
-          [dismissible]="dismissible" 
-          [fade]="fade" 
+          dismissible
+          fade
           (dismissed)="dismissed()"
         >
           <ng-shadcn-alert-title>Fade Effect</ng-shadcn-alert-title>
