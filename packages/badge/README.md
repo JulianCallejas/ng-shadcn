@@ -65,23 +65,16 @@ export class MyComponent {}
 ### Dismissible Badge
 
 ```typescript
-// Basic dismissible badge (removes from DOM)
+// Basic dismissible badge
 <ng-shadcn-badge 
-  [dismissible]="'remove'"
+  [dismissible]="true"
   (dismissed)="onBadgeDismiss()">
-  Removable (removes from DOM)
-</ng-shadcn-badge>
-
-// Dismissible with hide behavior (hides but keeps in DOM)
-<ng-shadcn-badge
-  [dismissible]="'hide'"
-  (dismissed)="onBadgeDismiss()">
-  Hides when dismissed
+  Dismissible badge
 </ng-shadcn-badge>
 
 // With fade animation on dismiss
 <ng-shadcn-badge
-  [dismissible]="'remove'"
+  [dismissible]="true"
   [fade]="true"
   (dismissed)="onBadgeDismiss()">
   Fade out on dismiss
@@ -121,8 +114,8 @@ export class MyComponent {}
 |----------|------|---------|-------------|
 | `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'success' \| 'warning' \| 'info'` | `'default'` | Badge style variant |
 | `size` | `'sm' \| 'default' \| 'lg'` | `'default'` | Badge size |
-| `dismissible` | `'hide' | 'remove'` | `''` | Dismiss behavior: 'hide' keeps element in DOM but hidden, 'remove' removes element from DOM |
-| `fade` | `boolean` | `false` | Whether to use fade animation when dismissing (only applies when `dismissible` is set) |
+| `dismissible` | `boolean` | `false` | When true, shows a close button that removes the badge from the DOM when clicked |
+| `fade` | `boolean` | `false` | Whether to use fade animation when dismissing (only applies when `dismissible` is true) |
 | `class` | `string` | `''` | Additional CSS classes |
 | `role` | `string` | `'status'` | ARIA role attribute |
 | `ariaLabel` | `string` | `undefined` | ARIA label for accessibility |

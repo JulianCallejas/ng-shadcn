@@ -104,7 +104,7 @@ import { CardComponent } from '@packages/card/src/public-api';
             </svg>
             </ng-shadcn-alert-icon>
             <ng-shadcn-alert-title class="text-white">Custom Icon Alert</ng-shadcn-alert-title>
-            <ng-shadcn-alert-content class="bg-white bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]">
+            <ng-shadcn-alert-content class="bg-white bg-clip-text text-white">
               This alert shows how to use a custom icon with the alert component.
               bg-white mix-blend-difference bg-clip-text text-transparent invert-[1] grayscale-[1] contrast-[9]
             </ng-shadcn-alert-content>

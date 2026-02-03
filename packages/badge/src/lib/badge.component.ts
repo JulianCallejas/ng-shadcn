@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal, ContentChild, ElementRef, booleanAttribute, Output, EventEmitter, inject, DestroyRef, AfterContentInit, AfterContentChecked, contentChild } from '@angular/core';
+import { Component, Input, computed, signal, ElementRef, booleanAttribute, Output, EventEmitter, inject, DestroyRef, input, ChangeDetectionStrategy, contentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 // import { cn } from '@ng-shadcn/utils';
@@ -30,9 +30,7 @@ const badgeVariants = cva(
   }
 );
 
-export interface BadgeProps extends VariantProps<typeof badgeVariants> {
-  dismissible?: boolean;
-}
+export type BadgeProps = VariantProps<typeof badgeVariants>;
 
 /**
  * Badge component for status indicators and labels
@@ -41,6 +39,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
 @Component({
   selector: 'ng-shadcn-badge',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   styles: `
   @keyframes badge-fade-out {
@@ -89,7 +88,7 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
     
 
       <!-- Dismiss button -->
-      @if (!!dismissible()) {
+      @if (dismissible()) {
         <button
           type="button"
           class="ml-1 shrink-0 rounded-full p-0.5 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
@@ -116,37 +115,11 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
 })
 export class BadgeComponent {
 
-  @Input({ alias: 'variant' }) set _variant(v: BadgeProps['variant']) {
-    this.variant.set(v ?? 'default');
-  }
-
-  @Input({ alias: 'size' }) set _size(v: BadgeProps['size']) {
-    this.size.set(v ?? 'default');
-  }
-
-  @Input({ alias: 'dismissible'})
-  set _dismissible(v: 'hide' | 'remove') {
-    if (!v) {
-      this.dismissible.set('');
-      return;
-    }
-    this.dismissible.set(v);
-  }
-
-  @Input({ alias: 'fade', transform: booleanAttribute })
-  set _fade(v: boolean) {
-    this.fade.set(!!v);
-  }
-
-  @Input({ alias: 'class' }) set _class(v: string) {
-    this.class.set(v ?? '');
-  }
-  
-  variant = signal<BadgeProps['variant']>('default');
-  size = signal<BadgeProps['size']>('default');
-  dismissible = signal<'hide' | 'remove'| ''>('');
-  fade = signal(false);
-  class = signal('');
+  variant = input<BadgeProps['variant']>('default');
+  size = input<BadgeProps['size']>('default');
+  dismissible = input(false, { transform: booleanAttribute });
+  fade = input(false, { transform: booleanAttribute });
+  class = input('');
 
 
   @Input() role = 'status';
@@ -160,7 +133,7 @@ export class BadgeComponent {
   private destroyRef = inject(DestroyRef); 
   
   /** @ignore */
-  private dismissTimeout?: number;
+  private dismissTimeout?: ReturnType<typeof setTimeout>;
 
   // Content queries for projected icons
   
@@ -209,21 +182,14 @@ export class BadgeComponent {
     this.isDismissed.set(true);
 
     if (this.fade()) {
-      const pause = (ms) => new Promise(res => setTimeout(res, ms));
+      const pause = (ms) => new Promise(res => {
+        this.dismissTimeout = setTimeout(res, ms)
+        return this.dismissTimeout;
+      });
       await pause(200); 
     }
     this.dismissed.emit();
-    if (this.dismissible() === 'remove') {
-      this.removeFromDOM();
-    }
+    this.elementRef.nativeElement.remove();
   }
 
-  /** @ignore */
-  private removeFromDOM(): void {
-    const element = this.elementRef.nativeElement;
-    if (element && element.parentNode) {
-      element.parentNode.removeChild(element);
-    }
-  }
-  
 }

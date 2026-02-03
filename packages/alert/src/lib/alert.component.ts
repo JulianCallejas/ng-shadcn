@@ -233,6 +233,9 @@ export class AlertComponent {
 
   /** @ignore */
   private destroyRef = inject(DestroyRef); // ¡IMPORTANTE!
+
+    /** @ignore */
+  private dismissTimeout?: ReturnType<typeof setTimeout>;
   
   /**
    * Reference to the alert icon component if it exists.
@@ -245,9 +248,14 @@ export class AlertComponent {
    * Only used for generating the Storybook documentation.
    */
   private alertAction = contentChild(AlertActionComponent);
-  // @ContentChild(AlertActionComponent) private alertAction?: AlertActionComponent;
   
   constructor(private elementRef: ElementRef) {
+    this.destroyRef.onDestroy(() => {
+      if (this.dismissTimeout) {
+        window.clearTimeout(this.dismissTimeout);
+      }
+    });
+    
     effect(onCleanup => {
       const action = this.alertAction();
       if (!action) return;
@@ -279,16 +287,19 @@ export class AlertComponent {
   );
 
   /** @ignore */
-  dismiss() {
+  async dismiss() {
     this.isDismissed.set(true);
-    this.dismissed.emit();
     
-    setTimeout(() => {
-      if (!this.destroyRef.destroyed) {
-        this.isDismissed.set(false);
-        this.elementRef.nativeElement.remove();
-      }
-    }, 200);
+    if (this.fade()){
+      const pause = (ms) => new Promise(res => {
+        this.dismissTimeout = setTimeout(res, ms)
+        return this.dismissTimeout;
+      });
+      await pause(200);
+    }
+    
+    this.dismissed.emit();
+    this.elementRef.nativeElement.remove();
   }
     
 }

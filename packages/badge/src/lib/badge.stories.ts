@@ -104,15 +104,6 @@ Then use the component in your templates:
     variant: {
       control: 'select',
       options: ['default', 'secondary', 'destructive', 'outline', 'success', 'warning', 'info'],
-      mapping: {
-        default: signal('default'),
-        secondary: signal('secondary'),
-        destructive: signal('destructive'),
-        outline: signal('outline'),
-        success: signal('success'),
-        warning: signal('warning'),
-        info: signal('info'),
-      },
       description: 'The visual style variant of the badge',
       table:{
         defaultValue: { summary: 'default' },
@@ -124,11 +115,6 @@ Then use the component in your templates:
     size: {
       control: 'radio',
       options: ['sm', 'default', 'lg'],
-      mapping: {
-        sm: signal('sm'),
-        default: signal('default'),
-        lg: signal('lg'),
-      },
       description: 'The size of the badge',
       table:{
         defaultValue: { summary: 'default' },
@@ -138,31 +124,27 @@ Then use the component in your templates:
       },
     },
     dismissible: {
-      control: 'radio',
-      options: ['remove', 'hide', false],
-      mapping: {
-        remove: signal('remove'),
-        hide: signal('hide'),
-        false: signal(false),
-      },
+      control: 'boolean',
       description: 'Whether the badge can be dismissed',
       table:{
         defaultValue: { summary: 'false' },
         type: {
-          summary: '"remove" | "hide" | false',
+          summary: 'true | false',
         },
       }
     },
     fade: {
       control: 'boolean',
-      mapping: {
-        true: signal(true),
-        false: signal(false),
-      },
       description: 'Whether the badge has a fade effect when dismissed. Useful for indicating that the badge is "deleted" or "removed" visually.',
+      table:{
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'true | false',
+        },
+      },
     },
     class: {
-      control: false,
+      control: 'text',
       description: 'Additional CSS classes',
     },
     role: {
@@ -182,10 +164,13 @@ Then use the component in your templates:
     },
   },
   args: {
-    variant: signal('default'),
-    size: signal('default'),
-    dismissible: signal(''),
-    fade: signal(false),
+    variant: 'default',
+    size: 'default',
+    dismissible: false,
+    fade: false,
+    class: '',
+    role: 'status',
+    ariaLabel: 'badge',
   },
 };
 
@@ -197,10 +182,11 @@ export const Default: Story = {
     props: args,
     template: `
     <ng-shadcn-badge 
-      [variant]="variant()" 
-      [size]="size()" 
-      [dismissible]="dismissible()" 
-      [fade]="fade()" 
+      [variant]="variant"
+      [class]="class"
+      [size]="size" 
+      [dismissible]="dismissible" 
+      [fade]="fade" 
       [role]="role" 
       [ariaLabel]="ariaLabel"
     >
@@ -237,18 +223,15 @@ export const Size: Story = {
     template: `
       <div class="flex flex-col gap-4">
         <div class="flex items-baseline gap-2">
-          <ng-shadcn-badge [variant]="variant" [dismissible]="dismissible" size="sm">Small Badge</ng-shadcn-badge>
-          <span class="text-sm text-muted-foreground">sm</span>
+          <ng-shadcn-badge variant="warning" size="sm">Small Badge (sm)</ng-shadcn-badge>
         </div>
         
         <div class="flex items-baseline gap-2">
-          <ng-shadcn-badge [variant]="variant" [dismissible]="dismissible" size="default">Default Badge</ng-shadcn-badge>
-          <span class="text-sm text-muted-foreground">default</span>
+          <ng-shadcn-badge variant="info" size="default">Default Badge (default)</ng-shadcn-badge>
         </div>
         
         <div class="flex items-baseline gap-2">
-          <ng-shadcn-badge [variant]="variant" [dismissible]="dismissible" size="lg">Large Badge</ng-shadcn-badge>
-          <span class="text-sm text-muted-foreground">lg</span>
+          <ng-shadcn-badge variant="destructive" size="lg">Large Badge (lg)</ng-shadcn-badge>
         </div>
       </div>
     `,
@@ -386,7 +369,7 @@ export const Dismissible: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example of a dismissible badge. The `dismissible` attribute can be set to "remove" or "hide". "remove" will remove the badge from the DOM when dismissed, while "hide" will hide the badge with css classes. The badge emits a `dismissed` event when the badge is dismissed.',
+        story: 'Example of a dismissible badge. The `dismissible` attribute can be set to `true` or `false`. When `true`, the badge will be destroyed from the DOM when dismissed. The badge emits a `dismissed` event when the badge is dismissed.',
       },
     },
   },
