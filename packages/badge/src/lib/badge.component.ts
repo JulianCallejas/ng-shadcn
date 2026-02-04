@@ -30,7 +30,7 @@ const badgeVariants = cva(
   }
 );
 
-export type BadgeProps = VariantProps<typeof badgeVariants>;
+export type BadgeVariantProps = VariantProps<typeof badgeVariants>;
 
 /**
  * Badge component for status indicators and labels
@@ -115,8 +115,8 @@ export type BadgeProps = VariantProps<typeof badgeVariants>;
 })
 export class BadgeComponent {
 
-  variant = input<BadgeProps['variant']>('default');
-  size = input<BadgeProps['size']>('default');
+  variant = input<BadgeVariantProps['variant']>('default');
+  size = input<BadgeVariantProps['size']>('default');
   dismissible = input(false, { transform: booleanAttribute });
   fade = input(false, { transform: booleanAttribute });
   class = input('');

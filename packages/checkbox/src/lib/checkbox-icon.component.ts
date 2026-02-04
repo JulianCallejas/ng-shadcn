@@ -1,11 +1,12 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, input } from "@angular/core";
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
 @Component({
   selector: 'ng-shadcn-checkbox-icon',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   providers: [],
   template: `
@@ -15,14 +16,14 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CheckboxIconComponent  {
-  @Input() class = '';
+  class = input<string>('');
     
   // Computed properties
   /** @ignore */
   computedClasses = computed(() =>
     cn(
         'w-full h-full overflow-hidden text-current',
-        this.class
+        this.class()
     )
   );
 };

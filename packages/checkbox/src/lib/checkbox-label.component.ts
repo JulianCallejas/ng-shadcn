@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, Output } from "@angular/core";
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
@@ -7,6 +7,7 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-checkbox-label',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   providers: [],
   template: `
@@ -22,7 +23,7 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CheckboxLabelComponent  {
-  @Input() class = '';
+  class = input<string>('');
     
   /** @ignore */
   id = '';
@@ -30,7 +31,8 @@ export class CheckboxLabelComponent  {
   /** @ignore */
   size = 'default';
 
-  @Output() toggleCheckbox = new EventEmitter<string>();
+  /** @ignore */
+  toggleCheckbox = new EventEmitter<string>();
 
   /** @ignore */
   handleClick(): void {
@@ -43,7 +45,7 @@ export class CheckboxLabelComponent  {
   computedClasses = computed(() =>
     cn(
         'text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer',
-        this.class
+        this.class()
     )
   );
 };

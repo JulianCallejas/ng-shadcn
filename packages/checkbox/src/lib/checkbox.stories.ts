@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { Component, computed, OnInit, signal } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {
   AlertComponent,
@@ -36,6 +36,7 @@ import { ButtonComponent } from "@packages/button/src/public-api";
           <ng-shadcn-checkbox
             id="controlledCheckboxExample"
             [checked]="checked()"
+            [indeterminate]="indeterminateState()"
             (checkedChange)="toggleCheckbox()"
           >
             <ng-shadcn-checkbox-label>Controlled checkbox</ng-shadcn-checkbox-label>
@@ -44,11 +45,18 @@ import { ButtonComponent } from "@packages/button/src/public-api";
           <p class="text-sm text-muted-foreground mt-2">
             Current state: {{ checked() ? 'Checked' : 'Unchecked' }}
           </p>
-          <ng-shadcn-button
-            (clicked)="checked.set(!checked())"
-          >
-            Toggle Checked State
-          </ng-shadcn-button>
+          <div class="flex gap-2 flex-wrap">
+            <ng-shadcn-button
+              (click)="toggleCheckbox()"
+            >
+              Toggle Checked State
+            </ng-shadcn-button>
+            <ng-shadcn-button
+              (click)="toggleCheckboxIndeterminate()"
+            >
+              Indeterminate
+            </ng-shadcn-button>
+          </div>
         </div>
 
         <div class="pt-4 border-t">
@@ -65,16 +73,18 @@ import { ButtonComponent } from "@packages/button/src/public-api";
   `,
 })
 export class ControlledCheckboxExampleComponent {
-  checked = signal(false);
+  checked = signal(true);
+  indeterminateState = signal(false);
   toggleCheckbox() {
     this.checked.set(!this.checked());
+    this.indeterminateState.set(false);
+  }
+  toggleCheckboxIndeterminate() {
+    this.indeterminateState.set(!this.indeterminateState());
   }
 }
 
-
-
-
-// Create a wrapper component for reactive form example
+// Wrapper component for reactive form example
 @Component({
   selector: "reactive-form-example",
   standalone: true,
@@ -243,46 +253,28 @@ const meta: Meta<CheckboxComponent> = {
   title: 'Components/Checkbox',
   component: CheckboxComponent,
   render: (args) => {
-    const checked = signal(args.checked || false);
-    const disabled = signal(args.disabled || false);
-    const indeterminate = signal(args.indeterminate || false);
-    
     return {
       props: {
         ...args,
-        checked,
-        disabled,
-        indeterminate,
-        onToggle: () => {
-          if (!disabled()) {
-            checked.set(!checked());
-            indeterminate.set(false);
-            args.checkedChange?.(!!checked());
-          }
-        },
-        onCheckedChange: (value: boolean) => {
-          checked.set(value);
-          indeterminate.set(false);
-          args.checkedChange?.(!!value);
-        }
       },
       template: `
         <ng-shadcn-checkbox
           [id]="id"
-          [checked]="checked()"
-          [disabled]="disabled()"
-          [indeterminate]="indeterminate()"
+          [checked]="checked"
+          [disabled]="disabled"
+          [indeterminate]="indeterminate"
           [ariaLabel]="ariaLabel"
           [ariaDescribedby]="ariaDescribedby"
           [size]="size"
-          (checkedChange)="onCheckedChange($event)"
+          (checkedChange)="handleCheckedChange($event)"
           [class]="class"
+          [checkedClass]="checkedClass"
         >
-          <ng-shadcn-checkbox-label (toggleCheckbox)="onToggle()">
-            <ng-content select="ng-shadcn-checkbox-label"></ng-content>
+          <ng-shadcn-checkbox-label>
+            Label for the Chekcbox
           </ng-shadcn-checkbox-label>
           <ng-shadcn-checkbox-description>
-            <ng-content select="ng-shadcn-checkbox-description"></ng-content>
+            Description text for the checkbox
           </ng-shadcn-checkbox-description>
         </ng-shadcn-checkbox>
       `
@@ -446,19 +438,43 @@ export class SettingsComponent implements OnInit {
     checked: {
       control: "boolean",
       description: "Whether the checkbox is checked",
+      table:{
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'true | false',
+        },
+      }
     },
     disabled: {
       control: "boolean",
       description: "Whether the checkbox is disabled",
+      table:{
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'true | false',
+        },
+      }
     },
     indeterminate: {
       control: "boolean",
       description: "Whether the checkbox is in an indeterminate state",
+      table:{
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'true | false',
+        },
+      }
     },
     size: {
       control: "select",
       options: ["default", "sm", "lg"],
       description: "Size of the checkbox",
+      table:{
+        defaultValue: { summary: 'default' },
+        type: {
+          summary: 'sm | default | lg',
+        },
+      },
     },
     ariaLabel: {
       control: "text",
@@ -468,6 +484,59 @@ export class SettingsComponent implements OnInit {
       control: "text",
       description: "ARIA describedby for additional accessibility context",
     },
+    class: {
+      control: "text",
+      description: "Custom class for the checkbox",
+      table:{
+        defaultValue: { summary: '' },
+        type: {
+          summary: 'string',
+        },
+      },
+    },
+    checkedClass: {
+      control: "text",
+      description: "Custom class for the checkbox when it is in the checked state. This is useful for applying different styles when the checkbox is selected.",
+      table:{
+        defaultValue: { summary: '' },
+        type: {
+          summary: 'string',
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "ID for the checkbox",
+    },
+    customIcon: {
+      control: false,
+      table: {
+        defaultValue: { summary: '<ng-shadcn-checkbox-icon>' },
+        type: {
+          summary: 'CheckboxIconComponent',
+        },
+      }
+    },
+    labelComponent: {
+      control: false,
+      table: {
+        defaultValue: { summary: '<ng-shadcn-checkbox-label>' },
+        type: {
+          summary: 'CheckboxLabelComponent',
+        },
+      }
+    },
+    descriptionComponent: {
+      control: false,
+      table: {
+        defaultValue: { summary: '<ng-shadcn-checkbox-description>' },
+        type: {
+          summary: 'CheckboxDescriptionComponent',
+        },
+      }
+    }
+
+
   },
   subcomponents: {
     CheckboxIconComponent,
@@ -479,6 +548,8 @@ export class SettingsComponent implements OnInit {
     disabled: false,
     indeterminate: false,
     size: "default",
+    class: '',
+    checkedClass: '',
   },
 };
 
@@ -494,7 +565,6 @@ export const Default: Story = {
     const checked = signal(args.checked || false);
     const disabled = signal(args.disabled || false);
     const indeterminate = signal(args.indeterminate || false);
-    
     return {
       props: {
         ...args,
@@ -521,6 +591,7 @@ export const Default: Story = {
               [size]="size"
               (checkedChange)="checked.set($event)"
               [class]="class"
+              [checkedClass]="checkedClass"
             >
             </ng-shadcn-checkbox>
         </div>
@@ -624,84 +695,6 @@ export const Checked: Story = {
   },
 };
 
-export const Controlled: Story = {
-  render: () => ({
-    moduleMetadata: {
-      imports: [ControlledCheckboxExampleComponent],
-    },
-    template: `
-      <div class="flex justify-center p-6">
-        <controlled-checkbox-example></controlled-checkbox-example>
-      </div>
-    `,
-  }),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Fully controlled checkbox with two-way binding and manual state management.",
-      },
-      source: {
-        type: "code",
-        language: "typescript",
-        code: `
-      @Component({
-  selector: "controlled-checkbox-example",
-  standalone: true,
-  imports: [
-    CommonModule,
-    CheckboxComponent,
-    CheckboxDescriptionComponent,
-    CheckboxLabelComponent,
-    ButtonComponent
-  ],
-  template: \`
-  <div class="space-y-6">
-        <div class="space-y-2">
-          <h3 class="font-medium mb-2">Controlled Checkbox</h3>
-          <ng-shadcn-checkbox
-            id="controlledCheckboxExample"
-            [checked]="checked()"
-            (checkedChange)="toggleCheckbox()"
-          >
-            <ng-shadcn-checkbox-label>Controlled checkbox</ng-shadcn-checkbox-label>
-            <ng-shadcn-checkbox-description>State is managed by the parent component</ng-shadcn-checkbox-description>
-          </ng-shadcn-checkbox>
-          <p class="text-sm text-muted-foreground mt-2">
-            Current state: {{ checked() ? 'Checked' : 'Unchecked' }}
-          </p>
-          <ng-shadcn-button
-            (clicked)="checked.set(!checked())"
-          >
-            Toggle Checked State
-          </ng-shadcn-button>
-        </div>
-
-        <div class="pt-4 border-t">
-          <h3 class="font-medium mb-2">Uncontrolled Checkbox</h3>
-          <ng-shadcn-checkbox
-            id="ucontrolledCheckboxExample"
-          >
-            <ng-shadcn-checkbox-label>Uncontrolled checkbox</ng-shadcn-checkbox-label>
-            <ng-shadcn-checkbox-description>State is managed internally</ng-shadcn-checkbox-description>
-          </ng-shadcn-checkbox>
-        </div>
-      </div>
-    
-  \`,
-})
-export class ControlledCheckboxExampleComponent {
-  checked = signal(false);
-  toggleCheckbox() {
-    this.checked.set(!this.checked());
-  }
-}
-    `
-     }
-    },
-  },
-};
-
 export const Indeterminate: Story = {
   args: {
     indeterminate: true,
@@ -727,6 +720,96 @@ export const Indeterminate: Story = {
         story:
           "Checkbox in indeterminate state, typically used for parent checkboxes with mixed child states.",
       },
+    },
+  },
+};
+
+export const Controlled: Story = {
+  render: () => ({
+    moduleMetadata: {
+      imports: [ControlledCheckboxExampleComponent],
+    },
+    template: `
+      <div class="flex justify-center p-6">
+        <controlled-checkbox-example></controlled-checkbox-example>
+      </div>
+    `,
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Fully controlled checkbox with two-way binding and manual state management.",
+      },
+      source: {
+        type: "code",
+        language: "typescript",
+        code: `
+@Component({
+  selector: "controlled-checkbox-example",
+  standalone: true,
+  imports: [
+    CommonModule,
+    CheckboxComponent,
+    CheckboxDescriptionComponent,
+    CheckboxLabelComponent,
+    ButtonComponent
+  ],
+  template: \`
+  <div class="space-y-6">
+        <div class="space-y-2">
+          <h3 class="font-medium mb-2">Controlled Checkbox</h3>
+          <ng-shadcn-checkbox
+            id="controlledCheckboxExample"
+            [checked]="checked()"
+            [indeterminate]="indeterminateState()"
+            (checkedChange)="toggleCheckbox()"
+          >
+            <ng-shadcn-checkbox-label>Controlled checkbox</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>State is managed by the parent component</ng-shadcn-checkbox-description>
+          </ng-shadcn-checkbox>
+          <p class="text-sm text-muted-foreground mt-2">
+            Current state: {{ checked() ? 'Checked' : 'Unchecked' }}
+          </p>
+          <div class="flex gap-2 flex-wrap">
+            <ng-shadcn-button
+              (click)="toggleCheckbox()"
+            >
+              Toggle Checked State
+            </ng-shadcn-button>
+            <ng-shadcn-button
+              (click)="toggleCheckboxIndeterminate()"
+            >
+              Indeterminate
+            </ng-shadcn-button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t">
+          <h3 class="font-medium mb-2">Uncontrolled Checkbox</h3>
+          <ng-shadcn-checkbox
+            id="ucontrolledCheckboxExample"
+          >
+            <ng-shadcn-checkbox-label>Uncontrolled checkbox</ng-shadcn-checkbox-label>
+            <ng-shadcn-checkbox-description>State is managed internally</ng-shadcn-checkbox-description>
+          </ng-shadcn-checkbox>
+        </div>
+      </div>
+    
+  \`,
+})
+export class ControlledCheckboxExampleComponent {
+  checked = signal(true);
+  indeterminateState = signal(false);
+  toggleCheckbox() {
+    this.checked.set(!this.checked());
+    this.indeterminateState.set(false);
+  }
+  toggleCheckboxIndeterminate() {
+    this.indeterminateState.set(!this.indeterminateState());
+  }
+}`
+     }
     },
   },
 };
@@ -1028,6 +1111,7 @@ export const CustomCheckbox: Story = {
             checked
             checkedClass="bg-green-500 border-green-500"
             ariaLabel="Custom styled checkbox"
+            class="rounded-full"
           >
             <ng-shadcn-checkbox-icon>
               <svg 
