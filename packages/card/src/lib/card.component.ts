@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
@@ -10,20 +10,22 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-card',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
-    <div [ngClass]="computedClasses">
+    <div [ngClass]="computedClasses()">
       <ng-content></ng-content>
     </div>
   `,
 })
 export class CardComponent {
-  @Input() class = '';
+  class = input<string>('');
 
-  get computedClasses(): string {
-    return cn(
+  /** @ignore */
+  computedClasses = computed(() =>
+    cn(
       'rounded-lg border bg-card text-card-foreground shadow-sm',
-      this.class
-    );
-  }
+      this.class()
+    )
+  );
 }
