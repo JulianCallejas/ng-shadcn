@@ -17,7 +17,14 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class DialogHeaderComponent {
-  class = input('');
+  
+  /**
+   * Additional classes to apply to the dialog header.
+   * Useful for custom styling.
+   */
+  class = input<string>('');
+  
+  /** @ignore */
   computedClasses = computed(() => 
     cn('flex flex-col gap-2', this.class())
   );

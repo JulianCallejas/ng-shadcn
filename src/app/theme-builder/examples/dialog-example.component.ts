@@ -43,6 +43,7 @@ import { ButtonComponent } from '@packages/button/src/public-api';
             <ng-shadcn-dialog-trigger asChild>
               <ng-shadcn-button (click)="isOpen.set(true)">Open Dialog</ng-shadcn-button>
             </ng-shadcn-dialog-trigger>
+            <ng-shadcn-dialog-content>
               <ng-shadcn-dialog-header>
                 <ng-shadcn-dialog-title class="text-lg font-semibold">
                   Are you sure absolutely sure?
@@ -52,25 +53,22 @@ import { ButtonComponent } from '@packages/button/src/public-api';
                 </ng-shadcn-dialog-description>
                 <span>More header text</span>
               </ng-shadcn-dialog-header>
-
-              <ng-shadcn-dialog-content>
                 <p>Are you sure you want to delete your account?</p>
                 <p>This action cannot be undone.</p>
-              </ng-shadcn-dialog-content>
-              <span>More content text</span>
-              <ng-shadcn-dialog-footer>
-                <ng-shadcn-dialog-close (click)="handleClose()">
-                  Cancel
-                </ng-shadcn-dialog-close>
-                <ng-shadcn-dialog-close asChild>
-                  <ng-shadcn-button variant="destructive">
-                    Otro Cancel
+                <ng-shadcn-dialog-footer>
+                  <ng-shadcn-dialog-close (click)="handleClose()">
+                    Cancel
+                  </ng-shadcn-dialog-close>
+                  <ng-shadcn-dialog-close asChild>
+                    <ng-shadcn-button variant="destructive">
+                      Otro Cancel
+                    </ng-shadcn-button>
+                  </ng-shadcn-dialog-close>
+                  <ng-shadcn-button (click)="onDelete()">
+                    Delete
                   </ng-shadcn-button>
-                </ng-shadcn-dialog-close>
-                <ng-shadcn-button (click)="onDelete()">
-                  Delete
-                </ng-shadcn-button>
-              </ng-shadcn-dialog-footer>
+                </ng-shadcn-dialog-footer>
+              </ng-shadcn-dialog-content>
           </ng-shadcn-dialog>
 
           <div class="mt-4 p-4 bg-muted/20 rounded-md">

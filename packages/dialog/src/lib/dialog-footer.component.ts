@@ -13,8 +13,13 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class DialogFooterComponent {
-  class = input('');
+  /**
+   * Additional classes to apply to the dialog footer.
+   * Useful for custom styling.
+   */
+  class = input<string>('');
 
+  /** @ignore */
   computedClasses = computed(() => 
     cn(
       // 'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',

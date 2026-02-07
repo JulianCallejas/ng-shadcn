@@ -22,10 +22,19 @@ import { DialogComponent } from './dialog.component';
   `
 })
 export class DialogDescriptionComponent {
+  /**
+   * Additional classes to apply to the dialog description.
+   * Useful for custom styling.
+   */
+  class = input<string>('');
+  
+  /** @ignore */
   private dialog = inject(DialogComponent);
-  class = input('');
+  
+  /** @ignore */
   descriptionId = computed(() => this.dialog.descriptionId());
 
+  /** @ignore */
   computedClasses = computed(() => 
     cn(
       'text-muted-foreground *:[a]:hover:text-foreground text-sm *:[a]:underline *:[a]:underline-offset-3',

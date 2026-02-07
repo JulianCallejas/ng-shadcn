@@ -21,10 +21,20 @@ import { DialogComponent } from './dialog.component';
   `
 })
 export class DialogTitleComponent {
-  private dialog = inject(DialogComponent);
-  titleId = computed(() => this.dialog.titleId());
-  class = input('');
   
+  /**
+   * Additional classes to apply to the dialog title.
+   * Useful for custom styling.
+   */
+  class = input<string>('');
+  
+  /** @ignore */
+  private dialog = inject(DialogComponent);
+  
+  /** @ignore */
+  titleId = computed(() => this.dialog.titleId());
+    
+  /** @ignore */
   computedClasses = computed(() => 
     cn('text-base leading-none font-medium', this.class())
   );

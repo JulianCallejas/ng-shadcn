@@ -1,8 +1,7 @@
 import { Component, input, output, effect, signal, computed, ElementRef, contentChild, booleanAttribute, HostListener, inject, ChangeDetectionStrategy, linkedSignal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
-// import { cn } from '@ng-shadcn/utils';
-import { cn } from '@packages/utils/src/public-api';
+
 
 const dialogVariants = cva(
   'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 border bg-background p-4 shadow-lg sm:rounded-lg'
@@ -23,7 +22,6 @@ const dialogVariants = cva(
 );
 
 export type DialogVariantProps = VariantProps<typeof dialogVariants>;
-
 @Component({
   selector: 'ng-shadcn-dialog',
   standalone: true,
@@ -31,113 +29,85 @@ export type DialogVariantProps = VariantProps<typeof dialogVariants>;
   imports: [
     CommonModule,
   ],
-  styles: `
-    @keyframes dialog-fade-in {
-      0% { 
-        opacity: 0%; 
-        transform: scale(0);
-      }
-      100% { 
-        opacity: 100%; 
-        transform: scale(1);
-      }
-    }
-    .dialog-in {
-      animation: dialog-fade-in 50ms ease-out forwards;
-    }
-    
-    .dialog-out {
-      animation: dialog-fade-in 30ms ease-out reverse backwards;
-    }
-  `,
   template: `
     <!-- Trigger -->
-    <ng-content select="ng-shadcn-dialog-trigger"></ng-content>
+    <div [class]="class()">
+      <ng-content select="ng-shadcn-dialog-trigger"></ng-content>
+      <ng-content></ng-content>
+    </div>
+    
     @if (isOpenState) {
-      <!-- Backdrop -->
-      <div 
-      class="fixed inset-0 z-50 bg-black/80 w-svw h-svh backdrop-blur-xs"
-        animate.enter="dialog-in"
-        animate.leave="dialog-out"
-        (click)="onBackdropClick()"
-      ></div>
-      
-      <!-- Dialog -->
-        <div 
-          [class]="computedClasses()"
-          
-          role="dialog"
-          [attr.aria-labelledby]="titleId()"
-          [attr.aria-describedby]="descriptionId()"
-          aria-modal="true"
-          >
-          @if (showCloseButton()) {
-            <button
-              type="button"
-              (click)="close()"
-              [attr.aria-label]="'Close'"
-              class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
-            >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              <span class="sr-only">Close</span>
-            </button>
-          }
-          <ng-content select="ng-shadcn-dialog-header"></ng-content>
-          <ng-content select="ng-shadcn-dialog-content"></ng-content>
-          <ng-content></ng-content>
-          <ng-content select="ng-shadcn-dialog-footer"></ng-content>
-        </div>
-      }
+      <ng-content select="ng-shadcn-dialog-content"></ng-content>
+    }
   `,
 })
 export class DialogComponent implements OnDestroy {
-  // Inputs
+ 
+  /**
+   * Unique id for the dialog. Useful for accessibility purposes.
+   * @defaultValue 'dialog-01'
+   */
   id = input<string>('dialog-01');
+
+  /**
+   * Determines whether the close button should be shown.
+   * @defaultValue true
+   */
   showCloseButton = input(true, { transform: booleanAttribute });
+
+  /**
+   * Determines whether the dialog should close when the backdrop is clicked.
+   * @defaultValue true
+   */
   backdropClick = input(true, { transform: booleanAttribute });
+
+  /**
+   * The size of the dialog.
+   * @defaultValue 'md'
+   */
   size = input<DialogVariantProps['size']>('md');
+
+  /**
+   * Determines whether the dialog is open or closed.
+   * @defaultValue false
+   */
   isOpen = input(false, { transform: booleanAttribute });
-  class = input('');
-  bodyOverflow = ''
-  
-  // Outputs
+
+  /**
+   * Additional classes to be applied to the dialog.
+   */
+  class = input<string>('');
+
+  /**
+   * Emits when the dialog is opened.
+   */
   opened = output<void>();
+
+  /**
+   * Emits when the dialog is closed.
+   */
   closed = output<void>();
   
-  // Internal state
+  /** @ignore */
   private _isOpen = linkedSignal(this.isOpen);
-  
-  // Public getter for template access
+
+  /** @ignore */
   get isOpenState() {
     return this._isOpen();
   }
   
+    /** @ignore */
   titleId = computed(()=>`dialog-title-${this.id()}`);
+  
+  /** @ignore */
   descriptionId = computed(()=>`dialog-description-${this.id()}`);
     
   // Computed
   /** @ignore */
-  computedClasses = computed(() => 
-    cn(
+  sizeClasses = computed(() => 
       dialogVariants({ 
         size: this.size() 
       }),
-      this.class()
-    )
   );
 
   // Effects
@@ -154,6 +124,8 @@ export class DialogComponent implements OnDestroy {
     });
   }
 
+  
+  /** @ignore */
   ngOnDestroy(): void {
     document.body.style.overflow = '';
   }
@@ -180,7 +152,7 @@ export class DialogComponent implements OnDestroy {
   /** @ignore */
   @HostListener('document:keydown.escape')
   onKeyDown() {
-    if (this.isOpen()) {
+    if (this.isOpenState) {
       this.close();
     }
   }
