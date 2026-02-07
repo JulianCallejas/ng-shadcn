@@ -18,13 +18,17 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CardTitleComponent {
+  /**
+   * Additional classes to apply to the card title.
+   * Useful for custom styling.
+   */
   class = input<string>('');
 
   /** @ignore */
   computedClasses = computed(() =>
     cn(
       'text-2xl font-semibold leading-none tracking-tight',
-      this.class
+      this.class()
     )
   );
 }

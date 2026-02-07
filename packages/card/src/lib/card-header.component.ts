@@ -18,6 +18,10 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CardHeaderComponent {
+  /**
+   * Additional classes to apply to the card header.
+   * Useful for custom styling.
+   */
   class = input<string>('');
 
   /** @ignore */

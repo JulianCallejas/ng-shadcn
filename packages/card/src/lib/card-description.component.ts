@@ -18,13 +18,17 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CardDescriptionComponent {
+  /**
+   * Additional classes to apply to the card description.
+   * Useful for custom styling.
+   */
   class = input<string>('');
 
   /** @ignore */
   computedClasses = computed(() =>
     cn(
       'text-sm text-muted-foreground',
-      this.class
+      this.class()
     )
   );
 }

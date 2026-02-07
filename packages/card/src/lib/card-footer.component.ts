@@ -18,13 +18,17 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CardFooterComponent {
+  /**
+   * Additional classes to apply to the card footer.
+   * Useful for custom styling.
+   */
   class = input<string>('');
 
   /** @ignore */
   computedClasses = computed(() =>
     cn(
       'flex items-center p-6',
-      this.class
+      this.class()
     )
   );
 }

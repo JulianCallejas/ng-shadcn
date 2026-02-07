@@ -300,6 +300,7 @@ yarn add @ng-shadcn/checkbox
 # Using pnpm
 pnpm add @ng-shadcn/checkbox
 \`\`\`
+
 ## Usage
 ### Standalone Components (Recommended)
 Import and use the component directly in your standalone components:

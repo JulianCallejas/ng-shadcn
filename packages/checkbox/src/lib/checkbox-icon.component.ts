@@ -16,6 +16,11 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CheckboxIconComponent  {
+  
+  /**
+   * Additional classes to apply to the checkbox icon.
+   * Useful for custom styling.
+   */
   class = input<string>('');
     
   // Computed properties

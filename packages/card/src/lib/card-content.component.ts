@@ -18,13 +18,17 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CardContentComponent {
+  /**
+   * Additional classes to apply to the card content.
+   * Useful for custom styling.
+   */
   class = input<string>('');
 
   /** @ignore */
   computedClasses = computed(() =>
     cn(
       'px-6',
-      this.class
+      this.class()
     )
   );
 

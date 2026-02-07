@@ -23,6 +23,11 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class CheckboxLabelComponent  {
+  
+  /**
+   * Additional classes to apply to the checkbox label.
+   * Useful for custom styling.
+   */
   class = input<string>('');
     
   /** @ignore */
