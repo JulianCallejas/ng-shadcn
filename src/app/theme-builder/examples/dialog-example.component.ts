@@ -1,6 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '@packages/dialog/src/public-api';
+import {
+  DialogComponent,
+  DialogCloseComponent,
+  DialogHeaderComponent,
+  DialogTitleComponent,
+  DialogDescriptionComponent,
+  DialogFooterComponent,
+  DialogTriggerComponent,
+  DialogContentComponent
+} from '@packages/dialog/src/public-api';
 import { ButtonComponent } from '@packages/button/src/public-api';
 
 @Component({
@@ -9,59 +18,61 @@ import { ButtonComponent } from '@packages/button/src/public-api';
   imports: [
     CommonModule,
     DialogComponent,
+    DialogCloseComponent,
+    DialogHeaderComponent,
+    DialogTitleComponent,
+    DialogDescriptionComponent,
+    DialogContentComponent,
+    DialogFooterComponent,
+    DialogTriggerComponent,
     ButtonComponent
   ],
   template: `
     <div class="space-y-4">
       <h2 class="text-2xl font-bold text-foreground mb-4">Dialog</h2>
-      
+
       <div class="p-6 border rounded-lg bg-card">
         <div class="space-y-4">
           <p class="text-muted-foreground">
             Dialogs are modal windows that appear in front of the main content. They require user interaction before continuing.
           </p>
-          
-          <ng-shadcn-dialog>
-            <button 
-              (click)="isOpen.set(true)"
-              class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-            >
+          <ng-shadcn-dialog [isOpen]="isOpen()" (closed)="isOpen.set(false)" size="md">
+            <ng-shadcn-dialog-trigger>
               Open Dialog
-            </button>
-            
-            <ng-template #dialogContent>
-              <div class="space-y-4">
-                <div class="space-y-2">
-                  <h3 class="text-lg font-semibold">Are you sure absolutely sure?</h3>
-                  <p class="text-sm text-muted-foreground">
-                    This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-                  </p>
-                </div>
-                
-                <div class="py-4">
-                  <p class="text-muted-foreground">
-                    This is some additional content in the dialog. You can add any content here, including forms, lists, or other components.
-                  </p>
-                </div>
-                
-                <div class="flex justify-end space-x-2">
-                  <button 
-                    (click)="isOpen.set(false)"
-                    class="px-4 py-2 border rounded-md hover:bg-accent transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    class="px-4 py-2 bg-destructive text-destructive-foreground rounded-md hover:bg-destructive/90 transition-colors"
-                    (click)="onDelete()"
-                  >
-                    Delete Account
-                  </button>
-                </div>
-              </div>
-            </ng-template>
+            </ng-shadcn-dialog-trigger>
+            <ng-shadcn-dialog-trigger asChild>
+              <ng-shadcn-button (click)="isOpen.set(true)">Open Dialog</ng-shadcn-button>
+            </ng-shadcn-dialog-trigger>
+              <ng-shadcn-dialog-header>
+                <ng-shadcn-dialog-title class="text-lg font-semibold">
+                  Are you sure absolutely sure?
+                </ng-shadcn-dialog-title>
+                <ng-shadcn-dialog-description>
+                  This will permanently delete your account and remove your data from our servers.
+                </ng-shadcn-dialog-description>
+                <span>More header text</span>
+              </ng-shadcn-dialog-header>
+
+              <ng-shadcn-dialog-content>
+                <p>Are you sure you want to delete your account?</p>
+                <p>This action cannot be undone.</p>
+              </ng-shadcn-dialog-content>
+              <span>More content text</span>
+              <ng-shadcn-dialog-footer>
+                <ng-shadcn-dialog-close (click)="handleClose()">
+                  Cancel
+                </ng-shadcn-dialog-close>
+                <ng-shadcn-dialog-close asChild>
+                  <ng-shadcn-button variant="destructive">
+                    Otro Cancel
+                  </ng-shadcn-button>
+                </ng-shadcn-dialog-close>
+                <ng-shadcn-button (click)="onDelete()">
+                  Delete
+                </ng-shadcn-button>
+              </ng-shadcn-dialog-footer>
           </ng-shadcn-dialog>
-          
+
           <div class="mt-4 p-4 bg-muted/20 rounded-md">
             <p class="text-sm text-muted-foreground">
               <strong>Note:</strong> Click the button above to open a dialog. You can close it by clicking outside, pressing the escape key, or using the close button.
@@ -75,6 +86,11 @@ import { ButtonComponent } from '@packages/button/src/public-api';
 })
 export class DialogExampleComponent {
   isOpen = signal(false);
+
+  handleClose() {
+    console.log('Dialog closed');
+    // this.isOpen.set(false);
+  }
 
   onDelete() {
     console.log('Account deleted');

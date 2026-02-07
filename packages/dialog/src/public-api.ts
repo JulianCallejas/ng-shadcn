@@ -1,3 +1,10 @@
 export * from './lib/dialog.component';
-export * from './lib/dialog.service';
+export * from './lib/dialog-trigger.component';
+export * from './lib/dialog-header.component';
+export * from './lib/dialog-title.component';
+export * from './lib/dialog-description.component';
+export * from './lib/dialog-content.component';
+export * from './lib/dialog-footer.component';
+export * from './lib/dialog-close.component';
 export * from './lib/dialog.metadata';
+// export * from './lib/dialog.service';
