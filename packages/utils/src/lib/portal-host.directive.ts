@@ -5,8 +5,8 @@ import {
   AfterViewInit
 } from '@angular/core';
 
-@Directive({ selector: '[dialogPortalHost]' })
-export class DialogPortalHostDirective implements AfterViewInit, OnDestroy {
+@Directive({ selector: '[portalHost]' })
+export class PortalHostDirective implements AfterViewInit, OnDestroy {
   element: HTMLElement;
 
   constructor(elementRef: ElementRef<HTMLElement>) {
@@ -19,7 +19,6 @@ export class DialogPortalHostDirective implements AfterViewInit, OnDestroy {
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
-        console.log("ESC")
       }
     };
   }

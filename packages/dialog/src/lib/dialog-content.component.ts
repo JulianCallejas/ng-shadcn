@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 // import { cn } from '@ng-shadcn/utils';
-import { cn } from '@packages/utils/src/public-api';
+import { cn, PortalHostDirective } from '@packages/utils/src/public-api';
 import { DialogComponent } from './dialog.component';
-import { DialogPortalHostDirective } from './dialog-portal-host.directive';
+
 
 @Component({
   selector: 'ng-shadcn-dialog-content',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DialogPortalHostDirective],
+  imports: [PortalHostDirective],
   styles: `
     @keyframes dialog-fade-in {
       0% { 
@@ -36,47 +36,47 @@ import { DialogPortalHostDirective } from './dialog-portal-host.directive';
         animate.enter="dialog-in"
         animate.leave="dialog-out"
         (click)="dialog.onBackdropClick()"
-        dialogPortalHost
+        portalHost
       ></div>
       
       <!-- Dialog -->
-        <div 
-          [class]="computedClasses()"
-          [attr.aria-labelledby]="dialog.titleId()"
-          [attr.aria-describedby]="dialog.descriptionId()"
-          role="dialog"
-          aria-modal="true"
-          dialogPortalHost
+      <div 
+        [class]="computedClasses()"
+        [attr.aria-labelledby]="dialog.titleId()"
+        [attr.aria-describedby]="dialog.descriptionId()"
+        role="dialog"
+        aria-modal="true"
+        portalHost
+        >
+        @if (dialog.showCloseButton()) {
+          <button
+            type="button"
+            (click)="dialog.close()"
+            [attr.aria-label]="'Close'"
+            class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
           >
-          @if (dialog.showCloseButton()) {
-            <button
-              type="button"
-              (click)="dialog.close()"
-              [attr.aria-label]="'Close'"
-              class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
-            >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              <span class="sr-only">Close</span>
-            </button>
-          }
-          <ng-content select="ng-shadcn-dialog-header"></ng-content>
-          <ng-content></ng-content>
-          <ng-content select="ng-shadcn-dialog-footer"></ng-content>
-        </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            <span class="sr-only">Close</span>
+          </button>
+        }
+        <ng-content select="ng-shadcn-dialog-header"></ng-content>
+        <ng-content></ng-content>
+        <ng-content select="ng-shadcn-dialog-footer"></ng-content>
+      </div>
     }
   `,
 })

@@ -35,14 +35,14 @@ import { ButtonComponent } from '@packages/button/src/public-api';
           
           <div class="flex flex-wrap gap-4">
             <!-- Basic Dropdown -->
-            <ng-shadcn-dropdown-menu>
-              <ng-shadcn-dropdown-menu-trigger [isOpen]="isOpen()" (openChange)="isOpen.set($event)">
+            <ng-shadcn-dropdown-menu [open]="isOpen()">
+              <ng-shadcn-dropdown-menu-trigger (openChange)="isOpen.set($event)">
                 <button class="px-4 py-2 border rounded-md hover:bg-accent transition-colors">
                   Options
                 </button>
               </ng-shadcn-dropdown-menu-trigger>
               
-              <ng-shadcn-dropdown-menu-content [isOpen]="isOpen()">
+              <ng-shadcn-dropdown-menu-content>
                 <ng-shadcn-dropdown-menu-item 
                   *ngFor="let item of menuItems" 
                   [label]="item.label" 
@@ -55,14 +55,14 @@ import { ButtonComponent } from '@packages/button/src/public-api';
             </ng-shadcn-dropdown-menu>
             
             <!-- With Labels and Separators -->
-            <ng-shadcn-dropdown-menu>
-              <ng-shadcn-dropdown-menu-trigger [isOpen]="isOpen2()" (openChange)="isOpen2.set($event)">
+            <ng-shadcn-dropdown-menu [open]="isOpen2()">
+              <ng-shadcn-dropdown-menu-trigger  (openChange)="isOpen2.set($event)">
                 <button class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
                   Actions
                 </button>
               </ng-shadcn-dropdown-menu-trigger>
               
-              <ng-shadcn-dropdown-menu-content [isOpen]="isOpen2()">
+              <ng-shadcn-dropdown-menu-content>
                 <ng-shadcn-dropdown-menu-label>File</ng-shadcn-dropdown-menu-label>
                 <ng-shadcn-dropdown-menu-item 
                   *ngFor="let item of fileItems" 

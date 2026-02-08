@@ -7,7 +7,7 @@ import {
   DropdownMenuItemComponent,
   DropdownMenuSeparatorComponent,
   DropdownMenuLabelComponent
-} from './dropdown-menu.component';
+} from './index';
 
 const meta: Meta<DropdownMenuComponent> = {
   title: 'Components/Dropdown Menu',
@@ -34,7 +34,7 @@ const meta: Meta<DropdownMenuComponent> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    className: {
+    class: {
       control: 'text',
       description: 'Additional CSS classes',
     },
@@ -48,7 +48,7 @@ const meta: Meta<DropdownMenuComponent> = {
     },
   },
   args: {
-    className: '',
+    class: '',
     open: false,
   },
 };

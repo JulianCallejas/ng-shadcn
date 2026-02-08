@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, computed, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DialogComponent } from './dialog.component';
+
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
-import { DialogComponent } from './dialog.component';
 
 @Component({
   selector: 'ng-shadcn-dialog-title',
