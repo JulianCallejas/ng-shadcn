@@ -626,8 +626,8 @@ export const Sizes: Story = {
       },
       source:{
         type: "code",
-            language: "html",
-            code: `
+        language: "html",
+        code: `
   <div class="space-y-4">
     <h3 class="font-medium mb-2">Dialog Sizes</h3>
     

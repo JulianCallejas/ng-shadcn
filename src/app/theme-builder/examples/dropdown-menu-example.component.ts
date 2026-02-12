@@ -35,8 +35,8 @@ import { ButtonComponent } from '@packages/button/src/public-api';
           
           <div class="flex flex-wrap gap-4">
             <!-- Basic Dropdown -->
-            <ng-shadcn-dropdown-menu [open]="isOpen()">
-              <ng-shadcn-dropdown-menu-trigger (openChange)="isOpen.set($event)">
+            <ng-shadcn-dropdown-menu [open]="isOpen()" (openChange)="isOpen.set(!isOpen())">
+              <ng-shadcn-dropdown-menu-trigger asChild>
                 <button class="px-4 py-2 border rounded-md hover:bg-accent transition-colors">
                   Options
                 </button>
@@ -55,8 +55,8 @@ import { ButtonComponent } from '@packages/button/src/public-api';
             </ng-shadcn-dropdown-menu>
             
             <!-- With Labels and Separators -->
-            <ng-shadcn-dropdown-menu [open]="isOpen2()">
-              <ng-shadcn-dropdown-menu-trigger  (openChange)="isOpen2.set($event)">
+            <ng-shadcn-dropdown-menu [open]="isOpen2()" (openChange)="isOpen2.set(!isOpen2())">
+              <ng-shadcn-dropdown-menu-trigger asChild>
                 <button class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
                   Actions
                 </button>
@@ -93,6 +93,17 @@ import { ButtonComponent } from '@packages/button/src/public-api';
             </p>
           </div>
         </div>
+        <ng-shadcn-dropdown-menu id="prueba">
+            <ng-shadcn-dropdown-menu-trigger >
+                Prueba
+            </ng-shadcn-dropdown-menu-trigger>
+            <ng-shadcn-dropdown-menu-content>
+                <ng-shadcn-dropdown-menu-item
+                  label="item.label"
+                >
+              </ng-shadcn-dropdown-menu-item>
+            </ng-shadcn-dropdown-menu-content>
+          </ng-shadcn-dropdown-menu>
       </div>
     </div>
   `,

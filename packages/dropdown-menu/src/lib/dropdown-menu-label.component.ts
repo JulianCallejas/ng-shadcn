@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, input } from "@angular/core";
 
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
@@ -7,6 +7,7 @@ import { cn } from '@packages/utils/src/public-api';
 @Component({
   selector: 'ng-shadcn-dropdown-menu-label',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
     <div [class]="computedClasses()">
@@ -16,6 +17,9 @@ import { cn } from '@packages/utils/src/public-api';
 })
 export class DropdownMenuLabelComponent {
   
+  /**
+   * Class name for the dropdown Label (group title) element.
+   */
   class = input<string>('');
   
   

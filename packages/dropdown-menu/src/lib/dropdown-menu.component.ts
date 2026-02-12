@@ -3,29 +3,25 @@ import {
   Output,
   EventEmitter,
   computed,
-  HostListener,
   input,
   booleanAttribute,
   linkedSignal,
-  contentChildren,
   contentChild,
-  effect 
+  effect, 
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropdownMenuTriggerComponent } from './dropdown-menu-trigger.component';
 import { DropdownMenuContentComponent } from './dropdown-menu-content.component';
-import { DropdownMenuItemComponent } from './dropdown-menu-item.component';
 
 // import { cn } from '@ng-shadcn/utils';
 import { cn } from '@packages/utils/src/public-api';
 
 
-/**
- * Main dropdown menu component
- */
 @Component({
   selector: 'ng-shadcn-dropdown-menu',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
     <div [class]="computedClasses()">
@@ -35,15 +31,34 @@ import { cn } from '@packages/utils/src/public-api';
   `,
 })
 export class DropdownMenuComponent {
+  /**
+   * Additional CSS classes to apply to the dropdown menu container
+   */
   class = input<string>('');
-  open = input(false, { transform: booleanAttribute });
-  id = input<string>(`ddm-${new Date().getDate()}-${Math.ceil(Math.random()*1000)}`);
 
+  /**
+   * Whether the dropdown is open (controlled)
+   * @default false
+   */
+  open = input(false, { transform: booleanAttribute });
+
+  /**
+   * A unique identifier for the dropdown menu. Used for accessibility and associating the trigger with the content.
+   * @default `ddm-<timestamp>-<random-number>`
+   */
+  id = input<string>(`ddm-${new Date().getTime()}-${Math.ceil(Math.random()*1000)}`);
+
+  /**
+   * Event emitted when the dropdown open state changes
+   */
   @Output() openChange = new EventEmitter<boolean>();
   
+  /** @ignore */
   trigger = contentChild(DropdownMenuTriggerComponent);
+  
+  /** @ignore */
   content =  contentChild(DropdownMenuContentComponent);
-  menuItems = contentChildren(DropdownMenuItemComponent);
+  
 
   /** @ignore */
   private isOpen = linkedSignal(this.open);
@@ -54,7 +69,7 @@ export class DropdownMenuComponent {
       const child = this.trigger();
       if (!child) return;
 
-      const sub = child.openChange.subscribe(open => {
+      const sub = child.openChange.subscribe((open) => {
         this.setOpen(open);
       });
 
@@ -67,12 +82,19 @@ export class DropdownMenuComponent {
     })
 
     effect(()=>{
-      this.content().isOpen = computed(()=> this.isOpen());
+      this.content().isOpen = computed(()=> this.isOpen() );
       this.content().id = computed(()=> this.id());
     })
     
     effect(onCleanup => {
-      const children = this.menuItems();
+      if (!this.isOpen()) {
+        return;
+      }
+      const children = this.content().menuItems();
+
+      if (children.length === 0) {
+        return;
+      }
 
       const subs = children.map(child => {
         return child.itemSelected
@@ -87,35 +109,21 @@ export class DropdownMenuComponent {
     });
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    const dropdownElement = (event.currentTarget as HTMLElement)?.querySelector('ng-shadcn-dropdown-menu');
-    
-    if (this.isOpen() && dropdownElement && !dropdownElement.contains(target)) {
-      this.setOpen(false);
-    }
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  onDocumentKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.isOpen()) {
-      this.setOpen(false);
-    }
-  }
-
-  private setOpen(open: boolean): void {
+  /** @ignore */
+  setOpen(open: boolean): void {
     this.isOpen.set(open);
     this.openChange.emit(open);
     this.updateComponentPosition();
   }
 
+  /** @ignore */
   private updateComponentPosition(): void {
     if (this.isOpen() && this.trigger()) {
+      
       const position = this.trigger().getPosition();
       this.content().position.set({ 
-        top: position.top,
-        left: position.left,
+        top: this.content().positionY() || position.top,
+        left: this.content().positionX() || position.left,
         height: position.height,
         bottom: position.bottom
       });
