@@ -44,9 +44,9 @@ export class DropdownMenuComponent {
 
   /**
    * A unique identifier for the dropdown menu. Used for accessibility and associating the trigger with the content.
-   * @default `ddm-<timestamp>-<random-number>`
+   * @default 'ddm-<random-number>''
    */
-  id = input<string>(`ddm-${new Date().getTime()}-${Math.ceil(Math.random()*1000)}`);
+  id = input<string>(`ddm-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
 
   /**
    * Event emitted when the dropdown open state changes

@@ -19,43 +19,43 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
           <ng-shadcn-input type="email" placeholder="Enter email" label="Email"></ng-shadcn-input>
           <ng-shadcn-input type="password" placeholder="Password" label="Password"></ng-shadcn-input>
           <ng-shadcn-input [disabled]="true" placeholder="Disabled input" label="Disabled"></ng-shadcn-input>
-          
+
           <!-- Reactive Form Example -->
           <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="mt-6 space-y-4">
             <h3 class="text-lg font-medium">Profile Form (Reactive)</h3>
-            
-            <ng-shadcn-input 
+
+            <ng-shadcn-input
               formControlName="username"
               label="Username"
               placeholder="Enter username"
               [error]="getErrorMessage('username')">
             </ng-shadcn-input>
-            
-            <ng-shadcn-input 
+
+            <ng-shadcn-input
               type="email"
               formControlName="email"
               label="Email"
               placeholder="Enter email"
               [error]="getErrorMessage('email')">
             </ng-shadcn-input>
-            
-            <ng-shadcn-input 
+
+            <ng-shadcn-input
               type="password"
               formControlName="password"
               label="Password"
               placeholder="Enter password"
               [error]="getErrorMessage('password')">
             </ng-shadcn-input>
-            
+
             <div class="flex justify-end">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
                 [disabled]="!profileForm.valid">
                 Submit
               </button>
             </div>
-            
+
             <!-- Form Status -->
             <div class="text-sm text-muted-foreground">
               <div>Form Valid: {{ profileForm.valid | json }}</div>
@@ -73,7 +73,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
             label="Controlled Input"
             placeholder="Type something...">
           </ng-shadcn-input>
-          
+
           <!-- Display the current value -->
           <div class="mt-2 p-3 bg-muted/50 rounded-md">
             <p class="text-sm text-muted-foreground">Current value:</p>
@@ -85,7 +85,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
     </ng-shadcn-card>
   `
 })
-export class InputExampleComponent { 
+export class InputExampleComponent {
   profileForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -115,7 +115,7 @@ export class InputExampleComponent {
 
   getErrorMessage(controlName: string): string {
     const control = this.profileForm.get(controlName);
-    
+
     if (!control || !control.errors || !control.touched) {
       return '';
     }
@@ -123,24 +123,24 @@ export class InputExampleComponent {
     if (control.hasError('required')) {
       return 'This field is required';
     }
-    
+
     if (control.hasError('email')) {
       return 'Please enter a valid email';
     }
-    
+
     if (control.hasError('minlength')) {
       return `Minimum length is ${control.errors['minlength'].requiredLength} characters`;
     }
-    
+
     if (control.hasError('maxlength')) {
       return `Maximum length is ${control.errors['maxlength'].requiredLength} characters`;
     }
-    
+
     return '';
   }
 
   controlledValue: string = 'Initial value';
- 
+
   onControlledValueChange(value: string) {
     console.log('Controlled value changed:', value);
     this.controlledValue = value;

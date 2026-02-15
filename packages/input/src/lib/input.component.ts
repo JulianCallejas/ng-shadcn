@@ -62,12 +62,24 @@ export type InputModes = 'none' | 'text' | 'email' | 'numeric' | 'decimal' | 'te
           [type]="computedType()"
           [placeholder]="placeholder()"
           [disabled]="disabled()"
-          [value]="value()"
+          [value]="_value()"
           (input)="onInput($event)"
           (blur)="onBlur()"
           (focus)="onFocus()"
           [class]="computedClasses()"
           [inputMode]="computedInputMode()"
+          
+          [attr.name]="name() !== undefined && name()"
+          [attr.autocomplete]="autocomplete() !== undefined && autocomplete()"
+          [attr.max]="max() !== undefined && max()"
+          [attr.maxLength]="maxLength() !== undefined && maxLength()"
+          [attr.min]="min() !== undefined && min()"
+          [attr.minLength]="minLength() !== undefined && minLength()"
+          [attr.pattern]="pattern() !== undefined && pattern()"
+          [attr.required]="required() !== undefined && required()"
+          [attr.autofocus]="autofocus() !== undefined && autofocus()"
+          [attr.title]="title() !== undefined && title()"
+          [attr.aria-role]="role() !== undefined && role()"
         />
         @if (controlButton()) {
           @switch (type()) {
@@ -124,25 +136,213 @@ export type InputModes = 'none' | 'text' | 'email' | 'numeric' | 'decimal' | 'te
   `,
 })
 export class InputComponent implements ControlValueAccessor {
+  
+  /**
+   * The name of the input element.
+   * @default undefined
+   * @description Storybook description:
+   * The name of the input element. Used for form submission and can be accessed in server-side scripts.
+   */
+  name = input<string | undefined>();
+  /**
+   * The autocomplete attribute value.
+   * @default undefined
+   * @description Storybook description:
+   * The autocomplete attribute value. Specifies whether the browser should automatically complete the input field.
+   */
+  autocomplete = input<string | undefined>();
+  /**
+   * The maximum value for number/date inputs.
+   * @default undefined
+   * @description Storybook description:
+   * The maximum value for number/date inputs. It is used to specify the maximum value for the input field.
+   */
+  max = input<string | undefined>();
+  /**
+   * The maximum length of the input value.
+   * @default undefined
+   * @description Storybook description:
+   * The maximum length of the input value. It is used to limit the number of characters that can be entered in the input field.
+   */
+  maxLength = input<string | undefined>();
+  /**
+   * The minimum value for number/date inputs.
+   * @default undefined
+   * @description Storybook description:
+   * The minimum value for number/date inputs. It is used to specify the minimum value for the input field.
+   */
+  min = input<string | undefined>();
+  /**
+   * The minimum length of the input value.
+   * @default undefined
+   * @description Storybook description:
+   * The minimum length of the input value. It is used to specify the minimum number of characters that must be entered in the input field.
+   */
+  minLength = input<string | undefined>();
+  /**
+   * The pattern for input validation.
+   * @default undefined
+   * @description Storybook description:
+   * The pattern for input validation. It is used to specify a regular expression that the input field must match.
+   */
+  pattern = input<string | undefined>();
+  /**
+   * Whether the input is required.
+   * @default undefined
+   * @description Storybook description:
+   * Whether the input is required. It is used to specify that the input field must be filled out before the form can be submitted.
+   */
+  required = input<string | undefined>();
+  /**
+   * Whether the input should be focused when the page loads.
+   * @default undefined
+   * @description Storybook description:
+   * Whether the input should be focused when the page loads.
+   */
+  autofocus = input<boolean | undefined>();
+  /**
+   * The title attribute value.
+   * @default undefined
+   * @description Storybook description:
+   * The title attribute value. Specifies extra information about an element.
+   */
+  title = input<string | undefined>();
+  /**
+   * The role attribute value.
+   * @default undefined
+   * @description Storybook description:
+   * The role attribute value. Specifies the role of an element.
+   */
+  role = input<string | undefined>();
+  
+  
+  /**
+   * The type of input field.
+   * @default 'text'
+   * @description Storybook description:
+   * The type of input field.
+   */
   type = input<InputTypes>('text');
+  
+  /**
+   * Placeholder text for the input.
+   * @default ''
+   * @description Storybook description:
+   * Placeholder text for the input.
+   */
   placeholder = input('');
+  
+  /**
+   * Label text displayed above the input.
+   * @default ''
+   * @description Storybook description:
+   * Label text displayed above the input.
+   */
   label = input('');
+  
+  /**
+   * Error message displayed below the input.
+   * @default ''
+   * @description Storybook description:
+   * Error message displayed below the input.
+   */
   error = input('');
+  
+  /**
+   * Whether the input is disabled.
+   * @default false
+   * @description Storybook description:
+   * Whether the input is disabled.
+   */
   disabled = input(false);
+  
+  /**
+   * Whether to show a control button.
+   * @default true
+   * @description Storybook description:
+   * Whether to show a control button.
+   */
   controlButton = input(true);
-  id = input<string>(`ddm-${new Date().getTime()}-${Math.ceil(Math.random()*1000)}`);
-  class = input('')
+  
+  /**
+   * The id of the input field.
+   * @default inp-<random_number>
+   * @description Storybook description:
+   * The id of the input field.
+   */
+  id = input<string>(`inp-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
+  
+  /**
+   * Additional classes for the input field.
+   * @default ''
+   * @description Storybook description:
+   * Additional classes for the input field.
+   */
+  class = input('');
+  
+  /**
+   * Additional classes for the error message.
+   * @default ''
+   * @description Storybook description:
+   * Additional classes for the error message.
+   */
   errorClass = input('');
+  
+  /**
+   * Additional classes for the label.
+   * @default ''
+   * @description Storybook description:
+   * Additional classes for the label.
+   */
   labelClass = input('');
+  
+  /**
+   * Input mode for the input field.
+   * @default undefined
+   * @description Storybook description:
+   * Input mode for the input field.
+   */
   inputmode = input<InputModes>();
-  value = model('');
+  
+  /**
+   * The value of the input field.
+   * @default ''
+   * @description Storybook description:
+   * The value of the input field.
+   */
+  _value = signal('');
+  
+  @Input()
+  get value(): string {
+    return this._value();
+  }
+  set value(val: string) {
+    this._value.set(val || '');
+    this.onChange(val || '');
+  }
 
+  /**
+   * Event emitted when the input value changes.
+   * @event valueChange
+   * @type {EventEmitter<string>}
+   */
   @Output() valueChange = new EventEmitter<string>();
+
+  /**
+   * Event emitted when the input receives focus.
+   * @event focused
+   * @type {EventEmitter<void>}
+   */
   @Output() focused = new EventEmitter<void>();
+
+  /**
+   * Event emitted when the input loses focus.
+   * @event blurred
+   * @type {EventEmitter<void>}
+   */
   @Output() blurred = new EventEmitter<void>();
+    
   
-  
- 
   /** @ignore */
   private onChange = (value: string) => {};
   
@@ -160,6 +360,7 @@ export class InputComponent implements ControlValueAccessor {
     return this.type();
   });
 
+  /** @ignore */
   computedInputMode = computed(() => {
     if (this.inputmode()) {
       return this.inputmode();
@@ -198,8 +399,8 @@ export class InputComponent implements ControlValueAccessor {
   }
   
   /** @ignore */
-  setValue(value: string){
-    this.value.set(value);
+  setValue(value: string) {
+    this._value.set(value);
     this.onChange(value);
     this.valueChange.emit(value);
   }
@@ -211,7 +412,7 @@ export class InputComponent implements ControlValueAccessor {
 
   /** @ignore */
   changeNumber(type: 'increase' | 'decrease'){
-    let value = Number(this.value());
+    let value = Number(this._value());
     if (isNaN(value)) {
       value = 0;
     }
@@ -223,7 +424,7 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   /** @ignore */
-  clearInput(){
+  clearInput() {
     this.setValue('');
   }
 
@@ -261,7 +462,7 @@ export class InputComponent implements ControlValueAccessor {
 
   // ControlValueAccessor implementation
   writeValue(value: string): void {
-    this.value.set(value || '');
+    this._value.set(value || '');
   }
 
   registerOnChange(fn: (value: string) => void): void {

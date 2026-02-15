@@ -45,9 +45,9 @@ export class DialogComponent implements OnDestroy {
  
   /**
    * Unique id for the dialog. Useful for accessibility purposes.
-   * @defaultValue 'dialog-01'
+   * @defaultValue 'dlg-<random-number>'
    */
-  id = input<string>('dialog-01');
+  id = input<string>(`dlg-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
 
   /**
    * Determines whether the close button should be shown.

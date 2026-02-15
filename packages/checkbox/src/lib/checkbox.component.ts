@@ -119,8 +119,9 @@ export class CheckboxComponent implements ControlValueAccessor  {
 
   /**
    * Unique identifier for the checkbox.
+   * @defaultValue 'cbx-<random-number>'
    */
-  id = input<string>('');
+  id = input<string>(`cbx-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
 
   /**
    * Whether the checkbox is disabled.
