@@ -1,35 +1,25 @@
-import { Component, Input, Output, EventEmitter, computed, signal, forwardRef, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  computed,
+  signal,
+  forwardRef,
+  input,
+  booleanAttribute,
+  viewChild,
+  contentChildren,
+  viewChildren,
+  effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { cva, type VariantProps } from 'class-variance-authority';
-
-const selectVariants = cva(
-  'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-  {
-    variants: {
-      size: {
-        default: 'h-10 px-3 py-2',
-        sm: 'h-9 px-3 py-2 text-xs',
-        lg: 'h-11 px-4 py-2',
-      },
-    },
-    defaultVariants: {
-      size: 'default',
-    },
-  }
-);
+import { SelectSearchComponent } from './select-search.component';
+import { SelectItemComponent } from './select-item.component';
 
 export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
-}
-
-export interface SelectProps extends VariantProps<typeof selectVariants> {
-  placeholder?: string;
-  disabled?: boolean;
-  searchable?: boolean;
-  options: SelectOption[];
 }
 
 /**
@@ -39,7 +29,7 @@ export interface SelectProps extends VariantProps<typeof selectVariants> {
 @Component({
   selector: 'ng-shadcn-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SelectSearchComponent, SelectItemComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -49,166 +39,133 @@ export interface SelectProps extends VariantProps<typeof selectVariants> {
   ],
   template: `
     <div class="relative w-full">
-      <button
-        #trigger
-        type="button"
-        [class]="computedClasses()"
-        [disabled]="disabled"
-        (click)="toggleDropdown()"
-        (keydown)="onTriggerKeydown($event)"
-        [attr.aria-expanded]="isOpen()"
-        [attr.aria-haspopup]="true"
-        [attr.aria-label]="placeholder || 'Select option'"
-      >
-        <span class="block truncate text-left">
-          {{ selectedOption()?.label || placeholder || 'Select...' }}
-        </span>
-        <svg
-          class="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform"
-          [class.rotate-180]="isOpen()"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+      <ng-content select="ng-shadcn-select-trigger"></ng-content>
 
       <!-- Dropdown -->
       <div
         *ngIf="isOpen()"
         class="absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-md max-h-60 overflow-auto"
         role="listbox"
-        [attr.aria-label]="placeholder || 'Select options'"
+        aria-label="Select options"
       >
         <!-- Search input -->
-        <div *ngIf="searchable" class="p-2 border-b border-border">
-          <input
-            #searchInput
-            type="text"
-            class="w-full px-3 py-2 text-sm bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-            placeholder="Search..."
-            [(ngModel)]="searchTerm"
-            (input)="onSearch($event)"
-            (keydown)="onSearchKeydown($event)"
-          />
-        </div>
+        @if (searchable()) {
+          <ng-shadcn-select-search></ng-shadcn-select-search>
+        }
 
         <!-- Options -->
         <div class="py-1">
-          <div
-            *ngFor="let option of filteredOptions(); let i = index"
-            class="relative cursor-pointer select-none py-2 px-3 text-sm hover:bg-accent hover:text-accent-foreground"
-            [class.bg-accent]="highlightedIndex() === i"
-            [class.text-accent-foreground]="highlightedIndex() === i"
-            [class.opacity-50]="option.disabled"
-            [class.cursor-not-allowed]="option.disabled"
-            (click)="selectOption(option)"
-            (mouseenter)="setHighlightedIndex(i)"
-            role="option"
-            [attr.aria-selected]="selectedValue() === option.value"
-            [attr.aria-disabled]="option.disabled"
-          >
-            <span class="block truncate">{{ option.label }}</span>
-            <svg
-              *ngIf="selectedValue() === option.value"
-              class="absolute right-2 top-2.5 h-4 w-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-          </div>
+          <!-- Array Options -->
+          @for (option of filteredOptions(); track option.value) {
+            <ng-shadcn-select-item [option]="option"></ng-shadcn-select-item>
+          }
+
+          <!-- Content Options -->
+          @if (!searchTerm()){
+            <ng-content select="ng-shadcn-select-item"></ng-content>
+          }
           
-          <div *ngIf="filteredOptions().length === 0" class="py-2 px-3 text-sm text-muted-foreground">
-            No options found
-          </div>
+          <!-- No options -->
+          @if (filteredOptions().length === 0){
+            <div class="py-2 px-3 text-sm text-muted-foreground">
+              No options found
+            </div>
+          }
         </div>
       </div>
     </div>
 
     <!-- Backdrop -->
-    <div
-      *ngIf="isOpen()"
-      class="fixed inset-0 z-40"
-      (click)="closeDropdown()"
-    ></div>
+    @if (isOpen()) {
+      <div
+        class="fixed inset-0 z-40"
+        (click)="closeDropdown()"
+      ></div>
+    }
   `,
 })
-export class SelectComponent implements SelectProps, ControlValueAccessor {
-  @Input() options: SelectOption[] = [];
-  @Input() placeholder?: string;
-  @Input() disabled = false;
-  @Input() searchable = false;
-  @Input() size: SelectProps['size'] = 'default';
-  @Input() className = '';
+export class SelectComponent implements ControlValueAccessor {
+  options = input<SelectOption[]>([]);
+  disabled = input(false, { transform: booleanAttribute });
+  searchable = input(false, { transform: booleanAttribute });
+  searchClass = input('');
+  searchPlaceholder = input('');
+
+ 
 
   @Output() selectionChange = new EventEmitter<SelectOption | null>();
+  
+  searchInput = viewChild(SelectSearchComponent);
+  searchTerm = signal('');
 
-  @ViewChild('trigger') trigger!: ElementRef<HTMLButtonElement>;
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+  viewItems = viewChildren(SelectItemComponent);
+  contentItems = contentChildren(SelectItemComponent);
+  itemList = computed(() => [...this.viewItems(), ...this.contentItems()]);
+
+  constructor(){
+    effect(()=>{
+      if (!this.isOpen()) return;
+
+      const items = this.itemList();
+      if (items.length === 0) return;
+      
+      items.forEach((item, index) => {
+        item.isHighlighted = computed(()=> this.highlightedIndex() === index);
+        item.isSelected = computed(()=> this.selectedValue() === item.itemData().value);
+      });
+    });
+    
+    effect(onCleanup => {
+      if (!this.isOpen()) return;
+      
+      const items = this.itemList();
+      if (items.length === 0) return;
+      
+
+      const subs = items.map(item => {
+        return item.onSelectOption
+          .subscribe((option) => {
+            this.selectOption(option);
+          });
+      });
+      
+      onCleanup(() => {
+        subs.forEach(sub => sub.unsubscribe());
+      });
+    });
+    
+  }
 
   // Signals for reactive state
   protected selectedValue = signal<string | null>(null);
   protected isOpen = signal(false);
-  protected searchTerm = signal('');
   protected highlightedIndex = signal(-1);
-  private sizeSignal = signal(this.size);
-  private classNameSignal = signal(this.className);
-
+  getIsOpen = computed(() => this.isOpen());
+  
   // Computed properties
   selectedOption = computed(() => {
     const value = this.selectedValue();
-    return this.options.find(option => option.value === value) || null;
+    return this.options().find(option => option.value === value) || null;
   });
 
   filteredOptions = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    if (!term) return this.options;
-    return this.options.filter(option => 
+    if (!term) return this.options();
+    const filteredOptions = this.options().filter(option => 
       option.label.toLowerCase().includes(term)
     );
+    const filteredContentOptions = 
+      this.contentItems().reduce((acc, item)=>{
+        if (item.itemData().label.toLowerCase().includes(term)) {
+          acc.push(item.itemData());
+        }
+        return acc;
+      }, [] as SelectOption[])
+    return [...filteredOptions, ...filteredContentOptions];
   });
-
-  computedClasses = computed(() => {
-    return selectVariants({
-      size: this.sizeSignal(),
-      className: this.classNameSignal(),
-    });
-  });
-
-  // ControlValueAccessor implementation
-  private onChange = (value: string | null) => {};
-  private onTouched = () => {};
-
-  writeValue(value: string | null): void {
-    this.selectedValue.set(value);
-  }
-
-  registerOnChange(fn: (value: string | null) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  ngOnInit() {
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
-  }
-
-  ngOnChanges() {
-    this.sizeSignal.set(this.size);
-    this.classNameSignal.set(this.className);
-  }
 
   toggleDropdown() {
-    if (this.disabled) return;
+    if (this.disabled()) return;
     
     if (this.isOpen()) {
       this.closeDropdown();
@@ -222,9 +179,10 @@ export class SelectComponent implements SelectProps, ControlValueAccessor {
     this.highlightedIndex.set(-1);
     
     // Focus search input if searchable
-    if (this.searchable) {
+    if (this.searchable()) {
       setTimeout(() => {
-        this.searchInput?.nativeElement?.focus();
+        const searchInput = this.searchInput()?.elementRef.nativeElement.querySelector('input');
+        searchInput?.focus();
       });
     }
   }
@@ -306,7 +264,7 @@ export class SelectComponent implements SelectProps, ControlValueAccessor {
   }
 
   private navigateOptions(direction: number) {
-    const options = this.filteredOptions();
+    const options = this.itemList();
     if (options.length === 0) return;
 
     let newIndex = this.highlightedIndex() + direction;
@@ -319,7 +277,7 @@ export class SelectComponent implements SelectProps, ControlValueAccessor {
     }
 
     // Skip disabled options
-    while (options[newIndex]?.disabled) {
+    while (options[newIndex]?.isDisabled()) {
       newIndex += direction;
       if (newIndex < 0) newIndex = options.length - 1;
       if (newIndex >= options.length) newIndex = 0;
@@ -328,10 +286,19 @@ export class SelectComponent implements SelectProps, ControlValueAccessor {
     this.highlightedIndex.set(newIndex);
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    if (!this.trigger?.nativeElement.contains(event.target as Node)) {
-      this.closeDropdown();
-    }
+   // ControlValueAccessor implementation
+  private onChange = (value: string | null) => {};
+  private onTouched = () => {};
+
+  writeValue(value: string | null): void {
+    this.selectedValue.set(value);
+  }
+
+  registerOnChange(fn: (value: string | null) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }
