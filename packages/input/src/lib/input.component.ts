@@ -62,7 +62,7 @@ export type InputModes = 'none' | 'text' | 'email' | 'numeric' | 'decimal' | 'te
           [type]="computedType()"
           [placeholder]="placeholder()"
           [disabled]="disabled()"
-          [value]="_value()"
+          [value]="value()"
           (input)="onInput($event)"
           (blur)="onBlur()"
           (focus)="onFocus()"
@@ -310,16 +310,7 @@ export class InputComponent implements ControlValueAccessor {
    * @description Storybook description:
    * The value of the input field.
    */
-  _value = signal('');
-  
-  @Input()
-  get value(): string {
-    return this._value();
-  }
-  set value(val: string) {
-    this._value.set(val || '');
-    this.onChange(val || '');
-  }
+  value = model('')
 
   /**
    * Event emitted when the input value changes.
@@ -400,7 +391,7 @@ export class InputComponent implements ControlValueAccessor {
   
   /** @ignore */
   setValue(value: string) {
-    this._value.set(value);
+    this.value.set(value);
     this.onChange(value);
     this.valueChange.emit(value);
   }
@@ -412,7 +403,7 @@ export class InputComponent implements ControlValueAccessor {
 
   /** @ignore */
   changeNumber(type: 'increase' | 'decrease'){
-    let value = Number(this._value());
+    let value = Number(this.value());
     if (isNaN(value)) {
       value = 0;
     }
@@ -462,7 +453,7 @@ export class InputComponent implements ControlValueAccessor {
 
   // ControlValueAccessor implementation
   writeValue(value: string): void {
-    this._value.set(value || '');
+    this.value.set(value || '');
   }
 
   registerOnChange(fn: (value: string) => void): void {

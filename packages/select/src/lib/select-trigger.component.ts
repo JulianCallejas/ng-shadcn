@@ -42,17 +42,21 @@ export type SelectSize = 'default' | 'sm' | 'lg';
       <button
         type="button"
         [class]="computedClasses()"
-        [disabled]="disabled()"
-        [attr.aria-expanded]="isOpen()"
+        [disabled]="select.disabled()"
+        [attr.aria-expanded]="select.isOpen()"
         [attr.aria-haspopup]="true"
         [attr.aria-label]="placeholder || 'Select option'"
+        role="combobox"
+        [attr.aria-expanded]="select.isOpen()"
+        [attr.aria-controls]="select.id() + '-optionsContainer'"
+        [attr.aria-activedescendant]="select.highlightedItem()?.value"
       >
         <span class="block truncate text-left">
-          {{ selectedOption()?.label || placeholder() || 'Select...' }}
+          {{ select.selectedOption()?.label || placeholder() || 'Select...' }}
         </span>
         <svg
           class="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform"
-          [class.rotate-180]="isOpen()"
+          [class.rotate-180]="select.isOpen()"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -71,7 +75,6 @@ export class SelectTriggerComponent {
    * Whether to render the trigger as a child component
    */
   asChild = input(false, { transform: booleanAttribute });
-
   class = input('')
   placeholder = input('')
   size = input('default', { transform: (value: SelectSize) => {
@@ -82,15 +85,8 @@ export class SelectTriggerComponent {
   } });
   
   /** @ignore */
-  private select = inject(SelectComponent);
-
-  disabled = computed(() => this.select.disabled());
-
-  isOpen = computed(() => this.select.getIsOpen());
-
-  selectedOption = computed(() => this.select.selectedOption());
-
-
+  select = inject(SelectComponent);
+  
   /** @ignore */
   computedClasses = computed(() => cn(
     selectVariants({ size: this.size() }),
@@ -99,12 +95,14 @@ export class SelectTriggerComponent {
 
   /** @ignore */
   toggleDropdown(): void {
-    if (this.disabled()) return;
+    if (this.select.disabled()) return;
     this.select.toggleDropdown();
+    // lose focus from this element
   }
 
   /** @ignore */
   onTriggerKeydown(event: KeyboardEvent): void {
+    if (this.select.disabled()) return;
     this.select.onTriggerKeydown(event);
   }
   

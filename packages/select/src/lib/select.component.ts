@@ -8,18 +8,25 @@ import {
   input,
   booleanAttribute,
   viewChild,
-  contentChildren,
-  viewChildren,
-  effect } from '@angular/core';
+  ElementRef,
+  model,
+  linkedSignal,
+  effect,
+  inject,
+  contentChildren} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectSearchComponent } from './select-search.component';
 import { SelectItemComponent } from './select-item.component';
+
+// import { cn } from '@ng-shadcn/utils';
+import { cn } from '@packages/utils/src/public-api';
 
 export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
+  component?: boolean;
 }
 
 /**
@@ -29,7 +36,7 @@ export interface SelectOption {
 @Component({
   selector: 'ng-shadcn-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, SelectSearchComponent, SelectItemComponent],
+  imports: [CommonModule, SelectSearchComponent, SelectItemComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -38,132 +45,159 @@ export interface SelectOption {
     },
   ],
   template: `
-    <div class="relative w-full">
-      <ng-content select="ng-shadcn-select-trigger"></ng-content>
+    <div class="relative w-full" [id]="id()">
+    <ng-content select="ng-shadcn-select-trigger"></ng-content>
 
-      <!-- Dropdown -->
-      <div
-        *ngIf="isOpen()"
-        class="absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-md max-h-60 overflow-auto"
-        role="listbox"
-        aria-label="Select options"
-      >
-        <!-- Search input -->
-        @if (searchable()) {
-          <ng-shadcn-select-search></ng-shadcn-select-search>
-        }
-
-        <!-- Options -->
-        <div class="py-1">
-          <!-- Array Options -->
-          @for (option of filteredOptions(); track option.value) {
-            <ng-shadcn-select-item [option]="option"></ng-shadcn-select-item>
+      @if (isOpen()) {
+        <!-- Dropdown -->
+        <div
+          #optionsContainer
+          [id]="id() + '-optionsContainer'"
+          [class]="computedClasses()"
+          role="listbox"
+          aria-label="Select options"
+        >
+          <!-- Search input -->
+          @if (searchable()) {
+            <ng-shadcn-select-search></ng-shadcn-select-search>
           }
 
-          <!-- Content Options -->
-          @if (!searchTerm()){
+          <!-- Options -->
+          <div class="py-1">
+            <!-- Array Options -->
+            @for ( option of options(); track option.value ) {
+              <ng-shadcn-select-item [option]="option"></ng-shadcn-select-item>
+            }
+            <!-- Custom Options -->
             <ng-content select="ng-shadcn-select-item"></ng-content>
-          }
-          
-          <!-- No options -->
-          @if (filteredOptions().length === 0){
-            <div class="py-2 px-3 text-sm text-muted-foreground">
-              No options found
-            </div>
-          }
-        </div>
-      </div>
-    </div>
 
-    <!-- Backdrop -->
-    @if (isOpen()) {
-      <div
-        class="fixed inset-0 z-40"
-        (click)="closeDropdown()"
-      ></div>
-    }
+            <!-- No options -->
+            @if (renderedItems().length === 0){
+              <div class="py-2 px-3 text-sm text-muted-foreground">
+                No options found
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
   `,
 })
 export class SelectComponent implements ControlValueAccessor {
   options = input<SelectOption[]>([]);
-  disabled = input(false, { transform: booleanAttribute });
+  controlledDisabled = input(false, { transform: booleanAttribute, alias: 'disabled' });
   searchable = input(false, { transform: booleanAttribute });
   searchClass = input('');
   searchPlaceholder = input('');
-
- 
-
+  value = model<string | null>(null);
+  class = input('');
+  _id = input('', {alias: 'id'});
+  
   @Output() selectionChange = new EventEmitter<SelectOption | null>();
   
+  /** @ignore */
+  id = linkedSignal(this._id);
+
+  /** @ignore */
+  contentChildren = contentChildren(SelectItemComponent);
+
+  /** @ignore */
+  selectedOption = computed<SelectOption | undefined>(() => {
+    const selectedValue = this.value();
+    return this.renderedItems().find(option => option.value === selectedValue);
+  });
+  
+  /** @ignore */
+  renderedItems = computed(()=>{
+    const term = this.debouncedSearch().toLowerCase();
+    if (!term) return [
+      ...this.options(),
+      ...this.contentChildren().map(child=> child.itemData())
+    ];
+    let filteredContentChildren: SelectOption[] = [];
+    this.contentChildren().forEach(child => {
+      if (child.itemData().label.toLowerCase().includes(term)) {
+        filteredContentChildren.push(child.itemData());
+      }
+    });
+    return [
+      ...[...this.options()].filter(option => option.label.toLowerCase().includes(term)),
+      ...filteredContentChildren
+    ]
+  });
+  
+  /** @ignore */
   searchInput = viewChild(SelectSearchComponent);
+  
+  /** @ignore */
   searchTerm = signal('');
+  
+  /** @ignore */
+  debouncedSearch = signal('');
 
-  viewItems = viewChildren(SelectItemComponent);
-  contentItems = contentChildren(SelectItemComponent);
-  itemList = computed(() => [...this.viewItems(), ...this.contentItems()]);
+  /** @ignore */
+  optionsContainer = viewChild<ElementRef>('optionsContainer');
+  
+  /** @ignore */
+  disabled = linkedSignal(this.controlledDisabled);
+  
+  /** @ignore */
+  isOpen = signal(false);
+  
+  /** @ignore */
+  highlightedItem = signal<SelectOption | null>(null);
 
+  /** @ignore */
+  private elementRef = inject(ElementRef<HTMLElement>);
+
+  /** @ignore */
+  itemIndexMap = computed(() => {
+    const map = new Map<string, number>();
+    this.renderedItems().forEach((item, i) => map.set(item.value, i));
+    return map;
+  });
+  
   constructor(){
-    effect(()=>{
-      if (!this.isOpen()) return;
+    if (!this.id()) {
+      this.id.set(`sel-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
+    }
 
-      const items = this.itemList();
-      if (items.length === 0) return;
-      
-      items.forEach((item, index) => {
-        item.isHighlighted = computed(()=> this.highlightedIndex() === index);
-        item.isSelected = computed(()=> this.selectedValue() === item.itemData().value);
-      });
+    effect((onCleanup) => {
+      const term = this.searchTerm();
+      if (term === this.debouncedSearch()) return;
+
+      const timeout = setTimeout(() =>
+        this.debouncedSearch.set(term),
+        150
+      );
+      onCleanup(() => clearTimeout(timeout));
     });
-    
-    effect(onCleanup => {
-      if (!this.isOpen()) return;
-      
-      const items = this.itemList();
-      if (items.length === 0) return;
-      
 
-      const subs = items.map(item => {
-        return item.onSelectOption
-          .subscribe((option) => {
-            this.selectOption(option);
-          });
-      });
-      
+    // Close when click outside the component
+    effect((onCleanup) => {
+      if (!this.isOpen()) return;
+
+      const handler = (event: PointerEvent) => {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+          this.closeDropdown();
+        }
+      };
+
+      document.addEventListener('pointerdown', handler);
+
       onCleanup(() => {
-        subs.forEach(sub => sub.unsubscribe());
+        document.removeEventListener('pointerdown', handler);
       });
     });
-    
+
+    effect(() => {
+      if (!this.isOpen() || !this.searchable()) return;
+
+      queueMicrotask(() => this.focusSearchInput());
+    });
   }
 
-  // Signals for reactive state
-  protected selectedValue = signal<string | null>(null);
-  protected isOpen = signal(false);
-  protected highlightedIndex = signal(-1);
-  getIsOpen = computed(() => this.isOpen());
-  
-  // Computed properties
-  selectedOption = computed(() => {
-    const value = this.selectedValue();
-    return this.options().find(option => option.value === value) || null;
-  });
-
-  filteredOptions = computed(() => {
-    const term = this.searchTerm().toLowerCase();
-    if (!term) return this.options();
-    const filteredOptions = this.options().filter(option => 
-      option.label.toLowerCase().includes(term)
-    );
-    const filteredContentOptions = 
-      this.contentItems().reduce((acc, item)=>{
-        if (item.itemData().label.toLowerCase().includes(term)) {
-          acc.push(item.itemData());
-        }
-        return acc;
-      }, [] as SelectOption[])
-    return [...filteredOptions, ...filteredContentOptions];
-  });
-
+  /** @ignore */
   toggleDropdown() {
     if (this.disabled()) return;
     
@@ -174,72 +208,84 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   openDropdown() {
     this.isOpen.set(true);
-    this.highlightedIndex.set(-1);
-    
-    // Focus search input if searchable
-    if (this.searchable()) {
-      setTimeout(() => {
-        const searchInput = this.searchInput()?.elementRef.nativeElement.querySelector('input');
-        searchInput?.focus();
-      });
-    }
+    if (!this.value()) this.highlightedItem.set(null);
   }
 
+  /** @ignore */
+  private focusSearchInput() {
+    const searchInput = this.searchInput()
+      ?.elementRef.nativeElement
+      .querySelector('input');
+
+    searchInput?.focus();
+  }
+
+  /** @ignore */
   closeDropdown() {
     this.isOpen.set(false);
     this.searchTerm.set('');
-    this.highlightedIndex.set(-1);
+    if (!this.value()) this.highlightedItem.set(null);
     this.onTouched();
   }
 
+  /** @ignore */
   selectOption(option: SelectOption) {
     if (option.disabled) return;
     
-    this.selectedValue.set(option.value);
+    this.value.set(option.value);
     this.onChange(option.value);
     this.selectionChange.emit(option);
     this.closeDropdown();
   }
 
-  setHighlightedIndex(index: number) {
-    this.highlightedIndex.set(index);
-  }
-
+  /** @ignore */
   onSearch(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchTerm.set(target.value);
-    this.highlightedIndex.set(-1);
+    this.highlightedItem.set(null);
   }
 
+  /** @ignore */
   onTriggerKeydown(event: KeyboardEvent) {
     switch (event.key) {
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        this.toggleDropdown();
-        break;
       case 'ArrowDown':
         event.preventDefault();
-        if (!this.isOpen()) {
-          this.openDropdown();
-        } else {
-          this.navigateOptions(1);
-        }
+        if (!this.isOpen()) this.openDropdown();
+        this.navigateOptions(1);
         break;
+      
       case 'ArrowUp':
         event.preventDefault();
         if (this.isOpen()) {
           this.navigateOptions(-1);
         }
         break;
+      
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        if (!this.isOpen()) {
+          this.openDropdown();
+          return;
+        }
+        const highlighted = this.highlightedItem();
+        if (highlighted && !highlighted.disabled) {
+          this.selectOption(highlighted);
+        }else{
+          this.closeDropdown();
+        }
+        break;
+
       case 'Escape':
         this.closeDropdown();
         break;
     }
   }
 
+  /** @ignore */
   onSearchKeydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowDown':
@@ -252,7 +298,7 @@ export class SelectComponent implements ControlValueAccessor {
         break;
       case 'Enter':
         event.preventDefault();
-        const highlighted = this.filteredOptions()[this.highlightedIndex()];
+        const highlighted = this.highlightedItem();
         if (highlighted && !highlighted.disabled) {
           this.selectOption(highlighted);
         }
@@ -263,12 +309,14 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
+  /** @ignore */
   private navigateOptions(direction: number) {
-    const options = this.itemList();
+    const options = this.renderedItems();
     if (options.length === 0) return;
 
-    let newIndex = this.highlightedIndex() + direction;
-    
+    const currentIndex = this.itemIndexMap().get(this.highlightedItem()?.value) ?? -1;
+    let newIndex = currentIndex + direction;
+   
     // Wrap around
     if (newIndex < 0) {
       newIndex = options.length - 1;
@@ -277,21 +325,29 @@ export class SelectComponent implements ControlValueAccessor {
     }
 
     // Skip disabled options
-    while (options[newIndex]?.isDisabled()) {
+    let attempts = 0;
+    while (options[newIndex]?.disabled && attempts < options.length) {
       newIndex += direction;
       if (newIndex < 0) newIndex = options.length - 1;
       if (newIndex >= options.length) newIndex = 0;
+      attempts++;
     }
-
-    this.highlightedIndex.set(newIndex);
+    if (attempts === options.length) return;
+    this.highlightedItem.set(options[newIndex]);
   }
+
+  /** @ignore */
+    computedClasses = computed(() => cn(
+      'absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-md max-h-60 overflow-auto',
+      this.class()
+    ));
 
    // ControlValueAccessor implementation
   private onChange = (value: string | null) => {};
   private onTouched = () => {};
 
   writeValue(value: string | null): void {
-    this.selectedValue.set(value);
+    this.value.set(value);
   }
 
   registerOnChange(fn: (value: string | null) => void): void {
@@ -300,5 +356,9 @@ export class SelectComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 }
