@@ -42,13 +42,13 @@ export type SelectSize = 'default' | 'sm' | 'lg';
       <button
         type="button"
         [class]="computedClasses()"
-        [disabled]="select.disabled()"
+        [disabled]="select._disabled()"
         [attr.aria-expanded]="select.isOpen()"
         [attr.aria-haspopup]="true"
         [attr.aria-label]="placeholder || 'Select option'"
         role="combobox"
         [attr.aria-expanded]="select.isOpen()"
-        [attr.aria-controls]="select.id() + '-optionsContainer'"
+        [attr.aria-controls]="select._id() + '-optionsContainer'"
         [attr.aria-activedescendant]="select.highlightedItem()?.value"
       >
         <span class="block truncate text-left">
@@ -75,14 +75,26 @@ export class SelectTriggerComponent {
    * Whether to render the trigger as a child component
    */
   asChild = input(false, { transform: booleanAttribute });
+  
+  /**
+   * Additional CSS classes to apply to the trigger element
+   */
   class = input('')
+  
+  /**
+   * Placeholder text to display when no option is selected
+   */
   placeholder = input('')
+  
+  /**
+   * Size variant of the trigger element. One of 'default', 'sm', or 'lg'
+   */
   size = input('default', { transform: (value: SelectSize) => {
     if (value === 'default') return 'default';
     if (value === 'sm') return 'sm';
     if (value === 'lg') return 'lg';
     return 'default';
-  } });
+  }});
   
   /** @ignore */
   select = inject(SelectComponent);
@@ -95,14 +107,14 @@ export class SelectTriggerComponent {
 
   /** @ignore */
   toggleDropdown(): void {
-    if (this.select.disabled()) return;
+    if (this.select._disabled()) return;
     this.select.toggleDropdown();
     // lose focus from this element
   }
 
   /** @ignore */
   onTriggerKeydown(event: KeyboardEvent): void {
-    if (this.select.disabled()) return;
+    if (this.select._disabled()) return;
     this.select.onTriggerKeydown(event);
   }
   

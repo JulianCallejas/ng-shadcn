@@ -45,14 +45,14 @@ export interface SelectOption {
     },
   ],
   template: `
-    <div class="relative w-full" [id]="id()">
+    <div class="relative w-full" [id]="_id()">
     <ng-content select="ng-shadcn-select-trigger"></ng-content>
 
       @if (isOpen()) {
         <!-- Dropdown -->
         <div
           #optionsContainer
-          [id]="id() + '-optionsContainer'"
+          [id]="_id() + '-optionsContainer'"
           [class]="computedClasses()"
           role="listbox"
           aria-label="Select options"
@@ -84,19 +84,54 @@ export interface SelectOption {
   `,
 })
 export class SelectComponent implements ControlValueAccessor {
+  /**
+   * Array of select options with value, label, and optional disabled property
+   */
   options = input<SelectOption[]>([]);
-  controlledDisabled = input(false, { transform: booleanAttribute, alias: 'disabled' });
+
+  /**
+   * Whether the select is disabled
+   */
+  disabled = input(false, { transform: booleanAttribute });
+
+  /**
+   * Whether the select is searchable
+   */
   searchable = input(false, { transform: booleanAttribute });
+
+  /**
+   * Custom class for the search input
+   */
   searchClass = input('');
+
+  /**
+   * Placeholder text for the search input
+   */
   searchPlaceholder = input('');
+
+  /**
+   * Current selected value
+   */
   value = model<string | null>(null);
-  class = input('');
-  _id = input('', {alias: 'id'});
-  
+
+  /**
+   * Custom class for the select options container
+   */
+  optionBoxClass = input('');
+
+  /**
+   * ID for the select component
+   */
+  id = input('', {alias: 'id'});
+
+  /**
+   * Event emitted when the selection changes
+   */
   @Output() selectionChange = new EventEmitter<SelectOption | null>();
+
   
   /** @ignore */
-  id = linkedSignal(this._id);
+  _id = linkedSignal(this.id);
 
   /** @ignore */
   contentChildren = contentChildren(SelectItemComponent);
@@ -139,7 +174,7 @@ export class SelectComponent implements ControlValueAccessor {
   optionsContainer = viewChild<ElementRef>('optionsContainer');
   
   /** @ignore */
-  disabled = linkedSignal(this.controlledDisabled);
+  _disabled = linkedSignal(this.disabled);
   
   /** @ignore */
   isOpen = signal(false);
@@ -158,8 +193,8 @@ export class SelectComponent implements ControlValueAccessor {
   });
   
   constructor(){
-    if (!this.id()) {
-      this.id.set(`sel-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
+    if (!this._id()) {
+      this._id.set(`sel-${crypto.getRandomValues(new Uint32Array(1))[0]}`);
     }
 
     effect((onCleanup) => {
@@ -199,7 +234,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   /** @ignore */
   toggleDropdown() {
-    if (this.disabled()) return;
+    if (this._disabled()) return;
     
     if (this.isOpen()) {
       this.closeDropdown();
@@ -339,11 +374,14 @@ export class SelectComponent implements ControlValueAccessor {
   /** @ignore */
     computedClasses = computed(() => cn(
       'absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-md max-h-60 overflow-auto',
-      this.class()
+      this.optionBoxClass()
     ));
 
    // ControlValueAccessor implementation
-  private onChange = (value: string | null) => {};
+  /** @ignore */
+   private onChange = (value: string | null) => {};
+  
+  /** @ignore */
   private onTouched = () => {};
 
   writeValue(value: string | null): void {
@@ -359,6 +397,6 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+    this._disabled.set(isDisabled);
   }
 }

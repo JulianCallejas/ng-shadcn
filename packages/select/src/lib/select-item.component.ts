@@ -25,7 +25,8 @@ import { cn } from '@packages/utils/src/public-api';
         [attr.aria-disabled]="isDisabled()"
         [id]="itemData().value"
       >
-        <span class="block truncate">{{ itemData().label }}</span>
+      <div class="inline-block truncate" [innerHTML]="itemData().label">
+      </div>  
         @if (isSelected()){
           <svg
             class="absolute right-2 top-2.5 h-4 w-4"
@@ -42,12 +43,31 @@ import { cn } from '@packages/utils/src/public-api';
 })
 export class SelectItemComponent {
 
+  /**
+   * Custom class for the select item
+   */
   class = input('')
+
+  /**
+   * Disables the select item
+   */
   disabled = input(false, { transform: booleanAttribute });
+
+  /**
+   * Select Option object
+   */
   option = input<SelectOption | null>(null);
+
+  /**
+   * Label for the select item
+   */
   label = input('')
+
+  /**
+   * Value for the select item
+   */
   value = input('')
-  // index = input<number>(-2)
+
   
   /** @ignore */
   itemData = computed(()=>{
